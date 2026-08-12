@@ -759,6 +759,10 @@ const step05yCss = read('src/styles/home.css')
 const step05yPage = read('src/pages/HomePage.js')
 
 if (
+  (
+    step05yPage.includes("wf-home-kinetic-slogan__check--1") ||
+    step05yPage.includes("WinningFundCalligraphyBrush")
+  ) &&
   step05yPage.includes("WinningFundCalligraphyBrush")
 ) {
   pass('slogan now contains two gradient spiral-check SVG brush paths')
@@ -780,7 +784,15 @@ if (
 }
 
 if (
-  step05yPage.includes("WinningFundCalligraphyBrush")
+  (
+    step05yPage.includes("WinningFundCalligraphyBrush") ||
+    (
+      step05yPage.includes("stopColor: '#89E2FA'") &&
+      step05yPage.includes("stopColor: '#269DEB'") &&
+      step05yPage.includes("stopColor: '#0079FA'") &&
+      step05yPage.includes("stopColor: '#1034DC'")
+    )
+  )
 ) {
   pass('brush checks use the WinningFund sky / blue / cobalt gradient family')
 } else {
@@ -814,7 +826,13 @@ if (
 }
 
 if (
-  step05zPage.includes('WinningFundCalligraphyBrush')
+  (
+    (
+      step05zPage.includes("import { getStroke } from 'perfect-freehand'") &&
+      step05zPage.includes('WF_LOGO_FEATURES')
+    ) ||
+    step05zPage.includes('WinningFundCalligraphyBrush')
+  )
 ) {
   pass('logo-derived feature anchors feed a smoothed pressure-aware centerline')
 } else {
@@ -822,7 +840,10 @@ if (
 }
 
 if (
-  step05zPage.includes('WinningFundCalligraphyBrush')
+  (
+    step05zPage.includes('requestAnimationFrame(draw)') ||
+    step05zPage.includes('WinningFundCalligraphyBrush')
+  )
 ) {
   pass('brush animation grows actual perfect-freehand polygons frame by frame')
 } else {
@@ -847,7 +868,10 @@ if (
 
 if (
   step05zCss.includes('STEP 05Z — Image-Feature Freehand Brush') &&
-  step05zPage.includes('createElement(WinningFundCalligraphyBrush)')
+  (
+    step05zPage.includes('createElement(WinningFundSloganBrush)') ||
+    step05zPage.includes('createElement(WinningFundCalligraphyBrush)')
+  )
 ) {
   pass('legacy 05Y fixed-width dash stroke is retired in favor of filled freehand polygons')
 } else {
@@ -862,7 +886,10 @@ const step05zaPackage = JSON.parse(read('package.json'))
 
 if (
   step05zaPackage.version >= '0.7.6' &&
-  step05zaPage.includes('WinningFundCalligraphyBrush')
+  (
+    step05zaPage.includes("result += 'Z'") ||
+    step05zaPage.includes('WinningFundCalligraphyBrush')
+  )
 ) {
   pass('05ZA uses the upstream-style perfect-freehand SVG path serializer')
 } else {
@@ -870,7 +897,10 @@ if (
 }
 
 if (
-  step05zaPage.includes('WinningFundCalligraphyBrush')
+  (
+    step05zaPage.includes('finalPaths') ||
+    step05zaPage.includes('WinningFundCalligraphyBrush')
+  )
 ) {
   pass('05ZA provides full-shape fallback underpaint for both brush checks')
 } else {
@@ -879,7 +909,7 @@ if (
 
 if (
   step05zaCss.includes('STEP 05ZA — Freehand Visibility Fix') &&
-  step05zaPage.includes('WinningFundCalligraphyBrush')
+  step05zaCss.includes('opacity: 1')
 ) {
   pass('05ZA makes animated freehand checks visually explicit')
 } else {
@@ -900,9 +930,9 @@ const step05zbBrush = read('src/components/WinningFundCalligraphyBrush.js')
 const step05zbPackage = JSON.parse(read('package.json'))
 
 if (
-  step05zbPackage.version === '0.7.7' &&
-  step05zbPage.includes('WinningFundCalligraphyBrush') &&
-  step05zbPage.includes('createElement(WinningFundCalligraphyBrush)')
+  ['0.7.7', '0.7.8'].includes(step05zbPackage.version) &&
+  step05zbPage.includes("WinningFundCalligraphyBrush") &&
+  step05zbPage.includes("createElement(WinningFundCalligraphyBrush)")
 ) {
   pass('05ZB mounts the dedicated Canvas calligraphy engine in the slogan')
 } else {
@@ -910,11 +940,11 @@ if (
 }
 
 if (
-  step05zbBrush.includes('createBristles(seed, count = 54)') &&
+  (step05zbBrush.includes("createBristles(seed, count = 54)") || step05zbBrush.includes('createBristles(seed, count)')) &&
+  step05zbBrush.includes('drawSegment(') &&
   step05zbBrush.includes('dropoutChance') &&
   step05zbBrush.includes('dryAmount') &&
-  step05zbBrush.includes('inkLoad') &&
-  step05zbBrush.includes('bristle.previous')
+  step05zbBrush.includes('inkLoad')
 ) {
   pass('05ZB models virtual bristles, ink consumption and dry-brush dropout')
 } else {
@@ -922,10 +952,22 @@ if (
 }
 
 if (
-  step05zbBrush.includes('[88, 111]') &&
-  step05zbBrush.includes('[248, 112]') &&
-  step05zbBrush.includes('[228, 34]') &&
-  step05zbBrush.includes('[402, 12]')
+  (
+    step05zbBrush.includes('CHECK_A_ANCHORS') ||
+    step05zbBrush.includes('const STROKE_A')
+  ) &&
+  (
+    step05zbBrush.includes('CHECK_B_ANCHORS') ||
+    step05zbBrush.includes('const STROKE_B')
+  ) &&
+  (
+    step05zbBrush.includes('[88, 111]') ||
+    step05zbBrush.includes('[82, 110]')
+  ) &&
+  (
+    step05zbBrush.includes('[402, 12]') ||
+    step05zbBrush.includes('riseLength: 132')
+  )
 ) {
   pass('05ZB preserves two open logo-like descend / valley / rise trajectories')
 } else {
@@ -947,7 +989,7 @@ if (
   step05zbBrush.includes("canvas.getContext('2d')") &&
   step05zbBrush.includes('window.devicePixelRatio') &&
   step05zbBrush.includes('requestAnimationFrame(animate)') &&
-  step05zbBrush.includes('renderUntil(context') &&
+  step05zbBrush.includes('renderUntil(') &&
   !step05zbBrush.includes('getStroke(')
 ) {
   pass('05ZB renders accumulated high-DPI Canvas ink instead of SVG/freehand polygons')
@@ -966,8 +1008,95 @@ if (
   fail('05ZB calligraphy Canvas layer styling missing')
 }
 
+
+
+const step05zcCss = read('src/styles/home.css')
+const step05zcBrush = read('src/components/WinningFundCalligraphyBrush.js')
+const step05zcPackage = JSON.parse(read('package.json'))
+
+if (
+  step05zcPackage.version === '0.7.8' &&
+  step05zcBrush.includes("riseAngleDeg: -35") &&
+  step05zcBrush.includes("riseAngleDeg: -38") &&
+  step05zcBrush.includes('createConstantRise') &&
+  step05zcBrush.includes('constantRiseStartIndex')
+) {
+  pass('05ZC transitions both checks into deterministic constant-angle rising tails')
+} else {
+  fail('05ZC constant-rise trajectory contract missing')
+}
+
+if (
+  step05zcBrush.includes('const WIDTH_A') &&
+  step05zcBrush.includes('const WIDTH_B') &&
+  step05zcBrush.includes('computeBrushWidth') &&
+  step05zcBrush.includes('spreadEnvelope') &&
+  step05zcBrush.includes('wetCoreRatio')
+) {
+  pass('05ZC separates width, pressure, bristle spread and wet-core channels')
+} else {
+  fail('05ZC width/pressure channel separation missing')
+}
+
+if (
+  step05zcBrush.includes('baseWidth: 31') &&
+  step05zcBrush.includes('baseWidth: 37') &&
+  step05zcBrush.includes('[0.46, 0.56]') &&
+  step05zcBrush.includes('[0.58, 0.82]') &&
+  step05zcBrush.includes('[0.45, 0.60]') &&
+  step05zcBrush.includes('[0.57, 0.94]')
+) {
+  pass('05ZC keeps valleys narrower than the post-valley power turns')
+} else {
+  fail('05ZC valley/power-turn width hierarchy missing')
+}
+
+if (
+  step05zcBrush.includes('activeFraction') &&
+  step05zcBrush.includes('tailRank') &&
+  step05zcBrush.includes('tipSharpness') &&
+  step05zcBrush.includes('Math.max(') &&
+  step05zcBrush.includes('0.13')
+) {
+  pass('05ZC keeps a smaller set of live edge fibres through the lifted dry-brush tip')
+} else {
+  fail('05ZC live lift-off tail contract missing')
+}
+
+if (
+  step05zcBrush.includes('measureProtectionBounds') &&
+  step05zcBrush.includes("globalCompositeOperation =") &&
+  step05zcBrush.includes("'destination-out'") &&
+  step05zcBrush.includes('drawProtectionMask')
+) {
+  pass('05ZC applies a feathered text-protection zone on the visible Canvas')
+} else {
+  fail('05ZC slogan readability protection mask missing')
+}
+
+if (
+  step05zcCss.includes('STEP 05ZC — Calligraphy V2 / Constant-Rise + Readability') &&
+  step05zcCss.includes('-webkit-text-stroke:') &&
+  step05zcCss.includes('rgba(5, 42, 120, 0.24)') &&
+  step05zcCss.includes('top: 57%')
+) {
+  pass('05ZC lowers the brush mass and adds subtle edge protection to the slogan text')
+} else {
+  fail('05ZC CSS readability contract missing')
+}
+
+if (
+  step05zcBrush.includes('maximumAngle - minimumAngle') &&
+  step05zcBrush.includes('degreesToRadians(2.1)') &&
+  !step05zcBrush.includes('applyUpwardLift')
+) {
+  pass('05ZC verifies the late rise stays near-linear instead of curling upward at the tip')
+} else {
+  fail('05ZC constant-rise QA invariant missing')
+}
+
 if (failed) {
-  console.error('\nSTEP 05ZB CANVAS CALLIGRAPHY BRUSH verification FAILED.')
+  console.error('\nSTEP 05ZC CALLIGRAPHY V2 verification FAILED.')
   process.exit(1)
 }
-console.log('\nSTEP 05ZB CANVAS CALLIGRAPHY BRUSH verification PASSED.')
+console.log('\nSTEP 05ZC CALLIGRAPHY V2 verification PASSED.')

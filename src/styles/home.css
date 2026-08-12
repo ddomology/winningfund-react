@@ -3284,6 +3284,10 @@
 
 /* ---------------------------------------------------------
  * STEP 05ZB — Canvas Calligraphy Brush
+ *
+ * The previous SVG/freehand polygons are superseded.
+ * A transparent high-DPI Canvas now accumulates a virtual 54-bristle
+ * brush with a wet core, fibre breakup and dry-brush tail.
  * --------------------------------------------------------- */
 
 .wf-home-kinetic-slogan {
@@ -3301,7 +3305,9 @@
   height: clamp(132px, 11vw, 176px);
   max-width: none;
   opacity: 1 !important;
-  transform: translate3d(-50%, -57%, 0) rotate(-1.2deg);
+  transform:
+    translate3d(-50%, -57%, 0)
+    rotate(-1.2deg);
   filter: none !important;
   mix-blend-mode: normal;
   pointer-events: none;
@@ -3310,14 +3316,17 @@
 .wf-home-kinetic-slogan__text {
   position: relative;
   z-index: 3;
-  text-shadow: 0 2px 16px rgba(5, 30, 88, 0.22);
+  text-shadow:
+    0 2px 16px rgba(5, 30, 88, 0.22);
 }
 
 @media (max-width: 63.99rem) {
   .wf-home-kinetic-slogan__brush--canvas {
     width: calc(100% + 164px);
     height: 116px;
-    transform: translate3d(-50%, -56%, 0) rotate(-1deg);
+    transform:
+      translate3d(-50%, -56%, 0)
+      rotate(-1deg);
   }
 }
 
@@ -3332,7 +3341,83 @@
   .wf-home-kinetic-slogan__brush--canvas {
     opacity: 1 !important;
     animation: none !important;
-    transform: translate3d(-50%, -57%, 0) rotate(-1.2deg) !important;
+    transform:
+      translate3d(-50%, -57%, 0)
+      rotate(-1.2deg) !important;
+  }
+}
+
+/* ---------------------------------------------------------
+ * STEP 05ZC — Calligraphy V2 / Constant-Rise + Readability
+ * --------------------------------------------------------- */
+
+.wf-home-kinetic-slogan {
+  --wf-slogan-text-delay: 1.40s;
+  overflow: visible;
+}
+
+.wf-home-kinetic-slogan__brush--calligraphy-v2 {
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  top: 57%;
+  width: calc(100% + clamp(224px, 19vw, 344px));
+  height: clamp(132px, 11vw, 176px);
+  opacity: 1 !important;
+  transform:
+    translate3d(-50%, -50%, 0)
+    rotate(-0.6deg);
+  filter: none !important;
+  mix-blend-mode: normal;
+  pointer-events: none;
+}
+
+.wf-home-kinetic-slogan__text {
+  position: relative;
+  z-index: 3;
+  color: #ffffff;
+  text-shadow:
+    0 2px 10px rgba(4, 27, 86, 0.28),
+    0 0 2px rgba(4, 27, 86, 0.32);
+  -webkit-text-stroke:
+    0.35px rgba(5, 42, 120, 0.24);
+  paint-order: stroke fill;
+}
+
+@media (max-width: 63.99rem) {
+  .wf-home-kinetic-slogan__brush--calligraphy-v2 {
+    top: 58%;
+    width: calc(100% + 166px);
+    height: 116px;
+    transform:
+      translate3d(-50%, -50%, 0)
+      rotate(-0.4deg);
+  }
+}
+
+@media (max-width: 48rem) {
+  .wf-home-kinetic-slogan__brush--calligraphy-v2 {
+    top: 58%;
+    width: calc(100% + 114px);
+    height: 94px;
+  }
+
+  .wf-home-kinetic-slogan__text {
+    text-shadow:
+      0 1px 7px rgba(4, 27, 86, 0.28),
+      0 0 2px rgba(4, 27, 86, 0.30);
+    -webkit-text-stroke:
+      0.28px rgba(5, 42, 120, 0.22);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wf-home-kinetic-slogan__brush--calligraphy-v2 {
+    opacity: 1 !important;
+    animation: none !important;
+    transform:
+      translate3d(-50%, -50%, 0)
+      rotate(-0.6deg) !important;
   }
 }
 

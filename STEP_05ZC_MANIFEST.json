@@ -1,0 +1,16 @@
+{
+  "patch": "PATCH_05ZC_CALLIGRAPHY_V2",
+  "requiresVersion": "0.7.7",
+  "resultVersion": "0.7.8",
+  "dependenciesAdded": [],
+  "changes": [
+    "Split pressure, visual width, wet-core width and bristle spread into independent channels",
+    "Make valleys deliberately narrower than the post-valley power turn",
+    "Transition each trajectory to a fixed-angle constant rise (-35deg / -38deg)",
+    "Reduce pressure during the constant rise without fading the final edge fibres to zero",
+    "Keep live dry-brush edge fibres through the lift-off tip",
+    "Lower the main brush mass below the slogan baseline",
+    "Apply a feathered Canvas text-protection mask behind the slogan",
+    "Add subtle cobalt text edge protection for readability"
+  ]
+}
