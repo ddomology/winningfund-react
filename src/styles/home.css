@@ -3533,177 +3533,240 @@
   .wf-home-logo-reveal__ribbon { opacity: 0.25 !important; }
 }
 
-/* WF DIGITAL BRUSH PATCH START */
+/* WF BRUSH STROKE PATCH START */
+
+/* ---------------------------------------------------------
+   WINNINGFUND — BRAND BRUSH STROKE
+
+   Actual brush texture:
+   brush-stroke-mask.png
+
+   No WinningFund logo artwork is displayed here.
+   --------------------------------------------------------- */
+
+.wf-home-kinetic-slogan {
+  position: relative;
+  isolation: isolate;
+}
+
 
 /*
- * WinningFund digital brush signature
+ * Whole brush object.
  *
- * Not a logo.
- * One brand-color gesture behind the Korean slogan.
+ * Negative rotation means:
+ *
+ *          /
+ *        /
+ *      /
+ *
+ * so the gesture rises toward the right.
  */
-
-.wf-home-digital-brush {
+.wf-home-brush-stroke {
   position: absolute;
+
   z-index: 1;
 
   left: 50%;
-  top: 51%;
+  top: 52%;
 
-  width: clamp(540px, 58vw, 920px);
-  height: auto;
-  aspect-ratio: 1000 / 260;
+  width: clamp(560px, 58vw, 900px);
+
+  aspect-ratio: 295 / 50;
 
   transform:
-    translate3d(-49%, -50%, 0)
-    rotate(-1.4deg);
+    translate3d(-50%, -50%, 0)
+    rotate(-8deg);
 
-  opacity: 0.64;
+  transform-origin: center;
 
-  overflow: visible;
   pointer-events: none;
   user-select: none;
 
+  overflow: visible;
+}
+
+
+/*
+ * Actual painted brush.
+ *
+ * The PNG only supplies silhouette / texture.
+ * Color comes completely from WinningFund brand gradients.
+ */
+.wf-home-brush-stroke__paint {
+  position: absolute;
+  inset: 0;
+
+  display: block;
+
+  background:
+    radial-gradient(
+      ellipse at 30% 30%,
+      rgba(222, 249, 255, 0.82) 0%,
+      rgba(154, 232, 255, 0.42) 25%,
+      transparent 52%
+    ),
+    linear-gradient(
+      90deg,
+      #bcefff 0%,
+      #86dffb 18%,
+      #5bc1f3 38%,
+      #299dec 67%,
+      #126feF 82%,
+      #085ced 100%
+    );
+
+  -webkit-mask-image:
+    url('../assets/brand/brush-stroke-mask.png');
+
+  mask-image:
+    url('../assets/brand/brush-stroke-mask.png');
+
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+
+  -webkit-mask-position: center;
+  mask-position: center;
+
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+
+  opacity: 0;
+
+  clip-path:
+    inset(0 100% 0 0);
+
+  animation:
+    wf-brush-stroke-draw
+    880ms
+    cubic-bezier(.18, .78, .20, 1)
+    520ms
+    forwards;
+
   will-change:
-    transform,
+    clip-path,
     opacity;
 }
 
 
-.wf-home-digital-brush .wf-home-logo-reveal__svg {
-  display: block;
-  width: 100%;
-  height: 100%;
-  overflow: visible;
-}
-
-
 /*
- * The artwork begins slightly soft and settles after the draw.
+ * One physical-looking brush gesture:
+ *
+ * invisible
+ *   →
+ * left edge appears
+ *   →
+ * brush travels right
+ *   →
+ * final artwork locks
  */
-.wf-home-digital-brush__art {
-  opacity: 0;
+@keyframes wf-brush-stroke-draw {
 
-  animation:
-    wf-digital-brush-art-in
-    260ms
-    ease-out
-    500ms
-    forwards;
-}
+  0% {
+    clip-path:
+      inset(0 100% 0 0);
 
-
-/*
- * One left-to-right drawing gesture.
- */
-.wf-home-digital-brush__mask-path {
-  stroke-dasharray: 1;
-  stroke-dashoffset: 1;
-
-  animation:
-    wf-digital-brush-reveal
-    920ms
-    cubic-bezier(.16, .84, .24, 1)
-    520ms
-    forwards;
-
-  will-change: stroke-dashoffset;
-}
-
-
-@keyframes wf-digital-brush-reveal {
-  from {
-    stroke-dashoffset: 1;
-  }
-
-  to {
-    stroke-dashoffset: 0;
-  }
-}
-
-
-@keyframes wf-digital-brush-art-in {
-  from {
     opacity: 0;
   }
 
-  to {
-    opacity: 1;
+  8% {
+    opacity: 0.74;
+  }
+
+  100% {
+    clip-path:
+      inset(0 0 0 0);
+
+    opacity: 0.62;
   }
 }
 
 
 /*
- * Keep actual slogan text above the gesture.
+ * Text stays above brush.
  */
-.wf-home-kinetic-slogan {
-  isolation: isolate;
-}
-
 .wf-home-kinetic-slogan__text {
   position: relative;
   z-index: 2;
 }
 
 
-/*
- * Mid-size layouts.
- */
+/* ---------------------------------------------------------
+   TABLET
+   --------------------------------------------------------- */
+
 @media (max-width: 63.99rem) {
 
-  .wf-home-digital-brush {
-    width: clamp(430px, 72vw, 700px);
+  .wf-home-brush-stroke {
+    width: clamp(460px, 72vw, 700px);
 
-    top: 52%;
-
-    opacity: 0.58;
+    top: 53%;
 
     transform:
-      translate3d(-49%, -49%, 0)
-      rotate(-1.5deg);
+      translate3d(-50%, -50%, 0)
+      rotate(-7deg);
+  }
+
+  .wf-home-brush-stroke__paint {
+    animation-name:
+      wf-brush-stroke-draw;
   }
 }
 
 
-/*
- * Mobile.
- */
+/* ---------------------------------------------------------
+   MOBILE
+   --------------------------------------------------------- */
+
 @media (max-width: 48rem) {
 
-  .wf-home-digital-brush {
-    width: clamp(330px, 106vw, 560px);
+  .wf-home-brush-stroke {
+    width: clamp(330px, 105vw, 520px);
 
-    top: 52%;
-
-    opacity: 0.52;
+    left: 49%;
+    top: 53%;
 
     transform:
-      translate3d(-49%, -48%, 0)
-      rotate(-1.8deg);
+      translate3d(-50%, -50%, 0)
+      rotate(-6deg);
+  }
+
+  @keyframes wf-brush-stroke-draw {
+
+    0% {
+      clip-path:
+        inset(0 100% 0 0);
+
+      opacity: 0;
+    }
+
+    8% {
+      opacity: 0.66;
+    }
+
+    100% {
+      clip-path:
+        inset(0 0 0 0);
+
+      opacity: 0.52;
+    }
   }
 }
 
 
-/*
- * Reduced motion:
- * show final artwork immediately.
- */
+/* ---------------------------------------------------------
+   REDUCED MOTION
+   --------------------------------------------------------- */
+
 @media (prefers-reduced-motion: reduce) {
 
-  .wf-home-digital-brush__mask-path {
-    stroke-dashoffset: 0 !important;
+  .wf-home-brush-stroke__paint {
     animation: none !important;
-  }
 
-  .wf-home-digital-brush__art {
-    opacity: 1 !important;
-    animation: none !important;
-  }
+    clip-path:
+      inset(0 0 0 0) !important;
 
-  .wf-home-digital-brush {
-    transform:
-      translate3d(-49%, -50%, 0)
-      rotate(-1.4deg) !important;
+    opacity: 0.62 !important;
   }
 }
 
-/* WF DIGITAL BRUSH PATCH END */
+/* WF BRUSH STROKE PATCH END */
