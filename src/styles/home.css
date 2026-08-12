@@ -3115,3 +3115,106 @@
   }
 }
 
+/* ---------------------------------------------------------
+ * STEP 05Z — Image-Feature Freehand Brush
+ *
+ * Final brush contract:
+ * - two open check/ribbon trajectories derived from the supplied logo
+ * - NO circular "9" loops
+ * - perfect-freehand owns pressure-sensitive variable width polygons
+ * - requestAnimationFrame reveals actual growing polygons
+ * - SVG gradient fill follows each brush direction
+ * --------------------------------------------------------- */
+
+.wf-home-kinetic-slogan {
+  --wf-slogan-text-delay: 1.48s;
+
+  padding:
+    0.42em
+    0.18em
+    0.34em
+    0.24em;
+}
+
+.wf-home-kinetic-slogan__brush {
+  position: absolute;
+  z-index: 0;
+  left: 50%;
+  top: 50%;
+  width: calc(100% + clamp(150px, 13vw, 248px));
+  height: clamp(104px, 9.8vw, 148px);
+  max-width: none;
+  overflow: visible;
+  pointer-events: none;
+  transform:
+    translate3d(-50%, -55%, 0)
+    rotate(-1.4deg);
+}
+
+.wf-home-kinetic-slogan__check {
+  stroke: none !important;
+  stroke-width: 0 !important;
+  stroke-dasharray: none !important;
+  stroke-dashoffset: 0 !important;
+  opacity: 0.88;
+  transform: none !important;
+  animation: none !important;
+  vector-effect: non-scaling-stroke;
+}
+
+.wf-home-kinetic-slogan__check--1 {
+  opacity: 0.82;
+}
+
+.wf-home-kinetic-slogan__check--2 {
+  opacity: 0.90;
+}
+
+.wf-home-kinetic-slogan__text {
+  position: relative;
+  z-index: 2;
+  opacity: 0;
+  transform: translate3d(0, 9px, 0);
+  text-shadow:
+    0 2px 18px rgba(8, 32, 82, .22);
+  animation:
+    wf-home-slogan-text-in
+    500ms
+    cubic-bezier(.16, 1, .3, 1)
+    var(--wf-slogan-text-delay)
+    forwards;
+}
+
+@media (max-width: 63.99rem) {
+  .wf-home-kinetic-slogan__brush {
+    left: 48%;
+    width: calc(100% + 116px);
+    height: 100px;
+    transform:
+      translate3d(-50%, -54%, 0)
+      rotate(-1.4deg);
+  }
+}
+
+@media (max-width: 48rem) {
+  .wf-home-kinetic-slogan__brush {
+    left: 47%;
+    width: calc(100% + 82px);
+    height: 82px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wf-home-kinetic-slogan__check {
+    opacity: .76 !important;
+    transform: none !important;
+    animation: none !important;
+  }
+
+  .wf-home-kinetic-slogan__text {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
+}
+

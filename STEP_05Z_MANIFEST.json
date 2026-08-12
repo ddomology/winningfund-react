@@ -1,0 +1,15 @@
+{
+  "patch": "PATCH_05Z_IMAGE_FEATURE_FREEHAND",
+  "requiresVersion": "0.7.4",
+  "resultVersion": "0.7.5",
+  "dependenciesAdded": [
+    "perfect-freehand@1.2.3"
+  ],
+  "changes": [
+    "Replace fixed-width SVG check strokes with pressure-sensitive perfect-freehand polygons",
+    "Use two open logo-derived check trajectories: start -> valley -> rise",
+    "Animate real polygon growth with requestAnimationFrame rather than stroke-dashoffset",
+    "Keep sky/blue/cobalt directional gradients and subtle SVG roughness",
+    "Keep Korean typing removed and preserve reduced-motion final state"
+  ]
+}

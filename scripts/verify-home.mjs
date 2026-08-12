@@ -807,8 +807,85 @@ if (
   fail('old straight ribbon or reduced-motion handling still conflicts')
 }
 
+
+
+const step05zCss = read('src/styles/home.css')
+const step05zPage = read('src/pages/HomePage.js')
+const step05zPackage = JSON.parse(read('package.json'))
+
+if (
+  step05zPackage.version === '0.7.5' &&
+  step05zPackage.dependencies?.['perfect-freehand'] === '1.2.3'
+) {
+  pass('STEP 05Z pins perfect-freehand 1.2.3 and advances package version')
+} else {
+  fail('STEP 05Z perfect-freehand dependency/version contract missing')
+}
+
+if (
+  step05zPage.includes("import { getStroke } from 'perfect-freehand'") &&
+  step05zPage.includes('WF_LOGO_FEATURES') &&
+  step05zPage.includes('sampleCatmullRom') &&
+  step05zPage.includes('pressureForCheckA') &&
+  step05zPage.includes('pressureForCheckB')
+) {
+  pass('logo-derived feature anchors feed a smoothed pressure-aware centerline')
+} else {
+  fail('logo feature extraction contract is not represented in implementation')
+}
+
+if (
+  step05zPage.includes('requestAnimationFrame(draw)') &&
+  step05zPage.includes('buildFreehandPath') &&
+  step05zPage.includes('getStroke(partialPoints') &&
+  step05zPage.includes('simulatePressure: false') &&
+  step05zPage.includes('visibleProgress')
+) {
+  pass('brush animation grows actual perfect-freehand polygons frame by frame')
+} else {
+  fail('brush still relies on fake SVG dash drawing')
+}
+
+if (
+  step05zPage.includes('wf-slogan-brush-gradient-a') &&
+  step05zPage.includes('wf-slogan-brush-gradient-b') &&
+  step05zPage.includes("stopColor: '#89E2FA'") &&
+  step05zPage.includes("stopColor: '#269DEB'") &&
+  step05zPage.includes("stopColor: '#0079FA'") &&
+  step05zPage.includes("stopColor: '#1034DC'")
+) {
+  pass('both freehand polygons keep the WinningFund sky / blue / cobalt gradient')
+} else {
+  fail('STEP 05Z brand gradient missing')
+}
+
+if (
+  step05zPage.includes('[36, 86]') &&
+  step05zPage.includes('[116, 111]') &&
+  step05zPage.includes('[244, 50]') &&
+  step05zPage.includes('[205, 87]') &&
+  step05zPage.includes('[236, 111]') &&
+  step05zPage.includes('[393, 11]')
+) {
+  pass('two open check trajectories preserve the logo-derived start / valley / rise anchors')
+} else {
+  fail('double-check feature anchors were altered or lost')
+}
+
+if (
+  step05zCss.includes('STEP 05Z — Image-Feature Freehand Brush') &&
+  step05zCss.includes('stroke: none !important') &&
+  step05zCss.includes('stroke-dasharray: none !important') &&
+  step05zCss.includes('animation: none !important') &&
+  step05zPage.includes('createElement(WinningFundSloganBrush)')
+) {
+  pass('legacy 05Y fixed-width dash stroke is retired in favor of filled freehand polygons')
+} else {
+  fail('legacy 05Y stroke animation still owns the final brush')
+}
+
 if (failed) {
-  console.error('\nSTEP 05Y DOUBLE SPIRAL CHECK verification FAILED.')
+  console.error('\nSTEP 05Z IMAGE-FEATURE FREEHAND BRUSH verification FAILED.')
   process.exit(1)
 }
-console.log('\nSTEP 05Y DOUBLE SPIRAL CHECK verification PASSED.')
+console.log('\nSTEP 05Z IMAGE-FEATURE FREEHAND BRUSH verification PASSED.')
