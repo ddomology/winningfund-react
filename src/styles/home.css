@@ -3218,3 +3218,66 @@
   }
 }
 
+
+
+/* ---------------------------------------------------------
+ * STEP 05ZA — Freehand Visibility Fix
+ * --------------------------------------------------------- */
+
+.wf-home-kinetic-slogan__brush {
+  z-index: 1;
+  width: calc(100% + clamp(190px, 16vw, 310px));
+  height: clamp(122px, 11vw, 170px);
+  transform: translate3d(-50%, -56%, 0) rotate(-1.2deg);
+}
+
+.wf-home-kinetic-slogan__underpaint,
+.wf-home-kinetic-slogan__check {
+  stroke: none !important;
+  transform: none !important;
+  animation: none !important;
+}
+
+.wf-home-kinetic-slogan__underpaint--1 {
+  opacity: 0.22;
+}
+
+.wf-home-kinetic-slogan__underpaint--2 {
+  opacity: 0.20;
+}
+
+.wf-home-kinetic-slogan__check--1 {
+  opacity: 0.98;
+}
+
+.wf-home-kinetic-slogan__check--2 {
+  opacity: 1;
+}
+
+.wf-home-kinetic-slogan__text {
+  z-index: 3;
+}
+
+@media (max-width: 63.99rem) {
+  .wf-home-kinetic-slogan__brush {
+    width: calc(100% + 150px);
+    height: 112px;
+  }
+}
+
+@media (max-width: 48rem) {
+  .wf-home-kinetic-slogan__brush {
+    width: calc(100% + 106px);
+    height: 92px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wf-home-kinetic-slogan__underpaint {
+    opacity: 0 !important;
+  }
+
+  .wf-home-kinetic-slogan__check {
+    opacity: .94 !important;
+  }
+}

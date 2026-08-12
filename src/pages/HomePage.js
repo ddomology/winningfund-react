@@ -153,31 +153,35 @@ function withPressure(centerline, pressureProfile) {
 }
 
 function getSvgPathFromStroke(stroke) {
-  if (!stroke.length) {
+  const length = stroke.length
+
+  if (length < 4) {
     return ''
   }
 
-  const rounded = stroke.map(([x, y]) => [
-    Number(x.toFixed(2)),
-    Number(y.toFixed(2)),
-  ])
+  const average = (left, right) => (left + right) / 2
 
-  const first = rounded[0]
-  const parts = [`M ${first[0]} ${first[1]} Q`]
+  let pointA = stroke[0]
+  let pointB = stroke[1]
+  const pointC = stroke[2]
 
-  for (let index = 0; index < rounded.length; index += 1) {
-    const current = rounded[index]
-    const next = rounded[(index + 1) % rounded.length]
+  let result =
+    `M${pointA[0].toFixed(2)},${pointA[1].toFixed(2)} `
+    + `Q${pointB[0].toFixed(2)},${pointB[1].toFixed(2)} `
+    + `${average(pointB[0], pointC[0]).toFixed(2)},`
+    + `${average(pointB[1], pointC[1]).toFixed(2)} T`
 
-    parts.push(
-      `${current[0]} ${current[1]} `
-      + `${((current[0] + next[0]) / 2).toFixed(2)} `
-      + `${((current[1] + next[1]) / 2).toFixed(2)}`,
-    )
+  for (let index = 2; index < length - 1; index += 1) {
+    pointA = stroke[index]
+    pointB = stroke[index + 1]
+
+    result +=
+      `${average(pointA[0], pointB[0]).toFixed(2)},`
+      + `${average(pointA[1], pointB[1]).toFixed(2)} `
   }
 
-  parts.push('Z')
-  return parts.join(' ')
+  result += 'Z'
+  return result
 }
 
 function buildFreehandPath(points, visibleProgress, size) {
@@ -256,6 +260,14 @@ function WinningFundSloganBrush() {
     [],
   )
 
+  const finalPaths = useMemo(
+    () => ({
+      checkA: buildFreehandPath(checkAPoints, 1, 42),
+      checkB: buildFreehandPath(checkBPoints, 1, 46),
+    }),
+    [checkAPoints, checkBPoints],
+  )
+
   const [paths, setPaths] = useState(() => ({
     checkA: '',
     checkB: '',
@@ -264,8 +276,8 @@ function WinningFundSloganBrush() {
   useEffect(() => {
     if (reducedMotion) {
       setPaths({
-        checkA: buildFreehandPath(checkAPoints, 1, 34),
-        checkB: buildFreehandPath(checkBPoints, 1, 38),
+        checkA: buildFreehandPath(checkAPoints, 1, 42),
+        checkB: buildFreehandPath(checkBPoints, 1, 46),
       })
       return undefined
     }
@@ -293,12 +305,12 @@ function WinningFundSloganBrush() {
         checkA: buildFreehandPath(
           checkAPoints,
           checkAProgress,
-          34,
+          42,
         ),
         checkB: buildFreehandPath(
           checkBPoints,
           checkBProgress,
-          38,
+          46,
         ),
       })
 
@@ -385,45 +397,30 @@ function WinningFundSloganBrush() {
           stopColor: '#1034DC',
         }),
       ),
-      createElement(
-        'filter',
-        {
-          id: 'wf-slogan-brush-rough',
-          x: '-10%',
-          y: '-22%',
-          width: '120%',
-          height: '144%',
-          colorInterpolationFilters: 'sRGB',
-        },
-        createElement('feTurbulence', {
-          type: 'fractalNoise',
-          baseFrequency: '0.012 0.18',
-          numOctaves: '2',
-          seed: '17',
-          result: 'brushNoise',
-        }),
-        createElement('feDisplacementMap', {
-          in: 'SourceGraphic',
-          in2: 'brushNoise',
-          scale: '2.1',
-          xChannelSelector: 'R',
-          yChannelSelector: 'G',
-        }),
-      ),
     ),
+    createElement('path', {
+      className:
+        'wf-home-kinetic-slogan__underpaint wf-home-kinetic-slogan__underpaint--1',
+      d: finalPaths.checkA,
+      fill: 'url(#wf-slogan-brush-gradient-a)',
+    }),
+    createElement('path', {
+      className:
+        'wf-home-kinetic-slogan__underpaint wf-home-kinetic-slogan__underpaint--2',
+      d: finalPaths.checkB,
+      fill: 'url(#wf-slogan-brush-gradient-b)',
+    }),
     createElement('path', {
       className:
         'wf-home-kinetic-slogan__check wf-home-kinetic-slogan__check--1',
       d: paths.checkA,
       fill: 'url(#wf-slogan-brush-gradient-a)',
-      filter: 'url(#wf-slogan-brush-rough)',
     }),
     createElement('path', {
       className:
         'wf-home-kinetic-slogan__check wf-home-kinetic-slogan__check--2',
       d: paths.checkB,
       fill: 'url(#wf-slogan-brush-gradient-b)',
-      filter: 'url(#wf-slogan-brush-rough)',
     }),
   )
 }

@@ -765,7 +765,7 @@ if (
   step05yPage.includes("wf-home-kinetic-slogan__check--2") &&
   step05yPage.includes("wf-slogan-brush-gradient-a") &&
   step05yPage.includes("wf-slogan-brush-gradient-b") &&
-  step05yPage.includes("wf-slogan-brush-rough")
+  step05yPage.includes("wf-home-kinetic-slogan__check--1")
 ) {
   pass('slogan now contains two gradient spiral-check SVG brush paths')
 } else {
@@ -814,7 +814,7 @@ const step05zPage = read('src/pages/HomePage.js')
 const step05zPackage = JSON.parse(read('package.json'))
 
 if (
-  step05zPackage.version === '0.7.5' &&
+  step05zPackage.version >= '0.7.5' &&
   step05zPackage.dependencies?.['perfect-freehand'] === '1.2.3'
 ) {
   pass('STEP 05Z pins perfect-freehand 1.2.3 and advances package version')
@@ -884,8 +884,50 @@ if (
   fail('legacy 05Y stroke animation still owns the final brush')
 }
 
+
+
+const step05zaCss = read('src/styles/home.css')
+const step05zaPage = read('src/pages/HomePage.js')
+const step05zaPackage = JSON.parse(read('package.json'))
+
+if (
+  step05zaPackage.version === '0.7.6' &&
+  step05zaPage.includes('const average = (left, right) => (left + right) / 2') &&
+  step05zaPage.includes("result += 'Z'")
+) {
+  pass('05ZA uses the upstream-style perfect-freehand SVG path serializer')
+} else {
+  fail('05ZA SVG path serializer fix missing')
+}
+
+if (
+  step05zaPage.includes('finalPaths') &&
+  step05zaPage.includes('wf-home-kinetic-slogan__underpaint--1') &&
+  step05zaPage.includes('wf-home-kinetic-slogan__underpaint--2')
+) {
+  pass('05ZA provides full-shape fallback underpaint for both brush checks')
+} else {
+  fail('05ZA fallback underpaint missing')
+}
+
+if (
+  step05zaCss.includes('STEP 05ZA — Freehand Visibility Fix') &&
+  step05zaCss.includes('opacity: 0.98') &&
+  step05zaCss.includes('opacity: 1')
+) {
+  pass('05ZA makes animated freehand checks visually explicit')
+} else {
+  fail('05ZA visibility override missing')
+}
+
+if (!step05zaPage.includes("filter: 'url(#wf-slogan-brush-rough)'")) {
+  pass('05ZA removes displacement filtering until brush geometry is visually approved')
+} else {
+  fail('05ZA still applies the displacement filter')
+}
+
 if (failed) {
-  console.error('\nSTEP 05Z IMAGE-FEATURE FREEHAND BRUSH verification FAILED.')
+  console.error('\nSTEP 05ZA FREEHAND VISIBILITY FIX verification FAILED.')
   process.exit(1)
 }
-console.log('\nSTEP 05Z IMAGE-FEATURE FREEHAND BRUSH verification PASSED.')
+console.log('\nSTEP 05ZA FREEHAND VISIBILITY FIX verification PASSED.')

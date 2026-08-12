@@ -1,0 +1,11 @@
+{
+  "patch": "PATCH_05ZA_FREEHAND_VISIBILITY_FIX",
+  "requiresVersion": "0.7.5",
+  "resultVersion": "0.7.6",
+  "changes": [
+    "Fix perfect-freehand SVG polygon serialization using upstream rendering pattern",
+    "Temporarily remove displacement filter to eliminate a rendering variable",
+    "Add a subtle full final-shape underpaint fallback behind each animated brush",
+    "Increase freehand size and opacity so the brush is unmistakably visible"
+  ]
+}
