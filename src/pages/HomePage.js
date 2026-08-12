@@ -3,7 +3,7 @@ import { Link } from 'react-router'
 import Section from '../components/Section.js'
 import SectionHeader from '../components/SectionHeader.js'
 import HomeSectionRail from '../components/HomeSectionRail.js'
-import WinningFundLogoReveal from '../components/WinningFundLogoReveal.js'
+import WinningFundBrushSignature from '../components/WinningFundBrushSignature.js'
 import {
   siteContentBundle,
   selectHomePageData,
@@ -12,7 +12,7 @@ import {
 const homeData = selectHomePageData(siteContentBundle)
 
 
-/* STEP 05ZD: original logo pixels are revealed by feature-path masks behind the slogan. */
+/* Hero footer: static Korean copy with one decorative brand brush gesture. */
 
 function HeroWordRow({
   number,
@@ -153,7 +153,7 @@ function HomeHero() {
               className: 'wf-home-kinetic-slogan',
               'aria-label': homeData.hero.koreanSlogan,
             },
-            createElement(WinningFundLogoReveal),
+            createElement(WinningFundBrushSignature),
             createElement(
               'span',
               { className: 'wf-home-kinetic-slogan__text' },

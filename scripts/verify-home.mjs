@@ -1,4 +1,4 @@
-import fs from 'node:fs'
+﻿import fs from 'node:fs'
 import path from 'node:path'
 import process from 'node:process'
 import {
@@ -414,7 +414,7 @@ if (
 }
 
 if (
-  (homeSource.includes('wf-home-kinetic-slogan__brush') || homeSource.includes('WinningFundCalligraphyBrush') || homeSource.includes('WinningFundLogoReveal')) &&
+  (homeSource.includes('WinningFundBrushSignature') || homeSource.includes('wf-home-kinetic-slogan__brush') || homeSource.includes('WinningFundCalligraphyBrush') || homeSource.includes('WinningFundLogoReveal')) &&
   homeSource.includes('wf-home-kinetic-slogan__text') &&
   step05qCss.includes('wf-home-korean-typing') &&
   step05qCss.includes('@keyframes wf-home-korean-caret-move') &&
@@ -713,394 +713,35 @@ if (
 } else {
   fail('Korean slogan emphasis is missing')
 }
+const stepFinalBrushCss = read('src/styles/home.css')
+const stepFinalBrushPage = read('src/pages/HomePage.js')
+const stepFinalBrushPackage = JSON.parse(read('package.json'))
 
+const stepFinalBrushCssCompact =
+  stepFinalBrushCss
+    .toLowerCase()
+    .replace(/\s+/g, '')
 
+const stepFinalBrushComponentPath = path.join(
+  root,
+  'src',
+  'components',
+  'WinningFundBrushSignature.js',
+)
 
-const step05xCss = read('src/styles/home.css')
-const step05xPage = read('src/pages/HomePage.js')
+const stepLegacyLogoComponentPath = path.join(
+  root,
+  'src',
+  'components',
+  'WinningFundLogoReveal.js',
+)
 
-if (
-  (step05xPage.includes("WinningFundCalligraphyBrush") || step05xPage.includes("WinningFundLogoReveal")) &&
-  step05xPage.includes("wf-home-kinetic-slogan__text") &&
-  !step05xPage.includes("wf-home-kinetic-slogan__typing")
-) {
-  pass('Home hero slogan has advanced from typing to the brush-driven slogan system')
-} else {
-  fail('Home hero slogan brush structure missing')
-}
-
-if (
-  step05xCss.includes('STEP 05X — Brush-Ribbon Slogan') &&
-  step05xCss.includes('wf-home-slogan-ribbon-sweep') &&
-  step05xCss.includes('rotate(-11deg)') &&
-  step05xCss.includes('rotate(-8deg)') &&
-  step05xCss.includes('rotate(-5.5deg)') &&
-  step05xCss.includes('cubic-bezier(.16, 1, .3, 1)')
-) {
-  pass('Korean slogan now uses a smooth rising brush-ribbon sweep inspired by the logo flow')
-} else {
-  fail('Brush-ribbon sweep styling is missing or incomplete')
-}
-
-if (
-  step05xCss.includes('.wf-home-kinetic-slogan::before,') &&
-  step05xCss.includes('content: none !important;') &&
-  step05xCss.includes('.wf-home-kinetic-slogan__text') &&
-  step05xCss.includes('opacity: 0.30;') &&
-  step05xCss.includes('@media (prefers-reduced-motion: reduce)')
-) {
-  pass('Previous Korean typing treatment is neutralized and a subtle final brush trace remains')
-} else {
-  fail('Korean slogan still behaves like the old typing treatment')
-}
-
-
-const step05yCss = read('src/styles/home.css')
-const step05yPage = read('src/pages/HomePage.js')
-
-if (
-  (
-    step05yPage.includes("wf-home-kinetic-slogan__check--1") ||
-    (step05yPage.includes("WinningFundCalligraphyBrush") || step05yPage.includes("WinningFundLogoReveal"))
-  ) &&
-  (step05yPage.includes("WinningFundCalligraphyBrush") || step05yPage.includes("WinningFundLogoReveal"))
-) {
-  pass('slogan now contains two gradient spiral-check SVG brush paths')
-} else {
-  fail('double spiral-check SVG brush markup missing')
-}
-
-if (
-  step05yCss.includes('STEP 05Y — Double Spiral-Check Brush') &&
-  step05yCss.includes('@keyframes wf-home-slogan-check-one') &&
-  step05yCss.includes('@keyframes wf-home-slogan-check-two') &&
-  step05yCss.includes('stroke-dasharray: 1') &&
-  step05yCss.includes('stroke-dashoffset: 1') &&
-  step05yCss.includes('stroke-dashoffset: 0')
-) {
-  pass('both brush checks draw smoothly along their curved paths and lock')
-} else {
-  fail('double check draw animation missing')
-}
-
-if (
-  (
-    (step05yPage.includes("WinningFundCalligraphyBrush") || step05yPage.includes("WinningFundLogoReveal")) ||
-    (
-      step05yPage.includes("stopColor: '#89E2FA'") &&
-      step05yPage.includes("stopColor: '#269DEB'") &&
-      step05yPage.includes("stopColor: '#0079FA'") &&
-      step05yPage.includes("stopColor: '#1034DC'")
-    )
-  )
-) {
-  pass('brush checks use the WinningFund sky / blue / cobalt gradient family')
-} else {
-  fail('brush gradient does not use the WinningFund brand family')
-}
-
-if (
-  step05yCss.includes('.wf-home-kinetic-slogan__ribbon') &&
-  step05yCss.includes('display: none !important') &&
-  step05yCss.includes('@media (prefers-reduced-motion: reduce)') &&
-  step05yCss.includes('stroke-dashoffset: 0 !important')
-) {
-  pass('old straight ribbon is retired and reduced-motion keeps the final painted checks')
-} else {
-  fail('old straight ribbon or reduced-motion handling still conflicts')
-}
-
-
-
-const step05zCss = read('src/styles/home.css')
-const step05zPage = read('src/pages/HomePage.js')
-const step05zPackage = JSON.parse(read('package.json'))
-
-if (
-  step05zPackage.version >= '0.7.5' &&
-  step05zPackage.dependencies?.['perfect-freehand'] === '1.2.3'
-) {
-  pass('STEP 05Z pins perfect-freehand 1.2.3 and advances package version')
-} else {
-  fail('STEP 05Z perfect-freehand dependency/version contract missing')
-}
-
-if (
-  (
-    (
-      step05zPage.includes("import { getStroke } from 'perfect-freehand'") &&
-      step05zPage.includes('WF_LOGO_FEATURES')
-    ) ||
-    (step05zPage.includes('WinningFundCalligraphyBrush') || step05zPage.includes('WinningFundLogoReveal'))
-  )
-) {
-  pass('logo-derived feature anchors feed a smoothed pressure-aware centerline')
-} else {
-  fail('logo feature extraction contract is not represented in implementation')
-}
-
-if (
-  (
-    step05zPage.includes('requestAnimationFrame(draw)') ||
-    (step05zPage.includes('WinningFundCalligraphyBrush') || step05zPage.includes('WinningFundLogoReveal'))
-  )
-) {
-  pass('brush animation grows actual perfect-freehand polygons frame by frame')
-} else {
-  fail('brush still relies on fake SVG dash drawing')
-}
-
-if (
-  (step05zPage.includes('WinningFundCalligraphyBrush') || step05zPage.includes('WinningFundLogoReveal'))
-) {
-  pass('both freehand polygons keep the WinningFund sky / blue / cobalt gradient')
-} else {
-  fail('STEP 05Z brand gradient missing')
-}
-
-if (
-  (step05zPage.includes('WinningFundCalligraphyBrush') || step05zPage.includes('WinningFundLogoReveal'))
-) {
-  pass('two open check trajectories preserve the logo-derived start / valley / rise anchors')
-} else {
-  fail('double-check feature anchors were altered or lost')
-}
-
-if (
-  step05zCss.includes('STEP 05Z — Image-Feature Freehand Brush') &&
-  (
-    step05zPage.includes('createElement(WinningFundSloganBrush)') ||
-    step05zPage.includes('createElement(WinningFundCalligraphyBrush)') ||
-    step05zPage.includes('createElement(WinningFundLogoReveal)')
-  )
-) {
-  pass('legacy 05Y fixed-width dash stroke is retired in favor of filled freehand polygons')
-} else {
-  fail('legacy 05Y stroke animation still owns the final brush')
-}
-
-
-
-const step05zaCss = read('src/styles/home.css')
-const step05zaPage = read('src/pages/HomePage.js')
-const step05zaPackage = JSON.parse(read('package.json'))
-
-if (
-  step05zaPackage.version >= '0.7.6' &&
-  (
-    step05zaPage.includes("result += 'Z'") ||
-    (step05zaPage.includes('WinningFundCalligraphyBrush') || step05zaPage.includes('WinningFundLogoReveal'))
-  )
-) {
-  pass('05ZA uses the upstream-style perfect-freehand SVG path serializer')
-} else {
-  fail('05ZA SVG path serializer fix missing')
-}
-
-if (
-  (
-    step05zaPage.includes('finalPaths') ||
-    (step05zaPage.includes('WinningFundCalligraphyBrush') || step05zaPage.includes('WinningFundLogoReveal'))
-  )
-) {
-  pass('05ZA provides full-shape fallback underpaint for both brush checks')
-} else {
-  fail('05ZA fallback underpaint missing')
-}
-
-if (
-  step05zaCss.includes('STEP 05ZA — Freehand Visibility Fix') &&
-  step05zaCss.includes('opacity: 1')
-) {
-  pass('05ZA makes animated freehand checks visually explicit')
-} else {
-  fail('05ZA visibility override missing')
-}
-
-if (!step05zaPage.includes("filter: 'url(#wf-slogan-brush-rough)'")) {
-  pass('05ZA removes displacement filtering until brush geometry is visually approved')
-} else {
-  fail('05ZA still applies the displacement filter')
-}
-
-
-
-const step05zbCss = read('src/styles/home.css')
-const step05zbPage = read('src/pages/HomePage.js')
-const step05zbBrush = read('src/components/WinningFundCalligraphyBrush.js')
-const step05zbPackage = JSON.parse(read('package.json'))
-
-if (
-  ['0.7.7', '0.7.8', '0.7.9'].includes(step05zbPackage.version) &&
-  ((step05zbPage.includes("WinningFundCalligraphyBrush") && step05zbPage.includes("createElement(WinningFundCalligraphyBrush)")) ||
-   (step05zbPage.includes("WinningFundLogoReveal") && step05zbPage.includes("createElement(WinningFundLogoReveal)")))
-) {
-  pass('05ZB mounts the dedicated Canvas calligraphy engine in the slogan')
-} else {
-  fail('05ZB Canvas calligraphy component is not mounted')
-}
-
-if (
-  (step05zbBrush.includes("createBristles(seed, count = 54)") || step05zbBrush.includes('createBristles(seed, count)')) &&
-  step05zbBrush.includes('drawSegment(') &&
-  step05zbBrush.includes('dropoutChance') &&
-  step05zbBrush.includes('dryAmount') &&
-  step05zbBrush.includes('inkLoad')
-) {
-  pass('05ZB models virtual bristles, ink consumption and dry-brush dropout')
-} else {
-  fail('05ZB bristle/ink simulation contract missing')
-}
-
-if (
-  (
-    step05zbBrush.includes('CHECK_A_ANCHORS') ||
-    step05zbBrush.includes('const STROKE_A')
-  ) &&
-  (
-    step05zbBrush.includes('CHECK_B_ANCHORS') ||
-    step05zbBrush.includes('const STROKE_B')
-  ) &&
-  (
-    step05zbBrush.includes('[88, 111]') ||
-    step05zbBrush.includes('[82, 110]')
-  ) &&
-  (
-    step05zbBrush.includes('[402, 12]') ||
-    step05zbBrush.includes('riseLength: 132')
-  )
-) {
-  pass('05ZB preserves two open logo-like descend / valley / rise trajectories')
-} else {
-  fail('05ZB double-check geometry contract missing')
-}
-
-if (
-  step05zbBrush.includes('[174, 238, 255]') &&
-  step05zbBrush.includes('[38, 157, 235]') &&
-  step05zbBrush.includes('[16, 52, 220]') &&
-  step05zbBrush.includes('colorAtProgress')
-) {
-  pass('05ZB deposits the WinningFund gradient as physical per-sample ink colors')
-} else {
-  fail('05ZB directional brush gradient missing')
-}
-
-if (
-  step05zbBrush.includes("canvas.getContext('2d')") &&
-  step05zbBrush.includes('window.devicePixelRatio') &&
-  step05zbBrush.includes('requestAnimationFrame(animate)') &&
-  step05zbBrush.includes('renderUntil(') &&
-  !step05zbBrush.includes('getStroke(')
-) {
-  pass('05ZB renders accumulated high-DPI Canvas ink instead of SVG/freehand polygons')
-} else {
-  fail('05ZB final renderer is not the custom Canvas brush engine')
-}
-
-if (
-  step05zbCss.includes('STEP 05ZB — Canvas Calligraphy Brush') &&
-  step05zbCss.includes('.wf-home-kinetic-slogan__brush--canvas') &&
-  step05zbCss.includes('mix-blend-mode: normal') &&
-  step05zbCss.includes('z-index: 3')
-) {
-  pass('05ZB keeps the calligraphy Canvas visible behind readable slogan text')
-} else {
-  fail('05ZB calligraphy Canvas layer styling missing')
-}
-
-
-
-const step05zcCss = read('src/styles/home.css')
-const step05zcBrush = read('src/components/WinningFundCalligraphyBrush.js')
-const step05zcPackage = JSON.parse(read('package.json'))
-
-if (
-  step05zcPackage.version >= '0.7.8' &&
-  step05zcBrush.includes("riseAngleDeg: -35") &&
-  step05zcBrush.includes("riseAngleDeg: -38") &&
-  step05zcBrush.includes('createConstantRise') &&
-  step05zcBrush.includes('constantRiseStartIndex')
-) {
-  pass('05ZC transitions both checks into deterministic constant-angle rising tails')
-} else {
-  fail('05ZC constant-rise trajectory contract missing')
-}
-
-if (
-  step05zcBrush.includes('const WIDTH_A') &&
-  step05zcBrush.includes('const WIDTH_B') &&
-  step05zcBrush.includes('computeBrushWidth') &&
-  step05zcBrush.includes('spreadEnvelope') &&
-  step05zcBrush.includes('wetCoreRatio')
-) {
-  pass('05ZC separates width, pressure, bristle spread and wet-core channels')
-} else {
-  fail('05ZC width/pressure channel separation missing')
-}
-
-if (
-  step05zcBrush.includes('baseWidth: 31') &&
-  step05zcBrush.includes('baseWidth: 37') &&
-  step05zcBrush.includes('[0.46, 0.56]') &&
-  step05zcBrush.includes('[0.58, 0.82]') &&
-  step05zcBrush.includes('[0.45, 0.60]') &&
-  step05zcBrush.includes('[0.57, 0.94]')
-) {
-  pass('05ZC keeps valleys narrower than the post-valley power turns')
-} else {
-  fail('05ZC valley/power-turn width hierarchy missing')
-}
-
-if (
-  step05zcBrush.includes('activeFraction') &&
-  step05zcBrush.includes('tailRank') &&
-  step05zcBrush.includes('tipSharpness') &&
-  step05zcBrush.includes('Math.max(') &&
-  step05zcBrush.includes('0.13')
-) {
-  pass('05ZC keeps a smaller set of live edge fibres through the lifted dry-brush tip')
-} else {
-  fail('05ZC live lift-off tail contract missing')
-}
-
-if (
-  step05zcBrush.includes('measureProtectionBounds') &&
-  step05zcBrush.includes("globalCompositeOperation =") &&
-  step05zcBrush.includes("'destination-out'") &&
-  step05zcBrush.includes('drawProtectionMask')
-) {
-  pass('05ZC applies a feathered text-protection zone on the visible Canvas')
-} else {
-  fail('05ZC slogan readability protection mask missing')
-}
-
-if (
-  step05zcCss.includes('STEP 05ZC — Calligraphy V2 / Constant-Rise + Readability') &&
-  step05zcCss.includes('-webkit-text-stroke:') &&
-  step05zcCss.includes('rgba(5, 42, 120, 0.24)') &&
-  step05zcCss.includes('top: 57%')
-) {
-  pass('05ZC lowers the brush mass and adds subtle edge protection to the slogan text')
-} else {
-  fail('05ZC CSS readability contract missing')
-}
-
-if (
-  step05zcBrush.includes('maximumAngle - minimumAngle') &&
-  step05zcBrush.includes('degreesToRadians(2.1)') &&
-  !step05zcBrush.includes('applyUpwardLift')
-) {
-  pass('05ZC verifies the late rise stays near-linear instead of curling upward at the tip')
-} else {
-  fail('05ZC constant-rise QA invariant missing')
-}
-
-
-
-const stepHqBrushCss = read('src/styles/home.css')
-const stepHqBrushPage = read('src/pages/HomePage.js')
-const stepHqBrushComponent = read('src/components/WinningFundLogoReveal.js')
+const stepLegacyCalligraphyPath = path.join(
+  root,
+  'src',
+  'components',
+  'WinningFundCalligraphyBrush.js',
+)
 
 const stepHqBrushMaskPath = path.join(
   root,
@@ -1110,70 +751,195 @@ const stepHqBrushMaskPath = path.join(
   'brush-stroke-mask-hq.png',
 )
 
+const stepLowResBrushMaskPath = path.join(
+  root,
+  'src',
+  'assets',
+  'brand',
+  'brush-stroke-mask.png',
+)
+
+const stepFinalBrushComponent =
+  fs.existsSync(stepFinalBrushComponentPath)
+    ? read('src/components/WinningFundBrushSignature.js')
+    : ''
+
 if (
-  stepHqBrushPage.includes('WinningFundLogoReveal') &&
-  stepHqBrushPage.includes('wf-home-kinetic-slogan__text')
+  stepFinalBrushPage.includes(
+    "import WinningFundBrushSignature from '../components/WinningFundBrushSignature.js'"
+  ) &&
+  stepFinalBrushPage.includes(
+    'createElement(WinningFundBrushSignature)'
+  ) &&
+  stepFinalBrushPage.includes(
+    'wf-home-kinetic-slogan__text'
+  )
 ) {
-  pass('05ZF keeps the approved hero copy and brush mounting point')
+  pass('05ZG mounts the dedicated final brush signature component')
 } else {
-  fail('05ZF hero brush mounting contract missing')
+  fail('05ZG final brush component wiring missing')
 }
 
 if (
-  fs.existsSync(stepHqBrushMaskPath) &&
-  stepHqBrushComponent.includes("className: 'wf-home-brush-stroke'") &&
-  stepHqBrushComponent.includes("className: 'wf-home-brush-stroke__paint'")
+  fs.existsSync(stepFinalBrushComponentPath) &&
+  stepFinalBrushComponent.includes(
+    "className: 'wf-home-brush-signature'"
+  ) &&
+  stepFinalBrushComponent.includes(
+    "className: 'wf-home-brush-signature__paint'"
+  )
 ) {
-  pass('05ZF uses the supplied high-resolution brush mask asset')
+  pass('05ZG brush component has single-purpose semantic ownership')
 } else {
-  fail('05ZF HQ brush asset/component contract missing')
+  fail('05ZG brush component contract missing')
 }
 
 if (
-  stepHqBrushCss.includes("brush-stroke-mask-hq.png") &&
-  stepHqBrushCss.includes('3072 / 1046') &&
-  stepHqBrushCss.includes('scaleY(0.62)')
+  !fs.existsSync(stepLegacyLogoComponentPath) &&
+  !fs.existsSync(stepLegacyCalligraphyPath) &&
+  !fs.existsSync(stepLowResBrushMaskPath) &&
+  fs.existsSync(stepHqBrushMaskPath)
 ) {
-  pass('05ZF preserves HQ mask resolution while flattening the broad source gesture')
+  pass('05ZG removes obsolete logo/calligraphy/low-resolution brush files')
 } else {
-  fail('05ZF HQ mask geometry contract missing')
+  fail('05ZG obsolete brush implementation files remain')
 }
 
 if (
-  stepHqBrushCss.includes('rotate(-4.5deg)') &&
-  stepHqBrushCss.includes('width: clamp(500px, 50vw, 800px)') &&
-  stepHqBrushCss.includes('@keyframes wf-brush-stroke-draw')
+  !stepFinalBrushPackage.dependencies?.['perfect-freehand']
 ) {
-  pass('05ZF brush uses the final restrained angle, size and one-shot reveal')
+  pass('05ZG removes the unused perfect-freehand dependency')
 } else {
-  fail('05ZF final brush placement/draw contract missing')
+  fail('05ZG still carries the dead perfect-freehand dependency')
 }
 
 if (
-  stepHqBrushCss.includes('clamp(3.1rem, 7.15vw, 7.4rem)') &&
-  stepHqBrushCss.includes('clamp(2.9rem, 6.7vw, 6.9rem)') &&
-  stepHqBrushCss.includes('clamp(2.75rem, 6.15vw, 6.35rem)') &&
-  stepHqBrushCss.includes('clamp(1.72rem, 2.3vw, 2.7rem)') &&
-  stepHqBrushCss.includes('clamp(2.05rem, 2.85vw, 3.1rem)')
+  stepFinalBrushCss.includes('STEP 05ZG') &&
+  !stepFinalBrushCss.includes('STEP 05X') &&
+  !stepFinalBrushCss.includes('STEP 05Y') &&
+  !stepFinalBrushCss.includes('STEP 05Z — Image-Feature Freehand Brush') &&
+  !stepFinalBrushCss.includes('WF BRUSH STROKE PATCH START') &&
+  !stepFinalBrushCss.includes('WF HQ BRUSH TYPOGRAPHY PATCH START')
 ) {
-  pass('05ZF locks the reviewed hero typography hierarchy')
+  pass('05ZG collapses the brush experiment tail into one final CSS contract')
 } else {
-  fail('05ZF reviewed typography scale contract missing')
+  fail('05ZG legacy brush CSS tail remains')
 }
 
 if (
-  stepHqBrushCss.includes('@media (prefers-reduced-motion: reduce)') &&
-  stepHqBrushCss.includes('opacity: 0.42 !important') &&
-  stepHqBrushCss.includes('animation: none !important')
+  stepFinalBrushCssCompact.includes(
+    '.wf-home-kinetic-slogan__text{'
+  ) &&
+  stepFinalBrushCssCompact.includes(
+    'opacity:1!important'
+  ) &&
+  stepFinalBrushCssCompact.includes(
+    'transform:none!important'
+  ) &&
+  stepFinalBrushCssCompact.includes(
+    'animation:none!important'
+  )
 ) {
-  pass('05ZF reduced-motion shows the final HQ brush immediately')
+  pass('05ZG Korean slogan is static from first paint')
 } else {
-  fail('05ZF reduced-motion HQ brush fallback missing')
+  fail('05ZG Korean slogan still owns entrance motion')
+}
+
+if (
+  stepFinalBrushCssCompact.includes(
+    '@keyframeswf-home-brush-signature-draw'
+  ) &&
+  stepFinalBrushCssCompact.includes('540ms') &&
+  stepFinalBrushCssCompact.includes('1.34s') &&
+  stepFinalBrushCssCompact.includes('opacity:0.34')
+) {
+  pass('05ZG runs one restrained brush gesture after English settles')
+} else {
+  fail('05ZG brush timing/intensity contract missing')
+}
+
+if (
+  stepFinalBrushCssCompact.includes(
+    "url('../assets/brand/brush-stroke-mask-hq.png')"
+  ) &&
+  stepFinalBrushCssCompact.includes(
+    'width:clamp(480px,43vw,700px)'
+  ) &&
+  stepFinalBrushCssCompact.includes(
+    'aspect-ratio:3072/1046'
+  ) &&
+  stepFinalBrushCssCompact.includes(
+    'rotate(-3.5deg)'
+  ) &&
+  stepFinalBrushCssCompact.includes(
+    'scaley(0.54)'
+  )
+) {
+  pass('05ZG uses the HQ mask with restrained final geometry')
+} else {
+  fail('05ZG HQ brush geometry contract missing')
+}
+
+if (
+  stepFinalBrushCssCompact.includes('#c8f2ff0%') &&
+  stepFinalBrushCssCompact.includes('#8de2fb34%') &&
+  stepFinalBrushCssCompact.includes('#55c1f468%') &&
+  stepFinalBrushCssCompact.includes('#2d96ec100%') &&
+  !stepFinalBrushCssCompact.includes('#085ced100%')
+) {
+  pass('05ZG keeps brush texture visible against the cobalt hero field')
+} else {
+  fail('05ZG final brush color contrast contract missing')
+}
+
+if (
+  stepFinalBrushCssCompact.includes(
+    'clamp(3.1rem,7.15vw,7.4rem)'
+  ) &&
+  stepFinalBrushCssCompact.includes(
+    'clamp(2.9rem,6.7vw,6.9rem)'
+  ) &&
+  stepFinalBrushCssCompact.includes(
+    'clamp(2.75rem,6.15vw,6.35rem)'
+  ) &&
+  stepFinalBrushCssCompact.includes(
+    'clamp(1.55rem,2.05vw,2.35rem)'
+  ) &&
+  stepFinalBrushCssCompact.includes(
+    'clamp(1.95rem,2.6vw,2.85rem)'
+  )
+) {
+  pass('05ZG locks the reviewed final hero typography hierarchy')
+} else {
+  fail('05ZG final typography hierarchy missing')
+}
+
+if (
+  stepFinalBrushCssCompact.includes(
+    '@media(prefers-reduced-motion:reduce)'
+  ) &&
+  stepFinalBrushCssCompact.includes(
+    '.wf-home-brush-signature__paint{'
+  ) &&
+  stepFinalBrushCssCompact.includes(
+    'opacity:0.34!important'
+  ) &&
+  stepFinalBrushCssCompact.includes(
+    'animation:none!important'
+  )
+) {
+  pass('05ZG reduced-motion exposes the final static composition')
+} else {
+  fail('05ZG reduced-motion final composition missing')
 }
 
 if (failed) {
-  console.error('\nSTEP 05ZF HQ BRUSH + TYPOGRAPHY verification FAILED.')
+  console.error(
+    '\nSTEP 05ZG FINAL BRUSH / MAINTENANCE verification FAILED.'
+  )
   process.exit(1)
 }
 
-console.log('\nSTEP 05ZF HQ BRUSH + TYPOGRAPHY verification PASSED.')
+console.log(
+  '\nSTEP 05ZG FINAL BRUSH / MAINTENANCE verification PASSED.'
+)

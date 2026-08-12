@@ -12,3 +12,6 @@ _backups/
 
 .DS_Store
 Thumbs.db
+
+# Local patch snapshots
+patch-backup/
