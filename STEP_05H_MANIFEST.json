@@ -1,0 +1,14 @@
+{
+  "patch": "PATCH_05H_SIGNATURE_HERO_TYPO",
+  "requiresVersion": "0.5.6",
+  "resultVersion": "0.5.7",
+  "dependenciesAdded": [],
+  "scope": "Hero typography only; section rail/gutter/content contracts unchanged",
+  "visualRoles": {
+    "INVESTMENT": "editorial offset-cut",
+    "AND": "small blue connector",
+    "ECONOMICS": "long lighter-weight secondary line",
+    "CLUB": "WinningFund gradient + restrained horizontal stretch"
+  },
+  "clippingFix": "preserved"
+}

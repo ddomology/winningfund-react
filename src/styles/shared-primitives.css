@@ -1,0 +1,336 @@
+/* STEP 04 shared contract layer.
+ * These rules are deliberately generic and removable.
+ * Page composition and business state must not depend on them.
+ */
+
+.wf-page-transition {
+  min-width: 0;
+}
+
+.wf-section {
+  width: 100%;
+}
+
+.wf-section--width-content {
+  width: min(100% - (var(--wf-gutter) * 2), var(--wf-container-max));
+  margin-inline: auto;
+}
+
+.wf-section--width-wide {
+  width: min(100% - (var(--wf-gutter) * 2), 1440px);
+  margin-inline: auto;
+}
+
+.wf-section--spacing-default {
+  padding-block: clamp(64px, 9vw, 128px);
+}
+
+.wf-section--spacing-compact {
+  padding-block: clamp(40px, 6vw, 80px);
+}
+
+.wf-section-header {
+  display: grid;
+  gap: 12px;
+}
+
+.wf-section-header--center {
+  justify-items: center;
+  text-align: center;
+}
+
+.wf-section-header__eyebrow {
+  margin: 0;
+  color: var(--wf-brand-blue);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.wf-section-header__title {
+  margin: 0;
+  color: var(--wf-ink);
+  font-size: clamp(2rem, 5vw, 4.5rem);
+  line-height: 0.98;
+  letter-spacing: -0.045em;
+}
+
+.wf-section-header__description {
+  max-width: 64ch;
+  margin: 0;
+  color: var(--wf-ink-muted);
+  line-height: 1.7;
+}
+
+.wf-responsive-media {
+  margin: 0;
+}
+
+.wf-responsive-media__frame {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  background: var(--wf-surface-soft);
+}
+
+.wf-responsive-media__image,
+.wf-responsive-media__fallback {
+  width: 100%;
+  height: 100%;
+}
+
+.wf-responsive-media__image {
+  display: block;
+  object-fit: cover;
+}
+
+.wf-responsive-media__fallback {
+  display: grid;
+  place-items: center;
+  min-height: 120px;
+  border: 1px solid var(--wf-line);
+  color: var(--wf-ink-muted);
+}
+
+.wf-responsive-media__fallback-text {
+  max-width: 28ch;
+  padding: 16px;
+  text-align: center;
+}
+
+.wf-responsive-media__caption {
+  margin-top: 10px;
+  color: var(--wf-ink-muted);
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+
+.wf-cta {
+  min-height: 44px;
+  width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px 16px;
+  border: 1px solid var(--wf-ink);
+  background: transparent;
+  color: var(--wf-ink);
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+}
+
+.wf-cta--primary {
+  border-color: var(--wf-brand-blue);
+}
+
+.wf-cta--unavailable {
+  cursor: not-allowed;
+  opacity: 0.64;
+}
+
+.wf-cta__reason {
+  color: var(--wf-ink-muted);
+  font-weight: 500;
+}
+
+.wf-external-link {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--wf-ink);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+
+.wf-external-link__content {
+  display: grid;
+  gap: 3px;
+}
+
+.wf-external-link__label {
+  font-weight: 700;
+}
+
+.wf-external-link__description {
+  color: var(--wf-ink-muted);
+  font-size: 0.8rem;
+}
+
+.wf-accordion {
+  border-top: 1px solid var(--wf-line);
+}
+
+.wf-accordion__item {
+  border-bottom: 1px solid var(--wf-line);
+}
+
+.wf-accordion__heading {
+  margin: 0;
+}
+
+.wf-accordion__trigger {
+  width: 100%;
+  min-height: 60px;
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: 16px;
+  border: 0;
+  padding: 14px 0;
+  background: transparent;
+  color: var(--wf-ink);
+  text-align: left;
+  cursor: pointer;
+}
+
+.wf-accordion__state-text {
+  color: var(--wf-ink-muted);
+  font-size: 0.72rem;
+}
+
+.wf-accordion__indicator {
+  width: 1.25rem;
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+.wf-accordion__panel {
+  padding: 10px 0 28px;
+}
+
+.wf-member-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(14px, 2.5vw, 28px);
+}
+
+.wf-member-card,
+.wf-report-card,
+.wf-club-card {
+  min-width: 0;
+  border-top: 1px solid var(--wf-line);
+  padding-top: 12px;
+}
+
+.wf-member-card__media-fallback {
+  aspect-ratio: 1;
+  background: var(--wf-surface-soft);
+  border: 1px solid var(--wf-line);
+}
+
+.wf-member-card__body,
+.wf-report-card__body {
+  display: grid;
+  gap: 6px;
+  padding-top: 12px;
+}
+
+.wf-member-card__name,
+.wf-report-card__title,
+.wf-club-card__title {
+  margin: 0;
+  color: var(--wf-ink);
+}
+
+.wf-member-card__role,
+.wf-report-card__type,
+.wf-report-card__fallback,
+.wf-club-card__category,
+.wf-club-card__activity {
+  margin: 0;
+  color: var(--wf-ink-muted);
+  font-size: 0.8rem;
+  line-height: 1.55;
+}
+
+.wf-report-card__type,
+.wf-club-card__category {
+  color: var(--wf-brand-blue);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+}
+
+.wf-activity-section {
+  scroll-margin-top: 92px;
+}
+
+.wf-internal-section-nav {
+  overflow-x: auto;
+  border-block: 1px solid var(--wf-line);
+}
+
+.wf-internal-section-nav__list {
+  min-width: max-content;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  list-style: none;
+}
+
+.wf-internal-section-nav__link {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  padding-inline: 14px;
+  color: var(--wf-ink-muted);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+}
+
+.wf-internal-section-nav__link--active {
+  color: var(--wf-ink);
+  border-bottom-color: var(--wf-brand-blue);
+}
+
+.wf-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.wf-accordion__trigger:focus-visible,
+.wf-cta:focus-visible,
+.wf-external-link:focus-visible,
+.wf-internal-section-nav__link:focus-visible {
+  outline: 2px solid var(--wf-brand-blue);
+  outline-offset: 3px;
+}
+
+@media (min-width: 48rem) {
+  .wf-member-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 28rem) {
+  .wf-member-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .wf-accordion__trigger {
+    grid-template-columns: 1fr auto;
+  }
+
+  .wf-accordion__state-text {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+  }
+}

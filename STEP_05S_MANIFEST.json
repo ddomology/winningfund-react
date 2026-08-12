@@ -1,0 +1,12 @@
+{
+  "patch": "PATCH_05S_DOT_CONNECTOR",
+  "requiresVersion": "0.6.7",
+  "resultVersion": "0.6.8",
+  "dependenciesAdded": [],
+  "changes": [
+    "Replace active rail connector bar with a compact blue dot",
+    "Remove visual divider/effect between CURRENT TERM and the Korean slogan",
+    "Simplify footer to a clean term + slogan layout only",
+    "Preserve English clip entrance, Korean typing, and CLUB alignment fixes"
+  ]
+}

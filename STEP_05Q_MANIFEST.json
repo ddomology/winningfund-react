@@ -1,0 +1,16 @@
+{
+  "patch": "PATCH_05Q_HERO_COHESION",
+  "requiresVersion": "0.6.5",
+  "resultVersion": "0.6.6",
+  "dependenciesAdded": [],
+  "changes": [
+    "Korean slogan gets stepped proportional-font typing animation",
+    "Typing caret blinks briefly and disappears after completion",
+    "CLUB ghost/reveal/final geometry uses one shared text-slot",
+    "CLUB right alignment is declared only on the shared slot",
+    "Desktop rail-to-hero bridge gutter expanded to 64–88px",
+    "Active section rail tick extends into the bridge and fades out",
+    "Hero left edge softened from sky blue into the main brand gradient",
+    "Existing English center-clip entrance remains intact"
+  ]
+}

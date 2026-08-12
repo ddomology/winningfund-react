@@ -1,0 +1,13 @@
+{
+  "patch": "PATCH_05R_SOFT_CONNECTORS",
+  "requiresVersion": "0.6.6",
+  "resultVersion": "0.6.7",
+  "dependenciesAdded": [],
+  "changes": [
+    "Korean slogan enlarged and slightly emboldened",
+    "Footer divider no longer uses a dark thin line",
+    "Footer divider becomes a soft brand-color fade field",
+    "Active section rail connector across the gutter becomes a thicker color wash",
+    "Existing English clip entrance and Korean typing are preserved"
+  ]
+}

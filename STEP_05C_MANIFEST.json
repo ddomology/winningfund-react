@@ -1,0 +1,19 @@
+{
+  "patch": "PATCH_05C_HERO_FLOW",
+  "requiresVersion": "0.5.1",
+  "resultVersion": "0.5.2",
+  "changes": [
+    "Restore English global navigation labels",
+    "Restore INVESTMENT AND ECONOMICS CLUB as hero typography",
+    "Increase Korean slogan hierarchy",
+    "After hero reveal, settle hero from 100svh to 88svh so 10-15% of next section enters viewport",
+    "Keep cloud/wave/CLUB blue line removed"
+  ],
+  "motion": {
+    "sliceReveal": "0.07s / 0.19s / 0.31s stagger",
+    "slogan": "0.56s fade-rise",
+    "settle": "starts 1.35s, 700ms",
+    "continuationCue": "starts 1.55s",
+    "reducedMotion": "render final settled layout immediately"
+  }
+}

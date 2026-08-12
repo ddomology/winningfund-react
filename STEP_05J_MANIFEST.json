@@ -1,0 +1,20 @@
+{
+  "patch": "PATCH_05J_EDITORIAL_SPREAD",
+  "requiresVersion": "0.5.8",
+  "resultVersion": "0.5.9",
+  "dependenciesAdded": [],
+  "scope": "HOME hero composition only; section rail/gutter/content boundary preserved",
+  "direction": {
+    "field": "brand color field starts on content line and bleeds to viewport-right edge",
+    "investmentEconomics": "extra-heavy clean sans, staggered",
+    "connector": "large serif italic ampersand",
+    "club": "medium cobalt wordmark",
+    "korean": "hollow outline declaration quote with solid cobalt quotation marks",
+    "term": "18-2 integrated into field"
+  },
+  "removed": [
+    "centered poster card composition",
+    "handwritten and",
+    "detached 18-2 datum"
+  ]
+}

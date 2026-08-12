@@ -1,0 +1,170 @@
+/* STEP 02 only micro-effect:
+ * active navigation underline / trace.
+ * It is cosmetic; NavLink's active semantics exist independently.
+ */
+
+.wf-desktop-nav {
+  display: none;
+}
+
+.wf-desktop-nav__list,
+.wf-mobile-nav__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.wf-desktop-nav__list {
+  display: flex;
+  align-items: center;
+  gap: clamp(22px, 2.6vw, 42px);
+}
+
+.wf-nav-link {
+  position: relative;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  color: var(--wf-ink-muted);
+  font-size: 0.76rem;
+  font-weight: 750;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+}
+
+.wf-nav-link::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: 7px;
+  left: 0;
+  height: 2px;
+  background: var(--wf-brand-gradient);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--wf-motion-fast) var(--wf-ease-out);
+}
+
+.wf-nav-link:hover,
+.wf-nav-link:focus-visible,
+.wf-nav-link--active {
+  color: var(--wf-ink);
+}
+
+.wf-nav-link--active {
+  font-weight: 850;
+}
+
+.wf-nav-link--active::after {
+  transform: scaleX(1);
+}
+
+.wf-mobile-nav {
+  position: relative;
+}
+
+.wf-mobile-nav__trigger {
+  min-width: 76px;
+  min-height: 44px;
+  border: 1px solid var(--wf-line);
+  border-radius: var(--wf-radius-sm);
+  background: var(--wf-surface);
+  color: var(--wf-ink);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.wf-mobile-nav__trigger-label {
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+}
+
+.wf-mobile-nav__trigger-mark {
+  width: 14px;
+  height: 2px;
+  background: var(--wf-brand-gradient);
+  transform: skewX(-28deg);
+}
+
+.wf-mobile-nav__panel {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  width: min(82vw, 320px);
+  padding: 10px;
+  border: 1px solid var(--wf-line);
+  border-radius: var(--wf-radius-md);
+  background: var(--wf-surface);
+  box-shadow: 0 18px 60px rgba(11, 23, 48, 0.09);
+}
+
+.wf-mobile-nav__list {
+  display: grid;
+}
+
+.wf-mobile-nav__link {
+  min-height: 52px;
+  display: grid;
+  grid-template-columns: 36px 1fr;
+  align-items: center;
+  border-bottom: 1px solid var(--wf-line);
+  color: var(--wf-ink-muted);
+  text-decoration: none;
+}
+
+.wf-mobile-nav__item:last-child .wf-mobile-nav__link {
+  border-bottom: 0;
+}
+
+.wf-mobile-nav__index {
+  color: var(--wf-brand-blue);
+  font-size: 0.65rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.wf-mobile-nav__label {
+  font-size: 0.84rem;
+  font-weight: 750;
+  letter-spacing: 0.06em;
+}
+
+.wf-mobile-nav__link--active {
+  color: var(--wf-ink);
+}
+
+.wf-mobile-nav__link--active .wf-mobile-nav__label::after {
+  content: ' — CURRENT';
+  color: var(--wf-brand-cobalt);
+  font-size: 0.58rem;
+  letter-spacing: 0.08em;
+}
+
+.wf-brand:focus-visible,
+.wf-nav-link:focus-visible,
+.wf-mobile-nav__trigger:focus-visible,
+.wf-mobile-nav__link:focus-visible,
+.wf-not-found-link:focus-visible {
+  outline: 2px solid var(--wf-brand-blue);
+  outline-offset: 3px;
+}
+
+@media (min-width: 60rem) {
+  .wf-desktop-nav {
+    display: block;
+  }
+
+  .wf-mobile-nav {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wf-nav-link::after {
+    transition: none;
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "patch": "PATCH_05G_GRADIENT_TYPO_CLIP_FIX",
+  "requiresVersion": "0.5.5",
+  "resultVersion": "0.5.6",
+  "changes": [
+    "Add glyph-safe vertical buffer to hero Slice Reveal masks",
+    "Add explicit hero line-height to prevent lower glyph clipping",
+    "Adapt uploaded gradient-filled text reference to CLUB only",
+    "Use WinningFund sky-blue-blue-cobalt gradient",
+    "Keep semantic HTML H1 and existing Slice Reveal",
+    "Preserve reduced-motion final state"
+  ],
+  "dependenciesAdded": []
+}

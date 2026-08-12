@@ -1,0 +1,23 @@
+{
+  "patch": "PATCH_01_REACT_SCAFFOLD",
+  "stage": "STEP 01",
+  "purpose": "Minimal one-root React + Vite scaffold with canonical asset paths.",
+  "does_not_implement": [
+    "router",
+    "route business contract",
+    "page content",
+    "backend/CMS",
+    "global state library",
+    "animation polish"
+  ],
+  "canonical_assets": {
+    "logo": "src/assets/brand/winningfund-logo.png",
+    "members_18_2": "src/assets/members/18-2/"
+  },
+  "packages": {
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "vite": "8.1.5",
+    "@vitejs/plugin-react": "6.0.4"
+  }
+}

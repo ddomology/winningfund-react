@@ -1,0 +1,14 @@
+{
+  "patch": "PATCH_05U_REVEAL_LOCK",
+  "requiresVersion": "0.6.9",
+  "resultVersion": "0.7.0",
+  "dependenciesAdded": [],
+  "changes": [
+    "English center-slit reveal no longer fades out after entrance",
+    "Full reveal state remains visually fixed after each row finishes",
+    "Completed rows stay locked while the next English row animates",
+    "Underlying ghost text retires only after the reveal completes",
+    "Reduced-motion immediately shows the same locked final design",
+    "STEP 05T rail-state and hard-cut gutter styling remain unchanged"
+  ]
+}

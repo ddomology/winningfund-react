@@ -1,0 +1,20 @@
+{
+  "patch": "PATCH_05F_RAIL_GUTTER_REBALANCE",
+  "stage": "STEP 05F",
+  "requiresVersion": "0.5.4",
+  "resultVersion": "0.5.5",
+  "scope": "HOME layout refinement only",
+  "layoutContract": "[section rail] [dedicated editorial gutter] [main content]",
+  "desktopGutter": "clamp(64px, 4.6vw, 96px)",
+  "intermediateGutter": "clamp(44px, 4vw, 60px)",
+  "compactGutter": "0px; rail already recomposes horizontally",
+  "unchanged": [
+    "English global navigation",
+    "large persistent section rail",
+    "brand-color rail progress states",
+    "Hero English typography + Korean slogan",
+    "Slice Reveal",
+    "favicon",
+    "route/content/deep-link contracts"
+  ]
+}

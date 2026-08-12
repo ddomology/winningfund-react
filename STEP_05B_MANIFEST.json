@@ -1,0 +1,12 @@
+{
+  "patch": "PATCH_05B_HOME_REFINEMENT",
+  "requiresVersion": "0.5.0",
+  "resultVersion": "0.5.1",
+  "changes": [
+    "Remove atmospheric clouds",
+    "Remove animated wave runtime from HOME",
+    "Remove CLUB-side blue line",
+    "Add editorial slice reveal to hero text",
+    "Localize navigation/footer/home section labels toward Korean"
+  ]
+}

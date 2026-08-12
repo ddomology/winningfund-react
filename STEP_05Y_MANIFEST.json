@@ -1,0 +1,14 @@
+{
+  "patch": "PATCH_05Y_DOUBLE_SPIRAL_CHECK",
+  "requiresVersion": "0.7.3",
+  "resultVersion": "0.7.4",
+  "dependenciesAdded": [],
+  "changes": [
+    "Replace the faint straight brush ribbon with an actual SVG brush drawing",
+    "Draw two separate spiral/check paths in sequence",
+    "Use sky-to-blue and blue-to-cobalt gradients from the WinningFund brand palette",
+    "Add slight SVG roughness so the paths read more like brush strokes",
+    "Keep both painted checks visible after drawing completes",
+    "Keep Korean slogan typing removed"
+  ]
+}

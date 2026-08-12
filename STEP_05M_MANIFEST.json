@@ -1,0 +1,16 @@
+{
+  "patch": "PATCH_05M_READABILITY_REBALANCE",
+  "requiresVersion": "0.6.1",
+  "resultVersion": "0.6.2",
+  "dependenciesAdded": [],
+  "scope": "HOME hero visual hierarchy only",
+  "changes": [
+    "Keep strong WinningFund sky-blue-to-cobalt gradient",
+    "Restore INVESTMENT and ECONOMICS to solid white",
+    "Use 3-contour line-art only for ampersand and CLUB",
+    "Reduce English scale and increase vertical spacing",
+    "Make Korean slogan solid white and larger",
+    "Shorten navy-to-transparent separator",
+    "Place term and slogan in one structured footer band"
+  ]
+}

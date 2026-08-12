@@ -1,0 +1,44 @@
+/*
+ * WinningFund — STEP 00 soft-lock visual foundation.
+ *
+ * Presentation only:
+ * routing, state, content and accessibility contracts must not depend on this file.
+ */
+
+:root {
+  --wf-brand-sky: #89e2fa;
+  --wf-brand-mid: #269deb;
+  --wf-brand-blue: #0079fa;
+  --wf-brand-cobalt: #1034dc;
+
+  --wf-ink: #0b1730;
+  --wf-ink-muted: #536179;
+  --wf-surface: #ffffff;
+  --wf-surface-soft: #f6f9fd;
+  --wf-line: #dbe5f0;
+
+  --wf-brand-gradient: linear-gradient(
+    135deg,
+    var(--wf-brand-sky) 0%,
+    var(--wf-brand-mid) 42%,
+    var(--wf-brand-blue) 72%,
+    var(--wf-brand-cobalt) 100%
+  );
+
+  --wf-container-max: 1240px;
+  --wf-gutter: clamp(20px, 4vw, 64px);
+
+  /* FLEX candidates — not final design locks. */
+  --wf-radius-sm: 8px;
+  --wf-radius-md: 14px;
+  --wf-motion-fast: 160ms;
+  --wf-motion-base: 240ms;
+  --wf-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --wf-motion-fast: 0ms;
+    --wf-motion-base: 0ms;
+  }
+}

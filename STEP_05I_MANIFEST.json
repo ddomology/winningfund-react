@@ -1,0 +1,19 @@
+{
+  "patch": "PATCH_05I_POSTER_HERO",
+  "requiresVersion": "0.5.7",
+  "resultVersion": "0.5.8",
+  "dependenciesAdded": [],
+  "scope": "HOME hero visual variant only; section rail/gutter/content contracts unchanged",
+  "direction": {
+    "colorField": "bounded light WinningFund blue poster field",
+    "investment": "extra-heavy sans",
+    "and": "centered handwritten script accent",
+    "economics": "extra-heavy sans",
+    "club": "compact cobalt editorial label",
+    "koreanSlogan": "hollow outline"
+  },
+  "removed": [
+    "05H offset-cut lettering",
+    "05H stretched gradient CLUB experiment"
+  ]
+}

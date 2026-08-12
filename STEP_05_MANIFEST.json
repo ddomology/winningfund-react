@@ -1,0 +1,31 @@
+{
+  "patch": "PATCH_05_HOME",
+  "stage": "STEP 05",
+  "requiresVersion": "0.4.0",
+  "resultVersion": "0.5.0",
+  "dependenciesAdded": [],
+  "homeSectionOrder": [
+    "Hero",
+    "Short Introduction",
+    "Program Overview",
+    "Our Mission",
+    "Contents for 18-2"
+  ],
+  "visualDirection": {
+    "baseline": "Editorial Ascend",
+    "cloudDrift": "subtle CSS-only atmospheric layer",
+    "wave": "MIT reference adapted to WinningFund blue flow",
+    "imageFreeHome": true
+  },
+  "contentStates": {
+    "hero": "APPROVED_LOCKED",
+    "shortIntroductionBody": "SOURCE_AVAILABLE_NOT_IMPORTED",
+    "program01Summary": "SOURCE_BACKED_REVIEWABLE",
+    "program02Summary": "UNAVAILABLE",
+    "program03Summary": "SOURCE_BACKED_REVIEWABLE",
+    "program04Summary": "UNAVAILABLE",
+    "missionHeadings": "SOURCE_AVAILABLE",
+    "missionDescriptions": "SOURCE_AVAILABLE_NOT_IMPORTED",
+    "semester18_2Schedule": "SOURCE_AVAILABLE_NOT_IMPORTED"
+  }
+}

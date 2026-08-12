@@ -1,0 +1,13 @@
+{
+  "patch": "PATCH_05V_TONE_ON_TONE_RAIL",
+  "requiresVersion": "0.7.0",
+  "resultVersion": "0.7.1",
+  "dependenciesAdded": [],
+  "changes": [
+    "Replace section-rail gradient text treatment with tone-on-tone brand blues",
+    "Use restrained three-blue treatment on rail progress",
+    "Keep upcoming items gray, visited items soft blue, current item cobalt/blue",
+    "Shift English reveal type from ink to cobalt",
+    "Keep the reveal-lock behavior from 05U"
+  ]
+}

@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>WF_SMOKE_PENDING</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        font-family: monospace;
+      }
+
+      #app-frame {
+        width: 1200px;
+        height: 800px;
+        border: 0;
+      }
+
+      #result {
+        white-space: pre-wrap;
+      }
+    </style>
+  </head>
+  <body>
+    <pre id="result">RUNNING</pre>
+    <iframe id="app-frame" src="/"></iframe>
+
+    <script>
+      const result = document.getElementById('result')
+      const frame = document.getElementById('app-frame')
+
+      const delay = (milliseconds) =>
+        new Promise((resolve) => setTimeout(resolve, milliseconds))
+
+      async function waitFor(predicate, label, timeout = 4000) {
+        const started = performance.now()
+
+        while (performance.now() - started < timeout) {
+          if (predicate()) return
+          await delay(25)
+        }
+
+        throw new Error(`Timeout waiting for ${label}`)
+      }
+
+      async function clickRoute(pathname) {
+        const anchor = frame.contentDocument.querySelector(
+          `a[href="${pathname}"]`,
+        )
+
+        if (!anchor) {
+          throw new Error(`Navigation anchor not found: ${pathname}`)
+        }
+
+        anchor.click()
+
+        await waitFor(
+          () => frame.contentWindow.location.pathname === pathname,
+          `pathname ${pathname}`,
+        )
+      }
+
+      async function run() {
+        await new Promise((resolve) => {
+          if (frame.contentDocument?.readyState === 'complete') {
+            resolve()
+            return
+          }
+
+          frame.addEventListener('load', resolve, { once: true })
+        })
+
+        await waitFor(
+          () => frame.contentDocument.querySelector('header.wf-header'),
+          'AppShell header',
+        )
+
+        const appWindow = frame.contentWindow
+        appWindow.__WF_SPA_SENTINEL__ = 'PRESERVE_ACROSS_ROUTE_CHANGES'
+
+        const checks = []
+
+        checks.push({
+          name: 'start-at-home',
+          pass: appWindow.location.pathname === '/',
+        })
+
+        await clickRoute('/about')
+
+        checks.push({
+          name: 'nav-home-to-about',
+          pass: appWindow.location.pathname === '/about',
+        })
+
+        checks.push({
+          name: 'no-document-reload-about',
+          pass:
+            appWindow.__WF_SPA_SENTINEL__ ===
+            'PRESERVE_ACROSS_ROUTE_CHANGES',
+        })
+
+        await clickRoute('/members')
+
+        checks.push({
+          name: 'nav-about-to-members',
+          pass: appWindow.location.pathname === '/members',
+        })
+
+        checks.push({
+          name: 'no-document-reload-members',
+          pass:
+            appWindow.__WF_SPA_SENTINEL__ ===
+            'PRESERVE_ACROSS_ROUTE_CHANGES',
+        })
+
+        appWindow.history.back()
+
+        await waitFor(
+          () => appWindow.location.pathname === '/about',
+          'history back -> /about',
+        )
+
+        checks.push({
+          name: 'history-back',
+          pass: appWindow.location.pathname === '/about',
+        })
+
+        checks.push({
+          name: 'no-extra-document-on-back',
+          pass:
+            appWindow.__WF_SPA_SENTINEL__ ===
+            'PRESERVE_ACROSS_ROUTE_CHANGES',
+        })
+
+        appWindow.history.forward()
+
+        await waitFor(
+          () => appWindow.location.pathname === '/members',
+          'history forward -> /members',
+        )
+
+        checks.push({
+          name: 'history-forward',
+          pass: appWindow.location.pathname === '/members',
+        })
+
+        const status = checks.every((check) => check.pass)
+          ? 'PASS'
+          : 'FAIL'
+
+        const payload = {
+          status,
+          checks,
+          finalPathname: appWindow.location.pathname,
+        }
+
+        result.textContent = JSON.stringify(payload, null, 2)
+        document.title =
+          status === 'PASS' ? 'WF_SMOKE_PASS' : 'WF_SMOKE_FAIL'
+      }
+
+      run().catch((error) => {
+        result.textContent = JSON.stringify(
+          {
+            status: 'FAIL',
+            error: String(error?.stack || error),
+          },
+          null,
+          2,
+        )
+        document.title = 'WF_SMOKE_FAIL'
+      })
+    </script>
+  </body>
+</html>

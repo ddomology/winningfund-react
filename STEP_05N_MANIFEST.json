@@ -1,0 +1,15 @@
+{
+  "patch": "PATCH_05N_KINETIC_ROWS",
+  "requiresVersion": "0.6.2",
+  "resultVersion": "0.6.3",
+  "dependenciesAdded": [],
+  "scope": "HOME hero visual composition only",
+  "changes": [
+    "Three editorial rows: INVESTMENT / ECONOMICS / CLUB",
+    "Sequential left-to-right fill from ghost text",
+    "Desktop center-line clip hover reveals 투자 / 경제 / 학회",
+    "Small AND annotation instead of decorative ampersand",
+    "18-2 + fade rule + Korean slogan in one lower composition",
+    "No GSAP / ScrollTrigger dependency"
+  ]
+}

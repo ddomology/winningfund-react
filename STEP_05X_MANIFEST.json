@@ -1,0 +1,13 @@
+{
+  "patch": "PATCH_05X_BRUSH_RIBBON_SLOGAN",
+  "requiresVersion": "0.7.2",
+  "resultVersion": "0.7.3",
+  "dependenciesAdded": [],
+  "changes": [
+    "Remove the Korean typing slogan treatment and caret",
+    "Add a clean slogan fade-up entrance",
+    "Add a smooth diagonal rising brush-ribbon sweep behind the slogan inspired by the WinningFund logo",
+    "Leave a subtle three-blue ribbon trace behind the slogan",
+    "Keep the footer divider hidden and preserve reduced-motion support"
+  ]
+}

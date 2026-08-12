@@ -1,0 +1,15 @@
+{
+  "patch": "PATCH_05K_UNIFIED_HERO_FIELD",
+  "requiresVersion": "0.5.9",
+  "resultVersion": "0.6.0",
+  "dependenciesAdded": [],
+  "scope": "HOME hero composition only",
+  "changes": [
+    "Remove separate poster/spread rectangle",
+    "Turn the hero itself into a pale WinningFund gradient field",
+    "Place ampersand inline before ECONOMICS instead of overlapping",
+    "Keep INVESTMENT -> & ECONOMICS -> CLUB diagonal typography flow",
+    "Integrate hollow Korean quote and 18-2 into the same hero field",
+    "Preserve section rail, dedicated gutter, favicon and content contracts"
+  ]
+}

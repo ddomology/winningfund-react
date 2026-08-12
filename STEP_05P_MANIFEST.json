@@ -1,0 +1,14 @@
+{
+  "patch": "PATCH_05P_HERO_GRID_FIX",
+  "requiresVersion": "0.6.4",
+  "resultVersion": "0.6.5",
+  "dependenciesAdded": [],
+  "rootCause": "STEP 05F desktop selector `.wf-home-hero__inner > * { grid-column: 2; }` overrode STEP 05O's two-column kinetic hero children. Both side/main were placed in column 2 on separate implicit rows, creating the top blank band and clipping the lower hero content.",
+  "changes": [
+    "Restore kinetic-side to desktop grid column 1 / row 1",
+    "Restore kinetic-main to desktop grid column 2 / row 1",
+    "Keep STEP 05F gutter behavior untouched for other HOME sections",
+    "Reduce kinetic row minimum heights slightly",
+    "Add short-height desktop safeguard so CURRENT TERM and slogan remain visible"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "patch": "PATCH_05L_BRAND_LINE_HERO",
+  "requiresVersion": "0.6.0",
+  "resultVersion": "0.6.1",
+  "dependenciesAdded": [],
+  "scope": "HOME hero visual composition only; existing rail/gutter/content contracts preserved",
+  "changes": [
+    "Strong WinningFund sky-blue-to-cobalt main hero field",
+    "Keep desktop rail/editorial zone white",
+    "Replace plain English display text with transparent multi-contour line-art SVG masks",
+    "Place CURRENT TERM / 18-2 at lower-left",
+    "Place Korean slogan as one line at lower-right without quotation marks",
+    "Add a thin navy-to-transparent separator between English and Korean areas",
+    "Preserve favicon, navigation, section rail and content boundary"
+  ]
+}

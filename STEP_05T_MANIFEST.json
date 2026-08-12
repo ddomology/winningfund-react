@@ -1,0 +1,14 @@
+{
+  "patch": "PATCH_05T_RAIL_STATE_STACK",
+  "requiresVersion": "0.6.8",
+  "resultVersion": "0.6.9",
+  "dependenciesAdded": [],
+  "changes": [
+    "Remove rail connector bar/dot entirely",
+    "Upcoming rail items stay gray",
+    "Current rail item lifts up and uses the full brand gradient",
+    "Visited rail items also lift up, but less than the current one",
+    "Make the gutter a hard cut with no side gradients or fade field",
+    "Preserve footer cleanup, Korean typing, and hero text entrance"
+  ]
+}

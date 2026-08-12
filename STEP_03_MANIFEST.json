@@ -1,0 +1,25 @@
+{
+  "patch": "PATCH_03_CONTENT_BOUNDARY",
+  "stage": "STEP 03",
+  "requiresVersion": "0.2.0",
+  "resultVersion": "0.3.0",
+  "dependenciesAdded": [],
+  "flow": "STATIC_SITE_SOURCE -> adapter -> normalize -> validate -> SiteContentBundle -> selectors -> UI",
+  "canonicalActivityIds": [
+    "sector-followup",
+    "classes",
+    "mock-investment-fm",
+    "reports"
+  ],
+  "resolvedUsed": {
+    "heroEnglish": "INVESTMENT AND ECONOMICS CLUB",
+    "heroKorean": "우리는 늘 최선의 선택을 연구합니다",
+    "secondAcademicClub": "위닝홀미팅",
+    "recruitmentPeriod": "2026-08-03 ~ 2026-08-21"
+  },
+  "unresolved": [
+    "U-001 Recruitment remaining public content",
+    "U-006 FM trading-journal asset",
+    "U-007 report example assets/captions"
+  ]
+}

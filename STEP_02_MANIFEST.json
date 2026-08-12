@@ -1,0 +1,23 @@
+{
+  "patch": "PATCH_02_ROUTER_APPSHELL",
+  "stage": "STEP 02",
+  "requires": {
+    "project_version": "0.1.0 STEP 01 baseline",
+    "logo": "src/assets/brand/winningfund-logo.png",
+    "portraits": 9
+  },
+  "dependency_added": {
+    "react-router": "7.18.2"
+  },
+  "canonical_routes": [
+    "/",
+    "/about",
+    "/members",
+    "/activities",
+    "/recruitment"
+  ],
+  "unknown_route": "NotFoundPage inside AppShell",
+  "app_shell": "Header -> RouteViewport(Outlet) -> Footer",
+  "micro_effect": "active nav underline/trace only",
+  "business_content": "placeholder-only"
+}

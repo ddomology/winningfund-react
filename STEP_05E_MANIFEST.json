@@ -1,0 +1,13 @@
+{
+  "patch": "PATCH_05E_RAIL_FAVICON",
+  "requiresVersion": "0.5.3",
+  "resultVersion": "0.5.4",
+  "changes": [
+    "Enlarge desktop HOME section rail to a 142px editorial page-map",
+    "Show visible Korean section labels beside 01-05",
+    "Use stronger WinningFund cobalt/blue state hierarchy and longer current tick",
+    "Keep compact horizontal rail on tablet/mobile",
+    "Add WinningFund brand mark as browser-tab favicon",
+    "Set browser tab title to WinningFund"
+  ]
+}

@@ -1,0 +1,42 @@
+.wf-scaffold {
+  width: min(100% - (var(--wf-gutter) * 2), var(--wf-container-max));
+  min-height: 100dvh;
+  margin-inline: auto;
+  display: grid;
+  align-content: center;
+  gap: 14px;
+  padding-block: 48px;
+}
+
+.wf-scaffold__accent {
+  width: 72px;
+  height: 6px;
+  background: var(--wf-brand-gradient);
+  transform: skewX(-28deg);
+  transform-origin: left center;
+}
+
+.wf-scaffold__eyebrow {
+  margin: 10px 0 0;
+  color: var(--wf-brand-blue);
+  font-size: 0.75rem;
+  font-weight: 750;
+  letter-spacing: 0.12em;
+}
+
+.wf-scaffold__title {
+  margin: 0;
+  max-width: 14ch;
+  color: var(--wf-ink);
+  font-size: clamp(2rem, 7vw, 4.5rem);
+  line-height: 0.98;
+  letter-spacing: -0.045em;
+}
+
+.wf-scaffold__note {
+  margin: 4px 0 0;
+  max-width: 52ch;
+  color: var(--wf-ink-muted);
+  font-size: 0.95rem;
+  line-height: 1.65;
+}

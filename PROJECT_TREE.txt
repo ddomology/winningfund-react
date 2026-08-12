@@ -1,0 +1,28 @@
+WinningFund_React/
+├─ index.html
+├─ package.json
+├─ vite.config.js
+├─ scripts/
+│  └─ verify-scaffold.mjs
+├─ src/
+│  ├─ main.js
+│  ├─ app/
+│  │  └─ App.js
+│  ├─ pages/
+│  ├─ components/
+│  ├─ content/
+│  ├─ assets/
+│  │  ├─ brand/
+│  │  │  └─ winningfund-logo.png
+│  │  └─ members/
+│  │     └─ 18-2/
+│  │        └─ 9 source-backed JPEG portraits
+│  ├─ styles/
+│  │  ├─ reset.css
+│  │  ├─ brand-foundation.css
+│  │  └─ scaffold.css
+│  └─ tests/
+├─ _patches/
+└─ _backups/
+
+STEP 01 explicitly does not implement router/page business UI.

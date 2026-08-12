@@ -1,0 +1,21 @@
+{
+  "patch": "PATCH_05D_SECTION_RAIL",
+  "requiresVersion": "0.5.2",
+  "resultVersion": "0.5.3",
+  "changes": [
+    "Remove STEP 05C hero settle animation and continuation arrow",
+    "Add persistent 01-05 section rail",
+    "Use WinningFund sky/blue/cobalt for continuous progress and section states",
+    "Current state uses cobalt + short tick; visited uses reduced brand blue; upcoming uses cool gray",
+    "No check/completion icons",
+    "Restore English global navigation labels explicitly",
+    "Compact viewports reuse the same rail DOM as a horizontal progress strip"
+  ],
+  "sectionAnchors": [
+    "home-hero",
+    "short-introduction",
+    "program-overview",
+    "mission",
+    "contents-18-2"
+  ]
+}

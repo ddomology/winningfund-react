@@ -1,0 +1,28 @@
+{
+  "name": "winningfund-react",
+  "private": true,
+  "version": "0.7.4",
+  "type": "module",
+  "engines": {
+    "node": "^20.19.0 || >=22.12.0"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "verify:scaffold": "node scripts/verify-scaffold.mjs",
+    "verify:routes": "node scripts/verify-routes.mjs",
+    "verify:content": "node scripts/verify-content-boundary.mjs",
+    "verify:primitives": "node scripts/verify-shared-primitives.mjs",
+    "verify:home": "node scripts/verify-home.mjs"
+  },
+  "dependencies": {
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "react-router": "7.18.2"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "6.0.4",
+    "vite": "8.1.5"
+  }
+}

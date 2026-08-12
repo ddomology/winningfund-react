@@ -1,0 +1,16 @@
+{
+  "patch": "PATCH_05O_CLIP_ENTRANCE",
+  "requiresVersion": "0.6.3",
+  "resultVersion": "0.6.4",
+  "dependenciesAdded": [],
+  "scope": "HOME hero motion behavior only",
+  "changes": [
+    "Remove 투자 / 경제 / 학회 hover reveal content",
+    "Remove hover dependency from hero rows",
+    "Convert supplied center-line hover clip into staggered entrance animation",
+    "Each row briefly opens a pale band from its horizontal center",
+    "Reveal band dissolves into clean solid-white English final state",
+    "Preserve INVESTMENT / ECONOMICS / CLUB row system and lower term/slogan composition",
+    "No GSAP / ScrollTrigger added"
+  ]
+}

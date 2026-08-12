@@ -1,0 +1,75 @@
+.wf-route-placeholder {
+  width: min(100% - (var(--wf-gutter) * 2), var(--wf-container-max));
+  min-height: clamp(420px, 68dvh, 760px);
+  margin-inline: auto;
+  display: grid;
+  align-content: center;
+  padding-block: clamp(72px, 10vw, 144px);
+}
+
+.wf-route-placeholder__index-row {
+  display: grid;
+  grid-template-columns: auto minmax(80px, 1fr);
+  align-items: center;
+  gap: 18px;
+  margin-bottom: clamp(28px, 5vw, 64px);
+}
+
+.wf-route-placeholder__index {
+  color: var(--wf-brand-blue);
+  font-size: 0.72rem;
+  font-weight: 850;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.12em;
+}
+
+.wf-route-placeholder__rule {
+  height: 1px;
+  background: var(--wf-line);
+}
+
+.wf-route-placeholder__eyebrow {
+  margin: 0 0 12px;
+  color: var(--wf-ink-muted);
+  font-size: 0.7rem;
+  font-weight: 750;
+  letter-spacing: 0.12em;
+}
+
+.wf-route-placeholder__title {
+  margin: 0;
+  max-width: 12ch;
+  color: var(--wf-ink);
+  font-size: clamp(2.8rem, 10vw, 7.5rem);
+  line-height: 0.88;
+  letter-spacing: -0.06em;
+}
+
+.wf-route-placeholder__path {
+  margin: 22px 0 0;
+  color: var(--wf-brand-cobalt);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.8rem;
+}
+
+.wf-route-placeholder__note {
+  max-width: 54ch;
+  margin: 14px 0 0;
+  color: var(--wf-ink-muted);
+  font-size: 0.92rem;
+  line-height: 1.65;
+}
+
+.wf-not-found-link {
+  width: fit-content;
+  min-height: 44px;
+  margin-top: 28px;
+  display: inline-flex;
+  align-items: center;
+  border-bottom: 1px solid var(--wf-ink);
+  color: var(--wf-ink);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+}

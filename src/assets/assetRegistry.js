@@ -1,0 +1,121 @@
+export const STATIC_ASSET_REGISTRY = Object.freeze([
+  {
+    "assetId": "brand-logo",
+    "sourcePath": "src/assets/brand/winningfund-logo.png",
+    "mediaType": "image/png",
+    "intrinsicWidth": 189,
+    "intrinsicHeight": 126,
+    "aspectRatio": 1.5,
+    "loadingClass": "EAGER",
+    "cropPolicy": "CONTAIN",
+    "sourceStatus": "AUTHORITATIVE"
+  },
+  {
+    "assetId": "member-18-2-01-photo",
+    "sourcePath": "src/assets/members/18-2/18-2_김호준_회장.jpg",
+    "mediaType": "image/jpeg",
+    "intrinsicWidth": 320,
+    "intrinsicHeight": 320,
+    "aspectRatio": 1.0,
+    "loadingClass": "LAZY",
+    "cropPolicy": "COVER",
+    "sourceStatus": "AUTHORITATIVE",
+    "ownerRef": "18-2-member-01"
+  },
+  {
+    "assetId": "member-18-2-02-photo",
+    "sourcePath": "src/assets/members/18-2/18-2_이승민_부회장.jpg",
+    "mediaType": "image/jpeg",
+    "intrinsicWidth": 320,
+    "intrinsicHeight": 320,
+    "aspectRatio": 1.0,
+    "loadingClass": "LAZY",
+    "cropPolicy": "COVER",
+    "sourceStatus": "AUTHORITATIVE",
+    "ownerRef": "18-2-member-02"
+  },
+  {
+    "assetId": "member-18-2-03-photo",
+    "sourcePath": "src/assets/members/18-2/18-2_황승연_회계임원.jpg",
+    "mediaType": "image/jpeg",
+    "intrinsicWidth": 320,
+    "intrinsicHeight": 320,
+    "aspectRatio": 1.0,
+    "loadingClass": "LAZY",
+    "cropPolicy": "COVER",
+    "sourceStatus": "AUTHORITATIVE",
+    "ownerRef": "18-2-member-03"
+  },
+  {
+    "assetId": "member-18-2-04-photo",
+    "sourcePath": "src/assets/members/18-2/18-2_김승연_인사임원.jpg",
+    "mediaType": "image/jpeg",
+    "intrinsicWidth": 320,
+    "intrinsicHeight": 320,
+    "aspectRatio": 1.0,
+    "loadingClass": "LAZY",
+    "cropPolicy": "COVER",
+    "sourceStatus": "AUTHORITATIVE",
+    "ownerRef": "18-2-member-04"
+  },
+  {
+    "assetId": "member-18-2-05-photo",
+    "sourcePath": "src/assets/members/18-2/18-2_이규정_교육임원.jpg",
+    "mediaType": "image/jpeg",
+    "intrinsicWidth": 320,
+    "intrinsicHeight": 320,
+    "aspectRatio": 1.0,
+    "loadingClass": "LAZY",
+    "cropPolicy": "COVER",
+    "sourceStatus": "AUTHORITATIVE",
+    "ownerRef": "18-2-member-05"
+  },
+  {
+    "assetId": "member-18-2-06-photo",
+    "sourcePath": "src/assets/members/18-2/18-2_김재형_교육임원.jpg",
+    "mediaType": "image/jpeg",
+    "intrinsicWidth": 320,
+    "intrinsicHeight": 320,
+    "aspectRatio": 1.0,
+    "loadingClass": "LAZY",
+    "cropPolicy": "COVER",
+    "sourceStatus": "AUTHORITATIVE",
+    "ownerRef": "18-2-member-06"
+  },
+  {
+    "assetId": "member-18-2-07-photo",
+    "sourcePath": "src/assets/members/18-2/18-2_마시은_기획임원.jpg",
+    "mediaType": "image/jpeg",
+    "intrinsicWidth": 320,
+    "intrinsicHeight": 320,
+    "aspectRatio": 1.0,
+    "loadingClass": "LAZY",
+    "cropPolicy": "COVER",
+    "sourceStatus": "AUTHORITATIVE",
+    "ownerRef": "18-2-member-07"
+  },
+  {
+    "assetId": "member-18-2-08-photo",
+    "sourcePath": "src/assets/members/18-2/18-2_임정우_기획임원.jpg",
+    "mediaType": "image/jpeg",
+    "intrinsicWidth": 320,
+    "intrinsicHeight": 320,
+    "aspectRatio": 1.0,
+    "loadingClass": "LAZY",
+    "cropPolicy": "COVER",
+    "sourceStatus": "AUTHORITATIVE",
+    "ownerRef": "18-2-member-08"
+  },
+  {
+    "assetId": "member-18-2-09-photo",
+    "sourcePath": "src/assets/members/18-2/18-2_황채연_기획임원.jpg",
+    "mediaType": "image/jpeg",
+    "intrinsicWidth": 320,
+    "intrinsicHeight": 320,
+    "aspectRatio": 1.0,
+    "loadingClass": "LAZY",
+    "cropPolicy": "COVER",
+    "sourceStatus": "AUTHORITATIVE",
+    "ownerRef": "18-2-member-09"
+  }
+])

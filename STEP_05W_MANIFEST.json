@@ -1,0 +1,13 @@
+{
+  "patch": "PATCH_05W_CARD_WIDTH_SLOGAN",
+  "requiresVersion": "0.7.1",
+  "resultVersion": "0.7.2",
+  "dependenciesAdded": [],
+  "changes": [
+    "Reduce the oversized pale card widths behind English hero words",
+    "Use a consistent text-led spacing rule across INVESTMENT / ECONOMICS / CLUB",
+    "Keep CLUB aligned right while matching the same card-padding logic",
+    "Increase Korean slogan size and weight",
+    "Add a soft echo layer behind the Korean slogan while preserving the typing effect"
+  ]
+}

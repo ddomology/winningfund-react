@@ -1,0 +1,33 @@
+{
+  "patch": "PATCH_04_SHARED_PRIMITIVES",
+  "stage": "STEP 04",
+  "requiresVersion": "0.3.0",
+  "resultVersion": "0.4.0",
+  "dependenciesAdded": [],
+  "components": [
+    "Header",
+    "DesktopNav",
+    "MobileNav",
+    "PageTransition",
+    "Section",
+    "SectionHeader",
+    "ResponsiveMedia",
+    "CTAButton",
+    "ExternalLink",
+    "Accordion",
+    "MemberGrid",
+    "MemberCard",
+    "ActivitySection",
+    "ReportCard",
+    "ClubCard",
+    "InternalSectionNav",
+    "Footer"
+  ],
+  "locks": {
+    "pageContent": "still placeholder-only",
+    "pageTransition": "cosmetic-only",
+    "accordion": "React state; controlled/local open-id support",
+    "responsiveMedia": "semantic fallback without image success",
+    "styleReplacement": "optional shared-primitives.css"
+  }
+}
