@@ -3,7 +3,7 @@ import { Link } from 'react-router'
 import Section from '../components/Section.js'
 import SectionHeader from '../components/SectionHeader.js'
 import HomeSectionRail from '../components/HomeSectionRail.js'
-import WinningFundCalligraphyBrush from '../components/WinningFundCalligraphyBrush.js'
+import WinningFundLogoReveal from '../components/WinningFundLogoReveal.js'
 import {
   siteContentBundle,
   selectHomePageData,
@@ -12,7 +12,7 @@ import {
 const homeData = selectHomePageData(siteContentBundle)
 
 
-/* STEP 05ZB: Canvas calligraphy engine is isolated in WinningFundCalligraphyBrush.js. */
+/* STEP 05ZD: original logo pixels are revealed by feature-path masks behind the slogan. */
 
 function HeroWordRow({
   number,
@@ -153,7 +153,7 @@ function HomeHero() {
               className: 'wf-home-kinetic-slogan',
               'aria-label': homeData.hero.koreanSlogan,
             },
-            createElement(WinningFundCalligraphyBrush),
+            createElement(WinningFundLogoReveal),
             createElement(
               'span',
               { className: 'wf-home-kinetic-slogan__text' },

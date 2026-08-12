@@ -414,7 +414,7 @@ if (
 }
 
 if (
-  (homeSource.includes('wf-home-kinetic-slogan__brush') || homeSource.includes('WinningFundCalligraphyBrush')) &&
+  (homeSource.includes('wf-home-kinetic-slogan__brush') || homeSource.includes('WinningFundCalligraphyBrush') || homeSource.includes('WinningFundLogoReveal')) &&
   homeSource.includes('wf-home-kinetic-slogan__text') &&
   step05qCss.includes('wf-home-korean-typing') &&
   step05qCss.includes('@keyframes wf-home-korean-caret-move') &&
@@ -720,7 +720,7 @@ const step05xCss = read('src/styles/home.css')
 const step05xPage = read('src/pages/HomePage.js')
 
 if (
-  step05xPage.includes("WinningFundCalligraphyBrush") &&
+  (step05xPage.includes("WinningFundCalligraphyBrush") || step05xPage.includes("WinningFundLogoReveal")) &&
   step05xPage.includes("wf-home-kinetic-slogan__text") &&
   !step05xPage.includes("wf-home-kinetic-slogan__typing")
 ) {
@@ -761,9 +761,9 @@ const step05yPage = read('src/pages/HomePage.js')
 if (
   (
     step05yPage.includes("wf-home-kinetic-slogan__check--1") ||
-    step05yPage.includes("WinningFundCalligraphyBrush")
+    (step05yPage.includes("WinningFundCalligraphyBrush") || step05yPage.includes("WinningFundLogoReveal"))
   ) &&
-  step05yPage.includes("WinningFundCalligraphyBrush")
+  (step05yPage.includes("WinningFundCalligraphyBrush") || step05yPage.includes("WinningFundLogoReveal"))
 ) {
   pass('slogan now contains two gradient spiral-check SVG brush paths')
 } else {
@@ -785,7 +785,7 @@ if (
 
 if (
   (
-    step05yPage.includes("WinningFundCalligraphyBrush") ||
+    (step05yPage.includes("WinningFundCalligraphyBrush") || step05yPage.includes("WinningFundLogoReveal")) ||
     (
       step05yPage.includes("stopColor: '#89E2FA'") &&
       step05yPage.includes("stopColor: '#269DEB'") &&
@@ -831,7 +831,7 @@ if (
       step05zPage.includes("import { getStroke } from 'perfect-freehand'") &&
       step05zPage.includes('WF_LOGO_FEATURES')
     ) ||
-    step05zPage.includes('WinningFundCalligraphyBrush')
+    (step05zPage.includes('WinningFundCalligraphyBrush') || step05zPage.includes('WinningFundLogoReveal'))
   )
 ) {
   pass('logo-derived feature anchors feed a smoothed pressure-aware centerline')
@@ -842,7 +842,7 @@ if (
 if (
   (
     step05zPage.includes('requestAnimationFrame(draw)') ||
-    step05zPage.includes('WinningFundCalligraphyBrush')
+    (step05zPage.includes('WinningFundCalligraphyBrush') || step05zPage.includes('WinningFundLogoReveal'))
   )
 ) {
   pass('brush animation grows actual perfect-freehand polygons frame by frame')
@@ -851,7 +851,7 @@ if (
 }
 
 if (
-  step05zPage.includes('WinningFundCalligraphyBrush')
+  (step05zPage.includes('WinningFundCalligraphyBrush') || step05zPage.includes('WinningFundLogoReveal'))
 ) {
   pass('both freehand polygons keep the WinningFund sky / blue / cobalt gradient')
 } else {
@@ -859,7 +859,7 @@ if (
 }
 
 if (
-  step05zPage.includes('WinningFundCalligraphyBrush')
+  (step05zPage.includes('WinningFundCalligraphyBrush') || step05zPage.includes('WinningFundLogoReveal'))
 ) {
   pass('two open check trajectories preserve the logo-derived start / valley / rise anchors')
 } else {
@@ -870,7 +870,8 @@ if (
   step05zCss.includes('STEP 05Z — Image-Feature Freehand Brush') &&
   (
     step05zPage.includes('createElement(WinningFundSloganBrush)') ||
-    step05zPage.includes('createElement(WinningFundCalligraphyBrush)')
+    step05zPage.includes('createElement(WinningFundCalligraphyBrush)') ||
+    step05zPage.includes('createElement(WinningFundLogoReveal)')
   )
 ) {
   pass('legacy 05Y fixed-width dash stroke is retired in favor of filled freehand polygons')
@@ -888,7 +889,7 @@ if (
   step05zaPackage.version >= '0.7.6' &&
   (
     step05zaPage.includes("result += 'Z'") ||
-    step05zaPage.includes('WinningFundCalligraphyBrush')
+    (step05zaPage.includes('WinningFundCalligraphyBrush') || step05zaPage.includes('WinningFundLogoReveal'))
   )
 ) {
   pass('05ZA uses the upstream-style perfect-freehand SVG path serializer')
@@ -899,7 +900,7 @@ if (
 if (
   (
     step05zaPage.includes('finalPaths') ||
-    step05zaPage.includes('WinningFundCalligraphyBrush')
+    (step05zaPage.includes('WinningFundCalligraphyBrush') || step05zaPage.includes('WinningFundLogoReveal'))
   )
 ) {
   pass('05ZA provides full-shape fallback underpaint for both brush checks')
@@ -930,9 +931,9 @@ const step05zbBrush = read('src/components/WinningFundCalligraphyBrush.js')
 const step05zbPackage = JSON.parse(read('package.json'))
 
 if (
-  ['0.7.7', '0.7.8'].includes(step05zbPackage.version) &&
-  step05zbPage.includes("WinningFundCalligraphyBrush") &&
-  step05zbPage.includes("createElement(WinningFundCalligraphyBrush)")
+  ['0.7.7', '0.7.8', '0.7.9'].includes(step05zbPackage.version) &&
+  ((step05zbPage.includes("WinningFundCalligraphyBrush") && step05zbPage.includes("createElement(WinningFundCalligraphyBrush)")) ||
+   (step05zbPage.includes("WinningFundLogoReveal") && step05zbPage.includes("createElement(WinningFundLogoReveal)")))
 ) {
   pass('05ZB mounts the dedicated Canvas calligraphy engine in the slogan')
 } else {
@@ -1015,7 +1016,7 @@ const step05zcBrush = read('src/components/WinningFundCalligraphyBrush.js')
 const step05zcPackage = JSON.parse(read('package.json'))
 
 if (
-  step05zcPackage.version === '0.7.8' &&
+  step05zcPackage.version >= '0.7.8' &&
   step05zcBrush.includes("riseAngleDeg: -35") &&
   step05zcBrush.includes("riseAngleDeg: -38") &&
   step05zcBrush.includes('createConstantRise') &&
@@ -1095,8 +1096,80 @@ if (
   fail('05ZC constant-rise QA invariant missing')
 }
 
+
+
+const step05zdCss = read('src/styles/home.css')
+const step05zdPage = read('src/pages/HomePage.js')
+const step05zdReveal = read('src/components/WinningFundLogoReveal.js')
+const step05zdPackage = JSON.parse(read('package.json'))
+
+if (
+  step05zdPackage.version === '0.7.9' &&
+  step05zdPage.includes("WinningFundLogoReveal") &&
+  step05zdPage.includes("createElement(WinningFundLogoReveal)")
+) {
+  pass('05ZD mounts the original-pixel logo reveal behind the Korean slogan')
+} else {
+  fail('05ZD logo reveal component is not mounted')
+}
+
+if (
+  step05zdReveal.includes("winningfund-logo.png") &&
+  step05zdReveal.includes("winningfund-ribbon-a.png") &&
+  step05zdReveal.includes("winningfund-ribbon-b.png") &&
+  step05zdReveal.includes("MASK_PATH_A") &&
+  step05zdReveal.includes("MASK_PATH_B")
+) {
+  pass('05ZD uses exact source-pixel A/B layers and feature paths only as reveal masks')
+} else {
+  fail('05ZD original-pixel reveal source contract missing')
+}
+
+if (
+  step05zdReveal.includes("strokeWidth: 47") &&
+  step05zdReveal.includes("strokeWidth: 51") &&
+  step05zdReveal.includes("mask: 'url(#wf-logo-mask-a)'") &&
+  step05zdReveal.includes("mask: 'url(#wf-logo-mask-b)'")
+) {
+  pass('05ZD mask strokes overscan the ribbons while PNG alpha owns the final silhouette')
+} else {
+  fail('05ZD wide feature-mask reveal contract missing')
+}
+
+if (
+  step05zdCss.includes('STEP 05ZD — Exact-Pixel Logo Watermark / Feature-Mask Reveal') &&
+  step05zdCss.includes('width: clamp(300px, 31vw, 500px)') &&
+  step05zdCss.includes('opacity: 0.11') &&
+  step05zdCss.includes('opacity: 0.25')
+) {
+  pass('05ZD places a large translucent WinningFund logo watermark behind the slogan')
+} else {
+  fail('05ZD large translucent slogan watermark styling missing')
+}
+
+if (
+  step05zdCss.includes('@keyframes wf-home-logo-mask-reveal') &&
+  step05zdCss.includes('1.12s') &&
+  step05zdCss.includes('1.66s') &&
+  step05zdCss.includes('stroke-dashoffset: 0')
+) {
+  pass('05ZD reveals ribbon A then ribbon B as two discrete logo gestures')
+} else {
+  fail('05ZD two-stage ribbon reveal timing missing')
+}
+
+if (
+  step05zdCss.includes('.wf-home-kinetic-slogan__brush--calligraphy-v2') &&
+  step05zdCss.includes('display: none !important') &&
+  step05zdCss.includes('@media (prefers-reduced-motion: reduce)')
+) {
+  pass('05ZD retires calligraphy rendering and preserves the static final logo for reduced motion')
+} else {
+  fail('05ZD calligraphy retirement or reduced-motion contract missing')
+}
+
 if (failed) {
-  console.error('\nSTEP 05ZC CALLIGRAPHY V2 verification FAILED.')
+  console.error('\nSTEP 05ZD ORIGINAL-PIXEL LOGO REVEAL verification FAILED.')
   process.exit(1)
 }
-console.log('\nSTEP 05ZC CALLIGRAPHY V2 verification PASSED.')
+console.log('\nSTEP 05ZD ORIGINAL-PIXEL LOGO REVEAL verification PASSED.')

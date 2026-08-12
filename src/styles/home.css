@@ -3421,3 +3421,114 @@
   }
 }
 
+
+
+/* ---------------------------------------------------------
+ * STEP 05ZD — Exact-Pixel Logo Watermark / Feature-Mask Reveal
+ * --------------------------------------------------------- */
+
+.wf-home-kinetic-slogan {
+  --wf-slogan-text-delay: 1.34s;
+  position: relative;
+  isolation: isolate;
+  overflow: visible;
+  min-height: clamp(96px, 8.6vw, 132px);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.wf-home-logo-reveal {
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  top: 51%;
+  display: block;
+  width: clamp(300px, 31vw, 500px);
+  aspect-ratio: 189 / 126;
+  transform: translate3d(-50%, -50%, 0);
+  pointer-events: none;
+  user-select: none;
+}
+
+.wf-home-logo-reveal__svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.wf-home-logo-reveal__base {
+  opacity: 0.11;
+}
+
+.wf-home-logo-reveal__ribbon {
+  opacity: 0.25;
+}
+
+.wf-home-logo-reveal__mask-path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  will-change: stroke-dashoffset;
+}
+
+.wf-home-logo-reveal__mask-path--a {
+  animation: wf-home-logo-mask-reveal 460ms cubic-bezier(.20, .76, .22, 1) 1.12s forwards;
+}
+
+.wf-home-logo-reveal__mask-path--b {
+  animation: wf-home-logo-mask-reveal 620ms cubic-bezier(.18, .74, .20, 1) 1.66s forwards;
+}
+
+@keyframes wf-home-logo-mask-reveal {
+  from { stroke-dashoffset: 1; }
+  to { stroke-dashoffset: 0; }
+}
+
+.wf-home-kinetic-slogan__text {
+  position: relative;
+  z-index: 3;
+  color: #ffffff;
+  text-shadow:
+    0 2px 12px rgba(4, 27, 86, 0.30),
+    0 0 2px rgba(4, 27, 86, 0.28);
+  -webkit-text-stroke: 0.3px rgba(5, 42, 120, 0.20);
+  paint-order: stroke fill;
+}
+
+/* Previous experimental final-renderer layers are no longer allowed to show. */
+.wf-home-kinetic-slogan__brush,
+.wf-home-kinetic-slogan__brush--canvas,
+.wf-home-kinetic-slogan__brush--calligraphy-v2,
+.wf-home-kinetic-slogan__underpaint,
+.wf-home-kinetic-slogan__check,
+.wf-home-kinetic-slogan__ribbon {
+  display: none !important;
+}
+
+@media (max-width: 63.99rem) {
+  .wf-home-kinetic-slogan { min-height: 108px; }
+  .wf-home-logo-reveal {
+    width: clamp(270px, 45vw, 420px);
+    top: 52%;
+  }
+}
+
+@media (max-width: 48rem) {
+  .wf-home-kinetic-slogan { min-height: 88px; }
+  .wf-home-logo-reveal {
+    width: clamp(230px, 70vw, 340px);
+    top: 52%;
+  }
+  .wf-home-logo-reveal__base { opacity: 0.10; }
+  .wf-home-logo-reveal__ribbon { opacity: 0.22; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wf-home-logo-reveal__mask-path {
+    stroke-dashoffset: 0 !important;
+    animation: none !important;
+  }
+  .wf-home-logo-reveal__base { opacity: 0.11 !important; }
+  .wf-home-logo-reveal__ribbon { opacity: 0.25 !important; }
+}

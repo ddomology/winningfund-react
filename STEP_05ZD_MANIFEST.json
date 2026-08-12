@@ -1,0 +1,13 @@
+{
+  "patch": "PATCH_05ZD_ORIGINAL_PIXEL_LOGO_REVEAL",
+  "requiresVersion": "0.7.8",
+  "resultVersion": "0.7.9",
+  "changes": [
+    "Retire the visible Canvas calligraphy effect from the slogan",
+    "Split the existing logo into exact-pixel A/B alpha layers while preserving all source RGB/alpha values",
+    "Use feature paths only as broad animated masks, never as visible artwork",
+    "Place a large 11% opacity full-logo watermark behind the Korean slogan",
+    "Reveal A then B at 25% opacity above the faint watermark",
+    "Preserve source gradient, rounded caps, antialiasing, overlap and optical corrections"
+  ]
+}
