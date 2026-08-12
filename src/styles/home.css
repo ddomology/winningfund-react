@@ -3770,3 +3770,188 @@
 }
 
 /* WF BRUSH STROKE PATCH END */
+
+/* WF HQ BRUSH TYPOGRAPHY PATCH START */
+
+/*
+ * Final hero proportion pass
+ * - retain oversized editorial English
+ * - close the CLUB scale gap
+ * - promote the Korean slogan
+ * - demote CURRENT TERM slightly
+ * - use the supplied high-resolution bristle mask
+ */
+
+/* INVESTMENT */
+.wf-home-kinetic-row--1 .wf-home-kinetic-row__ghost,
+.wf-home-kinetic-row--1 .wf-home-kinetic-row__reveal-word {
+  font-size: clamp(3.1rem, 7.15vw, 7.4rem);
+}
+
+/* ECONOMICS */
+.wf-home-kinetic-row--2 .wf-home-kinetic-row__ghost,
+.wf-home-kinetic-row--2 .wf-home-kinetic-row__reveal-word {
+  font-size: clamp(2.9rem, 6.7vw, 6.9rem);
+}
+
+/* CLUB ??still smaller, but no longer a footnote */
+.wf-home-kinetic-row--3 .wf-home-kinetic-row__ghost,
+.wf-home-kinetic-row--3 .wf-home-kinetic-row__reveal-word {
+  font-size: clamp(2.75rem, 6.15vw, 6.35rem);
+}
+
+/* Korean conclusion */
+.wf-home-kinetic-slogan {
+  font-size: clamp(1.72rem, 2.3vw, 2.7rem);
+  font-weight: 780;
+}
+
+/* Term remains secondary to the slogan */
+.wf-home-kinetic-term strong {
+  font-size: clamp(2.05rem, 2.85vw, 3.1rem);
+}
+
+/* Rail labels recover legibility without competing with the hero */
+.wf-home-rail__label {
+  font-size: 0.74rem;
+  opacity: 0.84;
+}
+
+.wf-home-rail::before {
+  font-size: 0.62rem;
+}
+
+/*
+ * Supplied brush artwork:
+ * - 3072px-wide high-resolution mask
+ * - source RGB luminance was folded into alpha so interior bristle
+ *   texture survives CSS recoloring
+ * - scaleY flattens the broad source stroke into an editorial signature
+ */
+.wf-home-brush-stroke {
+  left: 50%;
+  top: 50%;
+  width: clamp(500px, 50vw, 800px);
+  aspect-ratio: 3072 / 1046;
+
+  transform:
+    translate3d(-50%, -58%, 0)
+    rotate(-4.5deg)
+    scaleY(0.62);
+
+  transform-origin: center;
+}
+
+.wf-home-brush-stroke__paint {
+  background:
+    radial-gradient(
+      ellipse at 31% 29%,
+      rgba(221, 249, 255, 0.78) 0%,
+      rgba(145, 229, 255, 0.34) 29%,
+      transparent 56%
+    ),
+    linear-gradient(
+      90deg,
+      #bcefff 0%,
+      #86dffb 18%,
+      #5bc1f3 38%,
+      #299dec 66%,
+      #126fef 82%,
+      #085ced 100%
+    );
+
+  -webkit-mask-image:
+    url('../assets/brand/brush-stroke-mask-hq.png');
+
+  mask-image:
+    url('../assets/brand/brush-stroke-mask-hq.png');
+
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+
+  -webkit-mask-position: center;
+  mask-position: center;
+
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+}
+
+/*
+ * Final draw intensity:
+ * texture is visible, but the sentence remains the foreground.
+ */
+@keyframes wf-brush-stroke-draw {
+  0% {
+    clip-path: inset(0 100% 0 0);
+    opacity: 0;
+  }
+
+  8% {
+    opacity: 0.54;
+  }
+
+  100% {
+    clip-path: inset(0 0 0 0);
+    opacity: 0.42;
+  }
+}
+
+@media (max-width: 63.99rem) {
+  .wf-home-brush-stroke {
+    width: clamp(420px, 72vw, 680px);
+    top: 51%;
+    transform:
+      translate3d(-50%, -57%, 0)
+      rotate(-4deg)
+      scaleY(0.62);
+  }
+
+  .wf-home-kinetic-slogan {
+    font-size: clamp(1.28rem, 3.2vw, 1.82rem);
+  }
+}
+
+@media (max-width: 48rem) {
+  .wf-home-kinetic-row--1 .wf-home-kinetic-row__ghost,
+  .wf-home-kinetic-row--1 .wf-home-kinetic-row__reveal-word {
+    font-size: clamp(2.35rem, 10.8vw, 4.05rem);
+  }
+
+  .wf-home-kinetic-row--2 .wf-home-kinetic-row__ghost,
+  .wf-home-kinetic-row--2 .wf-home-kinetic-row__reveal-word {
+    font-size: clamp(2.15rem, 9.8vw, 3.72rem);
+  }
+
+  .wf-home-kinetic-row--3 .wf-home-kinetic-row__ghost,
+  .wf-home-kinetic-row--3 .wf-home-kinetic-row__reveal-word {
+    font-size: clamp(2.02rem, 9.25vw, 3.36rem);
+  }
+
+  .wf-home-kinetic-slogan {
+    font-size: clamp(1.08rem, 4.35vw, 1.46rem);
+  }
+
+  .wf-home-kinetic-term strong {
+    font-size: clamp(1.8rem, 8vw, 2.6rem);
+  }
+
+  .wf-home-brush-stroke {
+    width: clamp(330px, 102vw, 520px);
+    left: 50%;
+    top: 52%;
+    transform:
+      translate3d(-50%, -55%, 0)
+      rotate(-3.5deg)
+      scaleY(0.60);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wf-home-brush-stroke__paint {
+    clip-path: inset(0 0 0 0) !important;
+    opacity: 0.42 !important;
+    animation: none !important;
+  }
+}
+
+/* WF HQ BRUSH TYPOGRAPHY PATCH END */

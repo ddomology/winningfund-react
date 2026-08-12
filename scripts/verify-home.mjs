@@ -1098,136 +1098,82 @@ if (
 
 
 
-const stepBrushCss = read('src/styles/home.css')
-const stepBrushPage = read('src/pages/HomePage.js')
-const stepBrushComponent = read('src/components/WinningFundLogoReveal.js')
-const stepBrushPackage = JSON.parse(read('package.json'))
+const stepHqBrushCss = read('src/styles/home.css')
+const stepHqBrushPage = read('src/pages/HomePage.js')
+const stepHqBrushComponent = read('src/components/WinningFundLogoReveal.js')
 
-const stepBrushMaskPath = path.join(
+const stepHqBrushMaskPath = path.join(
   root,
   'src',
   'assets',
   'brand',
-  'brush-stroke-mask.png',
+  'brush-stroke-mask-hq.png',
 )
 
 if (
-  stepBrushPackage.version === '0.7.9' &&
-  stepBrushPage.includes('WinningFundLogoReveal') &&
-  stepBrushPage.includes('wf-home-kinetic-slogan__text')
+  stepHqBrushPage.includes('WinningFundLogoReveal') &&
+  stepHqBrushPage.includes('wf-home-kinetic-slogan__text')
 ) {
-  pass(
-    '05ZE keeps the approved hero/slogan composition and mounts the brush signature'
-  )
+  pass('05ZF keeps the approved hero copy and brush mounting point')
 } else {
-  fail(
-    '05ZE hero/slogan brush mounting contract missing'
-  )
+  fail('05ZF hero brush mounting contract missing')
 }
 
 if (
-  fs.existsSync(stepBrushMaskPath) &&
-  stepBrushComponent.includes(
-    "className: 'wf-home-brush-stroke'"
-  ) &&
-  stepBrushComponent.includes(
-    "className: 'wf-home-brush-stroke__paint'"
-  )
+  fs.existsSync(stepHqBrushMaskPath) &&
+  stepHqBrushComponent.includes("className: 'wf-home-brush-stroke'") &&
+  stepHqBrushComponent.includes("className: 'wf-home-brush-stroke__paint'")
 ) {
-  pass(
-    '05ZE uses the supplied brush-stroke PNG as the signature mask asset'
-  )
+  pass('05ZF uses the supplied high-resolution brush mask asset')
 } else {
-  fail(
-    '05ZE brush-stroke mask asset/component contract missing'
-  )
+  fail('05ZF HQ brush asset/component contract missing')
 }
 
 if (
-  !stepBrushComponent.includes('winningfund-logo.png') &&
-  !stepBrushComponent.includes('winningfund-ribbon-a.png') &&
-  !stepBrushComponent.includes('winningfund-ribbon-b.png') &&
-  !stepBrushComponent.includes('MASK_PATH_A') &&
-  !stepBrushComponent.includes('MASK_PATH_B')
+  stepHqBrushCss.includes("brush-stroke-mask-hq.png") &&
+  stepHqBrushCss.includes('3072 / 1046') &&
+  stepHqBrushCss.includes('scaleY(0.62)')
 ) {
-  pass(
-    '05ZE retires hero logo/ribbon artwork from the slogan signature'
-  )
+  pass('05ZF preserves HQ mask resolution while flattening the broad source gesture')
 } else {
-  fail(
-    '05ZE legacy hero logo/ribbon artwork still leaks into the brush signature'
-  )
+  fail('05ZF HQ mask geometry contract missing')
 }
 
 if (
-  stepBrushCss.includes(
-    "url('../assets/brand/brush-stroke-mask.png')"
-  ) &&
-  stepBrushCss.includes('#bcefff') &&
-  stepBrushCss.includes('#5bc1f3') &&
-  stepBrushCss.includes('#299dec') &&
-  stepBrushCss.includes('#085ced')
+  stepHqBrushCss.includes('rotate(-4.5deg)') &&
+  stepHqBrushCss.includes('width: clamp(500px, 50vw, 800px)') &&
+  stepHqBrushCss.includes('@keyframes wf-brush-stroke-draw')
 ) {
-  pass(
-    '05ZE recolors the supplied brush mask with the WinningFund blue gradient family'
-  )
+  pass('05ZF brush uses the final restrained angle, size and one-shot reveal')
 } else {
-  fail(
-    '05ZE brush mask or WinningFund gradient contract missing'
-  )
+  fail('05ZF final brush placement/draw contract missing')
 }
 
 if (
-  stepBrushCss.includes('rotate(-8deg)') &&
-  stepBrushCss.includes(
-    '@keyframes wf-brush-stroke-draw'
-  ) &&
-  stepBrushCss.includes(
-    'inset(0 100% 0 0)'
-  ) &&
-  stepBrushCss.includes(
-    'inset(0 0 0 0)'
-  )
+  stepHqBrushCss.includes('clamp(3.1rem, 7.15vw, 7.4rem)') &&
+  stepHqBrushCss.includes('clamp(2.9rem, 6.7vw, 6.9rem)') &&
+  stepHqBrushCss.includes('clamp(2.75rem, 6.15vw, 6.35rem)') &&
+  stepHqBrushCss.includes('clamp(1.72rem, 2.3vw, 2.7rem)') &&
+  stepHqBrushCss.includes('clamp(2.05rem, 2.85vw, 3.1rem)')
 ) {
-  pass(
-    '05ZE brush rises to the right and draws once from left to right'
-  )
+  pass('05ZF locks the reviewed hero typography hierarchy')
 } else {
-  fail(
-    '05ZE angled draw/reveal contract missing'
-  )
+  fail('05ZF reviewed typography scale contract missing')
 }
 
 if (
-  stepBrushCss.includes(
-    '@media (prefers-reduced-motion: reduce)'
-  ) &&
-  stepBrushCss.includes(
-    '.wf-home-brush-stroke__paint'
-  ) &&
-  stepBrushCss.includes(
-    'animation: none !important'
-  ) &&
-  stepBrushCss.includes(
-    'opacity: 0.62 !important'
-  )
+  stepHqBrushCss.includes('@media (prefers-reduced-motion: reduce)') &&
+  stepHqBrushCss.includes('opacity: 0.42 !important') &&
+  stepHqBrushCss.includes('animation: none !important')
 ) {
-  pass(
-    '05ZE reduced-motion exposes the final static brush immediately'
-  )
+  pass('05ZF reduced-motion shows the final HQ brush immediately')
 } else {
-  fail(
-    '05ZE reduced-motion brush fallback missing'
-  )
+  fail('05ZF reduced-motion HQ brush fallback missing')
 }
 
 if (failed) {
-  console.error(
-    '\nSTEP 05ZE ANGLED BRAND BRUSH verification FAILED.'
-  )
+  console.error('\nSTEP 05ZF HQ BRUSH + TYPOGRAPHY verification FAILED.')
   process.exit(1)
 }
 
-console.log(
-  '\nSTEP 05ZE ANGLED BRAND BRUSH verification PASSED.'
-)
+console.log('\nSTEP 05ZF HQ BRUSH + TYPOGRAPHY verification PASSED.')
