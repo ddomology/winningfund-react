@@ -3532,3 +3532,178 @@
   .wf-home-logo-reveal__base { opacity: 0.11 !important; }
   .wf-home-logo-reveal__ribbon { opacity: 0.25 !important; }
 }
+
+/* WF DIGITAL BRUSH PATCH START */
+
+/*
+ * WinningFund digital brush signature
+ *
+ * Not a logo.
+ * One brand-color gesture behind the Korean slogan.
+ */
+
+.wf-home-digital-brush {
+  position: absolute;
+  z-index: 1;
+
+  left: 50%;
+  top: 51%;
+
+  width: clamp(540px, 58vw, 920px);
+  height: auto;
+  aspect-ratio: 1000 / 260;
+
+  transform:
+    translate3d(-49%, -50%, 0)
+    rotate(-1.4deg);
+
+  opacity: 0.64;
+
+  overflow: visible;
+  pointer-events: none;
+  user-select: none;
+
+  will-change:
+    transform,
+    opacity;
+}
+
+
+.wf-home-digital-brush .wf-home-logo-reveal__svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+
+/*
+ * The artwork begins slightly soft and settles after the draw.
+ */
+.wf-home-digital-brush__art {
+  opacity: 0;
+
+  animation:
+    wf-digital-brush-art-in
+    260ms
+    ease-out
+    500ms
+    forwards;
+}
+
+
+/*
+ * One left-to-right drawing gesture.
+ */
+.wf-home-digital-brush__mask-path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+
+  animation:
+    wf-digital-brush-reveal
+    920ms
+    cubic-bezier(.16, .84, .24, 1)
+    520ms
+    forwards;
+
+  will-change: stroke-dashoffset;
+}
+
+
+@keyframes wf-digital-brush-reveal {
+  from {
+    stroke-dashoffset: 1;
+  }
+
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+
+@keyframes wf-digital-brush-art-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+
+/*
+ * Keep actual slogan text above the gesture.
+ */
+.wf-home-kinetic-slogan {
+  isolation: isolate;
+}
+
+.wf-home-kinetic-slogan__text {
+  position: relative;
+  z-index: 2;
+}
+
+
+/*
+ * Mid-size layouts.
+ */
+@media (max-width: 63.99rem) {
+
+  .wf-home-digital-brush {
+    width: clamp(430px, 72vw, 700px);
+
+    top: 52%;
+
+    opacity: 0.58;
+
+    transform:
+      translate3d(-49%, -49%, 0)
+      rotate(-1.5deg);
+  }
+}
+
+
+/*
+ * Mobile.
+ */
+@media (max-width: 48rem) {
+
+  .wf-home-digital-brush {
+    width: clamp(330px, 106vw, 560px);
+
+    top: 52%;
+
+    opacity: 0.52;
+
+    transform:
+      translate3d(-49%, -48%, 0)
+      rotate(-1.8deg);
+  }
+}
+
+
+/*
+ * Reduced motion:
+ * show final artwork immediately.
+ */
+@media (prefers-reduced-motion: reduce) {
+
+  .wf-home-digital-brush__mask-path {
+    stroke-dashoffset: 0 !important;
+    animation: none !important;
+  }
+
+  .wf-home-digital-brush__art {
+    opacity: 1 !important;
+    animation: none !important;
+  }
+
+  .wf-home-digital-brush {
+    transform:
+      translate3d(-49%, -50%, 0)
+      rotate(-1.4deg) !important;
+  }
+}
+
+/* WF DIGITAL BRUSH PATCH END */

@@ -1,142 +1,257 @@
 import { createElement } from 'react'
-import winningFundLogoUrl from '../assets/brand/winningfund-logo.png'
-import ribbonAUrl from '../assets/brand/winningfund-ribbon-a.png'
-import ribbonBUrl from '../assets/brand/winningfund-ribbon-b.png'
 
 /*
- * STEP 05ZD — Original-Pixel Logo Reveal
+ * WINNINGFUND — DIGITAL BRUSH SIGNATURE
  *
- * The SVG paths below are NEVER visible artwork. They are only broad masks
- * that uncover exact pixels copied from the original 189x126 logo PNG.
- * Therefore the source PNG owns final silhouette, gradient, caps and AA.
+ * This is intentionally NOT the WinningFund logo.
+ *
+ * It is a single abstract brand-color gesture:
+ * sky blue -> cyan -> vivid blue -> cobalt.
+ *
+ * Final artwork and reveal logic are separated:
+ * - paths own the artwork
+ * - centerline mask owns the drawing animation
  */
 
-const VIEWBOX_WIDTH = 189
-const VIEWBOX_HEIGHT = 126
-
-const MASK_PATH_A = [
-  'M 26.5 72',
-  'C 28.5 84, 34.5 98, 47.5 101',
-  'C 59 102, 71 99, 78.44 93.48',
-  'C 83 84, 85.5 68, 87.9 58',
-  'C 91 50, 94 45, 96 42',
+const BRUSH_SHAPE = [
+  'M 22 112',
+  'C 126 126, 216 164, 326 169',
+  'C 438 174, 538 142, 638 103',
+  'C 742 63, 844 40, 965 46',
+  'C 987 47, 998 57, 992 70',
+  'C 884 80, 784 108, 676 149',
+  'C 564 192, 454 219, 337 218',
+  'C 223 217, 122 192, 31 166',
+  'C 12 160, 7 148, 10 132',
+  'C 12 122, 16 116, 22 112',
+  'Z',
 ].join(' ')
 
-const MASK_PATH_B = [
-  'M 79 94',
-  'C 85 98, 92 101, 98.5 101',
-  'C 106 101, 113 99, 117.76 94.95',
-  'C 122 89, 124.5 84, 126.9 80',
-  'L 139.7 54',
-  'L 152.5 28',
-  'L 163 8',
+const REVEAL_PATH = [
+  'M 18 146',
+  'C 166 183, 290 197, 423 170',
+  'C 566 141, 704 77, 824 59',
+  'C 885 50, 940 50, 989 59',
 ].join(' ')
 
 export default function WinningFundLogoReveal() {
   return createElement(
     'span',
     {
-      className: 'wf-home-logo-reveal',
+      className:
+        'wf-home-logo-reveal wf-home-digital-brush',
       'aria-hidden': 'true',
     },
+
     createElement(
       'svg',
       {
         className: 'wf-home-logo-reveal__svg',
-        viewBox: `0 0 ${VIEWBOX_WIDTH} ${VIEWBOX_HEIGHT}`,
-        preserveAspectRatio: 'xMidYMid meet',
+        viewBox: '0 0 1000 260',
+        preserveAspectRatio: 'none',
         focusable: 'false',
       },
+
       createElement(
         'defs',
         null,
+
+        /*
+         * Main longitudinal brand gradient.
+         */
         createElement(
-          'mask',
+          'linearGradient',
           {
-            id: 'wf-logo-mask-a',
-            x: 0,
-            y: 0,
-            width: VIEWBOX_WIDTH,
-            height: VIEWBOX_HEIGHT,
-            maskUnits: 'userSpaceOnUse',
+            id: 'wf-digital-brush-base',
+            x1: '0%',
+            y1: '50%',
+            x2: '100%',
+            y2: '50%',
           },
-          createElement('rect', {
-            x: 0,
-            y: 0,
-            width: VIEWBOX_WIDTH,
-            height: VIEWBOX_HEIGHT,
-            fill: '#000',
+
+          createElement('stop', {
+            offset: '0%',
+            stopColor: '#BDEEFF',
           }),
-          createElement('path', {
-            className: 'wf-home-logo-reveal__mask-path wf-home-logo-reveal__mask-path--a',
-            d: MASK_PATH_A,
-            pathLength: 1,
-            fill: 'none',
-            stroke: '#fff',
-            strokeWidth: 47,
-            strokeLinecap: 'round',
-            strokeLinejoin: 'round',
+
+          createElement('stop', {
+            offset: '22%',
+            stopColor: '#84DEFA',
+          }),
+
+          createElement('stop', {
+            offset: '46%',
+            stopColor: '#43B9F5',
+          }),
+
+          createElement('stop', {
+            offset: '70%',
+            stopColor: '#168AF1',
+          }),
+
+          createElement('stop', {
+            offset: '100%',
+            stopColor: '#0759ED',
           }),
         ),
+
+
+        /*
+         * Soft internal highlight.
+         */
+        createElement(
+          'radialGradient',
+          {
+            id: 'wf-digital-brush-highlight',
+            cx: '34%',
+            cy: '34%',
+            r: '62%',
+          },
+
+          createElement('stop', {
+            offset: '0%',
+            stopColor: '#E1F9FF',
+            stopOpacity: '0.72',
+          }),
+
+          createElement('stop', {
+            offset: '34%',
+            stopColor: '#9BEAFF',
+            stopOpacity: '0.34',
+          }),
+
+          createElement('stop', {
+            offset: '100%',
+            stopColor: '#FFFFFF',
+            stopOpacity: '0',
+          }),
+        ),
+
+
+        /*
+         * Slight cobalt depth toward the end.
+         */
+        createElement(
+          'linearGradient',
+          {
+            id: 'wf-digital-brush-depth',
+            x1: '0%',
+            y1: '0%',
+            x2: '100%',
+            y2: '0%',
+          },
+
+          createElement('stop', {
+            offset: '42%',
+            stopColor: '#063DBC',
+            stopOpacity: '0',
+          }),
+
+          createElement('stop', {
+            offset: '74%',
+            stopColor: '#063DBC',
+            stopOpacity: '0.12',
+          }),
+
+          createElement('stop', {
+            offset: '100%',
+            stopColor: '#032FAD',
+            stopOpacity: '0.24',
+          }),
+        ),
+
+
+        /*
+         * Slight edge softening only.
+         */
+        createElement(
+          'filter',
+          {
+            id: 'wf-digital-brush-soft',
+            x: '-5%',
+            y: '-18%',
+            width: '110%',
+            height: '136%',
+          },
+
+          createElement('feGaussianBlur', {
+            stdDeviation: '0.65',
+          }),
+        ),
+
+
+        /*
+         * Animated reveal mask.
+         *
+         * The mask is deliberately much wider than the artwork.
+         * The artwork silhouette still owns the final visible shape.
+         */
         createElement(
           'mask',
           {
-            id: 'wf-logo-mask-b',
+            id: 'wf-digital-brush-reveal',
             x: 0,
             y: 0,
-            width: VIEWBOX_WIDTH,
-            height: VIEWBOX_HEIGHT,
+            width: 1000,
+            height: 260,
             maskUnits: 'userSpaceOnUse',
           },
+
           createElement('rect', {
             x: 0,
             y: 0,
-            width: VIEWBOX_WIDTH,
-            height: VIEWBOX_HEIGHT,
+            width: 1000,
+            height: 260,
             fill: '#000',
           }),
+
           createElement('path', {
-            className: 'wf-home-logo-reveal__mask-path wf-home-logo-reveal__mask-path--b',
-            d: MASK_PATH_B,
+            className:
+              'wf-home-digital-brush__mask-path',
+            d: REVEAL_PATH,
             pathLength: 1,
             fill: 'none',
             stroke: '#fff',
-            strokeWidth: 51,
+            strokeWidth: 238,
             strokeLinecap: 'round',
             strokeLinejoin: 'round',
           }),
         ),
       ),
-      createElement('image', {
-        className: 'wf-home-logo-reveal__base',
-        href: winningFundLogoUrl,
-        x: 0,
-        y: 0,
-        width: VIEWBOX_WIDTH,
-        height: VIEWBOX_HEIGHT,
-        preserveAspectRatio: 'none',
-      }),
-      /* B is below A so the source logo's overlap order is preserved. */
-      createElement('image', {
-        className: 'wf-home-logo-reveal__ribbon wf-home-logo-reveal__ribbon--b',
-        href: ribbonBUrl,
-        x: 0,
-        y: 0,
-        width: VIEWBOX_WIDTH,
-        height: VIEWBOX_HEIGHT,
-        preserveAspectRatio: 'none',
-        mask: 'url(#wf-logo-mask-b)',
-      }),
-      createElement('image', {
-        className: 'wf-home-logo-reveal__ribbon wf-home-logo-reveal__ribbon--a',
-        href: ribbonAUrl,
-        x: 0,
-        y: 0,
-        width: VIEWBOX_WIDTH,
-        height: VIEWBOX_HEIGHT,
-        preserveAspectRatio: 'none',
-        mask: 'url(#wf-logo-mask-a)',
-      }),
+
+
+      createElement(
+        'g',
+        {
+          className: 'wf-home-digital-brush__art',
+          mask: 'url(#wf-digital-brush-reveal)',
+        },
+
+        /*
+         * Base body.
+         */
+        createElement('path', {
+          d: BRUSH_SHAPE,
+          fill: 'url(#wf-digital-brush-base)',
+          filter: 'url(#wf-digital-brush-soft)',
+        }),
+
+        /*
+         * Highlight.
+         */
+        createElement('path', {
+          d: BRUSH_SHAPE,
+          fill: 'url(#wf-digital-brush-highlight)',
+        }),
+
+        /*
+         * Depth.
+         */
+        createElement('path', {
+          d: BRUSH_SHAPE,
+          fill: 'url(#wf-digital-brush-depth)',
+        }),
+      ),
     ),
   )
 }
