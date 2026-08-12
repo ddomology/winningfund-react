@@ -1,4 +1,4 @@
-/* STEP 05D — Hero typography + persistent branded section rail */
+﻿/* STEP 05D — Hero typography + persistent branded section rail */
 
 .wf-home {
   overflow-x: clip;
@@ -3380,3 +3380,94 @@
       none !important;
   }
 }
+
+/* WF SHARED IDENTITY GRADIENT START */
+
+/*
+ * ONE static diagonal identity field across the three hero words.
+ *
+ * INVESTMENT = dark / upper-left phase
+ * ECONOMICS  = middle / brand-blue phase
+ * CLUB       = bright / lower-right phase
+ *
+ * Layout and animation timing are unchanged.
+ */
+
+.wf-home-kinetic-list {
+  --wf-identity-gradient:
+    linear-gradient(
+      135deg,
+      #1737d2 0%,
+      #115de4 38%,
+      #078bec 72%,
+      #179fef 100%
+    );
+}
+
+.wf-home-kinetic-row__reveal-word {
+  color: transparent !important;
+
+  background-image:
+    var(--wf-identity-gradient);
+
+  /*
+   * Oversized field:
+   * each row samples a different zone instead of restarting
+   * the same gradient from its own left edge.
+   */
+  background-size:
+    175% 300%;
+
+  background-repeat:
+    no-repeat;
+
+  -webkit-background-clip:
+    text;
+
+  background-clip:
+    text;
+
+  -webkit-text-fill-color:
+    transparent;
+
+  text-shadow:
+    none;
+}
+
+.wf-home-kinetic-row--1
+.wf-home-kinetic-row__reveal-word {
+  background-position:
+    0% 0%;
+}
+
+.wf-home-kinetic-row--2
+.wf-home-kinetic-row__reveal-word {
+  background-position:
+    42% 48%;
+}
+
+.wf-home-kinetic-row--3
+.wf-home-kinetic-row__reveal-word {
+  background-position:
+    100% 100%;
+}
+
+/* Common pale canvas remains neutral. */
+.wf-home-kinetic-row__reveal {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(241, 248, 255, 0.97) 0%,
+      rgba(226, 240, 253, 0.95) 100%
+    );
+}
+
+/* Keep the same identity relation on compact screens. */
+@media (max-width: 63.99rem) {
+  .wf-home-kinetic-row__reveal-word {
+    background-size:
+      190% 320%;
+  }
+}
+
+/* WF SHARED IDENTITY GRADIENT END */
