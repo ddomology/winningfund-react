@@ -3384,23 +3384,23 @@
 /* WF SHARED IDENTITY GRADIENT START */
 
 /*
- * ONE static diagonal identity field across the three hero words.
+ * One restrained diagonal identity field.
  *
- * INVESTMENT = dark / upper-left phase
- * ECONOMICS  = middle / brand-blue phase
- * CLUB       = bright / lower-right phase
+ * The previous version changed hue too aggressively and made the
+ * three rows read as three separate colors.
  *
- * Layout and animation timing are unchanged.
+ * This version keeps every word close to cobalt/blue while the
+ * whole stack moves gradually from upper-left to lower-right.
  */
 
 .wf-home-kinetic-list {
   --wf-identity-gradient:
     linear-gradient(
       135deg,
-      #1737d2 0%,
-      #115de4 38%,
-      #078bec 72%,
-      #179fef 100%
+      #1739d2 0%,
+      #1550da 38%,
+      #1168e1 70%,
+      #0e7ce6 100%
     );
 }
 
@@ -3411,12 +3411,11 @@
     var(--wf-identity-gradient);
 
   /*
-   * Oversized field:
-   * each row samples a different zone instead of restarting
-   * the same gradient from its own left edge.
+   * Very large field = only a slight color shift inside each word.
+   * The stronger change is perceived across the three-row stack.
    */
   background-size:
-    175% 300%;
+    420% 620%;
 
   background-repeat:
     no-repeat;
@@ -3434,25 +3433,50 @@
     none;
 }
 
+/* Upper-left phase: deepest cobalt. */
 .wf-home-kinetic-row--1
 .wf-home-kinetic-row__reveal-word {
   background-position:
-    0% 0%;
+    8% 12%;
 }
 
+/* Middle phase: still cobalt-blue, not cyan. */
 .wf-home-kinetic-row--2
 .wf-home-kinetic-row__reveal-word {
   background-position:
-    42% 48%;
+    47% 50%;
 }
 
+/* Terminal phase: brighter blue, but deliberately stops before sky/cyan. */
 .wf-home-kinetic-row--3
 .wf-home-kinetic-row__reveal-word {
   background-position:
-    100% 100%;
+    78% 78%;
 }
 
-/* Common pale canvas remains neutral. */
+/*
+ * ECONOMICS glyph-safe reserve.
+ *
+ * The reveal element is permanently clip-pathed after entrance.
+ * With tight negative tracking, the final S can extend a few pixels
+ * beyond the text advance box and get optically shaved by that clip.
+ *
+ * Reserve a tiny amount of extra space in the owning text-slot.
+ * This changes neither font size nor row position; it only protects
+ * the final glyph's ink.
+ */
+@media (min-width: 64rem) {
+  .wf-home-kinetic-row--2
+  .wf-home-kinetic-row__text-slot {
+    padding-right:
+      calc(
+        var(--wf-card-trail)
+        + 0.11em
+      );
+  }
+}
+
+/* Keep the common pale card neutral. */
 .wf-home-kinetic-row__reveal {
   background:
     linear-gradient(
@@ -3462,11 +3486,20 @@
     );
 }
 
-/* Keep the same identity relation on compact screens. */
+/*
+ * Compact screens use the same restrained palette.
+ * No additional hue expansion.
+ */
 @media (max-width: 63.99rem) {
   .wf-home-kinetic-row__reveal-word {
     background-size:
-      190% 320%;
+      440% 660%;
+  }
+
+  .wf-home-kinetic-row--2
+  .wf-home-kinetic-row__text-slot {
+    padding-right:
+      0.11em;
   }
 }
 
