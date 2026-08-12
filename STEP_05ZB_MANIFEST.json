@@ -1,0 +1,14 @@
+{
+  "patch": "PATCH_05ZB_CANVAS_CALLIGRAPHY_BRUSH",
+  "requiresVersion": "0.7.6",
+  "resultVersion": "0.7.7",
+  "dependenciesAdded": [],
+  "changes": [
+    "Replace SVG/freehand polygon rendering with a custom high-DPI Canvas 2D calligraphy engine",
+    "Simulate 54 deterministic virtual bristles per stroke",
+    "Accumulate a wet core, separate fibre marks and dry-brush dropout",
+    "Use two open logo-derived descend-valley-rise checks with no closed loops",
+    "Deposit WinningFund gradient colors physically along stroke progress",
+    "Keep Korean slogan readable above the brush and reduced-motion static final ink"
+  ]
+}

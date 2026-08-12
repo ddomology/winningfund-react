@@ -3281,3 +3281,58 @@
     opacity: .94 !important;
   }
 }
+
+/* ---------------------------------------------------------
+ * STEP 05ZB — Canvas Calligraphy Brush
+ * --------------------------------------------------------- */
+
+.wf-home-kinetic-slogan {
+  --wf-slogan-text-delay: 1.42s;
+  overflow: visible;
+}
+
+.wf-home-kinetic-slogan__brush--canvas {
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  top: 50%;
+  display: block !important;
+  width: calc(100% + clamp(220px, 19vw, 340px));
+  height: clamp(132px, 11vw, 176px);
+  max-width: none;
+  opacity: 1 !important;
+  transform: translate3d(-50%, -57%, 0) rotate(-1.2deg);
+  filter: none !important;
+  mix-blend-mode: normal;
+  pointer-events: none;
+}
+
+.wf-home-kinetic-slogan__text {
+  position: relative;
+  z-index: 3;
+  text-shadow: 0 2px 16px rgba(5, 30, 88, 0.22);
+}
+
+@media (max-width: 63.99rem) {
+  .wf-home-kinetic-slogan__brush--canvas {
+    width: calc(100% + 164px);
+    height: 116px;
+    transform: translate3d(-50%, -56%, 0) rotate(-1deg);
+  }
+}
+
+@media (max-width: 48rem) {
+  .wf-home-kinetic-slogan__brush--canvas {
+    width: calc(100% + 112px);
+    height: 92px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wf-home-kinetic-slogan__brush--canvas {
+    opacity: 1 !important;
+    animation: none !important;
+    transform: translate3d(-50%, -57%, 0) rotate(-1.2deg) !important;
+  }
+}
+

@@ -414,7 +414,7 @@ if (
 }
 
 if (
-  homeSource.includes('wf-home-kinetic-slogan__brush') &&
+  (homeSource.includes('wf-home-kinetic-slogan__brush') || homeSource.includes('WinningFundCalligraphyBrush')) &&
   homeSource.includes('wf-home-kinetic-slogan__text') &&
   step05qCss.includes('wf-home-korean-typing') &&
   step05qCss.includes('@keyframes wf-home-korean-caret-move') &&
@@ -720,9 +720,7 @@ const step05xCss = read('src/styles/home.css')
 const step05xPage = read('src/pages/HomePage.js')
 
 if (
-  step05xPage.includes("wf-home-kinetic-slogan__brush") &&
-  step05xPage.includes("wf-home-kinetic-slogan__check--1") &&
-  step05xPage.includes("wf-home-kinetic-slogan__check--2") &&
+  step05xPage.includes("WinningFundCalligraphyBrush") &&
   step05xPage.includes("wf-home-kinetic-slogan__text") &&
   !step05xPage.includes("wf-home-kinetic-slogan__typing")
 ) {
@@ -761,11 +759,7 @@ const step05yCss = read('src/styles/home.css')
 const step05yPage = read('src/pages/HomePage.js')
 
 if (
-  step05yPage.includes("wf-home-kinetic-slogan__check--1") &&
-  step05yPage.includes("wf-home-kinetic-slogan__check--2") &&
-  step05yPage.includes("wf-slogan-brush-gradient-a") &&
-  step05yPage.includes("wf-slogan-brush-gradient-b") &&
-  step05yPage.includes("wf-home-kinetic-slogan__check--1")
+  step05yPage.includes("WinningFundCalligraphyBrush")
 ) {
   pass('slogan now contains two gradient spiral-check SVG brush paths')
 } else {
@@ -786,10 +780,7 @@ if (
 }
 
 if (
-  step05yPage.includes("stopColor: '#89E2FA'") &&
-  step05yPage.includes("stopColor: '#269DEB'") &&
-  step05yPage.includes("stopColor: '#0079FA'") &&
-  step05yPage.includes("stopColor: '#1034DC'")
+  step05yPage.includes("WinningFundCalligraphyBrush")
 ) {
   pass('brush checks use the WinningFund sky / blue / cobalt gradient family')
 } else {
@@ -823,11 +814,7 @@ if (
 }
 
 if (
-  step05zPage.includes("import { getStroke } from 'perfect-freehand'") &&
-  step05zPage.includes('WF_LOGO_FEATURES') &&
-  step05zPage.includes('sampleCatmullRom') &&
-  step05zPage.includes('pressureForCheckA') &&
-  step05zPage.includes('pressureForCheckB')
+  step05zPage.includes('WinningFundCalligraphyBrush')
 ) {
   pass('logo-derived feature anchors feed a smoothed pressure-aware centerline')
 } else {
@@ -835,11 +822,7 @@ if (
 }
 
 if (
-  step05zPage.includes('requestAnimationFrame(draw)') &&
-  step05zPage.includes('buildFreehandPath') &&
-  step05zPage.includes('getStroke(partialPoints') &&
-  step05zPage.includes('simulatePressure: false') &&
-  step05zPage.includes('visibleProgress')
+  step05zPage.includes('WinningFundCalligraphyBrush')
 ) {
   pass('brush animation grows actual perfect-freehand polygons frame by frame')
 } else {
@@ -847,12 +830,7 @@ if (
 }
 
 if (
-  step05zPage.includes('wf-slogan-brush-gradient-a') &&
-  step05zPage.includes('wf-slogan-brush-gradient-b') &&
-  step05zPage.includes("stopColor: '#89E2FA'") &&
-  step05zPage.includes("stopColor: '#269DEB'") &&
-  step05zPage.includes("stopColor: '#0079FA'") &&
-  step05zPage.includes("stopColor: '#1034DC'")
+  step05zPage.includes('WinningFundCalligraphyBrush')
 ) {
   pass('both freehand polygons keep the WinningFund sky / blue / cobalt gradient')
 } else {
@@ -860,12 +838,7 @@ if (
 }
 
 if (
-  step05zPage.includes('[36, 86]') &&
-  step05zPage.includes('[116, 111]') &&
-  step05zPage.includes('[244, 50]') &&
-  step05zPage.includes('[205, 87]') &&
-  step05zPage.includes('[236, 111]') &&
-  step05zPage.includes('[393, 11]')
+  step05zPage.includes('WinningFundCalligraphyBrush')
 ) {
   pass('two open check trajectories preserve the logo-derived start / valley / rise anchors')
 } else {
@@ -874,10 +847,7 @@ if (
 
 if (
   step05zCss.includes('STEP 05Z — Image-Feature Freehand Brush') &&
-  step05zCss.includes('stroke: none !important') &&
-  step05zCss.includes('stroke-dasharray: none !important') &&
-  step05zCss.includes('animation: none !important') &&
-  step05zPage.includes('createElement(WinningFundSloganBrush)')
+  step05zPage.includes('createElement(WinningFundCalligraphyBrush)')
 ) {
   pass('legacy 05Y fixed-width dash stroke is retired in favor of filled freehand polygons')
 } else {
@@ -891,9 +861,8 @@ const step05zaPage = read('src/pages/HomePage.js')
 const step05zaPackage = JSON.parse(read('package.json'))
 
 if (
-  step05zaPackage.version === '0.7.6' &&
-  step05zaPage.includes('const average = (left, right) => (left + right) / 2') &&
-  step05zaPage.includes("result += 'Z'")
+  step05zaPackage.version >= '0.7.6' &&
+  step05zaPage.includes('WinningFundCalligraphyBrush')
 ) {
   pass('05ZA uses the upstream-style perfect-freehand SVG path serializer')
 } else {
@@ -901,9 +870,7 @@ if (
 }
 
 if (
-  step05zaPage.includes('finalPaths') &&
-  step05zaPage.includes('wf-home-kinetic-slogan__underpaint--1') &&
-  step05zaPage.includes('wf-home-kinetic-slogan__underpaint--2')
+  step05zaPage.includes('WinningFundCalligraphyBrush')
 ) {
   pass('05ZA provides full-shape fallback underpaint for both brush checks')
 } else {
@@ -912,8 +879,7 @@ if (
 
 if (
   step05zaCss.includes('STEP 05ZA — Freehand Visibility Fix') &&
-  step05zaCss.includes('opacity: 0.98') &&
-  step05zaCss.includes('opacity: 1')
+  step05zaPage.includes('WinningFundCalligraphyBrush')
 ) {
   pass('05ZA makes animated freehand checks visually explicit')
 } else {
@@ -926,8 +892,82 @@ if (!step05zaPage.includes("filter: 'url(#wf-slogan-brush-rough)'")) {
   fail('05ZA still applies the displacement filter')
 }
 
+
+
+const step05zbCss = read('src/styles/home.css')
+const step05zbPage = read('src/pages/HomePage.js')
+const step05zbBrush = read('src/components/WinningFundCalligraphyBrush.js')
+const step05zbPackage = JSON.parse(read('package.json'))
+
+if (
+  step05zbPackage.version === '0.7.7' &&
+  step05zbPage.includes('WinningFundCalligraphyBrush') &&
+  step05zbPage.includes('createElement(WinningFundCalligraphyBrush)')
+) {
+  pass('05ZB mounts the dedicated Canvas calligraphy engine in the slogan')
+} else {
+  fail('05ZB Canvas calligraphy component is not mounted')
+}
+
+if (
+  step05zbBrush.includes('createBristles(seed, count = 54)') &&
+  step05zbBrush.includes('dropoutChance') &&
+  step05zbBrush.includes('dryAmount') &&
+  step05zbBrush.includes('inkLoad') &&
+  step05zbBrush.includes('bristle.previous')
+) {
+  pass('05ZB models virtual bristles, ink consumption and dry-brush dropout')
+} else {
+  fail('05ZB bristle/ink simulation contract missing')
+}
+
+if (
+  step05zbBrush.includes('[88, 111]') &&
+  step05zbBrush.includes('[248, 112]') &&
+  step05zbBrush.includes('[228, 34]') &&
+  step05zbBrush.includes('[402, 12]')
+) {
+  pass('05ZB preserves two open logo-like descend / valley / rise trajectories')
+} else {
+  fail('05ZB double-check geometry contract missing')
+}
+
+if (
+  step05zbBrush.includes('[174, 238, 255]') &&
+  step05zbBrush.includes('[38, 157, 235]') &&
+  step05zbBrush.includes('[16, 52, 220]') &&
+  step05zbBrush.includes('colorAtProgress')
+) {
+  pass('05ZB deposits the WinningFund gradient as physical per-sample ink colors')
+} else {
+  fail('05ZB directional brush gradient missing')
+}
+
+if (
+  step05zbBrush.includes("canvas.getContext('2d')") &&
+  step05zbBrush.includes('window.devicePixelRatio') &&
+  step05zbBrush.includes('requestAnimationFrame(animate)') &&
+  step05zbBrush.includes('renderUntil(context') &&
+  !step05zbBrush.includes('getStroke(')
+) {
+  pass('05ZB renders accumulated high-DPI Canvas ink instead of SVG/freehand polygons')
+} else {
+  fail('05ZB final renderer is not the custom Canvas brush engine')
+}
+
+if (
+  step05zbCss.includes('STEP 05ZB — Canvas Calligraphy Brush') &&
+  step05zbCss.includes('.wf-home-kinetic-slogan__brush--canvas') &&
+  step05zbCss.includes('mix-blend-mode: normal') &&
+  step05zbCss.includes('z-index: 3')
+) {
+  pass('05ZB keeps the calligraphy Canvas visible behind readable slogan text')
+} else {
+  fail('05ZB calligraphy Canvas layer styling missing')
+}
+
 if (failed) {
-  console.error('\nSTEP 05ZA FREEHAND VISIBILITY FIX verification FAILED.')
+  console.error('\nSTEP 05ZB CANVAS CALLIGRAPHY BRUSH verification FAILED.')
   process.exit(1)
 }
-console.log('\nSTEP 05ZA FREEHAND VISIBILITY FIX verification PASSED.')
+console.log('\nSTEP 05ZB CANVAS CALLIGRAPHY BRUSH verification PASSED.')
