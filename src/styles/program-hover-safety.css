@@ -19,58 +19,19 @@
 }
 
 /* ============================================================
-   HOME WAVES — ORIGINAL GOODKATZ REFERENCE MOTION
+   HOME WAVE MOTION OWNERSHIP
 
-   Keep the uploaded reference geometry exactly as-is:
-   - one long gentle-wave path
-   - four <use> layers
-   - 7 / 10 / 13 / 20 second parallax timings
-   - -90px -> 85px horizontal travel
+   The visual wave remains the uploaded Goodkatz reference geometry:
+   one long gentle-wave path with four <use> layers.
 
-   home.css contains a legacy reduced-motion rule with
-   transform: none !important on these SVG <use> elements. That can freeze
-   transform-keyframe motion even when the later animation declaration wins.
-
-   Use the independent `translate` property for the exact same visual travel.
-   It is not cancelled by that legacy `transform` declaration, so the wave
-   keeps moving in the normal page and when the OS motion preference is reduced.
+   CSS transform animation has accumulated legacy overrides in home.css.
+   Disable those competing CSS transforms here. src/home-wave-motion.js
+   drives the same -90 -> 85 horizontal travel through the SVG x attribute,
+   which cannot be cancelled by transform: none declarations.
    ============================================================ */
 
 .wf-home-wave__parallax > use {
-  animation:
-    wf-home-wave-reference-move
-    25s
-    cubic-bezier(.55, .5, .45, .5)
-    infinite
-    !important;
-}
-
-.wf-home-wave__parallax > use:nth-child(1) {
-  animation-delay: -2s !important;
-  animation-duration: 7s !important;
-}
-
-.wf-home-wave__parallax > use:nth-child(2) {
-  animation-delay: -3s !important;
-  animation-duration: 10s !important;
-}
-
-.wf-home-wave__parallax > use:nth-child(3) {
-  animation-delay: -4s !important;
-  animation-duration: 13s !important;
-}
-
-.wf-home-wave__parallax > use:nth-child(4) {
-  animation-delay: -5s !important;
-  animation-duration: 20s !important;
-}
-
-@keyframes wf-home-wave-reference-move {
-  0% {
-    translate: -90px 0;
-  }
-
-  100% {
-    translate: 85px 0;
-  }
+  animation: none !important;
+  transform: none !important;
+  translate: none !important;
 }
