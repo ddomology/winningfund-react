@@ -6074,3 +6074,182 @@
 }
 
 /* WF INTRO 02 BRAND COLOR FINAL END */
+
+/* WF INTRO 02 SOLID INDEX GLYPH SAFE FINAL START */
+
+/* =========================================================
+   02 / INTRO CORRECTION
+
+   1. Section index is solid WinningFund blue, not gradient text.
+   2. Headline reveal keeps its clip animation but reserves real ink space.
+   3. Final Korean glyphs must never be optically shaved on any edge.
+   ========================================================= */
+
+
+/* =========================================================
+   SECTION INDEX — SOLID, QUIET, BRAND-OWNED
+   ========================================================= */
+
+.wf-home-intro__index {
+  color:
+    var(--wf-brand-blue) !important;
+
+  background:
+    none !important;
+
+  background-image:
+    none !important;
+
+  -webkit-background-clip:
+    border-box !important;
+
+  background-clip:
+    border-box !important;
+
+  -webkit-text-fill-color:
+    currentColor !important;
+}
+
+
+/* Keep the small editorial dash, but make it a single flat tone. */
+.wf-home-intro__index::before {
+  background:
+    var(--wf-brand-sky) !important;
+
+  box-shadow:
+    none !important;
+}
+
+
+/* =========================================================
+   HEADLINE GLYPH SAFETY
+
+   The reveal wrapper still clips the entering line.
+   It now owns a generous transparent ink reserve on all sides,
+   so large Korean glyphs and punctuation never touch the clip edge.
+   ========================================================= */
+
+.wf-home-intro__headline {
+  line-height:
+    1.02;
+}
+
+
+.wf-home-intro__headline-line {
+  overflow:
+    hidden;
+
+  box-sizing:
+    content-box;
+
+  padding:
+    0.16em
+    0.12em
+    0.22em;
+
+  margin:
+    -0.16em
+    -0.12em
+    -0.22em;
+}
+
+
+/*
+ * Child gets a tiny inline reserve too.
+ * This protects terminal punctuation and tight negative tracking.
+ */
+.wf-home-intro__headline-line > span {
+  box-sizing:
+    content-box;
+
+  padding-inline:
+    0.035em;
+}
+
+
+/*
+ * Once the entrance is fully settled, release the clipping boundary.
+ * The delay matches the second line reveal closely enough that the
+ * transition still reads as a clip reveal, while the final state is
+ * completely glyph-safe.
+ */
+.wf-home-intro__editorial.is-revealed
+.wf-home-intro__headline-line {
+  animation:
+    wf-home-intro-release-clip
+    1ms
+    linear
+    900ms
+    forwards;
+}
+
+
+@keyframes wf-home-intro-release-clip {
+  to {
+    overflow:
+      visible;
+  }
+}
+
+
+/* =========================================================
+   PROOF VALUE SAFETY
+
+   The proof values use a tight line-height as well.
+   Give them a little vertical breathing room without changing layout.
+   ========================================================= */
+
+.wf-home-intro__proof-value {
+  line-height:
+    1;
+
+  padding-block:
+    0.05em
+    0.09em;
+
+  margin-block:
+    -0.05em
+    -0.09em;
+}
+
+
+/* =========================================================
+   MOBILE / TABLET
+
+   Same glyph-safe geometry, slightly smaller reserve.
+   ========================================================= */
+
+@media (max-width: 64rem) {
+
+  .wf-home-intro__headline-line {
+    padding:
+      0.14em
+      0.1em
+      0.2em;
+
+    margin:
+      -0.14em
+      -0.1em
+      -0.2em;
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+
+   No clip is needed when animation is skipped.
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .wf-home-intro__headline-line {
+    overflow:
+      visible !important;
+
+    animation:
+      none !important;
+  }
+}
+
+/* WF INTRO 02 SOLID INDEX GLYPH SAFE FINAL END */
