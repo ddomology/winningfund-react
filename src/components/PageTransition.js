@@ -1,9 +1,12 @@
 import { createElement } from 'react'
+import DesktopContinuousWave from './DesktopContinuousWave.js'
 
 const MOBILE_HALO_DOTS = 12
 
 export default function PageTransition({
   routeKey,
+  routeIndex = -1,
+  routeDirection = 'forward',
   phase = 'idle',
   routeEnter = 'run',
   reducedMotion = false,
@@ -16,11 +19,16 @@ export default function PageTransition({
     {
       className: 'wf-page-transition',
       'data-route-key': routeKey,
+      'data-route-index': routeIndex,
+      'data-route-direction': routeDirection,
       'data-phase': phase,
       'data-route-enter': routeEnter,
       'data-reduced-motion': reducedMotion ? 'true' : 'false',
     },
     children,
+    createElement(DesktopContinuousWave, {
+      routeIndex,
+    }),
     createElement(
       'div',
       {
