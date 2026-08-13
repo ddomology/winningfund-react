@@ -1,40 +1,55 @@
 import { createElement } from 'react'
 
 const ROUTE_COUNT = 5
-const SLOT_WIDTH = 150
-const TOTAL_WIDTH = ROUTE_COUNT * SLOT_WIDTH
-const WAVE_HEIGHT = 28
+const GENTLE_WAVE_PATH =
+  'M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z'
 
 const LAYERS = Object.freeze([
-  { className: 'wf-desktop-continuous-wave__layer--1', y: 0 },
-  { className: 'wf-desktop-continuous-wave__layer--2', y: 3 },
-  { className: 'wf-desktop-continuous-wave__layer--3', y: 5 },
-  { className: 'wf-desktop-continuous-wave__layer--4', y: 7 },
+  { y: 0, fill: 'var(--wf-desktop-wave-layer-1)' },
+  { y: 3, fill: 'var(--wf-desktop-wave-layer-2)' },
+  { y: 5, fill: 'var(--wf-desktop-wave-layer-3)' },
+  { y: 7, fill: 'var(--wf-desktop-wave-layer-4)' },
 ])
 
-function buildReferenceWavePath() {
-  const startX = -352
-  const startY = 44
-  const halfWave = 88
-  const segmentCount = 17
+function ReferenceWaveSlot({ slotIndex }) {
+  const waveId = `wf-desktop-gentle-wave-${slotIndex}`
 
-  const segments = [
-    `M${startX} ${startY}`,
-    `c30 0 58 -18 ${halfWave} -18`,
-  ]
-
-  for (let index = 0; index < segmentCount; index += 1) {
-    const deltaY = index % 2 === 0 ? 18 : -18
-    segments.push(`s58 ${deltaY} ${halfWave} ${deltaY}`)
-  }
-
-  const endX = startX + halfWave * (segmentCount + 1)
-  segments.push(`v44h-${endX - startX}z`)
-
-  return segments.join(' ')
+  return createElement(
+    'svg',
+    {
+      className:
+        'wf-desktop-continuous-wave__svg wf-desktop-continuous-wave__slot',
+      viewBox: '0 24 150 28',
+      preserveAspectRatio: 'none',
+      shapeRendering: 'auto',
+      focusable: 'false',
+    },
+    createElement(
+      'defs',
+      null,
+      createElement('path', {
+        id: waveId,
+        d: GENTLE_WAVE_PATH,
+      }),
+    ),
+    createElement(
+      'g',
+      { className: 'wf-desktop-continuous-wave__parallax' },
+      ...LAYERS.map((layer, index) =>
+        createElement('use', {
+          key: `${slotIndex}-${index}`,
+          href: `#${waveId}`,
+          x: 48,
+          y: layer.y,
+          className:
+            `wf-desktop-continuous-wave__layer ` +
+            `wf-desktop-continuous-wave__layer--${index + 1}`,
+          fill: layer.fill,
+        }),
+      ),
+    ),
+  )
 }
-
-const REFERENCE_WAVE_PATH = buildReferenceWavePath()
 
 export default function DesktopContinuousWave({ routeIndex = -1 }) {
   if (routeIndex < 0 || routeIndex >= ROUTE_COUNT) return null
@@ -53,34 +68,11 @@ export default function DesktopContinuousWave({ routeIndex = -1 }) {
           '--wf-desktop-wave-offset': `${routeIndex * -100}vw`,
         },
       },
-      createElement(
-        'svg',
-        {
-          className: 'wf-desktop-continuous-wave__svg',
-          viewBox: `0 24 ${TOTAL_WIDTH} ${WAVE_HEIGHT}`,
-          preserveAspectRatio: 'none',
-          shapeRendering: 'auto',
-          focusable: 'false',
-        },
-        createElement(
-          'defs',
-          null,
-          createElement('path', {
-            id: 'wf-desktop-gentle-wave',
-            d: REFERENCE_WAVE_PATH,
-          }),
-        ),
-        ...LAYERS.map((layer, index) =>
-          createElement('use', {
-            key: layer.className,
-            href: '#wf-desktop-gentle-wave',
-            x: 48,
-            y: layer.y,
-            className:
-              `wf-desktop-continuous-wave__layer ${layer.className}`,
-            fill: `var(--wf-desktop-wave-layer-${index + 1})`,
-          }),
-        ),
+      ...Array.from({ length: ROUTE_COUNT }, (_, slotIndex) =>
+        createElement(ReferenceWaveSlot, {
+          key: slotIndex,
+          slotIndex,
+        }),
       ),
     ),
   )
