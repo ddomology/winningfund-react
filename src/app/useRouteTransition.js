@@ -1,18 +1,15 @@
 import {
   useEffect,
-  useLayoutEffect,
   useRef,
   useState,
 } from 'react'
+import { flushSync } from 'react-dom'
 import {
   useLocation,
   useNavigate,
-  useNavigationType,
 } from 'react-router'
 
-const WATCHDOG_MS = 1000
 const MOBILE_QUERY = '(max-width: 48rem)'
-const MOBILE_LONG_SCROLL_PX = 600
 const APP_BASE_PATH =
   import.meta.env.BASE_URL === '/'
     ? ''
@@ -77,26 +74,37 @@ function easeOutCubic(progress) {
   return 1 - ((1 - progress) ** 3)
 }
 
+function scrollToRouteTarget(target) {
+  if (!target.hash) {
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
+    return
+  }
+
+  const id = decodeURIComponent(target.hash.slice(1))
+  const element = document.getElementById(id)
+
+  if (element) {
+    element.scrollIntoView({ block: 'start', behavior: 'auto' })
+  }
+}
+
 export default function useRouteTransition() {
   const location = useLocation()
   const navigate = useNavigate()
-  const navigationType = useNavigationType()
   const [phase, setPhase] = useState('idle')
   const [routeEnter, setRouteEnter] = useState('run')
-  const [snapCover, setSnapCover] = useState(false)
   const [reducedMotion, setReducedMotion] = useState(false)
 
-  const pendingRef = useRef(null)
-  const transitionOwnedNavigationRef = useRef(false)
-  const previousLocationRef = useRef(location)
-  const firstLocationEffectRef = useRef(true)
-  const watchdogRef = useRef(null)
+  const phaseRef = useRef('idle')
   const scrollFrameRef = useRef(null)
-  const phaseRef = useRef(phase)
-
-  phaseRef.current = phase
+  const transitionRef = useRef(null)
 
   const routeKey = `${location.pathname}${location.hash}`
+
+  function setTransitionPhase(nextPhase) {
+    phaseRef.current = nextPhase
+    setPhase(nextPhase)
+  }
 
   useEffect(() => {
     const media = window.matchMedia('(prefers-reduced-motion: reduce)')
@@ -108,13 +116,6 @@ export default function useRouteTransition() {
     return () => media.removeEventListener('change', sync)
   }, [])
 
-  function clearWatchdog() {
-    if (watchdogRef.current) {
-      window.clearTimeout(watchdogRef.current)
-      watchdogRef.current = null
-    }
-  }
-
   function cancelScrollMotion() {
     if (scrollFrameRef.current) {
       window.cancelAnimationFrame(scrollFrameRef.current)
@@ -122,138 +123,88 @@ export default function useRouteTransition() {
     }
   }
 
-  function animateCurrentPageTowardTop() {
+  function pullCurrentScreenToTop() {
     cancelScrollMotion()
 
     const startY = window.scrollY
-    if (startY <= 1) return
+    if (startY <= 1) return Promise.resolve()
 
     const mobile = window.matchMedia(MOBILE_QUERY).matches
-    const longMobile =
-      mobile && startY > MOBILE_LONG_SCROLL_PX
-
-    const duration = longMobile
-      ? 110
-      : mobile
-        ? 145
-        : 210
-
-    /*
-     * On a long mobile page, only show a short upward pull. The fully opaque
-     * wipe hides the final snap to zero so the browser chrome does not spend
-     * hundreds of milliseconds chasing a huge smooth-scroll distance.
-     */
-    const endY = longMobile
-      ? Math.max(
-          0,
-          startY - Math.min(520, Math.max(180, startY * 0.22)),
-        )
-      : 0
-
+    const duration = mobile ? 110 : 160
     const startedAt = performance.now()
 
-    function frame(now) {
-      const progress = Math.min(1, (now - startedAt) / duration)
-      const eased = easeOutCubic(progress)
-      const nextY = startY + ((endY - startY) * eased)
+    return new Promise((resolve) => {
+      function frame(now) {
+        const progress = Math.min(1, (now - startedAt) / duration)
+        const eased = easeOutCubic(progress)
+        const nextY = startY * (1 - eased)
 
-      window.scrollTo(0, nextY)
+        window.scrollTo(0, nextY)
 
-      if (progress < 1) {
-        scrollFrameRef.current = window.requestAnimationFrame(frame)
-      } else {
+        if (progress < 1) {
+          scrollFrameRef.current = window.requestAnimationFrame(frame)
+          return
+        }
+
         scrollFrameRef.current = null
+        window.scrollTo(0, 0)
+        resolve()
       }
-    }
 
-    scrollFrameRef.current = window.requestAnimationFrame(frame)
+      scrollFrameRef.current = window.requestAnimationFrame(frame)
+    })
   }
 
   function finishTransition() {
-    clearWatchdog()
-    cancelScrollMotion()
-    pendingRef.current = null
-    transitionOwnedNavigationRef.current = false
-    setSnapCover(false)
+    transitionRef.current = null
     setRouteEnter('run')
-    setPhase('idle')
+    setTransitionPhase('idle')
   }
 
-  function beginWatchdog() {
-    clearWatchdog()
+  function commitRoute(to) {
+    const target = new URL(to, window.location.origin)
 
-    watchdogRef.current = window.setTimeout(() => {
-      const pending = pendingRef.current
+    flushSync(() => {
+      setRouteEnter('hold')
+      navigate(to)
+    })
 
-      cancelScrollMotion()
+    scrollToRouteTarget(target)
+  }
 
-      if (pending && !transitionOwnedNavigationRef.current) {
-        transitionOwnedNavigationRef.current = true
+  function swapScreens(to) {
+    setTransitionPhase('swapping')
 
-        const target = new URL(pending.to, window.location.origin)
-        if (!target.hash) {
-          window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
+    if (typeof document.startViewTransition !== 'function') {
+      commitRoute(to)
+      window.requestAnimationFrame(() => {
+        window.requestAnimationFrame(finishTransition)
+      })
+      return
+    }
+
+    const transition = document.startViewTransition(() => {
+      commitRoute(to)
+    })
+
+    transitionRef.current = transition
+
+    transition.finished
+      .catch(() => undefined)
+      .finally(() => {
+        if (transitionRef.current === transition) {
+          finishTransition()
         }
-
-        navigate(pending.to)
-      }
-
-      finishTransition()
-    }, WATCHDOG_MS)
+      })
   }
 
   useEffect(
     () => () => {
-      clearWatchdog()
       cancelScrollMotion()
+      transitionRef.current = null
     },
     [],
   )
-
-  useLayoutEffect(() => {
-    if (firstLocationEffectRef.current) {
-      firstLocationEffectRef.current = false
-      previousLocationRef.current = location
-      return
-    }
-
-    const previous = previousLocationRef.current
-    previousLocationRef.current = location
-
-    if (transitionOwnedNavigationRef.current) {
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          if (phaseRef.current === 'covered') {
-            setPhase('revealing')
-          }
-        })
-      })
-      return
-    }
-
-    if (
-      navigationType === 'POP' &&
-      normalizePathname(previous.pathname) !==
-        normalizePathname(location.pathname)
-    ) {
-      if (reducedMotion) {
-        setRouteEnter('run')
-        return
-      }
-
-      setRouteEnter('hold')
-      setSnapCover(true)
-      setPhase('covered')
-      beginWatchdog()
-
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          setSnapCover(false)
-          setPhase('revealing')
-        })
-      })
-    }
-  }, [location, navigationType, reducedMotion])
 
   useEffect(() => {
     function onDocumentClick(event) {
@@ -284,23 +235,25 @@ export default function useRouteTransition() {
       const pathname = toRouterPathname(target.pathname)
       const to = `${pathname}${target.search}${target.hash}`
 
+      event.preventDefault()
+
       if (reducedMotion) {
-        event.preventDefault()
-
-        if (!target.hash) {
-          window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
-        }
-
-        navigate(to)
+        commitRoute(to)
+        finishTransition()
         return
       }
 
-      event.preventDefault()
+      setTransitionPhase('pulling')
 
-      pendingRef.current = { to }
-      animateCurrentPageTowardTop()
-      setPhase('covering')
-      beginWatchdog()
+      pullCurrentScreenToTop()
+        .then(() => {
+          if (phaseRef.current !== 'pulling') return
+          swapScreens(to)
+        })
+        .catch(() => {
+          commitRoute(to)
+          finishTransition()
+        })
     }
 
     document.addEventListener('click', onDocumentClick, true)
@@ -310,47 +263,10 @@ export default function useRouteTransition() {
     }
   }, [navigate, reducedMotion])
 
-  function commitPendingNavigation() {
-    const pending = pendingRef.current
-    if (!pending) return
-
-    cancelScrollMotion()
-    transitionOwnedNavigationRef.current = true
-    setRouteEnter('hold')
-    setPhase('covered')
-
-    const target = new URL(pending.to, window.location.origin)
-    if (!target.hash) {
-      window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
-    }
-
-    navigate(pending.to)
-  }
-
-  function onWipeTransitionEnd(event) {
-    if (
-      event.target !== event.currentTarget ||
-      event.propertyName !== 'transform'
-    ) {
-      return
-    }
-
-    if (phaseRef.current === 'covering') {
-      commitPendingNavigation()
-      return
-    }
-
-    if (phaseRef.current === 'revealing') {
-      finishTransition()
-    }
-  }
-
   return {
     routeKey,
     phase,
     routeEnter,
-    snapCover,
     reducedMotion,
-    onWipeTransitionEnd,
   }
 }
