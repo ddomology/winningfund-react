@@ -12,6 +12,14 @@ import {
 const MOBILE_QUERY = '(max-width: 48rem)'
 const MOBILE_WATCHDOG_MS = 2400
 const MOBILE_BRAND_HOLD_MS = 140
+const DESKTOP_TRANSITION_MS = 820
+const ROUTE_ORDER = Object.freeze([
+  '/',
+  '/about',
+  '/members',
+  '/activities',
+  '/recruitment',
+])
 const APP_BASE_PATH =
   import.meta.env.BASE_URL === '/'
     ? ''
@@ -33,6 +41,20 @@ function toRouterPathname(pathname) {
   }
 
   return normalized
+}
+
+function getRouteIndex(pathname) {
+  return ROUTE_ORDER.indexOf(
+    normalizePathname(toRouterPathname(pathname)),
+  )
+}
+
+function getRouteDirection(currentPathname, targetPathname) {
+  const currentIndex = getRouteIndex(currentPathname)
+  const targetIndex = getRouteIndex(targetPathname)
+
+  if (currentIndex < 0 || targetIndex < 0) return 'forward'
+  return targetIndex >= currentIndex ? 'forward' : 'backward'
 }
 
 function isModifiedClick(event) {
@@ -99,6 +121,7 @@ export default function useRouteTransition() {
   const navigate = useNavigate()
   const [phase, setPhase] = useState('idle')
   const [routeEnter, setRouteEnter] = useState('run')
+  const [routeDirection, setRouteDirection] = useState('forward')
   const [reducedMotion, setReducedMotion] = useState(false)
 
   const phaseRef = useRef('idle')
@@ -109,10 +132,16 @@ export default function useRouteTransition() {
   const mobileHoldRef = useRef(null)
 
   const routeKey = `${location.pathname}${location.hash}`
+  const routeIndex = getRouteIndex(location.pathname)
 
   function setTransitionPhase(nextPhase) {
     phaseRef.current = nextPhase
     setPhase(nextPhase)
+  }
+
+  function setDesktopDirection(nextDirection) {
+    setRouteDirection(nextDirection)
+    document.documentElement.dataset.wfRouteDirection = nextDirection
   }
 
   useEffect(() => {
@@ -182,6 +211,7 @@ export default function useRouteTransition() {
     clearMobileHold()
     pendingMobileRef.current = null
     transitionRef.current = null
+    delete document.documentElement.dataset.wfRouteDirection
     setRouteEnter('run')
     setTransitionPhase('idle')
   }
@@ -202,9 +232,7 @@ export default function useRouteTransition() {
 
     if (typeof document.startViewTransition !== 'function') {
       commitRoute(to)
-      window.requestAnimationFrame(() => {
-        window.requestAnimationFrame(finishTransition)
-      })
+      window.setTimeout(finishTransition, DESKTOP_TRANSITION_MS)
       return
     }
 
@@ -282,6 +310,7 @@ export default function useRouteTransition() {
       clearMobileHold()
       transitionRef.current = null
       pendingMobileRef.current = null
+      delete document.documentElement.dataset.wfRouteDirection
     },
     [],
   )
@@ -314,6 +343,10 @@ export default function useRouteTransition() {
 
       const pathname = toRouterPathname(target.pathname)
       const to = `${pathname}${target.search}${target.hash}`
+      const direction = getRouteDirection(
+        routeIdentity(current),
+        pathname,
+      )
 
       event.preventDefault()
 
@@ -321,6 +354,12 @@ export default function useRouteTransition() {
         commitRoute(to)
         finishTransition()
         return
+      }
+
+      if (!isMobileViewport()) {
+        setDesktopDirection(direction)
+      } else {
+        setRouteDirection(direction)
       }
 
       setTransitionPhase('pulling')
@@ -350,6 +389,8 @@ export default function useRouteTransition() {
 
   return {
     routeKey,
+    routeIndex,
+    routeDirection,
     phase,
     routeEnter,
     reducedMotion,
