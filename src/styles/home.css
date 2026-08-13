@@ -3505,34 +3505,31 @@
 
 /* WF SHARED IDENTITY GRADIENT END */
 
-/* WF PROPORTIONAL HERO LINE RING FINAL START */
+/* WF MOBILE COMPOSITION CONTINUOUS RAIL FINAL START */
 
 /* =========================================================
-   FINAL RESPONSIVE RULES
+   FINAL OWNERSHIP
 
-   MAIN HERO
-   - stays proportional to the blue field
-   - no fixed 1120px desktop composition
-   - wide screens keep the same relative geometry
+   HERO
+   - desktop keeps proportional composition
+   - mobile is a dedicated composition, not a scaled desktop
+   - row numbers disappear on mobile
+   - AND remains
+   - CLUB returns toward the stack instead of escaping right
+   - footer owns a rail-safe bottom reserve
 
-   DESKTOP RAIL
-   - no text
-   - no numbers
-   - no capsule
-   - only vertical line + hollow rings
-   - visually reads as: line / ring / line
-
-   MOBILE RAIL
-   - dedicated horizontal line + rings
-   - small frosted base only for readability
-
-   ECONOMICS
-   - terminal S gets real glyph-level safety space
+   SECTION RAIL
+   - line + rings are ONE continuous track
+   - no visited/current/upcoming ring color events
+   - scroll progress fills the line continuously
+   - every ring stays the same hollow ring
+   - ONLY the active section gets a tiny center dot
+   - no mobile capsule / menu-card treatment
    ========================================================= */
 
 
 /* =========================================================
-   SIDE PANEL / HERO SPLIT
+   DESKTOP HERO — proportional to the blue field
    ========================================================= */
 
 .wf-home {
@@ -3556,18 +3553,6 @@
       var(--wf-home-side-panel)
       minmax(0, 1fr);
   }
-}
-
-
-/* =========================================================
-   PROPORTIONAL HERO COMPOSITION
-
-   The blue field owns a percentage-based editorial frame.
-   It therefore keeps its relationship to the viewport instead
-   of drifting when the screen becomes very wide.
-   ========================================================= */
-
-@media (min-width: 64rem) {
 
   .wf-home-hero__kinetic-main {
     padding-left:
@@ -3601,10 +3586,6 @@
   }
 }
 
-
-/*
- * Mid desktop gets a little more usable width.
- */
 @media (max-width: 86rem) and (min-width: 64rem) {
 
   .wf-home-kinetic-list,
@@ -3618,31 +3599,8 @@
 }
 
 
-/*
- * Ultra-wide keeps the SAME ratios.
- * No pixel cap is introduced here.
- */
-@media (min-width: 100rem) {
-
-  .wf-home-kinetic-list,
-  .wf-home-kinetic-footer {
-    width:
-      78%;
-
-    margin-left:
-      8%;
-  }
-}
-
-
 /* =========================================================
-   ECONOMICS TERMINAL S
-
-   The negative tracking is slightly relaxed only on ECONOMICS.
-   Both visible text layers own extra right ink space.
-
-   This protects the curved terminal S from background-clip and
-   the locked reveal clipping boundary.
+   ECONOMICS TERMINAL S — keep the real ink safe
    ========================================================= */
 
 .wf-home-kinetic-row--2
@@ -3660,11 +3618,6 @@
     0.18em;
 }
 
-
-/*
- * Neutralize the older parent-only reserve.
- * Glyph safety is now owned by the actual word layer.
- */
 @media (min-width: 64rem) {
 
   .wf-home-kinetic-row--2
@@ -3674,43 +3627,325 @@
   }
 }
 
+
+/* =========================================================
+   MOBILE HERO COMPOSITION
+   ========================================================= */
+
 @media (max-width: 63.99rem) {
+
+  /*
+   * Keep the hero viewport-based, but let the list begin from a
+   * controlled upper position instead of vertically centering a
+   * desktop-sized stack inside the available middle row.
+   */
+  .wf-home-hero__kinetic-main {
+    min-height:
+      calc(
+        100svh
+        - 64px
+      );
+
+    padding:
+      22px
+      var(--wf-gutter)
+      24px;
+
+    grid-template-rows:
+      auto
+      minmax(0, 1fr)
+      auto;
+  }
+
+
+  .wf-home-kinetic-list {
+    width:
+      100%;
+
+    max-width:
+      none;
+
+    margin:
+      0;
+
+    padding-top:
+      clamp(
+        48px,
+        6.4svh,
+        72px
+      );
+
+    align-self:
+      start;
+  }
+
+
+  /*
+   * Mobile rows are deliberately tighter.
+   * The old 14-15vh rows produced the large dead bands visible
+   * between INVESTMENT / ECONOMICS / CLUB.
+   */
+  .wf-home-kinetic-row {
+    min-height:
+      clamp(
+        88px,
+        11.5svh,
+        112px
+      );
+
+    padding-top:
+      8px;
+
+    padding-bottom:
+      8px;
+
+    grid-template-columns:
+      minmax(
+        0,
+        1fr
+      );
+  }
+
+
+  /*
+   * The reveal no longer reserves the old 42px metadata column.
+   * This puts the actual type field under the main mobile gutter.
+   */
+  .wf-home-kinetic-row__reveal {
+    grid-template-columns:
+      minmax(
+        0,
+        1fr
+      );
+  }
+
+
+  .wf-home-kinetic-row__text-slot {
+    grid-column:
+      1 !important;
+
+    justify-self:
+      start;
+
+    width:
+      fit-content;
+  }
+
+
+  /*
+   * Number metadata is redundant on mobile because the global
+   * section rail already communicates progress.
+   */
+  .wf-home-kinetic-row__meta {
+    position:
+      absolute;
+
+    z-index:
+      7;
+
+    inset:
+      0
+      auto
+      auto
+      0;
+
+    width:
+      auto;
+
+    min-width:
+      0;
+
+    pointer-events:
+      none;
+  }
+
+  .wf-home-kinetic-row__meta
+  > span:first-child {
+    display:
+      none !important;
+  }
+
+
+  /*
+   * AND is the only row annotation that remains.
+   * It belongs to ECONOMICS rather than a permanent number gutter.
+   */
+  .wf-home-kinetic-row__annotation {
+    display:
+      block !important;
+
+    color:
+      rgba(
+        255,
+        255,
+        255,
+        0.92
+      );
+
+    font-size:
+      0.62rem;
+
+    font-weight:
+      850;
+
+    line-height:
+      1;
+
+    letter-spacing:
+      0.16em;
+  }
+
+  .wf-home-kinetic-row--2
+  .wf-home-kinetic-row__meta {
+    left:
+      5%;
+
+    top:
+      8px;
+  }
+
+
+  /*
+   * Mobile diagonal is restrained:
+   *
+   * INVESTMENT  0%
+   * ECONOMICS   5%
+   * CLUB       20%
+   *
+   * It still reads diagonally, but all three words stay one object.
+   */
+  .wf-home-kinetic-row--1
+  .wf-home-kinetic-row__text-slot {
+    margin-left:
+      0;
+
+    margin-right:
+      0;
+  }
 
   .wf-home-kinetic-row--2
   .wf-home-kinetic-row__text-slot {
+    margin-left:
+      5%;
+
+    margin-right:
+      0;
+
     padding-right:
       0 !important;
+  }
+
+  .wf-home-kinetic-row--3
+  .wf-home-kinetic-row__text-slot {
+    justify-self:
+      start !important;
+
+    margin-left:
+      20%;
+
+    margin-right:
+      0 !important;
+  }
+
+
+  /*
+   * Keep ECONOMICS's S reserve on the actual glyph layer on mobile.
+   */
+  .wf-home-kinetic-row--2
+  .wf-home-kinetic-row__ghost,
+
+  .wf-home-kinetic-row--2
+  .wf-home-kinetic-row__reveal-word {
+    padding-right:
+      0.18em;
+  }
+
+
+  /*
+   * Pull the footer away from the browser/rail edge.
+   * This prevents CURRENT TERM and the Korean slogan from being
+   * visually cut by the fixed rail.
+   */
+  .wf-home-kinetic-footer {
+    width:
+      100%;
+
+    max-width:
+      none;
+
+    margin:
+      0;
+
+    padding-top:
+      clamp(
+        18px,
+        2.8svh,
+        28px
+      );
+
+    padding-bottom:
+      70px;
+
+    grid-template-columns:
+      auto;
+
+    grid-template-areas:
+      "term"
+      "slogan";
+
+    justify-content:
+      start;
+
+    gap:
+      10px;
+  }
+
+  .wf-home-kinetic-slogan {
+    justify-self:
+      start;
+
+    max-width:
+      calc(
+        100vw
+        - var(--wf-gutter)
+        * 2
+      );
+  }
+}
+
+
+/* Short mobile screens: keep all hero information visible. */
+@media (max-width: 63.99rem) and (max-height: 760px) {
+
+  .wf-home-kinetic-list {
+    padding-top:
+      28px;
+  }
+
+  .wf-home-kinetic-row {
+    min-height:
+      82px;
+  }
+
+  .wf-home-kinetic-footer {
+    padding-top:
+      12px;
+
+    padding-bottom:
+      58px;
   }
 }
 
 
 /* =========================================================
-   DESKTOP: BARE LINE + RINGS
-
-             |
-             ○
-             |
-             ○
-             |
-             ◯   current
-             |
-             ○
-             |
-             ○
-             |
-
-   The line sits behind the white-filled hollow rings, so every
-   node visually interrupts the line instead of sitting beside it.
+   DESKTOP CONTINUOUS TRACK
    ========================================================= */
 
 @media (min-width: 64rem) {
 
   .wf-home-rail {
-    --wf-rail-ring:
-      11px;
-
-    --wf-rail-ring-current:
-      17px;
+    --wf-rail-ring-size:
+      10px;
 
     top:
       50%;
@@ -3739,15 +3974,15 @@
     min-height:
       310px;
 
+    padding:
+      8px
+      0;
+
     transform:
       translate(
         -50%,
         -50%
       );
-
-    padding:
-      8px
-      0;
 
     pointer-events:
       none;
@@ -3768,6 +4003,7 @@
       none !important;
   }
 
+
   .wf-home-rail::before {
     content:
       none !important;
@@ -3777,16 +4013,20 @@
   }
 
 
-  /* vertical line */
+  /*
+   * Base line.
+   * The progress child fills this SAME line continuously according
+   * to --wf-home-rail-progress from HomeSectionRail.js.
+   */
   .wf-home-rail__track {
     z-index:
       0;
 
     top:
-      22px;
+      20px;
 
     bottom:
-      22px;
+      20px;
 
     left:
       50%;
@@ -3801,19 +4041,22 @@
       auto;
 
     transform:
-      translateX(-50%);
+      translateX(
+        -50%
+      );
 
     overflow:
       visible;
 
     background:
       rgba(
-        138,
-        153,
-        176,
-        0.34
+        103,
+        122,
+        150,
+        0.32
       );
   }
+
 
   .wf-home-rail__progress {
     top:
@@ -3829,7 +4072,7 @@
       0;
 
     width:
-      1px;
+      1.5px;
 
     height:
       calc(
@@ -3843,17 +4086,21 @@
     min-height:
       0;
 
+    transform:
+      translateX(
+        -0.25px
+      );
+
     background:
       linear-gradient(
         180deg,
-        #69ccf5 0%,
+        #8fdefc 0%,
         #168cf4 54%,
         #193fd7 100%
       );
   }
 
 
-  /* five equal interaction zones */
   .wf-home-rail__list {
     z-index:
       2;
@@ -3874,6 +4121,7 @@
       );
   }
 
+
   .wf-home-rail__item {
     min-height:
       0;
@@ -3884,6 +4132,7 @@
     align-items:
       center;
   }
+
 
   .wf-home-rail__link {
     position:
@@ -3930,9 +4179,7 @@
   }
 
 
-  /*
-   * Keep DOM semantics + aria-label, remove visible text.
-   */
+  /* visually hide text, preserve anchor semantics + aria-label */
   .wf-home-rail__number,
   .wf-home-rail__label,
   .wf-home-rail__tick {
@@ -3979,8 +4226,15 @@
   }
 
 
-  /* default hollow ring */
-  .wf-home-rail__link::before {
+  /*
+   * Every node is the SAME hollow ring.
+   * No visited/current/upcoming visual events.
+   * The line behind it owns progress.
+   */
+  .wf-home-rail__link::before,
+  .wf-home-rail__link[data-state='visited']::before,
+  .wf-home-rail__link[data-state='current']::before,
+  .wf-home-rail__link[data-state='upcoming']::before {
     content:
       "";
 
@@ -3997,10 +4251,10 @@
       50%;
 
     width:
-      var(--wf-rail-ring);
+      var(--wf-rail-ring-size);
 
     height:
-      var(--wf-rail-ring);
+      var(--wf-rail-ring-size);
 
     box-sizing:
       border-box;
@@ -4015,109 +4269,102 @@
       1.5px
       solid
       rgba(
-        137,
-        151,
-        173,
-        0.72
+        91,
+        111,
+        141,
+        0.66
       );
 
     border-radius:
       50%;
 
-    /*
-     * White fill masks the line through the ring:
-     * line / ring / line.
-     */
     background:
-      #ffffff;
+      rgba(
+        255,
+        255,
+        255,
+        0.92
+      );
+
+    box-shadow:
+      none;
 
     transition:
-      width
-      220ms
-      var(--wf-ease-out),
-      height
-      220ms
-      var(--wf-ease-out),
       border-color
-      180ms
-      var(--wf-ease-out),
-      box-shadow
-      180ms
+      160ms
       var(--wf-ease-out);
   }
 
 
-  /* visited ring */
-  .wf-home-rail__link[data-state='visited']::before {
-    border-color:
-      rgba(
-        22,
-        140,
-        244,
-        0.72
-      );
-  }
-
-
-  /* current ring: bigger, still hollow */
-  .wf-home-rail__link[data-state='current']::before {
-    width:
-      var(--wf-rail-ring-current);
-
-    height:
-      var(--wf-rail-ring-current);
-
-    border:
-      2px
-      solid
-      var(--wf-brand-blue);
-
-    background:
-      #ffffff;
-
-    box-shadow:
-      0
-      0
-      0
-      4px
-      rgba(
-        22,
-        140,
-        244,
-        0.08
-      );
-  }
-
-
   /*
-   * Explicitly NO center dot.
-   * The ring itself is the state indicator.
+   * ONLY active section gets a center dot.
+   * Ring size, ring border, ring color stay unchanged.
    */
   .wf-home-rail__link::after {
     content:
-      none !important;
+      "";
 
-    display:
-      none !important;
+    position:
+      absolute;
+
+    z-index:
+      4;
+
+    left:
+      50%;
+
+    top:
+      50%;
+
+    width:
+      3.5px;
+
+    height:
+      3.5px;
+
+    transform:
+      translate(
+        -50%,
+        -50%
+      )
+      scale(0);
+
+    border-radius:
+      50%;
+
+    background:
+      var(--wf-brand-blue);
+
+    opacity:
+      0;
+
+    transition:
+      transform
+      160ms
+      var(--wf-ease-out),
+      opacity
+      160ms
+      var(--wf-ease-out);
+  }
+
+
+  .wf-home-rail__link[data-state='current']::after {
+    transform:
+      translate(
+        -50%,
+        -50%
+      )
+      scale(1);
+
+    opacity:
+      1;
   }
 
 
   .wf-home-rail__link:hover::before,
   .wf-home-rail__link:focus-visible::before {
     border-color:
-      var(--wf-brand-cobalt);
-
-    box-shadow:
-      0
-      0
-      0
-      4px
-      rgba(
-        22,
-        140,
-        244,
-        0.09
-      );
+      var(--wf-brand-blue);
   }
 
   .wf-home-rail__link:focus-visible {
@@ -4128,21 +4375,22 @@
 
 
 /* =========================================================
-   TABLET / MOBILE: HORIZONTAL LINE + RINGS
+   MOBILE CONTINUOUS TRACK
 
-   This is a dedicated horizontal composition.
-   A very small frosted base is kept only so the one-pixel line
-   remains legible over every section background.
+   No pill, no capsule, no card.
+   Just:
+      ○────○────⊙────○────○
+
+   Base line is always visible.
+   Progress overlays it continuously.
+   Only the current ring receives the dot.
    ========================================================= */
 
 @media (max-width: 63.99rem) {
 
   .wf-home-rail {
-    --wf-rail-ring:
-      10px;
-
-    --wf-rail-ring-current:
-      15px;
+    --wf-rail-ring-size:
+      8px;
 
     top:
       auto;
@@ -4155,69 +4403,51 @@
 
     bottom:
       max(
-        14px,
-        env(
-          safe-area-inset-bottom
+        18px,
+        calc(
+          env(
+            safe-area-inset-bottom
+          )
+          + 8px
         )
       );
 
     width:
-      min(
-        72vw,
-        300px
-      );
+      224px;
 
     height:
-      40px;
+      26px;
 
     min-height:
       0;
 
     padding:
-      0
-      16px;
+      0;
 
     transform:
-      translateX(-50%);
+      translateX(
+        -50%
+      );
 
     pointer-events:
       none;
 
     background:
-      rgba(
-        255,
-        255,
-        255,
-        0.86
-      );
+      transparent !important;
 
     border:
-      1px
-      solid
-      rgba(
-        25,
-        63,
-        215,
-        0.09
-      );
+      0 !important;
 
     border-radius:
-      999px;
+      0 !important;
 
     box-shadow:
-      0
-      8px
-      24px
-      rgba(
-        18,
-        43,
-        86,
-        0.10
-      );
+      none !important;
 
     backdrop-filter:
-      blur(12px);
+      none !important;
   }
+
 
   .wf-home-rail::before {
     content:
@@ -4228,7 +4458,6 @@
   }
 
 
-  /* horizontal line */
   .wf-home-rail__track {
     z-index:
       0;
@@ -4237,13 +4466,13 @@
       50%;
 
     right:
-      24px;
+      8px;
 
     bottom:
       auto;
 
     left:
-      24px;
+      8px;
 
     width:
       auto;
@@ -4252,19 +4481,35 @@
       1px;
 
     transform:
-      translateY(-50%);
+      translateY(
+        -50%
+      );
 
     overflow:
       visible;
 
     background:
       rgba(
-        138,
-        153,
-        176,
-        0.34
+        75,
+        96,
+        128,
+        0.38
+      );
+
+    filter:
+      drop-shadow(
+        0
+        1px
+        1px
+        rgba(
+          255,
+          255,
+          255,
+          0.22
+        )
       );
   }
+
 
   .wf-home-rail__progress {
     top:
@@ -4286,7 +4531,7 @@
       );
 
     height:
-      1px;
+      1.5px;
 
     min-width:
       0;
@@ -4294,11 +4539,16 @@
     min-height:
       0;
 
+    transform:
+      translateY(
+        -0.25px
+      );
+
     background:
       linear-gradient(
         90deg,
-        #69ccf5 0%,
-        #168cf4 54%,
+        #9fe5fd 0%,
+        #168cf4 56%,
         #193fd7 100%
       );
   }
@@ -4324,6 +4574,7 @@
       );
   }
 
+
   .wf-home-rail__item {
     justify-content:
       center;
@@ -4331,6 +4582,7 @@
     align-items:
       center;
   }
+
 
   .wf-home-rail__link {
     position:
@@ -4340,7 +4592,7 @@
       100%;
 
     height:
-      40px;
+      26px;
 
     min-height:
       0;
@@ -4417,7 +4669,14 @@
   }
 
 
-  .wf-home-rail__link::before {
+  /*
+   * Same ring for every state.
+   * There is no visited/current/upcoming border transition.
+   */
+  .wf-home-rail__link::before,
+  .wf-home-rail__link[data-state='visited']::before,
+  .wf-home-rail__link[data-state='current']::before,
+  .wf-home-rail__link[data-state='upcoming']::before {
     content:
       "";
 
@@ -4434,10 +4693,10 @@
       50%;
 
     width:
-      var(--wf-rail-ring);
+      var(--wf-rail-ring-size);
 
     height:
-      var(--wf-rail-ring);
+      var(--wf-rail-ring-size);
 
     box-sizing:
       border-box;
@@ -4452,115 +4711,157 @@
       1.5px
       solid
       rgba(
-        137,
-        151,
-        173,
-        0.72
+        67,
+        89,
+        122,
+        0.66
       );
 
     border-radius:
       50%;
 
     background:
-      #ffffff;
-  }
-
-  .wf-home-rail__link[data-state='visited']::before {
-    border-color:
       rgba(
-        22,
-        140,
-        244,
-        0.72
+        255,
+        255,
+        255,
+        0.90
       );
-  }
-
-  .wf-home-rail__link[data-state='current']::before {
-    width:
-      var(--wf-rail-ring-current);
-
-    height:
-      var(--wf-rail-ring-current);
-
-    border:
-      2px
-      solid
-      var(--wf-brand-blue);
-
-    background:
-      #ffffff;
 
     box-shadow:
       0
       0
       0
-      3px
+      1px
       rgba(
-        22,
-        140,
-        244,
-        0.08
+        255,
+        255,
+        255,
+        0.12
       );
   }
 
+
   .wf-home-rail__link::after {
     content:
-      none !important;
+      "";
 
-    display:
-      none !important;
+    position:
+      absolute;
+
+    z-index:
+      4;
+
+    left:
+      50%;
+
+    top:
+      50%;
+
+    width:
+      3px;
+
+    height:
+      3px;
+
+    transform:
+      translate(
+        -50%,
+        -50%
+      )
+      scale(0);
+
+    border-radius:
+      50%;
+
+    background:
+      var(--wf-brand-blue);
+
+    opacity:
+      0;
+
+    transition:
+      transform
+      160ms
+      var(--wf-ease-out),
+      opacity
+      160ms
+      var(--wf-ease-out);
   }
+
+
+  .wf-home-rail__link[data-state='current']::after {
+    transform:
+      translate(
+        -50%,
+        -50%
+      )
+      scale(1);
+
+    opacity:
+      1;
+  }
+
 
   .wf-home-rail__link:focus-visible {
     outline:
       none;
   }
-
-
-  /* mobile hero returns to full local width */
-  .wf-home-kinetic-list,
-  .wf-home-kinetic-footer {
-    width:
-      100%;
-
-    max-width:
-      none;
-
-    margin-inline:
-      0;
-  }
 }
 
 
+/* =========================================================
+   VERY SMALL PHONE
+   ========================================================= */
+
 @media (max-width: 30rem) {
+
+  .wf-home-kinetic-list {
+    padding-top:
+      34px;
+  }
+
+  .wf-home-kinetic-row {
+    min-height:
+      80px;
+  }
+
+  .wf-home-kinetic-row--3
+  .wf-home-kinetic-row__text-slot {
+    margin-left:
+      17%;
+  }
+
+  .wf-home-kinetic-footer {
+    padding-bottom:
+      62px;
+  }
 
   .wf-home-rail {
     width:
-      min(
-        82vw,
-        280px
-      );
+      200px;
 
     height:
-      38px;
-
-    padding:
-      0
-      12px;
+      24px;
   }
 
   .wf-home-rail__link {
     height:
-      38px;
-  }
-
-  .wf-home-rail__track {
-    left:
-      20px;
-
-    right:
-      20px;
+      24px;
   }
 }
 
-/* WF PROPORTIONAL HERO LINE RING FINAL END */
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .wf-home-rail__link::after {
+    transition:
+      none !important;
+  }
+}
+
+/* WF MOBILE COMPOSITION CONTINUOUS RAIL FINAL END */
