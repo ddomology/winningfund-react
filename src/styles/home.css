@@ -7641,3 +7641,222 @@
 }
 
 /* WF PROGRAM OVERVIEW 03 EDITORIAL TRACK FINAL END */
+
+/* WF MOBILE HERO VERTICAL COMPOSITION FINAL START */
+
+/* =========================================================
+   MOBILE HOME — VERTICAL COMPOSITION CORRECTION
+
+   Problem:
+   The mobile type stack was made content-driven, but the hero still
+   inherited viewport-height ownership from older rules. The result was
+   a large dead zone below the slogan while the fixed rail sat at the
+   browser chrome.
+
+   Final policy:
+   - do not force HOME to own a full viewport
+   - keep a compact but deliberate minimum scene height
+   - let 02 / 소개 begin to peek sooner
+   - reserve only the space the rail actually needs
+   - raise the fixed rail away from mobile browser controls
+   - do not enlarge the English words again
+   ========================================================= */
+
+@media (max-width: 48rem) {
+
+  /*
+   * The first scene is deliberately shorter than the visual viewport.
+   * On normal phones this leaves roughly one small next-section cue,
+   * instead of hundreds of pixels of empty blue.
+   */
+  .wf-home-hero--kinetic-entrance,
+  .wf-home-hero__inner--kinetic-entrance {
+    min-height:
+      0 !important;
+
+    height:
+      auto !important;
+  }
+
+
+  .wf-home-hero__kinetic-main {
+    min-height:
+      min(
+        720px,
+        calc(
+          100dvh
+          - 92px
+        )
+      )
+      !important;
+
+    height:
+      auto;
+
+    padding:
+      20px
+      var(--wf-gutter)
+      74px;
+
+    grid-template-rows:
+      auto
+      auto
+      auto;
+
+    align-content:
+      start;
+  }
+
+
+  /*
+   * Keep the type stack strong near the top without adding another
+   * blank viewport band.
+   */
+  .wf-home-kinetic-list {
+    padding-top:
+      clamp(
+        30px,
+        4.2dvh,
+        46px
+      )
+      !important;
+  }
+
+
+  .wf-home-kinetic-row {
+    min-height:
+      clamp(
+        78px,
+        9.8dvh,
+        96px
+      )
+      !important;
+  }
+
+
+  /*
+   * The footer follows CLUB at an intentional editorial interval.
+   * It is no longer pushed toward a synthetic viewport bottom.
+   */
+  .wf-home-kinetic-footer {
+    margin-top:
+      clamp(
+        38px,
+        5.6dvh,
+        52px
+      )
+      !important;
+
+    padding-top:
+      0
+      !important;
+
+    padding-bottom:
+      0
+      !important;
+
+    gap:
+      8px;
+  }
+
+
+  /*
+   * Keep slogan/brush in normal flow and leave the final blue field
+   * to the hero's own bottom padding.
+   */
+  .wf-home-kinetic-slogan {
+    margin-bottom:
+      0;
+  }
+
+
+  /*
+   * Global rail remains fixed across HOME sections, but it should not
+   * feel attached to Samsung/Chrome browser controls.
+   */
+  .wf-home-rail {
+    bottom:
+      max(
+        34px,
+        calc(
+          env(
+            safe-area-inset-bottom
+          )
+          + 22px
+        )
+      )
+      !important;
+  }
+}
+
+
+/* =========================================================
+   SHORT PHONE HEIGHT
+   ========================================================= */
+
+@media (max-width: 48rem) and (max-height: 720px) {
+
+  .wf-home-hero__kinetic-main {
+    min-height:
+      0
+      !important;
+
+    padding-bottom:
+      66px;
+  }
+
+
+  .wf-home-kinetic-list {
+    padding-top:
+      24px
+      !important;
+  }
+
+
+  .wf-home-kinetic-row {
+    min-height:
+      74px
+      !important;
+  }
+
+
+  .wf-home-kinetic-footer {
+    margin-top:
+      30px
+      !important;
+  }
+
+
+  .wf-home-rail {
+    bottom:
+      max(
+        28px,
+        calc(
+          env(
+            safe-area-inset-bottom
+          )
+          + 16px
+        )
+      )
+      !important;
+  }
+}
+
+
+/* =========================================================
+   TALL PHONE HEIGHT
+
+   Do not stretch the hero to consume the entire screen.
+   Extra device height becomes a subtle preview of 02 instead.
+   ========================================================= */
+
+@media (max-width: 48rem) and (min-height: 860px) {
+
+  .wf-home-hero__kinetic-main {
+    min-height:
+      700px
+      !important;
+  }
+}
+
+/* WF MOBILE HERO VERTICAL COMPOSITION FINAL END */
