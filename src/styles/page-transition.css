@@ -1,6 +1,6 @@
 /* ============================================================
    WINNINGFUND ROUTE TRANSITION
-   Cobalt curtain + center slit + destination hero gate
+   Fast top-pull + left-to-right cobalt wipe
    ============================================================ */
 
 .wf-page-transition {
@@ -8,21 +8,9 @@
   min-height: 100dvh;
 }
 
-.wf-page-transition > .wf-app-shell {
-  transform-origin: 50% 44%;
-  transition:
-    transform 180ms cubic-bezier(.16,1,.3,1),
-    opacity 180ms cubic-bezier(.16,1,.3,1);
-}
-
-.wf-page-transition[data-phase='covering'] > .wf-app-shell {
-  transform: scale(.992);
-  opacity: .86;
-}
-
 /*
- * Destination pages mount while the curtain is fully closed.
- * Freeze their CSS entrance animations until the curtain has left.
+ * Destination pages mount while the wipe is fully closed.
+ * Keep all entrance animation timelines at frame zero until reveal ends.
  */
 .wf-page-transition[data-route-enter='hold'] .wf-route-viewport *,
 .wf-page-transition[data-route-enter='hold'] .wf-route-viewport *::before,
@@ -30,205 +18,108 @@
   animation-play-state: paused !important;
 }
 
-.wf-page-transition__curtain {
+.wf-page-transition__wipe {
   position: fixed;
   z-index: 220;
   inset: 0;
-  overflow: hidden;
   visibility: hidden;
   pointer-events: none;
-  transform: translate3d(0, 100%, 0);
+  transform: scaleX(0);
+  transform-origin: left center;
   will-change: transform;
   background:
-    radial-gradient(
-      circle at 12% 18%,
-      rgba(190, 238, 255, .42),
-      transparent 30%
-    ),
-    radial-gradient(
-      circle at 86% 82%,
-      rgba(6, 35, 153, .24),
-      transparent 34%
-    ),
     linear-gradient(
-      128deg,
+      100deg,
       #69ccf5 0%,
-      #32a8f3 18%,
-      #168cf4 40%,
-      #0868ee 69%,
+      #35aef5 24%,
+      #168cf4 48%,
+      #0868ee 72%,
       #193fd7 100%
     );
 }
 
-.wf-page-transition__curtain::before {
+/* A restrained leading edge keeps the wipe crisp without becoming a loader. */
+.wf-page-transition__wipe::after {
   content: "";
   position: absolute;
-  inset: 0;
-  pointer-events: none;
-  opacity: .14;
-  background-image:
-    linear-gradient(rgba(255,255,255,.11) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,.09) 1px, transparent 1px);
-  background-size: min(8.333vw, 120px) 88px;
-  mask-image:
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: clamp(2px, .28vw, 5px);
+  opacity: .55;
+  background:
     linear-gradient(
       180deg,
-      rgba(0,0,0,.22),
-      rgba(0,0,0,.7) 48%,
-      rgba(0,0,0,.22)
+      rgba(255,255,255,.2),
+      rgba(235,249,255,.88) 50%,
+      rgba(255,255,255,.2)
     );
+  box-shadow: 0 0 18px rgba(190,238,255,.34);
 }
 
-.wf-page-transition[data-phase='idle'] .wf-page-transition__curtain {
-  transition: none;
+.wf-page-transition[data-phase='idle'] .wf-page-transition__wipe {
   visibility: hidden;
-  transform: translate3d(0, 100%, 0);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: none;
 }
 
-.wf-page-transition[data-phase='covering'] .wf-page-transition__curtain,
-.wf-page-transition[data-phase='covered'] .wf-page-transition__curtain,
-.wf-page-transition[data-phase='revealing'] .wf-page-transition__curtain {
+.wf-page-transition[data-phase='covering'] .wf-page-transition__wipe,
+.wf-page-transition[data-phase='covered'] .wf-page-transition__wipe,
+.wf-page-transition[data-phase='revealing'] .wf-page-transition__wipe {
   visibility: visible;
   pointer-events: auto;
 }
 
-.wf-page-transition[data-phase='covering'] .wf-page-transition__curtain {
-  transform: translate3d(0, 0, 0);
+/* Reference motion: grow from the left until the viewport is fully covered. */
+.wf-page-transition[data-phase='covering'] .wf-page-transition__wipe {
+  transform: scaleX(1);
+  transform-origin: left center;
   transition:
-    transform 320ms cubic-bezier(.16,1,.3,1);
+    transform 220ms cubic-bezier(.22,.8,.22,1);
 }
 
-.wf-page-transition[data-phase='covered'] .wf-page-transition__curtain {
-  transform: translate3d(0, 0, 0);
+.wf-page-transition[data-phase='covered'] .wf-page-transition__wipe {
+  transform: scaleX(1);
+  transform-origin: right center;
   transition: none;
 }
 
-.wf-page-transition[data-phase='revealing'] .wf-page-transition__curtain {
-  transform: translate3d(0, -100%, 0);
+/* Shrinking toward the right makes the reveal continue in the same direction. */
+.wf-page-transition[data-phase='revealing'] .wf-page-transition__wipe {
+  transform: scaleX(0);
+  transform-origin: right center;
   transition:
-    transform 360ms cubic-bezier(.7,0,.2,1);
+    transform 230ms cubic-bezier(.7,0,.25,1);
 }
 
-/* POP navigation must cover the already-committed destination before paint. */
-.wf-page-transition[data-snap-cover='true'] .wf-page-transition__curtain {
+/* POP already committed the destination; cover it before the next paint. */
+.wf-page-transition[data-snap-cover='true'] .wf-page-transition__wipe {
   visibility: visible !important;
   pointer-events: auto;
-  transform: translate3d(0, 0, 0) !important;
+  transform: scaleX(1) !important;
+  transform-origin: right center !important;
   transition: none !important;
 }
 
-.wf-page-transition__slit {
-  position: absolute;
-  z-index: 2;
-  top: 50%;
-  right: 0;
-  left: 0;
-  height: 1px;
-  transform: scaleX(.08);
-  transform-origin: center;
-  opacity: 0;
-  background:
-    linear-gradient(
-      90deg,
-      transparent 0%,
-      rgba(232,248,255,.56) 18%,
-      rgba(255,255,255,.92) 50%,
-      rgba(232,248,255,.56) 82%,
-      transparent 100%
-    );
-}
-
-.wf-page-transition[data-phase='covering'] .wf-page-transition__slit {
-  opacity: 1;
-  transform: scaleX(1);
-  transition:
-    transform 250ms cubic-bezier(.1,.5,.5,1) 55ms,
-    opacity 120ms linear 45ms;
-}
-
-.wf-page-transition[data-phase='covered'] .wf-page-transition__slit {
-  opacity: 1;
-  transform: scaleX(1);
-}
-
-.wf-page-transition[data-phase='revealing'] .wf-page-transition__slit {
-  opacity: 0;
-  transform: scaleX(.18);
-  transition:
-    transform 230ms cubic-bezier(.4,0,1,1),
-    opacity 150ms linear;
-}
-
-.wf-page-transition__marker {
-  position: absolute;
-  z-index: 3;
-  top: calc(50% - 30px);
-  left: max(
-    var(--wf-gutter),
-    calc((100vw - var(--wf-container-max)) / 2)
-  );
-  margin: 0;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  color: rgba(255,255,255,.84);
-  font-size: .62rem;
-  font-weight: 850;
-  line-height: 1;
-  letter-spacing: .16em;
-  opacity: 0;
-  transform: translate3d(0, 7px, 0);
-}
-
-.wf-page-transition__marker-index {
-  color: rgba(218,244,255,.72);
-}
-
-.wf-page-transition__marker-label {
-  color: #ffffff;
-}
-
-.wf-page-transition[data-phase='covering'] .wf-page-transition__marker {
-  opacity: 1;
-  transform: translate3d(0, 0, 0);
-  transition:
-    opacity 180ms linear 100ms,
-    transform 260ms cubic-bezier(.16,1,.3,1) 80ms;
-}
-
-.wf-page-transition[data-phase='covered'] .wf-page-transition__marker {
-  opacity: 1;
-  transform: translate3d(0, 0, 0);
-}
-
-.wf-page-transition[data-phase='revealing'] .wf-page-transition__marker {
-  opacity: 0;
-  transform: translate3d(0, -6px, 0);
-  transition:
-    opacity 130ms linear,
-    transform 180ms cubic-bezier(.4,0,1,1);
-}
-
 @media (max-width: 48rem) {
-  .wf-page-transition__marker {
-    top: calc(50% - 26px);
-    font-size: .58rem;
+  .wf-page-transition[data-phase='covering'] .wf-page-transition__wipe {
+    transition-duration: 180ms;
   }
 
-  .wf-page-transition[data-phase='covering'] .wf-page-transition__curtain {
-    transition-duration: 290ms;
+  .wf-page-transition[data-phase='revealing'] .wf-page-transition__wipe {
+    transition-duration: 200ms;
   }
 
-  .wf-page-transition[data-phase='revealing'] .wf-page-transition__curtain {
-    transition-duration: 330ms;
+  .wf-page-transition__wipe::after {
+    width: 2px;
+    opacity: .46;
+    box-shadow: 0 0 10px rgba(190,238,255,.28);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .wf-page-transition > .wf-app-shell,
-  .wf-page-transition__curtain,
-  .wf-page-transition__slit,
-  .wf-page-transition__marker {
+  .wf-page-transition__wipe {
     transition: none !important;
   }
 }
