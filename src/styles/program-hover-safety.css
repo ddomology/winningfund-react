@@ -1,0 +1,19 @@
+/* ============================================================
+   HOME PROGRAM HOVER LINE SAFETY
+
+   Legacy program-card hover accent used to sit at left: 0, which now
+   overlaps the editorial program number/title in the dark layout.
+   Keep the accent, but move it outside the readable content column.
+   ============================================================ */
+
+.wf-home-program::before {
+  inset: 0 auto 0 -18px !important;
+  width: 3px;
+  pointer-events: none;
+}
+
+@media (max-width: 48rem) {
+  .wf-home-program::before {
+    inset-inline-start: -20px !important;
+  }
+}
