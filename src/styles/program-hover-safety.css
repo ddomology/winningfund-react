@@ -25,6 +25,10 @@
    The wave is intentionally a long repeating SVG path; motion is created by
    translating that same path from -90px to 85px. Do not replace the path,
    reshape it, or animate the SVG x property.
+
+   Important: the uploaded reference does not disable this animation under
+   prefers-reduced-motion. Keep the wave running so OS/browser motion
+   preferences cannot silently turn the reference wave into a static divider.
    ============================================================ */
 
 .wf-home-wave__parallax > use {
@@ -63,12 +67,5 @@
 
   100% {
     transform: translate3d(85px, 0, 0);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .wf-home-wave__parallax > use {
-    animation: none !important;
-    transform: none !important;
   }
 }
