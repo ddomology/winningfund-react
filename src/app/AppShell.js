@@ -3,6 +3,7 @@ import { Outlet } from 'react-router'
 import Header from '../components/Header.js'
 import Footer from '../components/Footer.js'
 import PageTransition from '../components/PageTransition.js'
+import useRouteTransition from './useRouteTransition.js'
 import logoUrl from '../assets/brand/winningfund-logo.png'
 import {
   siteContentBundle,
@@ -22,9 +23,11 @@ const brand = Object.freeze({
 })
 
 export default function AppShell() {
+  const transition = useRouteTransition()
+
   return createElement(
     PageTransition,
-    null,
+    transition,
     createElement(
       'div',
       { className: 'wf-app-shell' },
