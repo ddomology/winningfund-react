@@ -267,10 +267,14 @@ if (
 }
 
 const recruitmentText = read('src/pages/RecruitmentPage.js')
-if (recruitmentText.includes('RoutePlaceholder')) {
-  pass('RecruitmentPage.js remains business-UI placeholder')
+if (
+  !recruitmentText.includes('RoutePlaceholder') &&
+  recruitmentText.includes('selectRecruitmentPageData') &&
+  recruitmentText.includes('CTAButton')
+) {
+  pass('RecruitmentPage.js now composes RECRUITMENT UI through normalized data')
 } else {
-  fail('RecruitmentPage.js implemented page composition before its stage')
+  fail('RecruitmentPage.js RECRUITMENT composition missing')
 }
 
 if (failed) {

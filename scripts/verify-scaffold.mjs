@@ -79,9 +79,12 @@ const recruitmentPath=path.join(root,'src','pages','RecruitmentPage.js')
 if(!fs.existsSync(recruitmentPath)){
   fail('missing RecruitmentPage.js')
 }else{
-  fs.readFileSync(recruitmentPath,'utf8').includes('RoutePlaceholder')
-    ? pass('RecruitmentPage.js remains placeholder-only')
-    : fail('RecruitmentPage.js gained business UI before its stage')
+  const recruitmentText=fs.readFileSync(recruitmentPath,'utf8')
+  !recruitmentText.includes('RoutePlaceholder') &&
+  recruitmentText.includes('selectRecruitmentPageData') &&
+  recruitmentText.includes("className: 'wf-recruitment'")
+    ? pass('RecruitmentPage.js implemented through normalized RECRUITMENT selector')
+    : fail('RecruitmentPage.js RECRUITMENT implementation missing')
 }
 
 const memberDir=path.join(root,'src','assets','members','18-2')

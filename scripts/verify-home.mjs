@@ -179,10 +179,13 @@ if (
 }
 
 const recruitmentPageSource = read('src/pages/RecruitmentPage.js')
-if (recruitmentPageSource.includes('RoutePlaceholder')) {
-  pass('RecruitmentPage.js remains placeholder')
+if (
+  !recruitmentPageSource.includes('RoutePlaceholder') &&
+  recruitmentPageSource.includes('selectRecruitmentPageData')
+) {
+  pass('RecruitmentPage.js is intentionally implemented after ACTIVITIES')
 } else {
-  fail('RecruitmentPage.js unexpectedly implemented')
+  fail('RecruitmentPage.js implementation boundary invalid')
 }
 
 
