@@ -27,7 +27,10 @@ export default function AppShell() {
 
   return createElement(
     PageTransition,
-    transition,
+    {
+      ...transition,
+      brandLogoUrl: logoUrl,
+    },
     createElement(
       'div',
       { className: 'wf-app-shell' },
