@@ -7860,3 +7860,458 @@
 }
 
 /* WF MOBILE HERO VERTICAL COMPOSITION FINAL END */
+
+/* WF PROGRAM OVERVIEW 03 LAYOUT RESCUE START */
+
+/* =========================================================
+   03 DESKTOP LAYOUT RESCUE
+
+   Full reset of the historical activity-card grid contract.
+   Each desktop activity owns exactly one readable content column.
+   ========================================================= */
+
+@media (min-width: 72.01rem) {
+
+  .wf-home-programs__list {
+    grid-template-columns:
+      repeat(
+        4,
+        minmax(
+          0,
+          1fr
+        )
+      )
+      !important;
+
+    grid-auto-flow:
+      row;
+
+    align-items:
+      start;
+
+    gap:
+      clamp(
+        34px,
+        3.2vw,
+        58px
+      );
+
+    margin-top:
+      clamp(
+        70px,
+        8svh,
+        96px
+      );
+  }
+
+
+  .wf-home-programs__list::before,
+  .wf-home-programs__list::after {
+    top:
+      112px;
+  }
+
+
+  /*
+   * Kill inherited multi-column/card placement completely.
+   */
+  .wf-home-program {
+    position:
+      relative;
+
+    display:
+      block !important;
+
+    width:
+      auto !important;
+
+    min-width:
+      0 !important;
+
+    max-width:
+      none !important;
+
+    min-height:
+      314px;
+
+    grid-template-columns:
+      none !important;
+
+    grid-template-rows:
+      none !important;
+
+    grid-template-areas:
+      none !important;
+
+    grid-auto-flow:
+      row !important;
+
+    align-items:
+      initial !important;
+
+    justify-items:
+      initial !important;
+
+    padding:
+      0 !important;
+
+    overflow:
+      visible;
+  }
+
+
+  .wf-home-program__number,
+  .wf-home-program__icon-shell,
+  .wf-home-program__track-node,
+  .wf-home-program__body,
+  .wf-home-program__arrow {
+    grid-column:
+      auto !important;
+
+    grid-row:
+      auto !important;
+
+    grid-area:
+      auto !important;
+  }
+
+
+  .wf-home-program__icon-shell {
+    display:
+      grid;
+
+    width:
+      64px;
+
+    height:
+      64px;
+
+    margin:
+      0;
+
+    place-items:
+      center;
+  }
+
+
+  .wf-home-program__icon {
+    width:
+      44px;
+
+    height:
+      44px;
+  }
+
+
+  /*
+   * Track line is at y=112. Node center lands exactly on that line.
+   */
+  .wf-home-program__track-node {
+    position:
+      absolute;
+
+    top:
+      104px;
+
+    left:
+      0;
+
+    width:
+      16px;
+
+    height:
+      16px;
+
+    margin:
+      0;
+
+    align-self:
+      auto;
+  }
+
+
+  .wf-home-program__number {
+    position:
+      absolute;
+
+    top:
+      86px;
+
+    left:
+      0;
+
+    transform:
+      none;
+
+    margin:
+      0;
+  }
+
+
+  /*
+   * One real text column.
+   * No old implicit grid column is allowed to narrow Korean copy.
+   */
+  .wf-home-program__body {
+    display:
+      grid !important;
+
+    grid-template-columns:
+      minmax(
+        0,
+        1fr
+      )
+      !important;
+
+    grid-template-rows:
+      auto
+      auto;
+
+    grid-template-areas:
+      none !important;
+
+    width:
+      100% !important;
+
+    min-width:
+      0 !important;
+
+    max-width:
+      none !important;
+
+    margin:
+      78px
+      0
+      0;
+
+    padding:
+      0 !important;
+
+    gap:
+      14px;
+  }
+
+
+  .wf-home-program__title,
+  .wf-home-program__summary {
+    grid-column:
+      1 !important;
+
+    grid-row:
+      auto !important;
+
+    grid-area:
+      auto !important;
+
+    width:
+      100% !important;
+
+    min-width:
+      0 !important;
+  }
+
+
+  .wf-home-program__title {
+    display:
+      block;
+
+    max-width:
+      16ch;
+
+    margin:
+      0;
+
+    white-space:
+      normal;
+
+    word-break:
+      keep-all;
+
+    overflow-wrap:
+      normal;
+  }
+
+
+  .wf-home-program__summary {
+    display:
+      block;
+
+    max-width:
+      30ch;
+
+    margin:
+      0;
+
+    white-space:
+      normal;
+
+    word-break:
+      keep-all;
+
+    overflow-wrap:
+      break-word;
+  }
+
+
+  .wf-home-program__arrow {
+    right:
+      0;
+
+    bottom:
+      0;
+  }
+}
+
+
+/* =========================================================
+   TABLET RESCUE
+
+   Keep the intended 2 x 2 composition, but use the same explicit
+   one-column item ownership so historical columns cannot leak in.
+   ========================================================= */
+
+@media (max-width: 72rem) and (min-width: 48.01rem) {
+
+  .wf-home-program {
+    display:
+      block !important;
+
+    width:
+      100% !important;
+
+    min-width:
+      0 !important;
+
+    grid-template-columns:
+      none !important;
+
+    grid-template-rows:
+      none !important;
+
+    grid-template-areas:
+      none !important;
+  }
+
+
+  .wf-home-program__number,
+  .wf-home-program__icon-shell,
+  .wf-home-program__track-node,
+  .wf-home-program__body,
+  .wf-home-program__arrow {
+    grid-column:
+      auto !important;
+
+    grid-row:
+      auto !important;
+
+    grid-area:
+      auto !important;
+  }
+
+
+  .wf-home-program__icon-shell {
+    margin-top:
+      22px;
+  }
+
+
+  .wf-home-program__body {
+    display:
+      grid !important;
+
+    grid-template-columns:
+      minmax(
+        0,
+        1fr
+      )
+      !important;
+
+    width:
+      100% !important;
+
+    margin-top:
+      24px;
+
+    padding:
+      0 !important;
+  }
+
+
+  .wf-home-program__title,
+  .wf-home-program__summary {
+    width:
+      100% !important;
+
+    grid-column:
+      1 !important;
+
+    grid-row:
+      auto !important;
+
+    grid-area:
+      auto !important;
+
+    word-break:
+      keep-all;
+  }
+}
+
+
+/* =========================================================
+   MOBILE HARD RESET
+
+   Preserve vertical timeline, but explicitly clear any old named areas.
+   ========================================================= */
+
+@media (max-width: 48rem) {
+
+  .wf-home-program {
+    grid-template-areas:
+      none !important;
+
+    grid-auto-flow:
+      row !important;
+  }
+
+
+  .wf-home-program__number {
+    grid-area:
+      auto !important;
+  }
+
+
+  .wf-home-program__icon-shell {
+    grid-area:
+      auto !important;
+  }
+
+
+  .wf-home-program__body {
+    grid-area:
+      auto !important;
+
+    min-width:
+      0 !important;
+
+    width:
+      100% !important;
+  }
+
+
+  .wf-home-program__title,
+  .wf-home-program__summary {
+    min-width:
+      0 !important;
+
+    width:
+      100% !important;
+
+    word-break:
+      keep-all;
+
+    overflow-wrap:
+      break-word;
+  }
+}
+
+/* WF PROGRAM OVERVIEW 03 LAYOUT RESCUE END */
