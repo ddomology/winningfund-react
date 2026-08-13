@@ -9,7 +9,8 @@ import {
   useNavigate,
 } from 'react-router'
 
-const MOBILE_QUERY = '(max-width: 48rem)'
+const DESKTOP_PRESENTATION_QUERY =
+  '(min-width: 48.01rem) and (hover: hover) and (pointer: fine)'
 const MOBILE_WATCHDOG_MS = 2400
 const MOBILE_BRAND_HOLD_MS = 140
 const DESKTOP_TRANSITION_MS = 820
@@ -112,8 +113,12 @@ function scrollToRouteTarget(target) {
   }
 }
 
-function isMobileViewport() {
-  return window.matchMedia(MOBILE_QUERY).matches
+function usesDesktopPresentation() {
+  return window.matchMedia(DESKTOP_PRESENTATION_QUERY).matches
+}
+
+function usesMobileExperience() {
+  return !usesDesktopPresentation()
 }
 
 export default function useRouteTransition() {
@@ -181,7 +186,7 @@ export default function useRouteTransition() {
     const startY = window.scrollY
     if (startY <= 1) return Promise.resolve()
 
-    const duration = isMobileViewport() ? 170 : 220
+    const duration = usesMobileExperience() ? 170 : 220
     const startedAt = performance.now()
 
     return new Promise((resolve) => {
@@ -356,7 +361,7 @@ export default function useRouteTransition() {
         return
       }
 
-      if (!isMobileViewport()) {
+      if (usesDesktopPresentation()) {
         setDesktopDirection(direction)
       } else {
         setRouteDirection(direction)
@@ -368,7 +373,7 @@ export default function useRouteTransition() {
         .then(() => {
           if (phaseRef.current !== 'pulling') return
 
-          if (isMobileViewport()) {
+          if (usesMobileExperience()) {
             beginMobileCurtain(to)
           } else {
             swapDesktopScreens(to)
