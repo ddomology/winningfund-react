@@ -4482,3 +4482,316 @@
 }
 
 /* WF SVG PAINT TRACK FINAL END */
+
+/* WF MOBILE HERO DENSITY FINAL START */
+
+/* =========================================================
+   MOBILE-ONLY EDITORIAL DENSITY
+
+   Goals:
+   - make the three English rows use more of the phone width
+   - keep AND above ECONOMICS with guaranteed breathing room
+   - reduce the large visual void between CLUB and CURRENT TERM
+   - leave desktop and the SVG paint-track rail untouched
+   ========================================================= */
+
+@media (max-width: 48rem) {
+
+  /*
+   * Stop using the flexible middle row as a large spacer.
+   * Brand -> type stack -> footer now flow as one mobile composition.
+   */
+  .wf-home-hero__kinetic-main {
+    grid-template-rows:
+      auto
+      auto
+      auto;
+
+    align-content:
+      start;
+  }
+
+
+  /*
+   * The stack starts slightly earlier and becomes denser.
+   */
+  .wf-home-kinetic-list {
+    padding-top:
+      clamp(
+        34px,
+        4.8svh,
+        52px
+      );
+  }
+
+
+  .wf-home-kinetic-row {
+    min-height:
+      clamp(
+        82px,
+        10.5svh,
+        102px
+      );
+  }
+
+
+  /* =======================================================
+     MOBILE TYPE SCALE
+
+     About +8~10% for the long words.
+     CLUB gets a slightly stronger increase.
+     ======================================================= */
+
+  .wf-home-kinetic-row--1
+  .wf-home-kinetic-row__ghost,
+
+  .wf-home-kinetic-row--1
+  .wf-home-kinetic-row__reveal-word {
+    font-size:
+      clamp(
+        2.55rem,
+        11.75vw,
+        4.38rem
+      );
+  }
+
+
+  .wf-home-kinetic-row--2
+  .wf-home-kinetic-row__ghost,
+
+  .wf-home-kinetic-row--2
+  .wf-home-kinetic-row__reveal-word {
+    font-size:
+      clamp(
+        2.34rem,
+        10.7vw,
+        4.02rem
+      );
+  }
+
+
+  .wf-home-kinetic-row--3
+  .wf-home-kinetic-row__ghost,
+
+  .wf-home-kinetic-row--3
+  .wf-home-kinetic-row__reveal-word {
+    font-size:
+      clamp(
+        2.28rem,
+        10.55vw,
+        3.82rem
+      );
+  }
+
+
+  /* =======================================================
+     AND OWNS A REAL SLOT
+
+     It is no longer visually sitting on ECONOMICS.
+     ======================================================= */
+
+  .wf-home-kinetic-row--2 {
+    padding-top:
+      18px;
+  }
+
+
+  .wf-home-kinetic-row--2
+  .wf-home-kinetic-row__meta {
+    left:
+      5%;
+
+    top:
+      2px;
+  }
+
+
+  .wf-home-kinetic-row__annotation {
+    font-size:
+      clamp(
+        0.58rem,
+        2.1vw,
+        0.66rem
+      );
+
+    line-height:
+      1;
+
+    letter-spacing:
+      0.15em;
+  }
+
+
+  .wf-home-kinetic-row--2
+  .wf-home-kinetic-row__text-slot {
+    margin-top:
+      8px;
+  }
+
+
+  /*
+   * Keep the diagonal but pull CLUB a little closer to the stack.
+   */
+  .wf-home-kinetic-row--3
+  .wf-home-kinetic-row__text-slot {
+    margin-left:
+      17% !important;
+  }
+
+
+  /* =======================================================
+     FOOTER DENSITY
+
+     Follow the type stack instead of being forced to viewport bottom.
+     ======================================================= */
+
+  .wf-home-kinetic-footer {
+    margin-top:
+      clamp(
+        34px,
+        5.2svh,
+        52px
+      );
+
+    padding-top:
+      0;
+
+    padding-bottom:
+      58px;
+
+    gap:
+      8px;
+  }
+
+
+  .wf-home-kinetic-term strong {
+    font-size:
+      clamp(
+        1.92rem,
+        8.15vw,
+        2.62rem
+      );
+  }
+
+
+  .wf-home-kinetic-slogan {
+    font-size:
+      clamp(
+        1.08rem,
+        4.35vw,
+        1.46rem
+      );
+  }
+}
+
+
+/* =========================================================
+   NARROW PHONE SAFETY
+
+   360-ish px phones need a little less aggression.
+   AND keeps its own vertical slot and ECONOMICS keeps its S reserve.
+   ========================================================= */
+
+@media (max-width: 23.5rem) {
+
+  .wf-home-kinetic-list {
+    padding-top:
+      28px;
+  }
+
+
+  .wf-home-kinetic-row {
+    min-height:
+      78px;
+  }
+
+
+  .wf-home-kinetic-row--1
+  .wf-home-kinetic-row__ghost,
+
+  .wf-home-kinetic-row--1
+  .wf-home-kinetic-row__reveal-word {
+    font-size:
+      clamp(
+        2.35rem,
+        11.25vw,
+        3.05rem
+      );
+  }
+
+
+  .wf-home-kinetic-row--2
+  .wf-home-kinetic-row__ghost,
+
+  .wf-home-kinetic-row--2
+  .wf-home-kinetic-row__reveal-word {
+    font-size:
+      clamp(
+        2.12rem,
+        10.15vw,
+        2.8rem
+      );
+  }
+
+
+  .wf-home-kinetic-row--3
+  .wf-home-kinetic-row__ghost,
+
+  .wf-home-kinetic-row--3
+  .wf-home-kinetic-row__reveal-word {
+    font-size:
+      clamp(
+        2.08rem,
+        10vw,
+        2.72rem
+      );
+  }
+
+
+  .wf-home-kinetic-row--3
+  .wf-home-kinetic-row__text-slot {
+    margin-left:
+      14% !important;
+  }
+
+
+  .wf-home-kinetic-footer {
+    margin-top:
+      28px;
+
+    padding-bottom:
+      54px;
+  }
+}
+
+
+/* =========================================================
+   SHORT PHONE HEIGHT
+
+   Keep the composition dense instead of shrinking only the type.
+   ========================================================= */
+
+@media (max-width: 48rem) and (max-height: 700px) {
+
+  .wf-home-kinetic-list {
+    padding-top:
+      24px;
+  }
+
+
+  .wf-home-kinetic-row {
+    min-height:
+      74px;
+  }
+
+
+  .wf-home-kinetic-footer {
+    margin-top:
+      24px;
+
+    padding-bottom:
+      50px;
+  }
+}
+
+/* WF MOBILE HERO DENSITY FINAL END */
