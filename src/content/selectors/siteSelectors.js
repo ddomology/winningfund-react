@@ -1,4 +1,4 @@
-import { RECRUITMENT_STATUS, RECRUITMENT_VIEW } from '../contentStates.js'
+﻿import { RECRUITMENT_STATUS, RECRUITMENT_VIEW } from '../contentStates.js'
 
 export const selectSiteConfig = (bundle) => bundle.siteConfig
 export const selectNavigation = (bundle) => bundle.navigation
@@ -52,8 +52,10 @@ export function selectMembersPageData(bundle) {
 
 export function selectActivitiesPageData(bundle) {
   return {
+    activitiesPage: bundle.activitiesPage,
     activitySections: bundle.activitySections,
     reportExamples: bundle.reportExamples,
+    otherAcademicActivities: bundle.otherAcademicActivities,
     clubs: bundle.clubs,
   }
 }

@@ -63,12 +63,25 @@ if(!fs.existsSync(membersPath)){
     : fail('MembersPage.js MEMBERS implementation missing')
 }
 
-for (const page of ['ActivitiesPage.js','RecruitmentPage.js']) {
-  const full=path.join(root,'src','pages',page)
-  if(!fs.existsSync(full)){fail(`missing ${page}`);continue}
-  fs.readFileSync(full,'utf8').includes('RoutePlaceholder')
-    ? pass(`${page} remains placeholder-only`)
-    : fail(`${page} gained business UI before its stage`)
+const activitiesPath=path.join(root,'src','pages','ActivitiesPage.js')
+if(!fs.existsSync(activitiesPath)){
+  fail('missing ActivitiesPage.js')
+}else{
+  const activitiesText=fs.readFileSync(activitiesPath,'utf8')
+  !activitiesText.includes('RoutePlaceholder') &&
+  activitiesText.includes('selectActivitiesPageData') &&
+  activitiesText.includes("className: 'wf-activities'")
+    ? pass('ActivitiesPage.js implemented through normalized ACTIVITIES selector')
+    : fail('ActivitiesPage.js ACTIVITIES implementation missing')
+}
+
+const recruitmentPath=path.join(root,'src','pages','RecruitmentPage.js')
+if(!fs.existsSync(recruitmentPath)){
+  fail('missing RecruitmentPage.js')
+}else{
+  fs.readFileSync(recruitmentPath,'utf8').includes('RoutePlaceholder')
+    ? pass('RecruitmentPage.js remains placeholder-only')
+    : fail('RecruitmentPage.js gained business UI before its stage')
 }
 
 const memberDir=path.join(root,'src','assets','members','18-2')

@@ -1,4 +1,4 @@
-export function normalizeToSiteContentBundle(source) {
+﻿export function normalizeToSiteContentBundle(source) {
   return {
     siteConfig: source.siteConfig ?? {},
     navigation: [...(source.navigation ?? [])]
@@ -10,7 +10,9 @@ export function normalizeToSiteContentBundle(source) {
     externalActivities: source.externalActivities ?? null,
     socialLinks: source.socialLinks ?? null,
     membersByTerm: [...(source.membersByTerm ?? [])].sort((a,b)=>a.order-b.order),
+    activitiesPage: source.activitiesPage ?? null,
     activitySections: [...(source.activitySections ?? [])].sort((a,b)=>a.order-b.order),
+    otherAcademicActivities: [...(source.otherAcademicActivities ?? [])],
     reportExamples: [...(source.reportExamples ?? [])],
     clubs: [...(source.clubs ?? [])],
     recruitment: source.recruitment ?? null,

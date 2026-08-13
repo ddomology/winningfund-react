@@ -1,4 +1,4 @@
-export function adaptStaticContentSource(source) {
+﻿export function adaptStaticContentSource(source) {
   const routes = source?.siteConfig?.routeManifest ?? {}
   return {
     sourceType: source?.sourceType ?? 'UNKNOWN',
@@ -14,7 +14,9 @@ export function adaptStaticContentSource(source) {
     externalActivities: source?.externalActivities ?? null,
     socialLinks: source?.socialLinks ?? null,
     membersByTerm: source?.membersByTerm ?? [],
+    activitiesPage: source?.activitiesPage ?? null,
     activitySections: source?.activitySections ?? [],
+    otherAcademicActivities: source?.otherAcademicActivities ?? [],
     reportExamples: source?.reportExamples ?? [],
     clubs: source?.clubs ?? [],
     recruitment: source?.recruitment ?? null,

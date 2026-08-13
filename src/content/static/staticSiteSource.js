@@ -1622,6 +1622,17 @@ const source = {
       "sourceNote": "source-row-retained-records-not-imported"
     }
   ],
+"activitiesPage": {
+    "sourceStatus": "AUTHORITATIVE",
+    "heroSummary": "위닝펀드가 매 학기 진행하는 자산운용, 학술활동, 모의투자를 자세히 소개합니다.",
+    "introHeadline": "체계적인 프로그램을 통해 스스로 판단하는 투자자로 성장합니다.",
+    "introParagraphs": [
+      "위닝펀드의 활동은 섹터별 팔로우업, 분반강의, 모의투자와 FM팀, 개별·팀 리포트 발간까지 네 가지 축으로 구성되어 있습니다. 매주 금요일 동국대학교에 모여 리서치와 학습을 이어갑니다.",
+      "분반강의로 투자의 기초와 실전 분석법을 익히고, 섹터별 팔로우업으로 매주 시장을 추적하며, 모의투자와 FM팀을 통해 실전 감각을 키웁니다. 학기 말에는 개별·팀 리포트 발간으로 한 학기의 학습을 정리합니다."
+    ],
+    "clubsTitle": "소모임",
+    "clubsIntroduction": "학술 활동만큼 친목도 놓치지 않습니다. 학술 소모임 2개와 친목 소모임 2개를 운영하며, 함께 공부하고 함께 시간을 보내는 연결을 이어갑니다."
+  },
   "activitySections": [
     {
       "activityId": "sector-followup",
@@ -1642,7 +1653,26 @@ const source = {
       },
       "homeLabel": "섹터별 팔로우업",
       "homeSummary": "10개 섹터로 나뉘어 각자 희망 섹터를 맡고, 매주 주요 이슈와 관련 종목을 조사해 발표합니다. 발표 후 질문과 답변을 통해 투자 관점을 구체화합니다.",
-      "homeSummaryStatus": "SOURCE_BACKED_REVIEWABLE"
+      "homeSummaryStatus": "SOURCE_BACKED_REVIEWABLE",
+      "pageTitle": "섹터별 팔로우업",
+      "pageSummary": "각 조원이 개별 섹터를 담당해 매주 시장 이슈와 산업 동향을 추적하고 발표합니다.",
+      "pageDetails": [
+        {
+          "id": "sector-allocation",
+          "title": "10개 섹터 분담",
+          "description": "반도체, 2차전지, 바이오·헬스케어, 방산 등 10개 섹터로 나뉘어 각자 희망 섹터를 담당합니다."
+        },
+        {
+          "id": "weekly-deadline",
+          "title": "매주 목요일 마감",
+          "description": "섹터 이슈와 관련 종목을 조사해 발표합니다."
+        },
+        {
+          "id": "one-question",
+          "title": "1인 1질문",
+          "description": "발표를 들은 회원은 반드시 질문하고, 질문받은 발표자는 답변하며 이슈에 대한 투자 생각을 구체화합니다."
+        }
+      ]
     },
     {
       "activityId": "classes",
@@ -1658,7 +1688,35 @@ const source = {
       },
       "homeLabel": "분반강의",
       "homeSummary": "입문반은 투자의 기본과 기업분석을, 실전반은 정량분석과 투자 아이디어를 다룹니다. 분반은 학기마다 자유롭게 교차 수강합니다.",
-      "homeSummaryStatus": "SOURCE_BACKED_REVIEWABLE"
+      "homeSummaryStatus": "SOURCE_BACKED_REVIEWABLE",
+      "pageTitle": "분반강의 (입문반 · 실전반)",
+      "pageSummary": "교육임원이 직접 제작한 커리큘럼으로 진행하며, 분반은 학기마다 자유롭게 교차 수강할 수 있습니다.",
+      "tracks": [
+        {
+          "id": "beginner",
+          "label": "입문반",
+          "englishLabel": "BEGINNER",
+          "curriculum": [
+            "주식 투자야 안녕?",
+            "기본적 분석",
+            "거시경제·산업 분석",
+            "기술적 분석",
+            "투자의 다양한 유형"
+          ]
+        },
+        {
+          "id": "practice",
+          "label": "실전반",
+          "englishLabel": "PRACTICE",
+          "curriculum": [
+            "투자 아이디어 소싱",
+            "PQC 정량적 기업분석",
+            "내러티브 & 넘버스",
+            "기술적 분석",
+            "매크로와 시장국면"
+          ]
+        }
+      ]
     },
     {
       "activityId": "mock-investment-fm",
@@ -1673,7 +1731,62 @@ const source = {
       },
       "homeLabel": "모의투자 & FM팀",
       "homeSummary": "개별·팀별 모의투자로 실전 감각을 익히고, FM팀은 일부 회원이 소규모로 참여해 실제 자금을 운용합니다.",
-      "homeSummaryStatus": "SOURCE_BACKED_REVIEWABLE"
+      "homeSummaryStatus": "SOURCE_BACKED_REVIEWABLE",
+      "pageTitle": "모의투자 & FM팀",
+      "pageSummary": "개별·팀별 모의투자를 통해 실전 투자 감각을 기르고, 일부 회원이 소규모로 참여하는 FM팀에서 실제 자금 운용을 경험합니다.",
+      "mockGroups": [
+        {
+          "id": "individual-mock",
+          "label": "개별모의투자",
+          "capital": "5,000만 원",
+          "points": [
+            "실전 투자 감각을 익히고 자신만의 투자 전략을 검증합니다.",
+            "원금 5,000만 원 기준 회전율 200%를 목표로 운용합니다.",
+            "매주 가장 높은 수익률을 기록한 회원에게 실제 주식을 상금으로 지급합니다.",
+            "한 학기 전체 성과를 기준으로 누적 수익률 시상을 진행합니다."
+          ]
+        },
+        {
+          "id": "team-mock",
+          "label": "팀별모의투자",
+          "capital": "1억 원",
+          "points": [
+            "조원들과 투자 아이디어를 나누고 전략을 세워 함께 운용합니다.",
+            "팀원들의 집단지성으로 주간 수익률 1위에 도전합니다.",
+            "한 학기를 아우르는 팀 성과를 기준으로 최종 시상을 진행합니다.",
+            "모의투자 수상자에게는 실제 개별 주식을 증정합니다."
+          ]
+        }
+      ],
+      "fmTeam": {
+        "label": "FM팀 (자산운용팀)",
+        "participation": "일부 회원만 소규모로 운영에 참여합니다.",
+        "aum": "예상 AUM 1,000~2,000만 원",
+        "approaches": [
+          {
+            "label": "Top-Down",
+            "description": "거시경제지표와 정책 환경을 분석해 주도 섹터와 종목을 선별합니다."
+          },
+          {
+            "label": "Bottom-Up",
+            "description": "기업의 내재가치를 분석해 저평가된 턴어라운드 기업을 발굴합니다."
+          },
+          {
+            "label": "Risk Management",
+            "description": "대형주와 중소형주, 섹터별 분산을 통해 멀티매니저 운용체계로 리스크를 관리합니다."
+          }
+        ],
+        "operations": [
+          {
+            "title": "매매 의사결정 기록",
+            "description": "모든 매매의 근거와 결과를 기록해 투자 판단의 일관성을 높이고, 사후 복기를 통해 운용 전략을 개선합니다."
+          },
+          {
+            "title": "월간 자산운용서 발간",
+            "description": "운용 결과와 매매 과정, 업종별 전망을 월간 보고서로 정리해 FM팀의 투자 판단과 포트폴리오 변화를 공유합니다."
+          }
+        ]
+      }
     },
     {
       "activityId": "reports",
@@ -1693,7 +1806,28 @@ const source = {
       },
       "homeLabel": "개별 리포트 & 팀리포트 발간",
       "homeSummary": "조원들과 하나의 기업을 정해 산업분석부터 밸류에이션까지 팀리포트를 작성합니다. 이후 개인은 기업분석 또는 투자전략 리포트를 선택해 작성합니다.",
-      "homeSummaryStatus": "SOURCE_BACKED_REVIEWABLE"
+      "homeSummaryStatus": "SOURCE_BACKED_REVIEWABLE",
+      "pageTitle": "개별 리포트 & 팀리포트 발간",
+      "pageSummary": "조원들과 하나의 기업을 선택해 산업분석부터 밸류에이션까지 팀리포트를 작성합니다. 이후 개인은 기업분석 또는 투자전략 리포트 중 하나를 선택해 작성합니다.",
+      "teamReport": {
+        "label": "팀리포트",
+        "points": [
+          "조원들과 하나의 기업을 선택해 산업분석부터 밸류에이션까지 함께 리포트를 작성합니다.",
+          "조별 발표를 통해 다른 조와 투자 포인트를 공유하고 질의응답을 진행합니다."
+        ]
+      },
+      "personalReports": [
+        {
+          "id": "individual-strategy",
+          "label": "투자전략 리포트",
+          "description": "거시적 관점에서 경제 환경을 분석하고, 그에 맞는 투자전략을 제시하는 개인 리포트를 작성합니다."
+        },
+        {
+          "id": "individual-company",
+          "label": "기업분석 리포트",
+          "description": "본인이 매력적으로 판단한 기업을 선정해 분석한 뒤, 해당 기업에 대한 투자 의견을 개인 리포트로 작성합니다."
+        }
+      ]
     }
   ],
   "reportExamples": [
@@ -1725,31 +1859,53 @@ const source = {
       "unresolvedKey": "U-007"
     }
   ],
+  "otherAcademicActivities": [
+    {
+      "id": "stock-game",
+      "title": "주식 게임",
+      "description": "위닝펀드가 자체적으로 고안한 모의투자 게임으로, 가상 환경에서 조별 전략으로 수익률을 겨룹니다.",
+      "sourceStatus": "AUTHORITATIVE"
+    },
+    {
+      "id": "stock-mentoring",
+      "title": "주식 멘토링",
+      "description": "경험이 많은 회원이 멘토가 되어 3회의 그룹 스터디를 진행하며, 매크로·모델링·차트 분석 등 심화 주제를 함께 학습합니다.",
+      "sourceStatus": "AUTHORITATIVE"
+    }
+  ],
   "clubs": [
     {
       "clubId": "jahabugong",
       "officialName": "자하부공",
       "category": "ACADEMIC",
+      "categoryLabel": "학술 / 리서치",
+      "description": "‘위닝증권 리서치센터’를 지향하며, 관심 기업을 선정하고 투자포인트를 추출해 통합 보고서를 작성합니다. 심층적인 기업 분석과 자신만의 투자포인트를 발견하는 학술 소모임입니다.",
       "sourceStatus": "AUTHORITATIVE"
     },
     {
       "clubId": "winning-hall-meeting",
       "officialName": "위닝홀미팅",
       "category": "ACADEMIC",
+      "categoryLabel": "학술 / 스피치",
+      "description": "산업·기업·매크로 세션으로 나뉘어 최근 발행된 증권사 리포트를 읽고 핵심 내용을 요약해 자유롭게 발표합니다. 리포트 이해도와 발표 역량을 함께 높이는 학술 소모임입니다.",
       "sourceStatus": "AUTHORITATIVE"
     },
     {
       "clubId": "sangeujoah",
       "officialName": "산그좋",
       "category": "SOCIAL",
+      "categoryLabel": "친목 / 등산",
       "activity": "등산",
+      "description": "함께 산을 오르며 자연스럽게 친목을 다지는 등산 소모임입니다.",
       "sourceStatus": "AUTHORITATIVE"
     },
     {
       "clubId": "winnings-run",
       "officialName": "위닝스런",
       "category": "SOCIAL",
+      "categoryLabel": "친목 / 러닝",
       "activity": "러닝",
+      "description": "함께 달리며 꾸준히 교류하고 친목을 다지는 러닝 소모임입니다.",
       "sourceStatus": "AUTHORITATIVE"
     }
   ],

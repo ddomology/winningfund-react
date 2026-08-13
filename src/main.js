@@ -10,6 +10,7 @@ import './styles/shared-primitives.css'
 import './styles/home.css'
 import './styles/about.css'
 import './styles/members.css'
+import './styles/activities.css'
 import './styles/placeholders.css'
 
 const rootElement = document.getElementById('root')

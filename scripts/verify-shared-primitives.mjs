@@ -255,10 +255,22 @@ if (
   fail('MembersPage.js MEMBERS composition missing')
 }
 
-for (const page of ['ActivitiesPage.js','RecruitmentPage.js']) {
-  const text = read(`src/pages/${page}`)
-  if (text.includes('RoutePlaceholder')) pass(`${page} remains business-UI placeholder`)
-  else fail(`${page} implemented page composition before its stage`)
+const activitiesText = read('src/pages/ActivitiesPage.js')
+if (
+  !activitiesText.includes('RoutePlaceholder') &&
+  activitiesText.includes('selectActivitiesPageData') &&
+  activitiesText.includes('InternalSectionNav')
+) {
+  pass('ActivitiesPage.js now composes ACTIVITIES UI through normalized data')
+} else {
+  fail('ActivitiesPage.js ACTIVITIES composition missing')
+}
+
+const recruitmentText = read('src/pages/RecruitmentPage.js')
+if (recruitmentText.includes('RoutePlaceholder')) {
+  pass('RecruitmentPage.js remains business-UI placeholder')
+} else {
+  fail('RecruitmentPage.js implemented page composition before its stage')
 }
 
 if (failed) {
