@@ -21,14 +21,19 @@
 /* ============================================================
    HOME WAVES — ORIGINAL GOODKATZ REFERENCE MOTION
 
-   Keep HomePage.js gentle-wave geometry exactly as the uploaded reference.
-   The wave is intentionally a long repeating SVG path; motion is created by
-   translating that same path from -90px to 85px. Do not replace the path,
-   reshape it, or animate the SVG x property.
+   Keep the uploaded reference geometry exactly as-is:
+   - one long gentle-wave path
+   - four <use> layers
+   - 7 / 10 / 13 / 20 second parallax timings
+   - -90px -> 85px horizontal travel
 
-   Important: the uploaded reference does not disable this animation under
-   prefers-reduced-motion. Keep the wave running so OS/browser motion
-   preferences cannot silently turn the reference wave into a static divider.
+   home.css contains a legacy reduced-motion rule with
+   transform: none !important on these SVG <use> elements. That can freeze
+   transform-keyframe motion even when the later animation declaration wins.
+
+   Use the independent `translate` property for the exact same visual travel.
+   It is not cancelled by that legacy `transform` declaration, so the wave
+   keeps moving in the normal page and when the OS motion preference is reduced.
    ============================================================ */
 
 .wf-home-wave__parallax > use {
@@ -62,10 +67,10 @@
 
 @keyframes wf-home-wave-reference-move {
   0% {
-    transform: translate3d(-90px, 0, 0);
+    translate: -90px 0;
   }
 
   100% {
-    transform: translate3d(85px, 0, 0);
+    translate: 85px 0;
   }
 }
