@@ -365,64 +365,318 @@ function ShortIntroduction() {
   )
 }
 
+function ProgramActivityIcon({ index }) {
+  const commonProps = {
+    className: 'wf-home-program__icon',
+    viewBox: '0 0 48 48',
+    fill: 'none',
+    stroke: 'currentColor',
+    strokeWidth: 1.8,
+    strokeLinecap: 'round',
+    strokeLinejoin: 'round',
+    'aria-hidden': 'true',
+    focusable: 'false',
+  }
+
+  if (index === 0) {
+    return createElement(
+      'svg',
+      commonProps,
+      createElement('path', {
+        d: 'M12 8h18l6 6v16H12z',
+      }),
+      createElement('path', {
+        d: 'M30 8v7h6M17 18h10M17 23h8',
+      }),
+      createElement('circle', {
+        cx: 31,
+        cy: 32,
+        r: 6,
+      }),
+      createElement('path', {
+        d: 'm35.5 36.5 4.5 4.5',
+      }),
+    )
+  }
+
+  if (index === 1) {
+    return createElement(
+      'svg',
+      commonProps,
+      createElement('path', {
+        d: 'M7 11c7-3 12-1 17 3v25c-5-4-10-6-17-3z',
+      }),
+      createElement('path', {
+        d: 'M41 11c-7-3-12-1-17 3v25c5-4 10-6 17-3z',
+      }),
+      createElement('path', {
+        d: 'M24 14v25',
+      }),
+    )
+  }
+
+  if (index === 2) {
+    return createElement(
+      'svg',
+      commonProps,
+      createElement('path', {
+        d: 'M8 39h33M10 39V12',
+      }),
+      createElement('path', {
+        d: 'M15 33v-8h5v8M24 33V18h5v15M33 33V12h5v21',
+      }),
+      createElement('path', {
+        d: 'm14 20 8-7 7 3 10-9',
+      }),
+    )
+  }
+
+  return createElement(
+    'svg',
+    commonProps,
+    createElement('circle', {
+      cx: 17,
+      cy: 17,
+      r: 6,
+    }),
+    createElement('circle', {
+      cx: 33,
+      cy: 19,
+      r: 5,
+    }),
+    createElement('path', {
+      d: 'M6 39c1-9 6-14 12-14s11 5 12 14',
+    }),
+    createElement('path', {
+      d: 'M27 28c2-2 4-3 7-3 6 0 9 5 9 12',
+    }),
+  )
+}
+
 function ProgramOverview() {
+  const [revealed, setRevealed] = useState(false)
+  const revealRef = useRef(null)
+
+  useEffect(() => {
+    const target = revealRef.current
+    if (!target) return undefined
+
+    const reducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)',
+    )
+
+    if (
+      reducedMotion.matches ||
+      !('IntersectionObserver' in window)
+    ) {
+      setRevealed(true)
+      return undefined
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0]
+
+        if (!entry?.isIntersecting) return
+
+        setRevealed(true)
+        observer.disconnect()
+      },
+      {
+        threshold: 0.18,
+        rootMargin: '0px 0px -10% 0px',
+      },
+    )
+
+    observer.observe(target)
+
+    return () => {
+      observer.disconnect()
+    }
+  }, [])
+
+  const revealClass = revealed
+    ? 'wf-home-programs__editorial is-revealed'
+    : 'wf-home-programs__editorial'
+
   return createElement(
     Section,
     {
       sectionId: 'program-overview',
+      spacingVariant: 'compact',
       className: 'wf-home-programs',
+      semanticLabel: '위닝펀드 주요 활동',
     },
+
+    /*
+     * Keep the shared SectionHeader contract in the DOM.
+     * The final visual composition owns its own editorial heading.
+     */
     createElement(
       'div',
-      { className: 'wf-home-section-index' },
-      '03 / 활동',
+      {
+        className: 'wf-home-programs__legacy-heading',
+        'aria-hidden': 'true',
+      },
+      createElement(SectionHeader, {
+        title: '주요 활동',
+        headingLevel: 2,
+      }),
     ),
-    createElement(SectionHeader, {
-      title: '주요 활동',
-      headingLevel: 2,
-    }),
+
     createElement(
       'div',
-      { className: 'wf-home-programs__list' },
-      ...homeData.programOverview.map(
-        (program, index) =>
+      {
+        ref: revealRef,
+        className: revealClass,
+      },
+
+      createElement(
+        'div',
+        {
+          className:
+            'wf-home-section-index wf-home-programs__index',
+        },
+        '03 / 주요 활동',
+      ),
+
+      createElement(
+        'header',
+        {
+          className: 'wf-home-programs__header',
+        },
+
+        createElement(
+          'h2',
+          {
+            className: 'wf-home-programs__headline',
+          },
           createElement(
-            Link,
+            'span',
             {
-              key: program.activityId,
-              to: program.target,
-              className: 'wf-home-program',
+              className: 'wf-home-programs__headline-line',
+            },
+            createElement('span', null, '우리는 시장을'),
+          ),
+          createElement(
+            'span',
+            {
+              className: 'wf-home-programs__headline-line',
+            },
+            createElement('span', null, '읽고, 검증하고,'),
+          ),
+          createElement(
+            'span',
+            {
+              className: 'wf-home-programs__headline-line',
             },
             createElement(
               'span',
-              { className: 'wf-home-program__number' },
-              String(index + 1).padStart(2, '0'),
-            ),
-            createElement(
-              'span',
-              { className: 'wf-home-program__body' },
+              null,
               createElement(
-                'strong',
-                { className: 'wf-home-program__title' },
-                program.homeLabel,
+                'span',
+                {
+                  className:
+                    'wf-home-programs__headline-accent',
+                },
+                '실전으로',
               ),
-              program.homeSummary
-                ? createElement(
-                    'span',
-                    { className: 'wf-home-program__summary' },
-                    program.homeSummary,
-                  )
-                : null,
-            ),
-            createElement(
-              'span',
-              {
-                className: 'wf-home-program__arrow',
-                'aria-hidden': 'true',
-              },
-              '↗',
+              ' 연결합니다.',
             ),
           ),
+        ),
+
+        createElement(
+          'p',
+          {
+            className: 'wf-home-programs__kicker',
+          },
+          'RESEARCH / STUDY / PRACTICE / REPORT',
+        ),
+      ),
+
+      createElement(
+        'div',
+        {
+          className: 'wf-home-programs__list',
+        },
+
+        ...homeData.programOverview.map(
+          (program, index) =>
+            createElement(
+              Link,
+              {
+                key: program.activityId,
+                to: program.target,
+                className: 'wf-home-program',
+                style: {
+                  '--wf-program-order': String(index),
+                },
+              },
+
+              createElement(
+                'span',
+                {
+                  className: 'wf-home-program__number',
+                },
+                String(index + 1).padStart(2, '0'),
+              ),
+
+              createElement(
+                'span',
+                {
+                  className:
+                    'wf-home-program__icon-shell',
+                  'aria-hidden': 'true',
+                },
+                createElement(ProgramActivityIcon, {
+                  index,
+                }),
+              ),
+
+              createElement('span', {
+                className:
+                  'wf-home-program__track-node',
+                'aria-hidden': 'true',
+              }),
+
+              createElement(
+                'span',
+                {
+                  className: 'wf-home-program__body',
+                },
+
+                createElement(
+                  'strong',
+                  {
+                    className:
+                      'wf-home-program__title',
+                  },
+                  program.homeLabel,
+                ),
+
+                program.homeSummary
+                  ? createElement(
+                      'span',
+                      {
+                        className:
+                          'wf-home-program__summary',
+                      },
+                      program.homeSummary,
+                    )
+                  : null,
+              ),
+
+              createElement(
+                'span',
+                {
+                  className: 'wf-home-program__arrow',
+                  'aria-hidden': 'true',
+                },
+                '↗',
+              ),
+            ),
+        ),
       ),
     ),
   )

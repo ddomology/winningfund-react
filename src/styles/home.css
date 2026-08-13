@@ -6253,3 +6253,1391 @@
 }
 
 /* WF INTRO 02 SOLID INDEX GLYPH SAFE FINAL END */
+
+/* WF PROGRAM OVERVIEW 03 EDITORIAL TRACK FINAL START */
+
+/* =========================================================
+   03 / 주요 활동
+
+   Dark counter-scene after the bright introduction.
+   Reference information architecture, WinningFund visual grammar.
+
+   - no cards
+   - no diamond icon boxes
+   - one shared activity track
+   - four editorial activity columns
+   - mobile becomes one vertical timeline
+   ========================================================= */
+
+.wf-home-programs {
+  position:
+    relative;
+
+  overflow:
+    clip;
+
+  color:
+    #f6f9ff;
+
+  background:
+    radial-gradient(
+      circle at 84% 14%,
+      rgba(
+        22,
+        140,
+        244,
+        0.18
+      )
+      0%,
+      transparent
+      31%
+    ),
+    radial-gradient(
+      circle at 6% 94%,
+      rgba(
+        25,
+        63,
+        215,
+        0.19
+      )
+      0%,
+      transparent
+      35%
+    ),
+    linear-gradient(
+      145deg,
+      #071126 0%,
+      #08152c 48%,
+      #050b19 100%
+    );
+}
+
+
+.wf-home-programs::before {
+  content:
+    "";
+
+  position:
+    absolute;
+
+  z-index:
+    0;
+
+  inset:
+    0;
+
+  pointer-events:
+    none;
+
+  background-image:
+    linear-gradient(
+      rgba(
+        255,
+        255,
+        255,
+        0.025
+      )
+      1px,
+      transparent
+      1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(
+        255,
+        255,
+        255,
+        0.018
+      )
+      1px,
+      transparent
+      1px
+    );
+
+  background-size:
+    74px
+    74px;
+
+  mask-image:
+    linear-gradient(
+      180deg,
+      rgba(
+        0,
+        0,
+        0,
+        0.46
+      ),
+      transparent
+      86%
+    );
+
+  opacity:
+    0.42;
+}
+
+
+.wf-home-programs.wf-section--spacing-compact {
+  padding-block:
+    clamp(
+      84px,
+      10svh,
+      128px
+    );
+}
+
+
+.wf-home-programs__legacy-heading {
+  position:
+    absolute !important;
+
+  width:
+    1px !important;
+
+  height:
+    1px !important;
+
+  margin:
+    -1px !important;
+
+  padding:
+    0 !important;
+
+  overflow:
+    hidden !important;
+
+  clip:
+    rect(
+      0,
+      0,
+      0,
+      0
+    ) !important;
+
+  white-space:
+    nowrap !important;
+
+  border:
+    0 !important;
+}
+
+
+.wf-home-programs__editorial {
+  position:
+    relative;
+
+  z-index:
+    1;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.wf-home-programs__index {
+  width:
+    fit-content;
+
+  margin:
+    0;
+
+  color:
+    #6fd2fa;
+
+  opacity:
+    0;
+
+  transform:
+    translate3d(
+      0,
+      12px,
+      0
+    );
+
+  transition:
+    opacity
+    360ms
+    var(--wf-ease-out)
+    80ms,
+    transform
+    420ms
+    var(--wf-ease-out)
+    80ms;
+}
+
+
+.wf-home-programs__header {
+  margin-top:
+    clamp(
+      34px,
+      5.5svh,
+      68px
+    );
+
+  display:
+    grid;
+
+  grid-template-columns:
+    minmax(
+      0,
+      1fr
+    )
+    auto;
+
+  gap:
+    34px;
+
+  align-items:
+    end;
+}
+
+
+.wf-home-programs__headline {
+  max-width:
+    11ch;
+
+  margin:
+    0;
+
+  color:
+    #f8fbff;
+
+  font-size:
+    clamp(
+      3.15rem,
+      5.5vw,
+      5.85rem
+    );
+
+  font-weight:
+    840;
+
+  line-height:
+    0.97;
+
+  letter-spacing:
+    -0.065em;
+
+  word-break:
+    keep-all;
+}
+
+
+.wf-home-programs__headline-line {
+  display:
+    block;
+
+  overflow:
+    hidden;
+
+  padding:
+    0.14em
+    0.08em
+    0.18em;
+
+  margin:
+    -0.14em
+    -0.08em
+    -0.18em;
+}
+
+
+.wf-home-programs__headline-line > span {
+  display:
+    block;
+
+  opacity:
+    0;
+
+  transform:
+    translate3d(
+      0,
+      112%,
+      0
+    );
+
+  transition:
+    opacity
+    360ms
+    var(--wf-ease-out),
+    transform
+    660ms
+    cubic-bezier(
+      .16,
+      1,
+      .3,
+      1
+    );
+}
+
+
+.wf-home-programs__headline-line:nth-child(1) > span {
+  transition-delay:
+    120ms;
+}
+
+
+.wf-home-programs__headline-line:nth-child(2) > span {
+  transition-delay:
+    200ms;
+}
+
+
+.wf-home-programs__headline-line:nth-child(3) > span {
+  transition-delay:
+    280ms;
+}
+
+
+.wf-home-programs__headline-accent {
+  color:
+    #45bdf4;
+}
+
+
+.wf-home-programs__kicker {
+  margin:
+    0
+    0
+    8px;
+
+  color:
+    rgba(
+      194,
+      210,
+      235,
+      0.58
+    );
+
+  font-size:
+    0.68rem;
+
+  font-weight:
+    800;
+
+  line-height:
+    1.5;
+
+  letter-spacing:
+    0.14em;
+
+  text-align:
+    right;
+}
+
+
+/* =========================================================
+   SHARED ACTIVITY TRACK
+   ========================================================= */
+
+.wf-home-programs__list {
+  position:
+    relative;
+
+  margin-top:
+    clamp(
+      78px,
+      9svh,
+      116px
+    );
+
+  display:
+    grid;
+
+  grid-template-columns:
+    repeat(
+      4,
+      minmax(
+        0,
+        1fr
+      )
+    );
+
+  gap:
+    clamp(
+      28px,
+      3.6vw,
+      68px
+    );
+}
+
+
+.wf-home-programs__list::before,
+.wf-home-programs__list::after {
+  content:
+    "";
+
+  position:
+    absolute;
+
+  z-index:
+    0;
+
+  top:
+    116px;
+
+  right:
+    0;
+
+  left:
+    0;
+
+  height:
+    3px;
+
+  border-radius:
+    999px;
+
+  pointer-events:
+    none;
+}
+
+
+.wf-home-programs__list::before {
+  background:
+    rgba(
+      144,
+      165,
+      198,
+      0.18
+    );
+}
+
+
+.wf-home-programs__list::after {
+  background:
+    linear-gradient(
+      90deg,
+      #75d8fb 0%,
+      #168cf4 52%,
+      #193fd7 100%
+    );
+
+  box-shadow:
+    0
+    0
+    18px
+    rgba(
+      22,
+      140,
+      244,
+      0.12
+    );
+
+  transform:
+    scaleX(0);
+
+  transform-origin:
+    left
+    center;
+
+  transition:
+    transform
+    900ms
+    cubic-bezier(
+      .16,
+      1,
+      .3,
+      1
+    )
+    390ms;
+}
+
+
+/* =========================================================
+   ACTIVITY ITEM
+   ========================================================= */
+
+.wf-home-program {
+  position:
+    relative;
+
+  z-index:
+    1;
+
+  min-width:
+    0;
+
+  min-height:
+    330px;
+
+  display:
+    grid;
+
+  grid-template-rows:
+    auto
+    74px
+    36px
+    auto;
+
+  align-content:
+    start;
+
+  padding:
+    0;
+
+  border:
+    0 !important;
+
+  background:
+    transparent !important;
+
+  color:
+    inherit;
+
+  text-decoration:
+    none;
+
+  opacity:
+    0;
+
+  transform:
+    translate3d(
+      0,
+      18px,
+      0
+    );
+
+  transition:
+    opacity
+    480ms
+    var(--wf-ease-out),
+    transform
+    520ms
+    cubic-bezier(
+      .16,
+      1,
+      .3,
+      1
+    ),
+    color
+    180ms
+    var(--wf-ease-out);
+
+  transition-delay:
+    calc(
+      470ms
+      + var(--wf-program-order)
+      * 65ms
+    );
+}
+
+
+.wf-home-program__number {
+  position:
+    absolute;
+
+  top:
+    103px;
+
+  left:
+    0;
+
+  transform:
+    translateY(
+      -100%
+    );
+
+  color:
+    #6fd2fa;
+
+  font-size:
+    0.66rem;
+
+  font-weight:
+    850;
+
+  line-height:
+    1;
+
+  letter-spacing:
+    0.11em;
+
+  font-variant-numeric:
+    tabular-nums;
+}
+
+
+.wf-home-program__icon-shell {
+  width:
+    68px;
+
+  height:
+    68px;
+
+  display:
+    grid;
+
+  place-items:
+    center;
+
+  color:
+    rgba(
+      230,
+      240,
+      255,
+      0.92
+    );
+
+  transition:
+    color
+    200ms
+    var(--wf-ease-out),
+    transform
+    240ms
+    cubic-bezier(
+      .16,
+      1,
+      .3,
+      1
+    );
+}
+
+
+.wf-home-program__icon {
+  width:
+    46px;
+
+  height:
+    46px;
+
+  overflow:
+    visible;
+}
+
+
+.wf-home-program__track-node {
+  position:
+    relative;
+
+  width:
+    16px;
+
+  height:
+    16px;
+
+  align-self:
+    center;
+
+  box-sizing:
+    border-box;
+
+  border:
+    3px
+    solid
+    #0a1831;
+
+  border-radius:
+    50%;
+
+  background:
+    #7edcff;
+
+  box-shadow:
+    0
+    0
+    0
+    2px
+    rgba(
+      126,
+      220,
+      255,
+      0.42
+    ),
+    0
+    0
+    18px
+    rgba(
+      22,
+      140,
+      244,
+      0.16
+    );
+
+  transition:
+    background
+    180ms
+    var(--wf-ease-out),
+    box-shadow
+    180ms
+    var(--wf-ease-out),
+    transform
+    220ms
+    var(--wf-ease-out);
+}
+
+
+.wf-home-program__body {
+  min-width:
+    0;
+
+  display:
+    grid;
+
+  align-content:
+    start;
+
+  gap:
+    15px;
+
+  padding-top:
+    28px;
+}
+
+
+.wf-home-program__title {
+  max-width:
+    15ch;
+
+  color:
+    #f8fbff;
+
+  font-size:
+    clamp(
+      1.15rem,
+      1.45vw,
+      1.48rem
+    );
+
+  font-weight:
+    790;
+
+  line-height:
+    1.24;
+
+  letter-spacing:
+    -0.035em;
+
+  word-break:
+    keep-all;
+
+  transition:
+    color
+    180ms
+    var(--wf-ease-out);
+}
+
+
+.wf-home-program__summary {
+  max-width:
+    28ch;
+
+  color:
+    rgba(
+      205,
+      218,
+      239,
+      0.72
+    );
+
+  font-size:
+    clamp(
+      0.84rem,
+      0.92vw,
+      0.98rem
+    );
+
+  font-weight:
+    480;
+
+  line-height:
+    1.72;
+
+  letter-spacing:
+    -0.018em;
+
+  word-break:
+    keep-all;
+}
+
+
+.wf-home-program__arrow {
+  position:
+    absolute;
+
+  right:
+    0;
+
+  bottom:
+    4px;
+
+  color:
+    rgba(
+      111,
+      210,
+      250,
+      0.66
+    );
+
+  font-size:
+    1.1rem;
+
+  opacity:
+    0;
+
+  transform:
+    translate3d(
+      -8px,
+      8px,
+      0
+    );
+
+  transition:
+    opacity
+    180ms
+    var(--wf-ease-out),
+    transform
+    220ms
+    var(--wf-ease-out);
+}
+
+
+/* =========================================================
+   HOVER / FOCUS
+   ========================================================= */
+
+.wf-home-program:hover,
+.wf-home-program:focus-visible {
+  color:
+    #ffffff;
+
+  outline:
+    none;
+}
+
+
+.wf-home-program:hover
+.wf-home-program__icon-shell,
+
+.wf-home-program:focus-visible
+.wf-home-program__icon-shell {
+  color:
+    #72d4fb;
+
+  transform:
+    translate3d(
+      0,
+      -4px,
+      0
+    );
+}
+
+
+.wf-home-program:hover
+.wf-home-program__track-node,
+
+.wf-home-program:focus-visible
+.wf-home-program__track-node {
+  background:
+    #ffffff;
+
+  transform:
+    scale(
+      1.08
+    );
+
+  box-shadow:
+    0
+    0
+    0
+    3px
+    rgba(
+      22,
+      140,
+      244,
+      0.38
+    ),
+    0
+    0
+    24px
+    rgba(
+      22,
+      140,
+      244,
+      0.22
+    );
+}
+
+
+.wf-home-program:hover
+.wf-home-program__title,
+
+.wf-home-program:focus-visible
+.wf-home-program__title {
+  color:
+    #72d4fb;
+}
+
+
+.wf-home-program:hover
+.wf-home-program__arrow,
+
+.wf-home-program:focus-visible
+.wf-home-program__arrow {
+  opacity:
+    1;
+
+  transform:
+    none;
+}
+
+
+/* =========================================================
+   REVEALED STATE
+   ========================================================= */
+
+.wf-home-programs__editorial.is-revealed
+.wf-home-programs__index {
+  opacity:
+    1;
+
+  transform:
+    none;
+}
+
+
+.wf-home-programs__editorial.is-revealed
+.wf-home-programs__headline-line > span {
+  opacity:
+    1;
+
+  transform:
+    none;
+}
+
+
+.wf-home-programs__editorial.is-revealed
+.wf-home-programs__list::after {
+  transform:
+    scaleX(
+      1
+    );
+}
+
+
+.wf-home-programs__editorial.is-revealed
+.wf-home-program {
+  opacity:
+    1;
+
+  transform:
+    none;
+}
+
+
+/* release final headline clipping after the one-shot entry */
+.wf-home-programs__editorial.is-revealed
+.wf-home-programs__headline-line {
+  animation:
+    wf-home-programs-release-clip
+    1ms
+    linear
+    980ms
+    forwards;
+}
+
+
+@keyframes wf-home-programs-release-clip {
+  to {
+    overflow:
+      visible;
+  }
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 72rem) and (min-width: 48.01rem) {
+
+  .wf-home-programs__list {
+    grid-template-columns:
+      repeat(
+        2,
+        minmax(
+          0,
+          1fr
+        )
+      );
+
+    row-gap:
+      72px;
+  }
+
+
+  .wf-home-programs__list::before,
+  .wf-home-programs__list::after {
+    display:
+      none;
+  }
+
+
+  .wf-home-program {
+    min-height:
+      286px;
+
+    border-top:
+      2px
+      solid
+      rgba(
+        111,
+        210,
+        250,
+        0.26
+      )
+      !important;
+
+    padding-top:
+      22px;
+  }
+
+
+  .wf-home-program__number {
+    top:
+      8px;
+  }
+
+
+  .wf-home-program__track-node {
+    display:
+      none;
+  }
+}
+
+
+/* =========================================================
+   MOBILE — VERTICAL TIMELINE
+   ========================================================= */
+
+@media (max-width: 48rem) {
+
+  .wf-home-programs.wf-section--spacing-compact {
+    padding-block:
+      64px
+      84px;
+  }
+
+
+  .wf-home-programs::before {
+    background-size:
+      54px
+      54px;
+
+    opacity:
+      0.34;
+  }
+
+
+  .wf-home-programs__header {
+    margin-top:
+      38px;
+
+    grid-template-columns:
+      minmax(
+        0,
+        1fr
+      );
+
+    gap:
+      24px;
+  }
+
+
+  .wf-home-programs__headline {
+    max-width:
+      10ch;
+
+    font-size:
+      clamp(
+        2.5rem,
+        11.4vw,
+        3.9rem
+      );
+
+    line-height:
+      0.99;
+  }
+
+
+  .wf-home-programs__kicker {
+    max-width:
+      28ch;
+
+    margin:
+      0;
+
+    text-align:
+      left;
+
+    font-size:
+      0.6rem;
+  }
+
+
+  .wf-home-programs__list {
+    margin-top:
+      62px;
+
+    grid-template-columns:
+      minmax(
+        0,
+        1fr
+      );
+
+    gap:
+      0;
+
+    padding-left:
+      44px;
+  }
+
+
+  .wf-home-programs__list::before,
+  .wf-home-programs__list::after {
+    display:
+      block;
+
+    top:
+      6px;
+
+    right:
+      auto;
+
+    bottom:
+      6px;
+
+    left:
+      7px;
+
+    width:
+      4px;
+
+    height:
+      auto;
+
+    border-radius:
+      999px;
+  }
+
+
+  .wf-home-programs__list::before {
+    background:
+      rgba(
+        144,
+        165,
+        198,
+        0.18
+      );
+  }
+
+
+  .wf-home-programs__list::after {
+    background:
+      linear-gradient(
+        180deg,
+        #75d8fb 0%,
+        #168cf4 52%,
+        #193fd7 100%
+      );
+
+    transform:
+      scaleY(
+        0
+      );
+
+    transform-origin:
+      top
+      center;
+  }
+
+
+  .wf-home-programs__editorial.is-revealed
+  .wf-home-programs__list::after {
+    transform:
+      scaleY(
+        1
+      );
+  }
+
+
+  .wf-home-program {
+    min-height:
+      0;
+
+    grid-template-rows:
+      auto
+      auto;
+
+    grid-template-columns:
+      minmax(
+        0,
+        1fr
+      )
+      auto;
+
+    gap:
+      0
+      18px;
+
+    padding:
+      0
+      0
+      54px;
+
+    overflow:
+      visible;
+  }
+
+
+  .wf-home-program:last-child {
+    padding-bottom:
+      0;
+  }
+
+
+  .wf-home-program__number {
+    position:
+      static;
+
+    grid-column:
+      1;
+
+    transform:
+      none;
+
+    margin-bottom:
+      12px;
+  }
+
+
+  .wf-home-program__icon-shell {
+    grid-column:
+      2;
+
+    grid-row:
+      1
+      / span 2;
+
+    width:
+      48px;
+
+    height:
+      48px;
+
+    color:
+      rgba(
+        111,
+        210,
+        250,
+        0.72
+      );
+  }
+
+
+  .wf-home-program__icon {
+    width:
+      38px;
+
+    height:
+      38px;
+  }
+
+
+  .wf-home-program__track-node {
+    position:
+      absolute;
+
+    top:
+      3px;
+
+    left:
+      -43px;
+
+    width:
+      14px;
+
+    height:
+      14px;
+  }
+
+
+  .wf-home-program__body {
+    grid-column:
+      1;
+
+    padding-top:
+      0;
+
+    gap:
+      11px;
+  }
+
+
+  .wf-home-program__title {
+    max-width:
+      20ch;
+
+    font-size:
+      1.16rem;
+  }
+
+
+  .wf-home-program__summary {
+    max-width:
+      33ch;
+
+    font-size:
+      0.9rem;
+
+    line-height:
+      1.68;
+  }
+
+
+  .wf-home-program__arrow {
+    display:
+      none;
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .wf-home-programs__index,
+  .wf-home-programs__headline-line > span,
+  .wf-home-program {
+    opacity:
+      1 !important;
+
+    transform:
+      none !important;
+
+    transition:
+      none !important;
+  }
+
+
+  .wf-home-programs__headline-line {
+    overflow:
+      visible !important;
+
+    animation:
+      none !important;
+  }
+
+
+  .wf-home-programs__list::after {
+    transform:
+      none !important;
+
+    transition:
+      none !important;
+  }
+}
+
+/* WF PROGRAM OVERVIEW 03 EDITORIAL TRACK FINAL END */
