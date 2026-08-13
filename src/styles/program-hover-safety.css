@@ -19,51 +19,55 @@
 }
 
 /* ============================================================
-   HOME SVG WAVE MOTION COMPATIBILITY FIX
+   HOME WAVE MOTION — KEEP THE REFERENCE WAVE INTACT
 
-   The HOME wave already has four SVG <use> layers and timing rules in
-   home.css. Some browsers do not reliably animate translate3d() on SVG
-   <use> elements, making the wave look completely static. Force the
-   final imported override to use SVG-compatible 2D transforms instead.
+   HomePage.js already uses the original gentle-wave path and the original
+   four-layer reference composition. Do not reshape, scale, or replace it.
+
+   The previous compatibility patch translated each SVG <use> by percentage,
+   which could move the long reference path outside the visible viewBox.
+   Instead, animate the SVG geometry x-position itself. The travel range is
+   exactly the reference motion: x=48 plus -90 -> +85 = -42 -> 133.
    ============================================================ */
 
 .wf-home-wave__parallax > use {
-  transform-box: view-box;
-  transform-origin: 0 0;
-  will-change: transform;
-  animation-name: wf-home-wave-move-compat !important;
-  animation-timing-function: linear !important;
-  animation-iteration-count: infinite !important;
-  animation-fill-mode: both;
+  transform: none !important;
+  will-change: auto;
+  animation:
+    wf-home-wave-reference-x
+    25s
+    cubic-bezier(.55, .5, .45, .5)
+    infinite
+    !important;
 }
 
 .wf-home-wave__parallax > use:nth-child(1) {
-  animation-duration: 9s !important;
   animation-delay: -2s !important;
+  animation-duration: 7s !important;
 }
 
 .wf-home-wave__parallax > use:nth-child(2) {
-  animation-duration: 12s !important;
   animation-delay: -3s !important;
+  animation-duration: 10s !important;
 }
 
 .wf-home-wave__parallax > use:nth-child(3) {
-  animation-duration: 16s !important;
   animation-delay: -4s !important;
+  animation-duration: 13s !important;
 }
 
 .wf-home-wave__parallax > use:nth-child(4) {
-  animation-duration: 22s !important;
   animation-delay: -5s !important;
+  animation-duration: 20s !important;
 }
 
-@keyframes wf-home-wave-move-compat {
-  from {
-    transform: translateX(-60%);
+@keyframes wf-home-wave-reference-x {
+  0% {
+    x: -42px;
   }
 
-  to {
-    transform: translateX(57.333333%);
+  100% {
+    x: 133px;
   }
 }
 
@@ -71,6 +75,6 @@
   .wf-home-wave__parallax > use {
     animation: none !important;
     transform: none !important;
-    will-change: auto;
+    x: 48px;
   }
 }
