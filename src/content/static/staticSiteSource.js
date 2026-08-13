@@ -1,4 +1,4 @@
-import { STATIC_ASSET_REGISTRY } from '../../assets/assetRegistry.js'
+﻿import { STATIC_ASSET_REGISTRY } from '../../assets/assetRegistry.js'
 
 const source = {
   "sourceType": "STATIC_DATA_MODULE",
@@ -82,22 +82,22 @@ const source = {
           "id": "depth-in-joy",
           "order": 1,
           "heading": "즐거움 속에 담긴 깊이",
-          "description": null,
-          "sourceStatus": "SOURCE_AVAILABLE_NOT_IMPORTED"
+          "description": "학술적 치열함과 사람 냄새 나는 따뜻함이 공존합니다",
+          "sourceStatus": "SOURCE_BACKED_REVIEWABLE"
         },
         {
           "id": "connection-beyond-comfort",
           "order": 2,
           "heading": "안주하지 않는 연결",
-          "description": null,
-          "sourceStatus": "SOURCE_AVAILABLE_NOT_IMPORTED"
+          "description": "우리만의 리그를 넘어, 더 넓은 세상과 호흡합니다",
+          "sourceStatus": "SOURCE_BACKED_REVIEWABLE"
         },
         {
           "id": "virtuous-impact-cycle",
           "order": 3,
           "heading": "선한 영향력의 선순환",
-          "description": null,
-          "sourceStatus": "SOURCE_AVAILABLE_NOT_IMPORTED"
+          "description": "올바른 철학을 가진 투자자를 배양하고 사회와 가치를 나눕니다",
+          "sourceStatus": "SOURCE_BACKED_REVIEWABLE"
         }
       ]
     },
@@ -567,7 +567,7 @@ const source = {
         "prohibitedStaleCopy": "2~3분간"
       },
       "homeLabel": "섹터별 팔로우업",
-      "homeSummary": "매주 목요일 마감. 각 조원이 담당 섹터의 주요 이슈와 관련 종목을 조사해 발표합니다. 발표를 들은 회원은 반드시 질문하고, 발표자는 질문에 답하며 이슈에 대한 투자 관점을 구체화합니다.",
+      "homeSummary": "10개 섹터로 나뉘어 각자 희망 섹터를 맡고, 매주 주요 이슈와 관련 종목을 조사해 발표합니다. 발표 후 질문과 답변을 통해 투자 관점을 구체화합니다.",
       "homeSummaryStatus": "SOURCE_BACKED_REVIEWABLE"
     },
     {
@@ -583,8 +583,8 @@ const source = {
         ]
       },
       "homeLabel": "분반강의",
-      "homeSummary": null,
-      "homeSummaryStatus": "UNAVAILABLE"
+      "homeSummary": "입문반은 투자의 기본과 기업분석을, 실전반은 정량분석과 투자 아이디어를 다룹니다. 분반은 학기마다 자유롭게 교차 수강합니다.",
+      "homeSummaryStatus": "SOURCE_BACKED_REVIEWABLE"
     },
     {
       "activityId": "mock-investment-fm",
@@ -598,7 +598,7 @@ const source = {
         "unresolvedKey": "U-006"
       },
       "homeLabel": "모의투자 & FM팀",
-      "homeSummary": "FM팀(자산운용팀)은 일부 회원이 소규모로 참여해 실제 자금을 운용하는 실전형 프로그램입니다. 참가 범위와 운용 규모는 학기별 운영 방침에 따라 달라질 수 있습니다.",
+      "homeSummary": "개별·팀별 모의투자로 실전 감각을 익히고, FM팀은 일부 회원이 소규모로 참여해 실제 자금을 운용합니다.",
       "homeSummaryStatus": "SOURCE_BACKED_REVIEWABLE"
     },
     {
@@ -618,8 +618,8 @@ const source = {
         "unresolvedKey": "U-007"
       },
       "homeLabel": "개별 리포트 & 팀리포트 발간",
-      "homeSummary": null,
-      "homeSummaryStatus": "UNAVAILABLE"
+      "homeSummary": "조원들과 하나의 기업을 정해 산업분석부터 밸류에이션까지 팀리포트를 작성합니다. 이후 개인은 기업분석 또는 투자전략 리포트를 선택해 작성합니다.",
+      "homeSummaryStatus": "SOURCE_BACKED_REVIEWABLE"
     }
   ],
   "reportExamples": [

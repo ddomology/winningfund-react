@@ -690,44 +690,110 @@ function MissionSection() {
     Section,
     {
       sectionId: 'mission',
+      spacingVariant: 'compact',
       className: 'wf-home-mission',
+      semanticLabel: '위닝펀드가 지향하는 방향',
     },
+
     createElement(
       'div',
-      { className: 'wf-home-section-index' },
+      {
+        className: 'wf-home-mission__legacy-heading',
+        'aria-hidden': 'true',
+      },
+      createElement(SectionHeader, {
+        title: mission.title,
+        headingLevel: 2,
+      }),
+    ),
+
+    createElement(
+      'div',
+      {
+        className:
+          'wf-home-section-index wf-home-mission__index',
+      },
       '04 / 방향',
     ),
-    createElement(SectionHeader, {
-      title: mission.title,
-      headingLevel: 2,
-    }),
+
     createElement(
       'div',
-      { className: 'wf-home-mission__grid' },
-      ...mission.items.map((item) =>
+      {
+        className: 'wf-home-mission__editorial',
+      },
+
+      createElement(
+        'header',
+        {
+          className: 'wf-home-mission__header',
+        },
+
         createElement(
-          'article',
+          'p',
           {
-            key: item.id,
-            className: 'wf-home-mission__item',
+            className: 'wf-home-mission__eyebrow',
+            'aria-hidden': 'true',
           },
+          'OUR MISSION',
+        ),
+
+        createElement(
+          'h2',
+          {
+            className: 'wf-home-mission__title',
+          },
+          mission.title,
+        ),
+      ),
+
+      createElement(
+        'div',
+        {
+          className: 'wf-home-mission__list',
+        },
+
+        ...mission.items.map((item) =>
           createElement(
-            'span',
-            { className: 'wf-home-mission__number' },
-            String(item.order).padStart(2, '0'),
+            'article',
+            {
+              key: item.id,
+              className: 'wf-home-mission__item',
+            },
+
+            createElement(
+              'span',
+              {
+                className: 'wf-home-mission__number',
+                'aria-hidden': 'true',
+              },
+              String(item.order).padStart(2, '0'),
+            ),
+
+            createElement(
+              'div',
+              {
+                className: 'wf-home-mission__body',
+              },
+
+              createElement(
+                'h3',
+                {
+                  className: 'wf-home-mission__heading',
+                },
+                item.heading,
+              ),
+
+              item.description
+                ? createElement(
+                    'p',
+                    {
+                      className: 'wf-home-mission__copy',
+                    },
+                    item.description,
+                  )
+                : null,
+            ),
           ),
-          createElement(
-            'h3',
-            { className: 'wf-home-mission__heading' },
-            item.heading,
-          ),
-          item.description
-            ? createElement(
-                'p',
-                { className: 'wf-home-mission__copy' },
-                item.description,
-              )
-            : null,
         ),
       ),
     ),
