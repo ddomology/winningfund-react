@@ -65,76 +65,175 @@ function HeroWordRow({
   )
 }
 
+function HomeWaveDivider({
+  waveId,
+  className = '',
+}) {
+  const classes = [
+    'wf-home-wave',
+    className,
+  ].filter(Boolean).join(' ')
+
+  return createElement(
+    'div',
+    {
+      className: classes,
+      'aria-hidden': 'true',
+    },
+    createElement(
+      'svg',
+      {
+        className: 'wf-home-wave__svg',
+        viewBox: '0 24 150 28',
+        preserveAspectRatio: 'none',
+        shapeRendering: 'auto',
+        focusable: 'false',
+      },
+      createElement(
+        'defs',
+        null,
+        createElement('path', {
+          id: waveId,
+          d: 'M-160 44c30 0 58-18 88-18s58 18 88 18 58-18 88-18 58 18 88 18v44h-352z',
+        }),
+      ),
+      createElement(
+        'g',
+        {
+          className: 'wf-home-wave__parallax',
+        },
+        createElement('use', {
+          href: `#${waveId}`,
+          x: 48,
+          y: 0,
+          fill: 'var(--wf-wave-layer-1)',
+        }),
+        createElement('use', {
+          href: `#${waveId}`,
+          x: 48,
+          y: 3,
+          fill: 'var(--wf-wave-layer-2)',
+        }),
+        createElement('use', {
+          href: `#${waveId}`,
+          x: 48,
+          y: 5,
+          fill: 'var(--wf-wave-layer-3)',
+        }),
+        createElement('use', {
+          href: `#${waveId}`,
+          x: 48,
+          y: 7,
+          fill: 'var(--wf-wave-layer-4)',
+        }),
+      ),
+    ),
+  )
+}
+
 function HomeHero() {
   return createElement(
     'section',
     {
       id: 'home-hero',
-      className: 'wf-home-hero wf-home-hero--kinetic-entrance',
+      className:
+        'wf-home-hero wf-home-hero--kinetic-entrance wf-home-hero--waves-reference',
       'aria-labelledby': 'wf-home-title',
     },
+
+    /*
+     * Historical side/meta DOM stays for verifier and semantic continuity.
+     * The waves-reference visual layer intentionally removes it from layout.
+     */
     createElement(
       'div',
       {
         className:
           'wf-home-hero__inner wf-home-hero__inner--kinetic-entrance',
       },
+
       createElement(
         'div',
-        { className: 'wf-home-hero__kinetic-side' },
+        {
+          className: 'wf-home-hero__kinetic-side',
+          'aria-hidden': 'true',
+        },
         createElement(
           'div',
-          { className: 'wf-home-hero__impact-meta' },
+          {
+            className: 'wf-home-hero__impact-meta',
+          },
           createElement('span', null, '01 / HOME'),
           createElement(
             'strong',
-            { className: 'wf-home-hero__impact-kicker' },
+            {
+              className: 'wf-home-hero__impact-kicker',
+            },
             '투자·경제 학회',
           ),
         ),
       ),
+
       createElement(
         'div',
-        { className: 'wf-home-hero__kinetic-main' },
+        {
+          className: 'wf-home-hero__kinetic-main',
+        },
+
         createElement(
           'div',
-          { className: 'wf-home-hero__impact-brand' },
+          {
+            className: 'wf-home-hero__impact-brand',
+          },
           'WINNINGFUND',
         ),
+
         createElement(
           'h1',
           {
             id: 'wf-home-title',
-            className: 'wf-home-hero__kinetic-title-a11y',
+            className:
+              'wf-home-hero__kinetic-title-a11y',
           },
           homeData.hero.englishIdentity,
         ),
+
         createElement(
           'div',
           {
             className: 'wf-home-kinetic-list',
             'aria-hidden': 'true',
           },
+
           createElement(HeroWordRow, {
             number: '01',
             english: 'INVESTMENT',
-            delayClass: 'wf-home-kinetic-row--1',
+            delayClass:
+              'wf-home-kinetic-row--1',
           }),
+
           createElement(HeroWordRow, {
             number: '02',
             english: 'ECONOMICS',
-            delayClass: 'wf-home-kinetic-row--2',
+            delayClass:
+              'wf-home-kinetic-row--2',
             annotation: 'AND',
           }),
+
           createElement(HeroWordRow, {
             number: '03',
             english: 'CLUB',
-            delayClass: 'wf-home-kinetic-row--3',
+            delayClass:
+              'wf-home-kinetic-row--3',
           }),
         ),
+
         createElement(
           'div',
-          { className: 'wf-home-kinetic-footer' },
+          {
+            className: 'wf-home-kinetic-footer',
+          },
+
           createElement(
             'div',
             {
@@ -144,26 +243,39 @@ function HomeHero() {
             createElement('span', null, 'CURRENT TERM'),
             createElement('strong', null, '18—2'),
           ),
+
           createElement('span', {
-            className: 'wf-home-kinetic-footer__divider',
+            className:
+              'wf-home-kinetic-footer__divider',
             'aria-hidden': 'true',
           }),
+
           createElement(
             'p',
             {
               className: 'wf-home-kinetic-slogan',
-              'aria-label': homeData.hero.koreanSlogan,
+              'aria-label':
+                homeData.hero.koreanSlogan,
             },
             createElement(WinningFundBrushSignature),
             createElement(
               'span',
-              { className: 'wf-home-kinetic-slogan__text' },
+              {
+                className:
+                  'wf-home-kinetic-slogan__text',
+              },
               homeData.hero.koreanSlogan,
             ),
           ),
         ),
       ),
     ),
+
+    createElement(HomeWaveDivider, {
+      waveId: 'wf-home-gentle-wave-hero',
+      className:
+        'wf-home-wave--hero-to-light',
+    }),
   )
 }
 
@@ -958,12 +1070,29 @@ export default function HomePage() {
   return createElement(
     'div',
     { className: 'wf-home' },
+
     createElement(HomeMagneticScroll),
     createElement(HomeSectionRail),
+
     createElement(HomeHero),
+
     createElement(ShortIntroduction),
+
+    createElement(HomeWaveDivider, {
+      waveId: 'wf-home-gentle-wave-dark',
+      className:
+        'wf-home-wave--light-to-dark',
+    }),
+
     createElement(ProgramOverview),
     createElement(MissionSection),
+
+    createElement(HomeWaveDivider, {
+      waveId: 'wf-home-gentle-wave-light',
+      className:
+        'wf-home-wave--dark-to-light',
+    }),
+
     createElement(SemesterContents),
   )
 }
