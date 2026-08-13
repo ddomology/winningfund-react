@@ -1,4 +1,5 @@
 ﻿import { createElement } from 'react'
+import RouteHeroMagneticScroll from '../components/RouteHeroMagneticScroll.js'
 import { RouteHeroTitle, RouteHeroWave } from '../components/RouteHeroEffects.js'
 import {
   selectAboutPageData,
@@ -269,6 +270,11 @@ export default function AboutPage() {
     {
       className: 'wf-about',
     },
+
+    createElement(RouteHeroMagneticScroll, {
+      heroSelector: '.wf-about-hero',
+      nextSelector: '.wf-about-section--intro',
+    }),
 
     createElement(
       'section',

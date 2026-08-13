@@ -3,6 +3,7 @@
   useEffect,
   useState,
 } from 'react'
+import RouteHeroMagneticScroll from '../components/RouteHeroMagneticScroll.js'
 import InternalSectionNav from '../components/InternalSectionNav.js'
 import { RouteHeroTitle, RouteHeroWave } from '../components/RouteHeroEffects.js'
 import ResponsiveMedia from '../components/ResponsiveMedia.js'
@@ -563,6 +564,11 @@ export default function ActivitiesPage() {
     {
       className: 'wf-activities',
     },
+
+    createElement(RouteHeroMagneticScroll, {
+      heroSelector: '.wf-activities-hero',
+      nextSelector: '.wf-activities-intro',
+    }),
 
     createElement(
       'section',

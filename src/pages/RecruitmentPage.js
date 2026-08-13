@@ -1,4 +1,5 @@
 ﻿import { createElement } from 'react'
+import RouteHeroMagneticScroll from '../components/RouteHeroMagneticScroll.js'
 import CTAButton from '../components/CTAButton.js'
 import { RouteHeroTitle, RouteHeroWave } from '../components/RouteHeroEffects.js'
 import {
@@ -94,6 +95,11 @@ export default function RecruitmentPage() {
     {
       className: 'wf-recruitment',
     },
+
+    createElement(RouteHeroMagneticScroll, {
+      heroSelector: '.wf-recruitment-hero',
+      nextSelector: '.wf-recruitment-info',
+    }),
 
     createElement(
       'section',
