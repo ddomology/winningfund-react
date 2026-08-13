@@ -17,3 +17,60 @@
     inset-inline-start: -20px !important;
   }
 }
+
+/* ============================================================
+   HOME SVG WAVE MOTION COMPATIBILITY FIX
+
+   The HOME wave already has four SVG <use> layers and timing rules in
+   home.css. Some browsers do not reliably animate translate3d() on SVG
+   <use> elements, making the wave look completely static. Force the
+   final imported override to use SVG-compatible 2D transforms instead.
+   ============================================================ */
+
+.wf-home-wave__parallax > use {
+  transform-box: view-box;
+  transform-origin: 0 0;
+  will-change: transform;
+  animation-name: wf-home-wave-move-compat !important;
+  animation-timing-function: linear !important;
+  animation-iteration-count: infinite !important;
+  animation-fill-mode: both;
+}
+
+.wf-home-wave__parallax > use:nth-child(1) {
+  animation-duration: 9s !important;
+  animation-delay: -2s !important;
+}
+
+.wf-home-wave__parallax > use:nth-child(2) {
+  animation-duration: 12s !important;
+  animation-delay: -3s !important;
+}
+
+.wf-home-wave__parallax > use:nth-child(3) {
+  animation-duration: 16s !important;
+  animation-delay: -4s !important;
+}
+
+.wf-home-wave__parallax > use:nth-child(4) {
+  animation-duration: 22s !important;
+  animation-delay: -5s !important;
+}
+
+@keyframes wf-home-wave-move-compat {
+  from {
+    transform: translateX(-60%);
+  }
+
+  to {
+    transform: translateX(57.333333%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wf-home-wave__parallax > use {
+    animation: none !important;
+    transform: none !important;
+    will-change: auto;
+  }
+}
