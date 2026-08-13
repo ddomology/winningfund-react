@@ -1,0 +1,52 @@
+/* ============================================================
+   KINETIC TITLE — GLYPH-SAFE CENTER SLIT
+
+   HOME and route heroes share the same kinetic reveal primitive.
+   Bold glyph overhang can extend a few pixels outside the measured text
+   box, so an inset:0 reveal clips the first/last strokes while opening.
+
+   Expand only the reveal mask box symmetrically. Matching inner padding
+   keeps the reveal word on the exact same baseline/x-origin as the ghost.
+   The center slit therefore stays centered and typography does not shift.
+   ============================================================ */
+
+.wf-home-kinetic-row__reveal {
+  --wf-kinetic-reveal-safe-inline: 0.16em;
+  --wf-kinetic-reveal-safe-block: 0.10em;
+
+  inset:
+    calc(-1 * var(--wf-kinetic-reveal-safe-block))
+    calc(-1 * var(--wf-kinetic-reveal-safe-inline));
+  box-sizing: border-box;
+  padding:
+    var(--wf-kinetic-reveal-safe-block)
+    var(--wf-kinetic-reveal-safe-inline);
+}
+
+/*
+ * Keep the text's measurable content box identical to the original slot.
+ * The parent grew by 2 × safe-area and the equal padding removes exactly
+ * that growth from the inner content area.
+ */
+.wf-home-kinetic-row__reveal-word {
+  min-width: 0;
+  max-width: 100%;
+}
+
+/* Route adaptation already uses overflow:visible on its title/slot.
+ * Explicitly preserve it so later compact rules cannot reintroduce edge
+ * clipping around the enlarged reveal mask.
+ */
+.wf-route-hero-title,
+.wf-route-hero-title__slot,
+.wf-route-hero-title .wf-home-kinetic-row,
+.wf-route-hero-title .wf-home-kinetic-row__text-slot {
+  overflow: visible !important;
+}
+
+@media (max-width: 30rem) {
+  .wf-home-kinetic-row__reveal {
+    --wf-kinetic-reveal-safe-inline: 0.19em;
+    --wf-kinetic-reveal-safe-block: 0.11em;
+  }
+}
