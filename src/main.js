@@ -8,6 +8,7 @@ import './styles/app-shell.css'
 import './styles/navigation.css'
 import './styles/shared-primitives.css'
 import './styles/home.css'
+import './styles/about.css'
 import './styles/placeholders.css'
 
 const rootElement = document.getElementById('root')

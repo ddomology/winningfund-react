@@ -238,20 +238,125 @@ const source = {
     }
   },
   "aboutContent": {
-    "sourceStatus": "UNAVAILABLE",
-    "detailedIntroduction": null
+    "sourceStatus": "AUTHORITATIVE",
+    "hero": {
+      "eyebrow": "WINNINGFUND",
+      "title": "ABOUT",
+      "summary": "대학생연합투자경제동아리 위닝펀드는 전국 최대 규모, 2009년 출범 이래 18년째 이어져 오고 있습니다."
+    },
+    "introductionTitle": "Introduction",
+    "detailedIntroduction": "위닝펀드는 2009년 출범해 18년째 이어지고 있는 전국 최대 규모의 대학생연합투자경제동아리입니다. 매주 금요일 동국대학교에 모여 섹터별 리서치와 분반강의, 모의투자를 통해 근거 있는 판단으로 투자하는 법을 함께 익히고 있으며, 지금까지 1,800여 명의 회원이 거쳐간 국내 최대 규모의 연합 투자 동아리로 성장했습니다.",
+    "facts": [
+      {
+        "id": "about-founded",
+        "value": "2009",
+        "label": "FOUNDED"
+      },
+      {
+        "id": "about-years",
+        "value": "18",
+        "label": "YEARS"
+      },
+      {
+        "id": "about-members",
+        "value": "1,800+",
+        "label": "MEMBERS"
+      }
+    ]
   },
   "organization": {
-    "sourceStatus": "UNAVAILABLE",
-    "nodes": []
+    "sourceStatus": "AUTHORITATIVE",
+    "note": "이렇게 체계적으로 나뉜 부서들이 유기적으로 협력하며, 위닝펀드의 모든 활동이 원활하게 운영될 수 있도록 최선을 다하고 있습니다.",
+    "nodes": [
+      {
+        "id": "president",
+        "order": 1,
+        "tier": "LEADERSHIP",
+        "role": "회장",
+        "description": "동아리의 운영 방향을 기획하고 각 부서와 협력하여 전반적인 활동을 총괄합니다."
+      },
+      {
+        "id": "vice-president",
+        "order": 2,
+        "tier": "LEADERSHIP",
+        "role": "부회장",
+        "description": "회원 관리와 대외 협력, 운용팀 운영을 담당하며 원활한 동아리 운영을 이끌어갑니다."
+      },
+      {
+        "id": "accounting",
+        "order": 3,
+        "tier": "OFFICER",
+        "role": "회계임원",
+        "description": "신입회원 가입을 진행하고 동아리 예산, 행사 지출 및 정산, 일정을 관리합니다."
+      },
+      {
+        "id": "people",
+        "order": 4,
+        "tier": "OFFICER",
+        "role": "인사임원",
+        "description": "기존·신입 회원을 관리하고 회원 DB를 구축하며, 출결 및 모의투자를 관리합니다."
+      },
+      {
+        "id": "education",
+        "order": 5,
+        "tier": "OFFICER",
+        "role": "교육임원 (입문·실전)",
+        "description": "교육 커리큘럼을 구성하고 분반강의, 스터디, 퀴즈 등 다양한 교육 프로그램을 기획·운영합니다."
+      },
+      {
+        "id": "planning",
+        "order": 6,
+        "tier": "OFFICER",
+        "role": "기획임원",
+        "description": "동아리의 다양한 프로그램과 미션을 기획·운영하며, 온·오프라인 홍보 콘텐츠를 제작합니다."
+      }
+    ]
   },
   "externalActivities": {
-    "sourceStatus": "UNAVAILABLE",
-    "items": []
+    "sourceStatus": "AUTHORITATIVE",
+    "title": "외부 활동 & 연계",
+    "introduction": "키움증권, 이베스트투자증권, 유진투자증권, 한국투자증권 등 주요 증권사와 파트너십을 맺고 있으며, 2025년 KB증권 '월가를 향한 흑백 마스터' 대회에서 우승을 차지했습니다. 다양한 대외 네트워크를 통해 회원들의 성장을 지원하고 있습니다.",
+    "items": [
+      {
+        "id": "korea-investment",
+        "label": "한국투자증권",
+        "description": "연계 프로그램으로 서류전형 우대 혜택 제공",
+        "sourceStatus": "AUTHORITATIVE"
+      },
+      {
+        "id": "uic",
+        "label": "UIC",
+        "description": "전국대학생투자동아리연합회 소속으로 타 대학 동아리와 교류",
+        "sourceStatus": "AUTHORITATIVE"
+      },
+      {
+        "id": "writing-bulkup",
+        "label": "글쓰기 벌크업",
+        "description": "투자 관련 글쓰기 역량을 키우는 대외 프로그램 참여",
+        "sourceStatus": "AUTHORITATIVE"
+      }
+    ]
   },
   "socialLinks": {
-    "sourceStatus": "UNAVAILABLE",
-    "items": []
+    "sourceStatus": "AUTHORITATIVE",
+    "title": "SNS",
+    "introduction": "위닝펀드는 소셜미디어를 적극 활용하며 활동 소식과 모집 안내를 발 빠르게 전하고 있습니다. 인스타그램과 네이버 카페를 통해 누구나 위닝펀드의 소식을 확인하고 소통할 수 있습니다.",
+    "items": [
+      {
+        "id": "instagram",
+        "label": "Instagram",
+        "handle": "@winning_fund",
+        "url": "https://www.instagram.com/winning_fund/",
+        "sourceStatus": "AUTHORITATIVE"
+      },
+      {
+        "id": "naver-cafe",
+        "label": "Naver Cafe",
+        "handle": "winningfund",
+        "url": "https://cafe.naver.com/winningfund",
+        "sourceStatus": "AUTHORITATIVE"
+      }
+    ]
   },
   "membersByTerm": [
     {

@@ -1,4 +1,4 @@
-import fs from 'node:fs'
+﻿import fs from 'node:fs'
 import path from 'node:path'
 import process from 'node:process'
 
@@ -231,8 +231,19 @@ if (
   fail('HomePage.js STEP 05 composition missing')
 }
 
+const aboutText = read('src/pages/AboutPage.js')
+
+if (
+  !aboutText.includes('RoutePlaceholder') &&
+  aboutText.includes('selectAboutPageData') &&
+  aboutText.includes("className: 'wf-about'")
+) {
+  pass('AboutPage.js now composes ABOUT UI through normalized data')
+} else {
+  fail('AboutPage.js ABOUT composition missing')
+}
+
 for (const page of [
-  'AboutPage.js',
   'MembersPage.js',
   'ActivitiesPage.js',
   'RecruitmentPage.js',
@@ -242,7 +253,7 @@ for (const page of [
   if (text.includes('RoutePlaceholder')) {
     pass(`${page} remains business-UI placeholder`)
   } else {
-    fail(`${page} implemented page composition during STEP 05`)
+    fail(`${page} implemented page composition before its stage`)
   }
 }
 

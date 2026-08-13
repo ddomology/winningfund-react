@@ -147,7 +147,18 @@ if (
   fail('reduced motion missing')
 }
 
-for (const page of ['AboutPage.js','MembersPage.js','ActivitiesPage.js','RecruitmentPage.js']) {
+const aboutPageSource = read('src/pages/AboutPage.js')
+
+if (
+  !aboutPageSource.includes('RoutePlaceholder') &&
+  aboutPageSource.includes('selectAboutPageData')
+) {
+  pass('AboutPage.js is intentionally implemented after HOME')
+} else {
+  fail('AboutPage.js implementation boundary invalid')
+}
+
+for (const page of ['MembersPage.js','ActivitiesPage.js','RecruitmentPage.js']) {
   const text = read(`src/pages/${page}`)
   if (text.includes('RoutePlaceholder')) pass(`${page} remains placeholder`)
   else fail(`${page} unexpectedly implemented`)

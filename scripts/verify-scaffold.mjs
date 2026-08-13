@@ -1,4 +1,4 @@
-import fs from 'node:fs'
+﻿import fs from 'node:fs'
 import path from 'node:path'
 import process from 'node:process'
 
@@ -39,7 +39,19 @@ if(!fs.existsSync(homePath)){
     : fail('HomePage.js STEP 05 implementation missing')
 }
 
-for (const page of ['AboutPage.js','MembersPage.js','ActivitiesPage.js','RecruitmentPage.js']) {
+const aboutPath=path.join(root,'src','pages','AboutPage.js')
+if(!fs.existsSync(aboutPath)){
+  fail('missing AboutPage.js')
+}else{
+  const aboutText=fs.readFileSync(aboutPath,'utf8')
+  !aboutText.includes('RoutePlaceholder') &&
+  aboutText.includes('selectAboutPageData') &&
+  aboutText.includes("className: 'wf-about'")
+    ? pass('AboutPage.js implemented through normalized ABOUT selector')
+    : fail('AboutPage.js ABOUT implementation missing')
+}
+
+for (const page of ['MembersPage.js','ActivitiesPage.js','RecruitmentPage.js']) {
   const full=path.join(root,'src','pages',page)
   if(!fs.existsSync(full)){fail(`missing ${page}`);continue}
   fs.readFileSync(full,'utf8').includes('RoutePlaceholder')
