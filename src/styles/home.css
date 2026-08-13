@@ -8592,3 +8592,1829 @@
 }
 
 /* WF HOME 03 CONTENT MOBILE + 04 MISSION FINAL END */
+
+/* WF HOME VISUAL CONSOLIDATION FINAL START */
+
+/* =========================================================
+   WINNINGFUND HOME — ONE VISUAL SYSTEM
+
+   This layer intentionally reduces visual noise.
+
+   Scene grammar:
+   01  Hero          = brand-blue statement
+   02  Introduction  = light editorial field
+   03  Activities    = dark chapter / shared track
+   04  Mission       = continuation of the same dark chapter
+   05  18-2          = light closing chapter
+
+   Desktop keeps a dedicated white rail panel.
+   Main scene color begins exactly where the Hero main field begins.
+
+   Effects budget:
+   - Hero typography / brush: existing locked effect
+   - Program shared paint track: retained
+   Everything else is typography, spacing and hairlines.
+   ========================================================= */
+
+.wf-home {
+  --wf-home-light-field: #f7faff;
+  --wf-home-light-field-2: #fbfdff;
+  --wf-home-dark-field: #071126;
+  --wf-home-dark-copy: rgba(214, 226, 244, 0.72);
+  --wf-home-dark-line: rgba(196, 214, 239, 0.16);
+  --wf-home-chapter-max: 1180px;
+}
+
+
+/* =========================================================
+   FULL-BLEED SCENE OWNERSHIP
+   ========================================================= */
+
+.wf-home > .wf-section {
+  max-width: none;
+}
+
+
+/*
+ * Desktop:
+ * left = dedicated white rail panel
+ * right = scene field
+ *
+ * Content begins one gutter inside the scene field.
+ */
+@media (min-width: 64rem) {
+
+  .wf-home > .wf-section {
+    display: block !important;
+    width: 100% !important;
+    margin-inline: 0 !important;
+  }
+
+
+  .wf-home-intro {
+    background:
+      linear-gradient(
+        90deg,
+        #ffffff 0,
+        #ffffff var(--wf-home-side-panel),
+        var(--wf-home-light-field)
+          var(--wf-home-side-panel),
+        var(--wf-home-light-field) 100%
+      )
+      !important;
+  }
+
+
+  .wf-home-programs,
+  .wf-home-mission {
+    background:
+      linear-gradient(
+        90deg,
+        #ffffff 0,
+        #ffffff var(--wf-home-side-panel),
+        var(--wf-home-dark-field)
+          var(--wf-home-side-panel),
+        var(--wf-home-dark-field) 100%
+      )
+      !important;
+  }
+
+
+  .wf-home-semester {
+    background:
+      linear-gradient(
+        90deg,
+        #ffffff 0,
+        #ffffff var(--wf-home-side-panel),
+        var(--wf-home-light-field-2)
+          var(--wf-home-side-panel),
+        var(--wf-home-light-field-2) 100%
+      )
+      !important;
+  }
+
+
+  .wf-home-intro__editorial,
+  .wf-home-programs__editorial,
+  .wf-home-mission__editorial,
+  .wf-home-semester__editorial {
+    box-sizing: border-box;
+
+    width:
+      min(
+        calc(
+          100%
+          - var(--wf-home-side-panel)
+          - var(--wf-gutter)
+          - var(--wf-gutter)
+        ),
+        var(--wf-home-chapter-max)
+      );
+
+    margin-left:
+      calc(
+        var(--wf-home-side-panel)
+        + var(--wf-gutter)
+      );
+
+    margin-right:
+      auto;
+  }
+}
+
+
+/* =========================================================
+   COMMON SECTION META
+   ========================================================= */
+
+.wf-home-intro__index,
+.wf-home-programs__index,
+.wf-home-mission__index,
+.wf-home-semester__index {
+  margin-bottom:
+    clamp(
+      28px,
+      3.2vw,
+      46px
+    );
+
+  color:
+    var(--wf-brand-blue);
+
+  font-size:
+    0.67rem;
+
+  font-weight:
+    850;
+
+  line-height:
+    1;
+
+  letter-spacing:
+    0.12em;
+}
+
+
+/* =========================================================
+   02 / INTRO — QUIET LIGHT EDITORIAL
+   ========================================================= */
+
+.wf-home-intro {
+  border:
+    0 !important;
+
+  background:
+    var(--wf-home-light-field)
+    !important;
+}
+
+
+.wf-home-intro::after {
+  content:
+    none !important;
+
+  display:
+    none !important;
+}
+
+
+.wf-home-intro.wf-section--spacing-compact {
+  padding-block:
+    clamp(
+      88px,
+      8vw,
+      124px
+    );
+}
+
+
+.wf-home-intro__editorial {
+  min-height:
+    0 !important;
+
+  grid-template-columns:
+    minmax(
+      92px,
+      0.18fr
+    )
+    minmax(
+      0,
+      1fr
+    );
+
+  gap:
+    clamp(
+      38px,
+      5vw,
+      78px
+    );
+}
+
+
+.wf-home-intro__index {
+  margin-top:
+    6px;
+}
+
+
+.wf-home-intro__index::before {
+  width:
+    18px !important;
+
+  height:
+    1px !important;
+
+  background:
+    var(--wf-brand-sky)
+    !important;
+}
+
+
+.wf-home-intro__headline {
+  max-width:
+    12.6ch;
+
+  color:
+    #0a1730;
+
+  font-size:
+    clamp(
+      3.25rem,
+      5vw,
+      5.6rem
+    );
+
+  font-weight:
+    830;
+
+  line-height:
+    1.01;
+
+  letter-spacing:
+    -0.058em;
+}
+
+
+/* No decorative gradient typography outside the Hero. */
+.wf-home-intro__headline-accent {
+  color:
+    var(--wf-brand-blue)
+    !important;
+
+  background:
+    none !important;
+
+  background-image:
+    none !important;
+
+  -webkit-background-clip:
+    border-box !important;
+
+  background-clip:
+    border-box !important;
+
+  -webkit-text-fill-color:
+    currentColor !important;
+
+  filter:
+    none !important;
+
+  text-shadow:
+    none !important;
+}
+
+
+.wf-home-intro__editorial.is-revealed
+.wf-home-intro__headline-accent {
+  filter:
+    none !important;
+}
+
+
+.wf-home-intro__editorial-copy {
+  width:
+    min(
+      34ch,
+      68%
+    );
+
+  margin:
+    clamp(
+      48px,
+      5vw,
+      68px
+    )
+    0
+    0
+    30%;
+
+  color:
+    #40516a;
+
+  font-size:
+    clamp(
+      1rem,
+      1.15vw,
+      1.18rem
+    );
+
+  font-weight:
+    520;
+
+  line-height:
+    1.72;
+}
+
+
+.wf-home-intro__proof {
+  margin-top:
+    clamp(
+      64px,
+      7vw,
+      92px
+    );
+
+  padding-top:
+    clamp(
+      20px,
+      2vw,
+      28px
+    );
+
+  column-gap:
+    clamp(
+      24px,
+      3.5vw,
+      56px
+    );
+}
+
+
+.wf-home-intro__proof::before {
+  height:
+    1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--wf-brand-blue) 0%,
+      var(--wf-brand-blue) 18%,
+      rgba(39, 70, 115, 0.16) 18%,
+      rgba(39, 70, 115, 0.16) 100%
+    );
+
+  box-shadow:
+    none;
+}
+
+
+.wf-home-intro__proof-value,
+.wf-home-intro__proof-value--word {
+  color:
+    var(--wf-brand-cobalt)
+    !important;
+
+  background:
+    none !important;
+
+  background-image:
+    none !important;
+
+  -webkit-background-clip:
+    border-box !important;
+
+  background-clip:
+    border-box !important;
+
+  -webkit-text-fill-color:
+    currentColor !important;
+
+  font-size:
+    clamp(
+      2.05rem,
+      3vw,
+      3.25rem
+    );
+}
+
+
+.wf-home-intro__proof-label {
+  color:
+    #65748a;
+
+  font-size:
+    0.74rem;
+
+  font-weight:
+    700;
+}
+
+
+/* =========================================================
+   03 / ACTIVITIES — DARK CHAPTER, ONE HERO EFFECT = TRACK
+   ========================================================= */
+
+.wf-home-programs {
+  border:
+    0 !important;
+
+  background:
+    var(--wf-home-dark-field)
+    !important;
+}
+
+
+.wf-home-programs::before {
+  background-image:
+    none !important;
+
+  opacity:
+    0 !important;
+}
+
+
+.wf-home-programs.wf-section--spacing-compact {
+  padding-block:
+    clamp(
+      92px,
+      8vw,
+      118px
+    )
+    clamp(
+      84px,
+      7vw,
+      108px
+    );
+}
+
+
+.wf-home-programs__header {
+  margin-top:
+    0;
+
+  grid-template-columns:
+    minmax(
+      0,
+      1fr
+    )
+    auto;
+
+  gap:
+    44px;
+
+  align-items:
+    end;
+}
+
+
+.wf-home-programs__headline {
+  max-width:
+    10.6ch;
+
+  font-size:
+    clamp(
+      3rem,
+      4.6vw,
+      5.15rem
+    );
+
+  font-weight:
+    820;
+
+  line-height:
+    1;
+
+  letter-spacing:
+    -0.058em;
+}
+
+
+.wf-home-programs__headline-accent {
+  color:
+    #56c5f4;
+}
+
+
+.wf-home-programs__kicker {
+  margin-bottom:
+    6px;
+
+  color:
+    rgba(
+      178,
+      199,
+      228,
+      0.48
+    );
+
+  font-size:
+    0.62rem;
+
+  letter-spacing:
+    0.13em;
+}
+
+
+.wf-home-programs__list {
+  margin-top:
+    clamp(
+      66px,
+      6.8vw,
+      92px
+    );
+
+  gap:
+    clamp(
+      28px,
+      3vw,
+      48px
+    );
+}
+
+
+.wf-home-programs__list::before,
+.wf-home-programs__list::after {
+  top:
+    84px;
+
+  height:
+    2px;
+
+  box-shadow:
+    none;
+}
+
+
+.wf-home-programs__list::before {
+  background:
+    rgba(
+      172,
+      194,
+      226,
+      0.15
+    );
+}
+
+
+.wf-home-programs__list::after {
+  background:
+    linear-gradient(
+      90deg,
+      #79d9fb 0%,
+      #168cf4 56%,
+      #193fd7 100%
+    );
+}
+
+
+@media (min-width: 72.01rem) {
+
+  .wf-home-program {
+    min-height:
+      252px;
+
+    overflow:
+      visible;
+  }
+
+
+  .wf-home-program__icon-shell {
+    width:
+      50px;
+
+    height:
+      50px;
+
+    color:
+      rgba(
+        230,
+        239,
+        252,
+        0.78
+      );
+  }
+
+
+  .wf-home-program__icon {
+    width:
+      38px;
+
+    height:
+      38px;
+  }
+
+
+  .wf-home-program__number {
+    top:
+      62px;
+
+    color:
+      #65cdf8;
+
+    font-size:
+      0.62rem;
+  }
+
+
+  .wf-home-program__track-node {
+    top:
+      77px;
+
+    width:
+      14px;
+
+    height:
+      14px;
+
+    border:
+      2px
+      solid
+      #071126;
+
+    background:
+      #78d9fb;
+
+    box-shadow:
+      0
+      0
+      0
+      1px
+      rgba(
+        120,
+        217,
+        251,
+        0.32
+      );
+  }
+
+
+  .wf-home-program__body {
+    margin-top:
+      54px;
+
+    gap:
+      12px;
+  }
+
+
+  .wf-home-program__title {
+    max-width:
+      17ch;
+
+    color:
+      #f7faff;
+
+    font-size:
+      clamp(
+        1.08rem,
+        1.28vw,
+        1.36rem
+      );
+
+    font-weight:
+      760;
+
+    line-height:
+      1.28;
+  }
+
+
+  .wf-home-program__summary {
+    max-width:
+      31ch;
+
+    color:
+      var(--wf-home-dark-copy);
+
+    font-size:
+      clamp(
+        0.82rem,
+        0.88vw,
+        0.94rem
+      );
+
+    line-height:
+      1.68;
+  }
+
+
+  .wf-home-program__arrow {
+    right:
+      0;
+
+    bottom:
+      0;
+
+    opacity:
+      0.28;
+
+    color:
+      #67cef8;
+
+    transform:
+      none;
+  }
+}
+
+
+/* restrained desktop interaction */
+@media (pointer: fine) and (hover: hover) {
+
+  .wf-home-program:hover
+  .wf-home-program__icon-shell,
+
+  .wf-home-program:focus-visible
+  .wf-home-program__icon-shell {
+    transform:
+      translateY(
+        -2px
+      );
+  }
+
+
+  .wf-home-program:hover
+  .wf-home-program__track-node,
+
+  .wf-home-program:focus-visible
+  .wf-home-program__track-node {
+    background:
+      #ffffff;
+
+    transform:
+      scale(
+        1.04
+      );
+
+    box-shadow:
+      0
+      0
+      0
+      2px
+      rgba(
+        22,
+        140,
+        244,
+        0.28
+      );
+  }
+
+
+  .wf-home-program:hover
+  .wf-home-program__title,
+
+  .wf-home-program:focus-visible
+  .wf-home-program__title {
+    color:
+      #72d4fb;
+  }
+
+
+  .wf-home-program:hover
+  .wf-home-program__arrow,
+
+  .wf-home-program:focus-visible
+  .wf-home-program__arrow {
+    opacity:
+      0.9;
+
+    transform:
+      translate(
+        2px,
+        -2px
+      );
+  }
+}
+
+
+/* =========================================================
+   04 / MISSION — SAME DARK CHAPTER, NO SECOND VISUAL LANGUAGE
+   ========================================================= */
+
+.wf-home-mission {
+  border:
+    0 !important;
+
+  background:
+    var(--wf-home-dark-field)
+    !important;
+}
+
+
+.wf-home-mission::before {
+  background-image:
+    none !important;
+
+  opacity:
+    0 !important;
+}
+
+
+.wf-home-mission.wf-section--spacing-compact {
+  padding-block:
+    clamp(
+      72px,
+      6.4vw,
+      96px
+    )
+    clamp(
+      92px,
+      8vw,
+      118px
+    );
+}
+
+
+.wf-home-mission__editorial {
+  margin-top:
+    0;
+
+  grid-template-columns:
+    minmax(
+      230px,
+      0.68fr
+    )
+    minmax(
+      0,
+      1.32fr
+    );
+
+  gap:
+    clamp(
+      56px,
+      7vw,
+      108px
+    );
+}
+
+
+.wf-home-mission__header {
+  position:
+    static;
+
+  top:
+    auto;
+}
+
+
+.wf-home-mission__eyebrow {
+  margin:
+    0;
+
+  color:
+    #62cbf7;
+
+  font-family:
+    inherit;
+
+  font-size:
+    clamp(
+      1.7rem,
+      2.2vw,
+      2.25rem
+    );
+
+  font-weight:
+    850;
+
+  line-height:
+    1;
+
+  letter-spacing:
+    -0.045em;
+}
+
+
+.wf-home-mission__title {
+  max-width:
+    12ch;
+
+  margin-top:
+    18px;
+
+  color:
+    rgba(
+      205,
+      219,
+      239,
+      0.54
+    );
+
+  font-size:
+    clamp(
+      0.92rem,
+      1.08vw,
+      1.05rem
+    );
+
+  font-weight:
+    650;
+
+  line-height:
+    1.55;
+}
+
+
+.wf-home-mission__list {
+  border-top:
+    1px
+    solid
+    var(--wf-home-dark-line);
+}
+
+
+.wf-home-mission__item {
+  min-height:
+    0 !important;
+
+  align-content:
+    start !important;
+
+  grid-template-columns:
+    42px
+    minmax(
+      0,
+      1fr
+    );
+
+  gap:
+    clamp(
+      20px,
+      2.2vw,
+      32px
+    );
+
+  padding:
+    clamp(
+      26px,
+      2.6vw,
+      34px
+    )
+    0;
+
+  border-right:
+    0 !important;
+
+  border-bottom:
+    1px
+    solid
+    var(--wf-home-dark-line)
+    !important;
+}
+
+
+.wf-home-mission__number {
+  padding-top:
+    4px;
+
+  color:
+    rgba(
+      99,
+      203,
+      248,
+      0.72
+    );
+
+  font-family:
+    inherit;
+
+  font-size:
+    0.64rem;
+
+  font-weight:
+    820;
+
+  letter-spacing:
+    0.1em;
+}
+
+
+.wf-home-mission__body {
+  gap:
+    9px;
+}
+
+
+.wf-home-mission__heading {
+  max-width:
+    none;
+
+  color:
+    #f7faff;
+
+  font-size:
+    clamp(
+      1.12rem,
+      1.35vw,
+      1.38rem
+    );
+
+  font-weight:
+    760;
+
+  line-height:
+    1.28;
+
+  letter-spacing:
+    -0.032em;
+}
+
+
+.wf-home-mission__copy {
+  max-width:
+    46ch;
+
+  color:
+    var(--wf-home-dark-copy);
+
+  font-size:
+    clamp(
+      0.84rem,
+      0.92vw,
+      0.96rem
+    );
+
+  line-height:
+    1.68;
+}
+
+
+/* =========================================================
+   05 / 18-2 — LIGHT CLOSING CHAPTER
+   ========================================================= */
+
+.wf-home-semester {
+  border-top:
+    1px
+    solid
+    rgba(
+      34,
+      65,
+      109,
+      0.10
+    );
+
+  background:
+    var(--wf-home-light-field-2)
+    !important;
+}
+
+
+.wf-home-semester.wf-section--spacing-compact {
+  padding-block:
+    clamp(
+      88px,
+      8vw,
+      120px
+    )
+    clamp(
+      96px,
+      9vw,
+      132px
+    );
+}
+
+
+.wf-home-semester__legacy-heading {
+  position:
+    absolute !important;
+
+  width:
+    1px !important;
+
+  height:
+    1px !important;
+
+  margin:
+    -1px !important;
+
+  padding:
+    0 !important;
+
+  overflow:
+    hidden !important;
+
+  clip:
+    rect(
+      0,
+      0,
+      0,
+      0
+    ) !important;
+
+  white-space:
+    nowrap !important;
+
+  border:
+    0 !important;
+}
+
+
+.wf-home-semester__heading-row {
+  display:
+    grid;
+
+  grid-template-columns:
+    minmax(
+      0,
+      1fr
+    )
+    auto;
+
+  align-items:
+    end;
+
+  gap:
+    clamp(
+      36px,
+      6vw,
+      92px
+    );
+}
+
+
+.wf-home-semester__heading-copy {
+  display:
+    grid;
+
+  gap:
+    14px;
+}
+
+
+.wf-home-semester__eyebrow {
+  margin:
+    0;
+
+  color:
+    var(--wf-brand-blue);
+
+  font-size:
+    0.72rem;
+
+  font-weight:
+    850;
+
+  line-height:
+    1;
+
+  letter-spacing:
+    0.14em;
+}
+
+
+.wf-home-semester__title {
+  margin:
+    0;
+
+  color:
+    #0a1730;
+
+  font-size:
+    clamp(
+      2.35rem,
+      4.2vw,
+      4.65rem
+    );
+
+  font-weight:
+    820;
+
+  line-height:
+    0.98;
+
+  letter-spacing:
+    -0.052em;
+}
+
+
+.wf-home-semester__term {
+  color:
+    var(--wf-brand-cobalt);
+
+  font-size:
+    clamp(
+      4.6rem,
+      8vw,
+      8.2rem
+    );
+
+  font-weight:
+    850;
+
+  line-height:
+    0.78;
+
+  letter-spacing:
+    -0.075em;
+}
+
+
+.wf-home-semester__source-line {
+  position:
+    relative;
+
+  height:
+    clamp(
+      116px,
+      12vw,
+      164px
+    );
+
+  margin-top:
+    clamp(
+      48px,
+      5vw,
+      68px
+    );
+
+  border-top:
+    1px
+    solid
+    rgba(
+      22,
+      48,
+      85,
+      0.24
+    );
+
+  border-bottom:
+    0;
+
+  overflow:
+    hidden;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(
+        22,
+        140,
+        244,
+        0.035
+      )
+      0%,
+      transparent
+      48%
+    );
+}
+
+
+.wf-home-semester__source-line::before {
+  content:
+    "";
+
+  position:
+    absolute;
+
+  top:
+    -1px;
+
+  left:
+    0;
+
+  width:
+    clamp(
+      92px,
+      12vw,
+      168px
+    );
+
+  height:
+    2px;
+
+  background:
+    var(--wf-brand-blue);
+}
+
+
+.wf-home-semester__source-line::after {
+  content:
+    "";
+
+  position:
+    absolute;
+
+  top:
+    30px;
+
+  right:
+    0;
+
+  bottom:
+    0;
+
+  left:
+    0;
+
+  background-image:
+    linear-gradient(
+      90deg,
+      rgba(
+        47,
+        77,
+        120,
+        0.08
+      )
+      1px,
+      transparent
+      1px
+    );
+
+  background-size:
+    25%
+    100%;
+
+  opacity:
+    0.72;
+}
+
+
+/* Future authoritative schedule data drops into the same system. */
+.wf-home-semester__timeline {
+  margin-top:
+    clamp(
+      48px,
+      5vw,
+      68px
+    );
+
+  border-top:
+    1px
+    solid
+    rgba(
+      22,
+      48,
+      85,
+      0.24
+    );
+}
+
+
+.wf-home-semester__item {
+  grid-template-columns:
+    minmax(
+      120px,
+      0.42fr
+    )
+    minmax(
+      180px,
+      0.72fr
+    )
+    minmax(
+      0,
+      1.3fr
+    );
+
+  gap:
+    clamp(
+      20px,
+      3vw,
+      44px
+    );
+
+  padding:
+    24px
+    0;
+
+  border-bottom:
+    1px
+    solid
+    rgba(
+      39,
+      70,
+      115,
+      0.14
+    );
+}
+
+
+.wf-home-semester__date {
+  color:
+    var(--wf-brand-blue);
+}
+
+
+.wf-home-semester__item-title {
+  color:
+    #0a1730;
+}
+
+
+.wf-home-semester__description {
+  color:
+    #5f7087;
+}
+
+
+/* =========================================================
+   RAIL — KEEP THE PAINT IDEA, REMOVE THE TOY-LIKE GLOW
+   ========================================================= */
+
+.wf-home-rail__svg-paint,
+.wf-home-rail__svg-active-dot {
+  filter:
+    none !important;
+}
+
+
+.wf-home-rail__svg-base {
+  stroke:
+    rgba(
+      79,
+      99,
+      130,
+      0.22
+    );
+}
+
+
+/* =========================================================
+   COMPACT / MOBILE RECOMPOSITION
+   ========================================================= */
+
+@media (max-width: 63.99rem) {
+
+  .wf-home-intro,
+  .wf-home-semester {
+    background:
+      var(--wf-home-light-field)
+      !important;
+  }
+
+
+  .wf-home-programs,
+  .wf-home-mission {
+    background:
+      var(--wf-home-dark-field)
+      !important;
+  }
+
+
+  .wf-home-intro__editorial,
+  .wf-home-programs__editorial,
+  .wf-home-mission__editorial,
+  .wf-home-semester__editorial {
+    width:
+      auto;
+
+    margin-inline:
+      var(--wf-gutter);
+  }
+}
+
+
+@media (max-width: 48rem) {
+
+  /* ---------- 02 ---------- */
+
+  .wf-home-intro.wf-section--spacing-compact {
+    padding-block:
+      64px
+      78px;
+  }
+
+
+  .wf-home-intro__editorial {
+    display:
+      grid;
+
+    grid-template-columns:
+      minmax(
+        0,
+        1fr
+      );
+
+    gap:
+      0;
+  }
+
+
+  .wf-home-intro__index {
+    margin:
+      0
+      0
+      34px;
+  }
+
+
+  .wf-home-intro__headline {
+    margin-top:
+      0;
+
+    max-width:
+      10.8ch;
+
+    font-size:
+      clamp(
+        2.5rem,
+        11vw,
+        3.65rem
+      );
+  }
+
+
+  .wf-home-intro__editorial-copy {
+    width:
+      88%;
+
+    margin:
+      38px
+      0
+      0
+      12%;
+
+    font-size:
+      clamp(
+        0.96rem,
+        4vw,
+        1.08rem
+      );
+  }
+
+
+  .wf-home-intro__proof {
+    margin-top:
+      52px;
+  }
+
+
+  .wf-home-intro__proof-item {
+    min-height:
+      0;
+
+    padding:
+      17px
+      0;
+  }
+
+
+  /* ---------- 03 ---------- */
+
+  .wf-home-programs.wf-section--spacing-compact {
+    padding-block:
+      68px
+      82px;
+  }
+
+
+  .wf-home-programs__index,
+  .wf-home-programs__header {
+    margin-left:
+      0;
+  }
+
+
+  .wf-home-programs__header {
+    gap:
+      20px;
+  }
+
+
+  .wf-home-programs__headline {
+    max-width:
+      10.6ch;
+
+    font-size:
+      clamp(
+        2.45rem,
+        10.8vw,
+        3.65rem
+      );
+  }
+
+
+  .wf-home-programs__list {
+    margin-top:
+      54px;
+
+    padding-left:
+      60px
+      !important;
+
+    padding-right:
+      2px;
+  }
+
+
+  .wf-home-programs__list::before,
+  .wf-home-programs__list::after {
+    left:
+      18px
+      !important;
+
+    width:
+      3px;
+  }
+
+
+  .wf-home-program__track-node {
+    left:
+      -49px
+      !important;
+
+    box-shadow:
+      none;
+  }
+
+
+  .wf-home-program {
+    padding-bottom:
+      46px;
+  }
+
+
+  .wf-home-program__icon-shell {
+    opacity:
+      0.68;
+  }
+
+
+  .wf-home-program__summary {
+    max-width:
+      34ch;
+
+    color:
+      var(--wf-home-dark-copy);
+
+    font-size:
+      0.88rem;
+  }
+
+
+  /* ---------- 04 ---------- */
+
+  .wf-home-mission.wf-section--spacing-compact {
+    padding-block:
+      64px
+      82px;
+  }
+
+
+  .wf-home-mission__index {
+    margin-left:
+      0;
+
+    margin-bottom:
+      32px;
+  }
+
+
+  .wf-home-mission__editorial {
+    margin-top:
+      0;
+
+    padding-inline:
+      0;
+
+    gap:
+      36px;
+  }
+
+
+  .wf-home-mission__eyebrow {
+    font-size:
+      clamp(
+        1.65rem,
+        7.8vw,
+        2.1rem
+      );
+  }
+
+
+  .wf-home-mission__title {
+    margin-top:
+      12px;
+
+    font-size:
+      0.9rem;
+  }
+
+
+  .wf-home-mission__item {
+    grid-template-columns:
+      30px
+      minmax(
+        0,
+        1fr
+      );
+
+    gap:
+      16px;
+
+    padding:
+      22px
+      0;
+  }
+
+
+  .wf-home-mission__heading {
+    font-size:
+      1.06rem;
+  }
+
+
+  .wf-home-mission__copy {
+    font-size:
+      0.86rem;
+  }
+
+
+  /* ---------- 05 ---------- */
+
+  .wf-home-semester.wf-section--spacing-compact {
+    padding-block:
+      66px
+      92px;
+  }
+
+
+  .wf-home-semester__index {
+    margin-bottom:
+      32px;
+  }
+
+
+  .wf-home-semester__heading-row {
+    grid-template-columns:
+      minmax(
+        0,
+        1fr
+      );
+
+    gap:
+      28px;
+  }
+
+
+  .wf-home-semester__eyebrow {
+    font-size:
+      0.62rem;
+  }
+
+
+  .wf-home-semester__title {
+    font-size:
+      clamp(
+        2.2rem,
+        10vw,
+        3.35rem
+      );
+  }
+
+
+  .wf-home-semester__term {
+    justify-self:
+      start;
+
+    font-size:
+      clamp(
+        4rem,
+        20vw,
+        6.4rem
+      );
+  }
+
+
+  .wf-home-semester__source-line {
+    height:
+      108px;
+
+    margin-top:
+      42px;
+  }
+
+
+  .wf-home-semester__item {
+    grid-template-columns:
+      minmax(
+        0,
+        1fr
+      );
+
+    gap:
+      7px;
+
+    padding:
+      20px
+      0;
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION — FINAL STATIC PRESENTATION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .wf-home-program__icon-shell,
+  .wf-home-program__track-node,
+  .wf-home-program__title,
+  .wf-home-program__arrow,
+  .wf-home-mission__heading {
+    transition:
+      none !important;
+  }
+}
+
+/* WF HOME VISUAL CONSOLIDATION FINAL END */

@@ -218,6 +218,7 @@ function ShortIntroduction() {
     {
       sectionId: 'short-introduction',
       spacingVariant: 'compact',
+      widthPolicy: 'full',
       className: 'wf-home-intro',
       semanticLabel: '위닝펀드 소개',
     },
@@ -504,6 +505,7 @@ function ProgramOverview() {
     {
       sectionId: 'program-overview',
       spacingVariant: 'compact',
+      widthPolicy: 'full',
       className: 'wf-home-programs',
       semanticLabel: '위닝펀드 주요 활동',
     },
@@ -691,6 +693,7 @@ function MissionSection() {
     {
       sectionId: 'mission',
       spacingVariant: 'compact',
+      widthPolicy: 'full',
       className: 'wf-home-mission',
       semanticLabel: '위닝펀드가 지향하는 방향',
     },
@@ -811,69 +814,143 @@ function SemesterContents() {
     return null
   }
 
+  const hasSchedule =
+    Boolean(semester.scheduleItems?.length)
+
   return createElement(
     Section,
     {
       sectionId: 'contents-18-2',
+      widthPolicy: 'full',
+      spacingVariant: 'compact',
       className: 'wf-home-semester',
+      semanticLabel: '18-2 활동',
     },
+
+    /*
+     * Keep the shared primitive contract in the DOM.
+     * The visible HOME composition uses a dedicated editorial heading.
+     */
     createElement(
       'div',
-      { className: 'wf-home-section-index' },
-      '05 / 18-2',
-    ),
-    createElement(
-      'div',
-      { className: 'wf-home-semester__heading-row' },
+      {
+        className: 'wf-home-semester__legacy-heading',
+        'aria-hidden': 'true',
+      },
       createElement(SectionHeader, {
         title: semester.title,
         headingLevel: 2,
       }),
+    ),
+
+    createElement(
+      'div',
+      {
+        className: 'wf-home-semester__editorial',
+      },
+
       createElement(
         'div',
         {
-          className: 'wf-home-semester__term',
-          'aria-hidden': 'true',
+          className:
+            'wf-home-section-index wf-home-semester__index',
         },
-        '18—2',
+        '05 / 18-2',
       ),
-    ),
-    semester.scheduleItems?.length
-      ? createElement(
-          'ol',
-          { className: 'wf-home-semester__timeline' },
-          ...semester.scheduleItems.map((item) =>
-            createElement(
-              'li',
-              {
-                key: item.id,
-                className: 'wf-home-semester__item',
-              },
-              createElement(
-                'span',
-                { className: 'wf-home-semester__date' },
-                item.period ?? item.dateLabel,
-              ),
-              createElement(
-                'strong',
-                { className: 'wf-home-semester__item-title' },
-                item.title,
-              ),
-              item.description
-                ? createElement(
-                    'span',
-                    { className: 'wf-home-semester__description' },
-                    item.description,
-                  )
-                : null,
-            ),
+
+      createElement(
+        'div',
+        {
+          className: 'wf-home-semester__heading-row',
+        },
+
+        createElement(
+          'div',
+          {
+            className: 'wf-home-semester__heading-copy',
+          },
+
+          createElement(
+            'p',
+            {
+              className: 'wf-home-semester__eyebrow',
+            },
+            'CONTENTS FOR 18-2',
           ),
-        )
-      : createElement('div', {
-          className: 'wf-home-semester__source-line',
-          'data-content-state': semester.sourceStatus,
-          'aria-hidden': 'true',
-        }),
+
+          createElement(
+            'h2',
+            {
+              className: 'wf-home-semester__title',
+            },
+            semester.title,
+          ),
+        ),
+
+        createElement(
+          'div',
+          {
+            className: 'wf-home-semester__term',
+            'aria-hidden': 'true',
+          },
+          '18—2',
+        ),
+      ),
+
+      hasSchedule
+        ? createElement(
+            'ol',
+            {
+              className: 'wf-home-semester__timeline',
+            },
+
+            ...semester.scheduleItems.map((item) =>
+              createElement(
+                'li',
+                {
+                  key: item.id,
+                  className: 'wf-home-semester__item',
+                },
+
+                createElement(
+                  'span',
+                  {
+                    className: 'wf-home-semester__date',
+                  },
+                  item.period ?? item.dateLabel,
+                ),
+
+                createElement(
+                  'strong',
+                  {
+                    className:
+                      'wf-home-semester__item-title',
+                  },
+                  item.title,
+                ),
+
+                item.description
+                  ? createElement(
+                      'span',
+                      {
+                        className:
+                          'wf-home-semester__description',
+                      },
+                      item.description,
+                    )
+                  : null,
+              ),
+            ),
+          )
+        : createElement(
+            'div',
+            {
+              className: 'wf-home-semester__source-line',
+              'data-content-state': semester.sourceStatus,
+              'aria-hidden': 'true',
+            },
+          ),
+    ),
   )
 }
 
