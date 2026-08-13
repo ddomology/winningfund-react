@@ -3505,31 +3505,33 @@
 
 /* WF SHARED IDENTITY GRADIENT END */
 
-/* WF MOBILE COMPOSITION CONTINUOUS RAIL FINAL START */
+/* WF SVG PAINT TRACK FINAL START */
 
 /* =========================================================
-   FINAL OWNERSHIP
+   FINAL HERO / RAIL CONTRACT
 
-   HERO
-   - desktop keeps proportional composition
-   - mobile is a dedicated composition, not a scaled desktop
-   - row numbers disappear on mobile
-   - AND remains
-   - CLUB returns toward the stack instead of escaping right
-   - footer owns a rail-safe bottom reserve
+   Desktop HOME:
+   - proportional composition inside blue field
 
-   SECTION RAIL
-   - line + rings are ONE continuous track
-   - no visited/current/upcoming ring color events
-   - scroll progress fills the line continuously
-   - every ring stays the same hollow ring
-   - ONLY the active section gets a tiny center dot
-   - no mobile capsule / menu-card treatment
+   Mobile HOME:
+   - tighter dedicated stack
+   - no 01 / 02 / 03
+   - AND retained
+   - offsets 0 / 5 / 20%
+   - footer reserves fixed-rail space
+
+   Rail:
+   - circle outlines ARE the track
+   - straight segments terminate at circle edges
+   - SVG base path + identical painted path
+   - scroll progress clips the paint continuously
+   - no visited/current/upcoming ring events
+   - active section only = tiny center dot
    ========================================================= */
 
 
 /* =========================================================
-   DESKTOP HERO — proportional to the blue field
+   PROPORTIONAL DESKTOP HERO
    ========================================================= */
 
 .wf-home {
@@ -3600,7 +3602,7 @@
 
 
 /* =========================================================
-   ECONOMICS TERMINAL S — keep the real ink safe
+   ECONOMICS TERMINAL S
    ========================================================= */
 
 .wf-home-kinetic-row--2
@@ -3634,11 +3636,6 @@
 
 @media (max-width: 63.99rem) {
 
-  /*
-   * Keep the hero viewport-based, but let the list begin from a
-   * controlled upper position instead of vertically centering a
-   * desktop-sized stack inside the available middle row.
-   */
   .wf-home-hero__kinetic-main {
     min-height:
       calc(
@@ -3680,11 +3677,6 @@
   }
 
 
-  /*
-   * Mobile rows are deliberately tighter.
-   * The old 14-15vh rows produced the large dead bands visible
-   * between INVESTMENT / ECONOMICS / CLUB.
-   */
   .wf-home-kinetic-row {
     min-height:
       clamp(
@@ -3707,10 +3699,6 @@
   }
 
 
-  /*
-   * The reveal no longer reserves the old 42px metadata column.
-   * This puts the actual type field under the main mobile gutter.
-   */
   .wf-home-kinetic-row__reveal {
     grid-template-columns:
       minmax(
@@ -3732,10 +3720,7 @@
   }
 
 
-  /*
-   * Number metadata is redundant on mobile because the global
-   * section rail already communicates progress.
-   */
+  /* hide 01 / 02 / 03 only */
   .wf-home-kinetic-row__meta {
     position:
       absolute;
@@ -3766,10 +3751,7 @@
   }
 
 
-  /*
-   * AND is the only row annotation that remains.
-   * It belongs to ECONOMICS rather than a permanent number gutter.
-   */
+  /* AND survives as a small annotation owned by ECONOMICS */
   .wf-home-kinetic-row__annotation {
     display:
       block !important;
@@ -3805,15 +3787,7 @@
   }
 
 
-  /*
-   * Mobile diagonal is restrained:
-   *
-   * INVESTMENT  0%
-   * ECONOMICS   5%
-   * CLUB       20%
-   *
-   * It still reads diagonally, but all three words stay one object.
-   */
+  /* restrained mobile diagonal */
   .wf-home-kinetic-row--1
   .wf-home-kinetic-row__text-slot {
     margin-left:
@@ -3848,9 +3822,6 @@
   }
 
 
-  /*
-   * Keep ECONOMICS's S reserve on the actual glyph layer on mobile.
-   */
   .wf-home-kinetic-row--2
   .wf-home-kinetic-row__ghost,
 
@@ -3861,11 +3832,6 @@
   }
 
 
-  /*
-   * Pull the footer away from the browser/rail edge.
-   * This prevents CURRENT TERM and the Korean slogan from being
-   * visually cut by the fixed rail.
-   */
   .wf-home-kinetic-footer {
     width:
       100%;
@@ -3900,6 +3866,7 @@
       10px;
   }
 
+
   .wf-home-kinetic-slogan {
     justify-self:
       start;
@@ -3914,7 +3881,6 @@
 }
 
 
-/* Short mobile screens: keep all hero information visible. */
 @media (max-width: 63.99rem) and (max-height: 760px) {
 
   .wf-home-kinetic-list {
@@ -3938,15 +3904,198 @@
 
 
 /* =========================================================
-   DESKTOP CONTINUOUS TRACK
+   SVG TRACK SHARED
+   ========================================================= */
+
+.wf-home-rail {
+  pointer-events:
+    none;
+}
+
+
+.wf-home-rail::before {
+  content:
+    none !important;
+
+  display:
+    none !important;
+}
+
+
+.wf-home-rail__svg {
+  position:
+    absolute;
+
+  z-index:
+    1;
+
+  inset:
+    0;
+
+  width:
+    100%;
+
+  height:
+    100%;
+
+  overflow:
+    visible;
+
+  pointer-events:
+    none;
+}
+
+
+.wf-home-rail__svg-base,
+.wf-home-rail__svg-paint {
+  fill:
+    none;
+
+  stroke-width:
+    4;
+
+  stroke-linecap:
+    round;
+
+  stroke-linejoin:
+    round;
+
+  vector-effect:
+    non-scaling-stroke;
+}
+
+
+.wf-home-rail__svg-base {
+  stroke:
+    rgba(
+      72,
+      92,
+      122,
+      0.24
+    );
+}
+
+
+.wf-home-rail__svg-paint {
+  filter:
+    drop-shadow(
+      0
+      0
+      3px
+      rgba(
+        22,
+        140,
+        244,
+        0.13
+      )
+    );
+}
+
+
+.wf-home-rail__svg-active-dot {
+  fill:
+    var(--wf-brand-cobalt);
+
+  stroke:
+    rgba(
+      255,
+      255,
+      255,
+      0.94
+    );
+
+  stroke-width:
+    1.15;
+
+  vector-effect:
+    non-scaling-stroke;
+
+  filter:
+    drop-shadow(
+      0
+      1px
+      2px
+      rgba(
+        25,
+        63,
+        215,
+        0.18
+      )
+    );
+}
+
+
+/*
+ * Old text/tick DOM stays accessible and clickable,
+ * but has zero visual presence.
+ */
+.wf-home-rail__number,
+.wf-home-rail__label,
+.wf-home-rail__tick {
+  position:
+    absolute !important;
+
+  width:
+    1px !important;
+
+  height:
+    1px !important;
+
+  min-width:
+    0 !important;
+
+  margin:
+    -1px !important;
+
+  padding:
+    0 !important;
+
+  overflow:
+    hidden !important;
+
+  clip:
+    rect(
+      0,
+      0,
+      0,
+      0
+    ) !important;
+
+  white-space:
+    nowrap !important;
+
+  border:
+    0 !important;
+
+  opacity:
+    0 !important;
+
+  pointer-events:
+    none !important;
+}
+
+
+/*
+ * Kill every old pseudo ring implementation.
+ * The real circle stroke now lives inside the SVG track.
+ */
+.wf-home-rail__link::before,
+.wf-home-rail__link::after {
+  content:
+    none !important;
+
+  display:
+    none !important;
+}
+
+
+/* =========================================================
+   DESKTOP VERTICAL SVG TRACK
    ========================================================= */
 
 @media (min-width: 64rem) {
 
   .wf-home-rail {
-    --wf-rail-ring-size:
-      10px;
-
     top:
       50%;
 
@@ -3975,7 +4124,6 @@
       310px;
 
     padding:
-      8px
       0;
 
     transform:
@@ -3983,9 +4131,6 @@
         -50%,
         -50%
       );
-
-    pointer-events:
-      none;
 
     background:
       none !important;
@@ -4004,106 +4149,26 @@
   }
 
 
-  .wf-home-rail::before {
-    content:
-      none !important;
-
+  .wf-home-rail__svg--vertical {
     display:
-      none !important;
+      block;
   }
 
-
-  /*
-   * Base line.
-   * The progress child fills this SAME line continuously according
-   * to --wf-home-rail-progress from HomeSectionRail.js.
-   */
-  .wf-home-rail__track {
-    z-index:
-      0;
-
-    top:
-      20px;
-
-    bottom:
-      20px;
-
-    left:
-      50%;
-
-    right:
-      auto;
-
-    width:
-      1px;
-
-    height:
-      auto;
-
-    transform:
-      translateX(
-        -50%
-      );
-
-    overflow:
-      visible;
-
-    background:
-      rgba(
-        103,
-        122,
-        150,
-        0.32
-      );
-  }
-
-
-  .wf-home-rail__progress {
-    top:
-      0;
-
-    right:
-      auto;
-
-    bottom:
-      auto;
-
-    left:
-      0;
-
-    width:
-      1.5px;
-
-    height:
-      calc(
-        var(--wf-home-rail-progress)
-        * 100%
-      );
-
-    min-width:
-      0;
-
-    min-height:
-      0;
-
-    transform:
-      translateX(
-        -0.25px
-      );
-
-    background:
-      linear-gradient(
-        180deg,
-        #8fdefc 0%,
-        #168cf4 54%,
-        #193fd7 100%
-      );
+  .wf-home-rail__svg--horizontal {
+    display:
+      none;
   }
 
 
   .wf-home-rail__list {
+    position:
+      absolute;
+
     z-index:
-      2;
+      3;
+
+    inset:
+      0;
 
     height:
       100%;
@@ -4151,16 +4216,7 @@
       0;
 
     display:
-      grid;
-
-    place-items:
-      center;
-
-    grid-template-columns:
-      none;
-
-    grid-template-areas:
-      none;
+      block;
 
     color:
       transparent !important;
@@ -4179,219 +4235,33 @@
   }
 
 
-  /* visually hide text, preserve anchor semantics + aria-label */
-  .wf-home-rail__number,
-  .wf-home-rail__label,
-  .wf-home-rail__tick {
-    position:
-      absolute !important;
-
-    width:
-      1px !important;
-
-    height:
-      1px !important;
-
-    min-width:
-      0 !important;
-
-    margin:
-      -1px !important;
-
-    padding:
-      0 !important;
-
-    overflow:
-      hidden !important;
-
-    clip:
-      rect(
-        0,
-        0,
-        0,
-        0
-      ) !important;
-
-    white-space:
-      nowrap !important;
-
-    border:
-      0 !important;
-
-    opacity:
-      0 !important;
-
-    pointer-events:
-      none !important;
-  }
-
-
-  /*
-   * Every node is the SAME hollow ring.
-   * No visited/current/upcoming visual events.
-   * The line behind it owns progress.
-   */
-  .wf-home-rail__link::before,
-  .wf-home-rail__link[data-state='visited']::before,
-  .wf-home-rail__link[data-state='current']::before,
-  .wf-home-rail__link[data-state='upcoming']::before {
-    content:
-      "";
-
-    position:
-      absolute;
-
-    z-index:
-      3;
-
-    left:
-      50%;
-
-    top:
-      50%;
-
-    width:
-      var(--wf-rail-ring-size);
-
-    height:
-      var(--wf-rail-ring-size);
-
-    box-sizing:
-      border-box;
-
-    transform:
-      translate(
-        -50%,
-        -50%
-      );
-
-    border:
-      1.5px
-      solid
-      rgba(
-        91,
-        111,
-        141,
-        0.66
-      );
-
-    border-radius:
-      50%;
-
-    background:
-      rgba(
-        255,
-        255,
-        255,
-        0.92
-      );
-
-    box-shadow:
-      none;
-
-    transition:
-      border-color
-      160ms
-      var(--wf-ease-out);
-  }
-
-
-  /*
-   * ONLY active section gets a center dot.
-   * Ring size, ring border, ring color stay unchanged.
-   */
-  .wf-home-rail__link::after {
-    content:
-      "";
-
-    position:
-      absolute;
-
-    z-index:
-      4;
-
-    left:
-      50%;
-
-    top:
-      50%;
-
-    width:
-      3.5px;
-
-    height:
-      3.5px;
-
-    transform:
-      translate(
-        -50%,
-        -50%
-      )
-      scale(0);
-
-    border-radius:
-      50%;
-
-    background:
-      var(--wf-brand-blue);
-
-    opacity:
-      0;
-
-    transition:
-      transform
-      160ms
-      var(--wf-ease-out),
-      opacity
-      160ms
-      var(--wf-ease-out);
-  }
-
-
-  .wf-home-rail__link[data-state='current']::after {
-    transform:
-      translate(
-        -50%,
-        -50%
-      )
-      scale(1);
-
-    opacity:
-      1;
-  }
-
-
-  .wf-home-rail__link:hover::before,
-  .wf-home-rail__link:focus-visible::before {
-    border-color:
-      var(--wf-brand-blue);
-  }
-
   .wf-home-rail__link:focus-visible {
     outline:
-      none;
+      2px
+      solid
+      rgba(
+        22,
+        140,
+        244,
+        0.55
+      );
+
+    outline-offset:
+      2px;
+
+    border-radius:
+      999px;
   }
 }
 
 
 /* =========================================================
-   MOBILE CONTINUOUS TRACK
-
-   No pill, no capsule, no card.
-   Just:
-      ○────○────⊙────○────○
-
-   Base line is always visible.
-   Progress overlays it continuously.
-   Only the current ring receives the dot.
+   MOBILE HORIZONTAL SVG TRACK
    ========================================================= */
 
 @media (max-width: 63.99rem) {
 
   .wf-home-rail {
-    --wf-rail-ring-size:
-      8px;
-
     top:
       auto;
 
@@ -4416,7 +4286,7 @@
       224px;
 
     height:
-      26px;
+      30px;
 
     min-height:
       0;
@@ -4428,9 +4298,6 @@
       translateX(
         -50%
       );
-
-    pointer-events:
-      none;
 
     background:
       transparent !important;
@@ -4449,114 +4316,33 @@
   }
 
 
-  .wf-home-rail::before {
-    content:
-      none !important;
-
+  .wf-home-rail__svg--vertical {
     display:
-      none !important;
+      none;
+  }
+
+  .wf-home-rail__svg--horizontal {
+    display:
+      block;
   }
 
 
-  .wf-home-rail__track {
-    z-index:
-      0;
-
-    top:
-      50%;
-
-    right:
-      8px;
-
-    bottom:
-      auto;
-
-    left:
-      8px;
-
-    width:
-      auto;
-
-    height:
-      1px;
-
-    transform:
-      translateY(
-        -50%
-      );
-
-    overflow:
-      visible;
-
-    background:
-      rgba(
-        75,
-        96,
-        128,
-        0.38
-      );
-
-    filter:
-      drop-shadow(
-        0
-        1px
-        1px
-        rgba(
-          255,
-          255,
-          255,
-          0.22
-        )
-      );
-  }
-
-
-  .wf-home-rail__progress {
-    top:
-      0;
-
-    right:
-      auto;
-
-    bottom:
-      auto;
-
-    left:
-      0;
-
-    width:
-      calc(
-        var(--wf-home-rail-progress)
-        * 100%
-      );
-
-    height:
-      1.5px;
-
-    min-width:
-      0;
-
-    min-height:
-      0;
-
-    transform:
-      translateY(
-        -0.25px
-      );
-
-    background:
-      linear-gradient(
-        90deg,
-        #9fe5fd 0%,
-        #168cf4 56%,
-        #193fd7 100%
-      );
+  .wf-home-rail__svg-base,
+  .wf-home-rail__svg-paint {
+    stroke-width:
+      4.25;
   }
 
 
   .wf-home-rail__list {
+    position:
+      absolute;
+
     z-index:
-      2;
+      3;
+
+    inset:
+      0;
 
     height:
       100%;
@@ -4592,7 +4378,7 @@
       100%;
 
     height:
-      26px;
+      30px;
 
     min-height:
       0;
@@ -4601,10 +4387,7 @@
       0;
 
     display:
-      grid;
-
-    place-items:
-      center;
+      block;
 
     color:
       transparent !important;
@@ -4623,189 +4406,22 @@
   }
 
 
-  .wf-home-rail__number,
-  .wf-home-rail__label,
-  .wf-home-rail__tick {
-    position:
-      absolute !important;
-
-    width:
-      1px !important;
-
-    height:
-      1px !important;
-
-    min-width:
-      0 !important;
-
-    margin:
-      -1px !important;
-
-    padding:
-      0 !important;
-
-    overflow:
-      hidden !important;
-
-    clip:
-      rect(
-        0,
-        0,
-        0,
-        0
-      ) !important;
-
-    white-space:
-      nowrap !important;
-
-    border:
-      0 !important;
-
-    opacity:
-      0 !important;
-
-    pointer-events:
-      none !important;
-  }
-
-
-  /*
-   * Same ring for every state.
-   * There is no visited/current/upcoming border transition.
-   */
-  .wf-home-rail__link::before,
-  .wf-home-rail__link[data-state='visited']::before,
-  .wf-home-rail__link[data-state='current']::before,
-  .wf-home-rail__link[data-state='upcoming']::before {
-    content:
-      "";
-
-    position:
-      absolute;
-
-    z-index:
-      3;
-
-    left:
-      50%;
-
-    top:
-      50%;
-
-    width:
-      var(--wf-rail-ring-size);
-
-    height:
-      var(--wf-rail-ring-size);
-
-    box-sizing:
-      border-box;
-
-    transform:
-      translate(
-        -50%,
-        -50%
-      );
-
-    border:
-      1.5px
-      solid
-      rgba(
-        67,
-        89,
-        122,
-        0.66
-      );
-
-    border-radius:
-      50%;
-
-    background:
-      rgba(
-        255,
-        255,
-        255,
-        0.90
-      );
-
-    box-shadow:
-      0
-      0
-      0
-      1px
-      rgba(
-        255,
-        255,
-        255,
-        0.12
-      );
-  }
-
-
-  .wf-home-rail__link::after {
-    content:
-      "";
-
-    position:
-      absolute;
-
-    z-index:
-      4;
-
-    left:
-      50%;
-
-    top:
-      50%;
-
-    width:
-      3px;
-
-    height:
-      3px;
-
-    transform:
-      translate(
-        -50%,
-        -50%
-      )
-      scale(0);
-
-    border-radius:
-      50%;
-
-    background:
-      var(--wf-brand-blue);
-
-    opacity:
-      0;
-
-    transition:
-      transform
-      160ms
-      var(--wf-ease-out),
-      opacity
-      160ms
-      var(--wf-ease-out);
-  }
-
-
-  .wf-home-rail__link[data-state='current']::after {
-    transform:
-      translate(
-        -50%,
-        -50%
-      )
-      scale(1);
-
-    opacity:
-      1;
-  }
-
-
   .wf-home-rail__link:focus-visible {
     outline:
-      none;
+      2px
+      solid
+      rgba(
+        22,
+        140,
+        244,
+        0.55
+      );
+
+    outline-offset:
+      1px;
+
+    border-radius:
+      999px;
   }
 }
 
@@ -4839,15 +4455,15 @@
 
   .wf-home-rail {
     width:
-      200px;
+      204px;
 
     height:
-      24px;
+      28px;
   }
 
   .wf-home-rail__link {
     height:
-      24px;
+      28px;
   }
 }
 
@@ -4858,10 +4474,11 @@
 
 @media (prefers-reduced-motion: reduce) {
 
-  .wf-home-rail__link::after {
-    transition:
+  .wf-home-rail__svg-paint,
+  .wf-home-rail__svg-active-dot {
+    filter:
       none !important;
   }
 }
 
-/* WF MOBILE COMPOSITION CONTINUOUS RAIL FINAL END */
+/* WF SVG PAINT TRACK FINAL END */
