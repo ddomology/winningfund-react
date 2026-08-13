@@ -4,6 +4,7 @@
   useState,
 } from 'react'
 import InternalSectionNav from '../components/InternalSectionNav.js'
+import { RouteHeroTitle, RouteHeroWave } from '../components/RouteHeroEffects.js'
 import ResponsiveMedia from '../components/ResponsiveMedia.js'
 import {
   selectActivitiesPageData,
@@ -46,32 +47,6 @@ function ActivityMedia({
   )
 }
 
-
-function ActivitiesWave() {
-  return createElement(
-    'div',
-    {
-      className: 'wf-activities-wave',
-      'aria-hidden': 'true',
-    },
-    createElement(
-      'svg',
-      {
-        viewBox: '0 0 1440 118',
-        preserveAspectRatio: 'none',
-        focusable: 'false',
-      },
-      createElement('path', {
-        d: 'M0,70 C240,15 450,118 720,68 C990,18 1180,26 1440,76 L1440,118 L0,118 Z',
-        fill: '#ffffff',
-      }),
-      createElement('path', {
-        d: 'M0,88 C260,47 500,112 800,76 C1060,44 1220,44 1440,84 L1440,118 L0,118 Z',
-        fill: 'rgba(255,255,255,0.64)',
-      }),
-    ),
-  )
-}
 
 function ProgramHeading({ activity }) {
   return createElement(
@@ -613,15 +588,11 @@ export default function ActivitiesPage() {
           'WINNINGFUND',
         ),
 
-        createElement(
-          'h1',
-          {
-            id: 'wf-activities-title',
-            className:
-              'wf-activities-hero__title',
-          },
-          'ACTIVITIES',
-        ),
+        createElement(RouteHeroTitle, {
+          id: 'wf-activities-title',
+          className: 'wf-activities-hero__title',
+          title: 'ACTIVITIES',
+        }),
 
         createElement(
           'p',
@@ -633,7 +604,7 @@ export default function ActivitiesPage() {
         ),
       ),
 
-      createElement(ActivitiesWave),
+      createElement(RouteHeroWave, { waveId: 'wf-activities-route-wave', surface: 'white' }),
     ),
 
     createElement(

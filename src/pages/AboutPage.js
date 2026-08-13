@@ -1,4 +1,5 @@
 ﻿import { createElement } from 'react'
+import { RouteHeroTitle, RouteHeroWave } from '../components/RouteHeroEffects.js'
 import {
   selectAboutPageData,
   siteContentBundle,
@@ -6,32 +7,6 @@ import {
 
 const aboutData =
   selectAboutPageData(siteContentBundle)
-
-function AboutWave() {
-  return createElement(
-    'div',
-    {
-      className: 'wf-about-wave',
-      'aria-hidden': 'true',
-    },
-    createElement(
-      'svg',
-      {
-        viewBox: '0 0 1440 120',
-        preserveAspectRatio: 'none',
-        focusable: 'false',
-      },
-      createElement('path', {
-        d: 'M0,74 C220,18 420,118 690,68 C920,26 1120,14 1440,72 L1440,120 L0,120 Z',
-        fill: '#f7faff',
-      }),
-      createElement('path', {
-        d: 'M0,90 C260,46 470,118 760,76 C1030,37 1210,42 1440,82 L1440,120 L0,120 Z',
-        fill: 'rgba(247,250,255,0.62)',
-      }),
-    ),
-  )
-}
 
 function SectionIntro({
   index,
@@ -316,14 +291,11 @@ export default function AboutPage() {
           hero.eyebrow ?? 'WINNINGFUND',
         ),
 
-        createElement(
-          'h1',
-          {
-            id: 'wf-about-title',
-            className: 'wf-about-hero__title',
-          },
-          hero.title ?? 'ABOUT',
-        ),
+        createElement(RouteHeroTitle, {
+          id: 'wf-about-title',
+          className: 'wf-about-hero__title',
+          title: hero.title ?? 'ABOUT',
+        }),
 
         createElement(
           'p',
@@ -360,7 +332,7 @@ export default function AboutPage() {
         ),
       ),
 
-      createElement(AboutWave),
+      createElement(RouteHeroWave, { waveId: 'wf-about-route-wave', surface: 'soft' }),
     ),
 
     createElement(

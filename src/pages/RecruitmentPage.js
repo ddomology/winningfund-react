@@ -1,5 +1,6 @@
 ﻿import { createElement } from 'react'
 import CTAButton from '../components/CTAButton.js'
+import { RouteHeroTitle, RouteHeroWave } from '../components/RouteHeroEffects.js'
 import {
   selectRecruitmentPageData,
   selectSiteConfig,
@@ -78,32 +79,6 @@ function formatDateToken(value) {
   return `${month}.${day}`
 }
 
-function RecruitmentWave() {
-  return createElement(
-    'div',
-    {
-      className: 'wf-recruitment-wave',
-      'aria-hidden': 'true',
-    },
-    createElement(
-      'svg',
-      {
-        viewBox: '0 0 1440 120',
-        preserveAspectRatio: 'none',
-        focusable: 'false',
-      },
-      createElement('path', {
-        d: 'M0,74 C240,18 454,118 728,67 C980,21 1190,22 1440,74 L1440,120 L0,120 Z',
-        fill: '#ffffff',
-      }),
-      createElement('path', {
-        d: 'M0,91 C268,47 508,114 808,77 C1072,44 1234,43 1440,84 L1440,120 L0,120 Z',
-        fill: 'rgba(255,255,255,0.62)',
-      }),
-    ),
-  )
-}
-
 export default function RecruitmentPage() {
   const { record } = recruitmentData
   const period = record?.period
@@ -148,14 +123,12 @@ export default function RecruitmentPage() {
           ),
         ),
 
-        createElement(
-          'h1',
-          {
-            id: 'wf-recruitment-title',
-            className: 'wf-recruitment-hero__title',
-          },
-          'RECRUITMENT',
-        ),
+        createElement(RouteHeroTitle, {
+          id: 'wf-recruitment-title',
+          className: 'wf-recruitment-hero__title',
+          title: 'RECRUITMENT',
+          alignment: 'left',
+        }),
 
         createElement(
           'div',
@@ -202,7 +175,7 @@ export default function RecruitmentPage() {
         ),
       ),
 
-      createElement(RecruitmentWave),
+      createElement(RouteHeroWave, { waveId: 'wf-recruitment-route-wave', surface: 'white' }),
     ),
 
     createElement(

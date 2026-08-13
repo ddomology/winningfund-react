@@ -1,4 +1,5 @@
 ﻿import { createElement } from 'react'
+import { RouteHeroTitle, RouteHeroWave } from '../components/RouteHeroEffects.js'
 import Accordion from '../components/Accordion.js'
 import MemberGrid from '../components/MemberGrid.js'
 import {
@@ -9,32 +10,6 @@ import {
 
 const membersData =
   selectMembersPageData(siteContentBundle)
-
-function MembersWave() {
-  return createElement(
-    'div',
-    {
-      className: 'wf-members-wave',
-      'aria-hidden': 'true',
-    },
-    createElement(
-      'svg',
-      {
-        viewBox: '0 0 1440 118',
-        preserveAspectRatio: 'none',
-        focusable: 'false',
-      },
-      createElement('path', {
-        d: 'M0,70 C240,15 450,118 720,68 C990,18 1180,26 1440,76 L1440,118 L0,118 Z',
-        fill: '#f7faff',
-      }),
-      createElement('path', {
-        d: 'M0,88 C260,47 500,112 800,76 C1060,44 1220,44 1440,84 L1440,118 L0,118 Z',
-        fill: 'rgba(247,250,255,0.62)',
-      }),
-    ),
-  )
-}
 
 function HistoricalMembers({ term }) {
   if (term.dataStatus !== 'AVAILABLE') {
@@ -106,14 +81,11 @@ export default function MembersPage() {
           'WINNINGFUND',
         ),
 
-        createElement(
-          'h1',
-          {
-            id: 'wf-members-title',
-            className: 'wf-members-hero__title',
-          },
-          'MEMBERS',
-        ),
+        createElement(RouteHeroTitle, {
+          id: 'wf-members-title',
+          className: 'wf-members-hero__title',
+          title: 'MEMBERS',
+        }),
 
         createElement(
           'p',
@@ -124,7 +96,7 @@ export default function MembersPage() {
         ),
       ),
 
-      createElement(MembersWave),
+      createElement(RouteHeroWave, { waveId: 'wf-members-route-wave', surface: 'soft' }),
     ),
 
     current
