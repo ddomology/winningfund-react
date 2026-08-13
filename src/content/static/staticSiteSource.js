@@ -436,90 +436,495 @@ const source = {
       "label": "18-1",
       "order": 2,
       "cohortStatus": "HISTORICAL",
-      "dataStatus": "UNAVAILABLE",
-      "members": [],
-      "sourceStatus": "UNAVAILABLE",
-      "sourceNote": "source-row-retained-records-not-imported"
+      "dataStatus": "AVAILABLE",
+      "members": [
+        {
+          "memberId": "18-1-member-01",
+          "name": "성인제",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "18-1-member-02",
+          "name": "박지민",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "18-1-member-03",
+          "name": "강나연",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "18-1-member-04",
+          "name": "김호준",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "18-1-member-05",
+          "name": "공나영",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "18-1-member-06",
+          "name": "박서준",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "18-1-member-07",
+          "name": "박지영",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "18-1-member-08",
+          "name": "이다현",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "18-1-member-09",
+          "name": "이규정",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "18-1-member-10",
+          "name": "오성아",
+          "sourceStatus": "AUTHORITATIVE"
+        }
+      ],
+      "sourceStatus": "AUTHORITATIVE"
     },
     {
       "termId": "17-2",
       "label": "17-2",
       "order": 3,
       "cohortStatus": "HISTORICAL",
-      "dataStatus": "UNAVAILABLE",
-      "members": [],
-      "sourceStatus": "UNAVAILABLE",
-      "sourceNote": "source-row-retained-records-not-imported"
+      "dataStatus": "AVAILABLE",
+      "members": [
+        {
+          "memberId": "17-2-member-01",
+          "name": "김민찬",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "17-2-member-02",
+          "name": "공규식",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "17-2-member-03",
+          "name": "김진혁",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "17-2-member-04",
+          "name": "김호준",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "17-2-member-05",
+          "name": "마시은",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "17-2-member-06",
+          "name": "성인제",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "17-2-member-07",
+          "name": "이선웅",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "17-2-member-08",
+          "name": "최윤호",
+          "sourceStatus": "AUTHORITATIVE"
+        }
+      ],
+      "sourceStatus": "AUTHORITATIVE"
     },
     {
       "termId": "17-1",
       "label": "17-1",
       "order": 4,
       "cohortStatus": "HISTORICAL",
-      "dataStatus": "UNAVAILABLE",
-      "members": [],
-      "sourceStatus": "UNAVAILABLE",
-      "sourceNote": "source-row-retained-records-not-imported"
+      "dataStatus": "AVAILABLE",
+      "members": [
+        {
+          "memberId": "17-1-member-01",
+          "name": "김민찬",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "17-1-member-02",
+          "name": "김나예",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "17-1-member-03",
+          "name": "김도현(98)",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "17-1-member-04",
+          "name": "김도현(00)",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "17-1-member-05",
+          "name": "김도현(01)",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "17-1-member-06",
+          "name": "안서령",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "17-1-member-07",
+          "name": "임지윤",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "17-1-member-08",
+          "name": "정승은",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "17-1-member-09",
+          "name": "황서영",
+          "sourceStatus": "AUTHORITATIVE"
+        }
+      ],
+      "sourceStatus": "AUTHORITATIVE"
     },
     {
       "termId": "16-2",
       "label": "16-2",
       "order": 5,
       "cohortStatus": "HISTORICAL",
-      "dataStatus": "UNAVAILABLE",
-      "members": [],
-      "sourceStatus": "UNAVAILABLE",
-      "sourceNote": "source-row-retained-records-not-imported"
+      "dataStatus": "AVAILABLE",
+      "members": [
+        {
+          "memberId": "16-2-member-01",
+          "name": "오사랑",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "16-2-member-02",
+          "name": "손효정",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "16-2-member-03",
+          "name": "김정현",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "16-2-member-04",
+          "name": "김민찬",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "16-2-member-05",
+          "name": "김도현",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "16-2-member-06",
+          "name": "박평수",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "16-2-member-07",
+          "name": "최인서",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "16-2-member-08",
+          "name": "김태욱",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "16-2-member-09",
+          "name": "강지영",
+          "sourceStatus": "AUTHORITATIVE"
+        }
+      ],
+      "sourceStatus": "AUTHORITATIVE"
     },
     {
       "termId": "16-1",
       "label": "16-1",
       "order": 6,
       "cohortStatus": "HISTORICAL",
-      "dataStatus": "UNAVAILABLE",
-      "members": [],
-      "sourceStatus": "UNAVAILABLE",
-      "sourceNote": "source-row-retained-records-not-imported"
+      "dataStatus": "AVAILABLE",
+      "members": [
+        {
+          "memberId": "16-1-member-01",
+          "name": "서재혁",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "16-1-member-02",
+          "name": "강지영",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "16-1-member-03",
+          "name": "이서현",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "16-1-member-04",
+          "name": "천근희",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "16-1-member-05",
+          "name": "김태욱",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "16-1-member-06",
+          "name": "황의민",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "16-1-member-07",
+          "name": "최시은",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "16-1-member-08",
+          "name": "손효정",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "16-1-member-09",
+          "name": "오사랑",
+          "sourceStatus": "AUTHORITATIVE"
+        }
+      ],
+      "sourceStatus": "AUTHORITATIVE"
     },
     {
       "termId": "15-2",
       "label": "15-2",
       "order": 7,
       "cohortStatus": "HISTORICAL",
-      "dataStatus": "UNAVAILABLE",
-      "members": [],
-      "sourceStatus": "UNAVAILABLE",
-      "sourceNote": "source-row-retained-records-not-imported"
+      "dataStatus": "AVAILABLE",
+      "members": [
+        {
+          "memberId": "15-2-member-01",
+          "name": "서재혁",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "15-2-member-02",
+          "name": "남정빈",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "15-2-member-03",
+          "name": "최은교",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "15-2-member-04",
+          "name": "박성진",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "15-2-member-05",
+          "name": "이예림",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "15-2-member-06",
+          "name": "김정민",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "15-2-member-07",
+          "name": "김수빈",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "15-2-member-08",
+          "name": "성준규",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "15-2-member-09",
+          "name": "조현규",
+          "sourceStatus": "AUTHORITATIVE"
+        }
+      ],
+      "sourceStatus": "AUTHORITATIVE"
     },
     {
       "termId": "15-1",
       "label": "15-1",
       "order": 8,
       "cohortStatus": "HISTORICAL",
-      "dataStatus": "UNAVAILABLE",
-      "members": [],
-      "sourceStatus": "UNAVAILABLE",
-      "sourceNote": "source-row-retained-records-not-imported"
+      "dataStatus": "AVAILABLE",
+      "members": [
+        {
+          "memberId": "15-1-member-01",
+          "name": "강동민",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "15-1-member-02",
+          "name": "심혜림",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "15-1-member-03",
+          "name": "남정빈",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "15-1-member-04",
+          "name": "박성진",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "15-1-member-05",
+          "name": "유동연",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "15-1-member-06",
+          "name": "서재혁",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "15-1-member-07",
+          "name": "심우승",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "15-1-member-08",
+          "name": "김수빈",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "15-1-member-09",
+          "name": "이경태",
+          "sourceStatus": "AUTHORITATIVE"
+        }
+      ],
+      "sourceStatus": "AUTHORITATIVE"
     },
     {
       "termId": "14-2",
       "label": "14-2",
       "order": 9,
       "cohortStatus": "HISTORICAL",
-      "dataStatus": "UNAVAILABLE",
-      "members": [],
-      "sourceStatus": "UNAVAILABLE",
-      "sourceNote": "source-row-retained-records-not-imported"
+      "dataStatus": "AVAILABLE",
+      "members": [
+        {
+          "memberId": "14-2-member-01",
+          "name": "이동휘",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "14-2-member-02",
+          "name": "심혜림",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "14-2-member-03",
+          "name": "김태형",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "14-2-member-04",
+          "name": "강동민",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "14-2-member-05",
+          "name": "금동길",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "14-2-member-06",
+          "name": "김지연",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "14-2-member-07",
+          "name": "이상혁",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "14-2-member-08",
+          "name": "남정빈",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "14-2-member-09",
+          "name": "서정민",
+          "sourceStatus": "AUTHORITATIVE"
+        }
+      ],
+      "sourceStatus": "AUTHORITATIVE"
     },
     {
       "termId": "14-1",
       "label": "14-1",
       "order": 10,
       "cohortStatus": "HISTORICAL",
-      "dataStatus": "UNAVAILABLE",
-      "members": [],
-      "sourceStatus": "UNAVAILABLE",
-      "sourceNote": "source-row-retained-records-not-imported"
+      "dataStatus": "AVAILABLE",
+      "members": [
+        {
+          "memberId": "14-1-member-01",
+          "name": "이혜규",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "14-1-member-02",
+          "name": "김가희",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "14-1-member-03",
+          "name": "이장미",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "14-1-member-04",
+          "name": "배가현",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "14-1-member-05",
+          "name": "박민호",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "14-1-member-06",
+          "name": "이동휘",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "14-1-member-07",
+          "name": "심혜림",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "14-1-member-08",
+          "name": "조혜온",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "14-1-member-09",
+          "name": "김지훈",
+          "sourceStatus": "AUTHORITATIVE"
+        }
+      ],
+      "sourceStatus": "AUTHORITATIVE"
     },
     {
       "termId": "13-2",
@@ -536,30 +941,180 @@ const source = {
       "label": "13-1",
       "order": 12,
       "cohortStatus": "HISTORICAL",
-      "dataStatus": "UNAVAILABLE",
-      "members": [],
-      "sourceStatus": "UNAVAILABLE",
-      "sourceNote": "source-row-retained-records-not-imported"
+      "dataStatus": "AVAILABLE",
+      "members": [
+        {
+          "memberId": "13-1-member-01",
+          "name": "임성원",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "13-1-member-02",
+          "name": "서지은",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "13-1-member-03",
+          "name": "김나현",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "13-1-member-04",
+          "name": "김민정",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "13-1-member-05",
+          "name": "고소영",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "13-1-member-06",
+          "name": "김태현",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "13-1-member-07",
+          "name": "김영우",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "13-1-member-08",
+          "name": "김재돈",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "13-1-member-09",
+          "name": "김가희",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "13-1-member-10",
+          "name": "조부현",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "13-1-member-11",
+          "name": "이혜규",
+          "sourceStatus": "AUTHORITATIVE"
+        }
+      ],
+      "sourceStatus": "AUTHORITATIVE"
     },
     {
       "termId": "12-2",
       "label": "12-2",
       "order": 13,
       "cohortStatus": "HISTORICAL",
-      "dataStatus": "UNAVAILABLE",
-      "members": [],
-      "sourceStatus": "UNAVAILABLE",
-      "sourceNote": "source-row-retained-records-not-imported"
+      "dataStatus": "AVAILABLE",
+      "members": [
+        {
+          "memberId": "12-2-member-01",
+          "name": "우용안",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "12-2-member-02",
+          "name": "김수현",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "12-2-member-03",
+          "name": "윤승민",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "12-2-member-04",
+          "name": "곽하빈",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "12-2-member-05",
+          "name": "장진영",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "12-2-member-06",
+          "name": "유소정",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "12-2-member-07",
+          "name": "서지은",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "12-2-member-08",
+          "name": "이예진",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "12-2-member-09",
+          "name": "김나현",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "12-2-member-10",
+          "name": "임성원",
+          "sourceStatus": "AUTHORITATIVE"
+        }
+      ],
+      "sourceStatus": "AUTHORITATIVE"
     },
     {
       "termId": "12-1",
       "label": "12-1",
       "order": 14,
       "cohortStatus": "HISTORICAL",
-      "dataStatus": "UNAVAILABLE",
-      "members": [],
-      "sourceStatus": "UNAVAILABLE",
-      "sourceNote": "source-row-retained-records-not-imported"
+      "dataStatus": "AVAILABLE",
+      "members": [
+        {
+          "memberId": "12-1-member-01",
+          "name": "우용안",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "12-1-member-02",
+          "name": "윤승민",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "12-1-member-03",
+          "name": "곽하빈",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "12-1-member-04",
+          "name": "장진영",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "12-1-member-05",
+          "name": "유소정",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "12-1-member-06",
+          "name": "서지은",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "12-1-member-07",
+          "name": "이예진",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "12-1-member-08",
+          "name": "김나현",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "12-1-member-09",
+          "name": "임성원",
+          "sourceStatus": "AUTHORITATIVE"
+        }
+      ],
+      "sourceStatus": "AUTHORITATIVE"
     },
     {
       "termId": "11-2",
@@ -576,50 +1131,335 @@ const source = {
       "label": "11-1",
       "order": 16,
       "cohortStatus": "HISTORICAL",
-      "dataStatus": "UNAVAILABLE",
-      "members": [],
-      "sourceStatus": "UNAVAILABLE",
-      "sourceNote": "source-row-retained-records-not-imported"
+      "dataStatus": "AVAILABLE",
+      "members": [
+        {
+          "memberId": "11-1-member-01",
+          "name": "윤승민",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "11-1-member-02",
+          "name": "김누리",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "11-1-member-03",
+          "name": "조남헌",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "11-1-member-04",
+          "name": "원호연",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "11-1-member-05",
+          "name": "최길호",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "11-1-member-06",
+          "name": "우가연",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "11-1-member-07",
+          "name": "장원진",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "11-1-member-08",
+          "name": "이아리",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "11-1-member-09",
+          "name": "윤나연",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "11-1-member-10",
+          "name": "김수현",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "11-1-member-11",
+          "name": "우용안",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "11-1-member-12",
+          "name": "조하윤",
+          "sourceStatus": "AUTHORITATIVE"
+        }
+      ],
+      "sourceStatus": "AUTHORITATIVE"
     },
     {
       "termId": "10-2",
       "label": "10-2",
       "order": 17,
       "cohortStatus": "HISTORICAL",
-      "dataStatus": "UNAVAILABLE",
-      "members": [],
-      "sourceStatus": "UNAVAILABLE",
-      "sourceNote": "source-row-retained-records-not-imported"
+      "dataStatus": "AVAILABLE",
+      "members": [
+        {
+          "memberId": "10-2-member-01",
+          "name": "오승현",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "10-2-member-02",
+          "name": "문혜준",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "10-2-member-03",
+          "name": "박경언",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "10-2-member-04",
+          "name": "강연수",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "10-2-member-05",
+          "name": "조남헌",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "10-2-member-06",
+          "name": "이채린",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "10-2-member-07",
+          "name": "한윤",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "10-2-member-08",
+          "name": "강승미",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "10-2-member-09",
+          "name": "김도연",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "10-2-member-10",
+          "name": "류나경",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "10-2-member-11",
+          "name": "홍성희",
+          "sourceStatus": "AUTHORITATIVE"
+        }
+      ],
+      "sourceStatus": "AUTHORITATIVE"
     },
     {
       "termId": "10-1",
       "label": "10-1",
       "order": 18,
       "cohortStatus": "HISTORICAL",
-      "dataStatus": "UNAVAILABLE",
-      "members": [],
-      "sourceStatus": "UNAVAILABLE",
-      "sourceNote": "source-row-retained-records-not-imported"
+      "dataStatus": "AVAILABLE",
+      "members": [
+        {
+          "memberId": "10-1-member-01",
+          "name": "공재민",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "10-1-member-02",
+          "name": "박경언",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "10-1-member-03",
+          "name": "강승미",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "10-1-member-04",
+          "name": "고수희",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "10-1-member-05",
+          "name": "남경준",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "10-1-member-06",
+          "name": "류나경",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "10-1-member-07",
+          "name": "김도연",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "10-1-member-08",
+          "name": "오승현",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "10-1-member-09",
+          "name": "조남헌",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "10-1-member-10",
+          "name": "이채린",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "10-1-member-11",
+          "name": "장유성",
+          "sourceStatus": "AUTHORITATIVE"
+        }
+      ],
+      "sourceStatus": "AUTHORITATIVE"
     },
     {
       "termId": "9-2",
       "label": "9-2",
       "order": 19,
       "cohortStatus": "HISTORICAL",
-      "dataStatus": "UNAVAILABLE",
-      "members": [],
-      "sourceStatus": "UNAVAILABLE",
-      "sourceNote": "source-row-retained-records-not-imported"
+      "dataStatus": "AVAILABLE",
+      "members": [
+        {
+          "memberId": "9-2-member-01",
+          "name": "강연수",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "9-2-member-02",
+          "name": "육지연",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "9-2-member-03",
+          "name": "강호열",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "9-2-member-04",
+          "name": "고수희",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "9-2-member-05",
+          "name": "김예지",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "9-2-member-06",
+          "name": "공재민",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "9-2-member-07",
+          "name": "김효정",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "9-2-member-08",
+          "name": "최진원",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "9-2-member-09",
+          "name": "김헌영",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "9-2-member-10",
+          "name": "장유성",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "9-2-member-11",
+          "name": "강승미",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "9-2-member-12",
+          "name": "허진석",
+          "sourceStatus": "AUTHORITATIVE"
+        }
+      ],
+      "sourceStatus": "AUTHORITATIVE"
     },
     {
       "termId": "9-1",
       "label": "9-1",
       "order": 20,
       "cohortStatus": "HISTORICAL",
-      "dataStatus": "UNAVAILABLE",
-      "members": [],
-      "sourceStatus": "UNAVAILABLE",
-      "sourceNote": "source-row-retained-records-not-imported"
+      "dataStatus": "AVAILABLE",
+      "members": [
+        {
+          "memberId": "9-1-member-01",
+          "name": "강연수",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "9-1-member-02",
+          "name": "강호열",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "9-1-member-03",
+          "name": "박훈민",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "9-1-member-04",
+          "name": "강민정",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "9-1-member-05",
+          "name": "공재민",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "9-1-member-06",
+          "name": "육지연",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "9-1-member-07",
+          "name": "허진석",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "9-1-member-08",
+          "name": "김헌영",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "9-1-member-09",
+          "name": "김효정",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "9-1-member-10",
+          "name": "이숙희",
+          "sourceStatus": "AUTHORITATIVE"
+        },
+        {
+          "memberId": "9-1-member-11",
+          "name": "장유성",
+          "sourceStatus": "AUTHORITATIVE"
+        }
+      ],
+      "sourceStatus": "AUTHORITATIVE"
     },
     {
       "termId": "8-2",

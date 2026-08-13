@@ -243,18 +243,22 @@ if (
   fail('AboutPage.js ABOUT composition missing')
 }
 
-for (const page of [
-  'MembersPage.js',
-  'ActivitiesPage.js',
-  'RecruitmentPage.js',
-]) {
-  const text = read(`src/pages/${page}`)
+const membersText = read('src/pages/MembersPage.js')
+if (
+  !membersText.includes('RoutePlaceholder') &&
+  membersText.includes('selectMembersPageData') &&
+  membersText.includes('MemberGrid') &&
+  membersText.includes('Accordion')
+) {
+  pass('MembersPage.js now composes MEMBERS UI through normalized data')
+} else {
+  fail('MembersPage.js MEMBERS composition missing')
+}
 
-  if (text.includes('RoutePlaceholder')) {
-    pass(`${page} remains business-UI placeholder`)
-  } else {
-    fail(`${page} implemented page composition before its stage`)
-  }
+for (const page of ['ActivitiesPage.js','RecruitmentPage.js']) {
+  const text = read(`src/pages/${page}`)
+  if (text.includes('RoutePlaceholder')) pass(`${page} remains business-UI placeholder`)
+  else fail(`${page} implemented page composition before its stage`)
 }
 
 if (failed) {

@@ -51,7 +51,19 @@ if(!fs.existsSync(aboutPath)){
     : fail('AboutPage.js ABOUT implementation missing')
 }
 
-for (const page of ['MembersPage.js','ActivitiesPage.js','RecruitmentPage.js']) {
+const membersPath=path.join(root,'src','pages','MembersPage.js')
+if(!fs.existsSync(membersPath)){
+  fail('missing MembersPage.js')
+}else{
+  const membersText=fs.readFileSync(membersPath,'utf8')
+  !membersText.includes('RoutePlaceholder') &&
+  membersText.includes('selectMembersPageData') &&
+  membersText.includes("className: 'wf-members'")
+    ? pass('MembersPage.js implemented through normalized MEMBERS selector')
+    : fail('MembersPage.js MEMBERS implementation missing')
+}
+
+for (const page of ['ActivitiesPage.js','RecruitmentPage.js']) {
   const full=path.join(root,'src','pages',page)
   if(!fs.existsSync(full)){fail(`missing ${page}`);continue}
   fs.readFileSync(full,'utf8').includes('RoutePlaceholder')

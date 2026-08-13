@@ -158,7 +158,17 @@ if (
   fail('AboutPage.js implementation boundary invalid')
 }
 
-for (const page of ['MembersPage.js','ActivitiesPage.js','RecruitmentPage.js']) {
+const membersPageSource = read('src/pages/MembersPage.js')
+if (
+  !membersPageSource.includes('RoutePlaceholder') &&
+  membersPageSource.includes('selectMembersPageData')
+) {
+  pass('MembersPage.js is intentionally implemented after ABOUT')
+} else {
+  fail('MembersPage.js implementation boundary invalid')
+}
+
+for (const page of ['ActivitiesPage.js','RecruitmentPage.js']) {
   const text = read(`src/pages/${page}`)
   if (text.includes('RoutePlaceholder')) pass(`${page} remains placeholder`)
   else fail(`${page} unexpectedly implemented`)
