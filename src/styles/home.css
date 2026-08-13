@@ -5630,3 +5630,447 @@
 }
 
 /* WF INTRO EDITORIAL 02 FINAL END */
+
+/* WF INTRO 02 BRAND COLOR FINAL START */
+
+/* =========================================================
+   INTRO BRAND COLOR LANGUAGE
+
+   Keep the editorial white field.
+   Add WinningFund identity through:
+   - sky/cobalt ambient light
+   - gradient section index
+   - semantic "좋은 질문" accent
+   - stronger gradient proof rail
+   - brand-colored proof values
+
+   No cards. No blue background takeover.
+   ========================================================= */
+
+.wf-home-intro {
+  background:
+    radial-gradient(
+      circle at 88% 10%,
+      rgba(
+        105,
+        204,
+        245,
+        0.18
+      )
+      0%,
+      rgba(
+        105,
+        204,
+        245,
+        0.075
+      )
+      18%,
+      transparent
+      38%
+    ),
+    radial-gradient(
+      circle at 4% 92%,
+      rgba(
+        25,
+        63,
+        215,
+        0.075
+      )
+      0%,
+      transparent
+      34%
+    ),
+    linear-gradient(
+      180deg,
+      #fcfeff 0%,
+      #f7faff 56%,
+      #f5f9ff 100%
+    );
+}
+
+
+/* very subtle brand wash, never a box */
+.wf-home-intro::after {
+  content:
+    "";
+
+  position:
+    absolute;
+
+  z-index:
+    0;
+
+  top:
+    0;
+
+  right:
+    0;
+
+  width:
+    min(
+      42vw,
+      620px
+    );
+
+  height:
+    2px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent 0%,
+      var(--wf-brand-sky) 28%,
+      var(--wf-brand-blue) 64%,
+      var(--wf-brand-cobalt) 100%
+    );
+
+  opacity:
+    0.72;
+
+  pointer-events:
+    none;
+}
+
+
+.wf-home-intro__editorial {
+  position:
+    relative;
+
+  z-index:
+    1;
+}
+
+
+/* =========================================================
+   02 / 소개
+   ========================================================= */
+
+.wf-home-intro__index {
+  position:
+    relative;
+
+  width:
+    fit-content;
+
+  color:
+    transparent;
+
+  background:
+    linear-gradient(
+      110deg,
+      var(--wf-brand-sky) 0%,
+      var(--wf-brand-blue) 48%,
+      var(--wf-brand-cobalt) 100%
+    );
+
+  background-clip:
+    text;
+
+  -webkit-background-clip:
+    text;
+
+  -webkit-text-fill-color:
+    transparent;
+}
+
+
+.wf-home-intro__index::before {
+  content:
+    "";
+
+  position:
+    absolute;
+
+  top:
+    50%;
+
+  right:
+    calc(
+      100%
+      + 12px
+    );
+
+  width:
+    24px;
+
+  height:
+    2px;
+
+  border-radius:
+    999px;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--wf-brand-sky),
+      var(--wf-brand-blue)
+    );
+
+  transform:
+    translateY(
+      -50%
+    );
+}
+
+
+/* =========================================================
+   HEADLINE: ONLY "좋은 질문" gets the strong color hit
+   ========================================================= */
+
+.wf-home-intro__headline-accent {
+  color:
+    transparent;
+
+  background:
+    linear-gradient(
+      112deg,
+      #35b8f4 0%,
+      #168cf4 42%,
+      #193fd7 100%
+    );
+
+  background-size:
+    160% 100%;
+
+  background-position:
+    0% 50%;
+
+  background-clip:
+    text;
+
+  -webkit-background-clip:
+    text;
+
+  -webkit-text-fill-color:
+    transparent;
+
+  text-shadow:
+    0
+    8px
+    28px
+    rgba(
+      22,
+      140,
+      244,
+      0.08
+    );
+}
+
+
+/* =========================================================
+   PROOF TRACK
+   ========================================================= */
+
+.wf-home-intro__proof::before {
+  height:
+    2px;
+
+  border-radius:
+    999px;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--wf-brand-sky) 0%,
+      var(--wf-brand-blue) 42%,
+      var(--wf-brand-cobalt) 72%,
+      rgba(
+        25,
+        63,
+        215,
+        0.12
+      )
+      100%
+    );
+
+  box-shadow:
+    0
+    0
+    18px
+    rgba(
+      22,
+      140,
+      244,
+      0.08
+    );
+}
+
+
+/* all proof values now belong to the same brand system */
+.wf-home-intro__proof-value,
+.wf-home-intro__proof-value--word {
+  color:
+    transparent;
+
+  background:
+    linear-gradient(
+      120deg,
+      var(--wf-brand-blue) 0%,
+      var(--wf-brand-cobalt) 100%
+    );
+
+  background-clip:
+    text;
+
+  -webkit-background-clip:
+    text;
+
+  -webkit-text-fill-color:
+    transparent;
+}
+
+
+/*
+ * Small labels remain neutral.
+ * This keeps hierarchy while the values and track carry the brand.
+ */
+.wf-home-intro__proof-label {
+  color:
+    color-mix(
+      in srgb,
+      var(--wf-ink-muted)
+      88%,
+      var(--wf-brand-cobalt)
+    );
+}
+
+
+/* =========================================================
+   ENTRY DETAIL
+   ========================================================= */
+
+/*
+ * When 02 reveals, the highlighted phrase settles from sky-blue
+ * into cobalt without introducing a separate animation system.
+ */
+.wf-home-intro__headline-accent {
+  filter:
+    saturate(
+      0.92
+    );
+
+  transition:
+    filter
+    620ms
+    var(--wf-ease-out)
+    240ms,
+    background-position
+    720ms
+    var(--wf-ease-out)
+    240ms;
+}
+
+
+.wf-home-intro__editorial.is-revealed
+.wf-home-intro__headline-accent {
+  filter:
+    saturate(
+      1.08
+    );
+
+  background-position:
+    100% 50%;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 48rem) {
+
+  .wf-home-intro {
+    background:
+      radial-gradient(
+        circle at 92% 8%,
+        rgba(
+          105,
+          204,
+          245,
+          0.16
+        )
+        0%,
+        transparent
+        34%
+      ),
+      radial-gradient(
+        circle at 0% 96%,
+        rgba(
+          25,
+          63,
+          215,
+          0.07
+        )
+        0%,
+        transparent
+        30%
+      ),
+      linear-gradient(
+        180deg,
+        #fcfeff 0%,
+        #f6faff 100%
+      );
+  }
+
+
+  .wf-home-intro::after {
+    width:
+      52vw;
+
+    opacity:
+      0.58;
+  }
+
+
+  .wf-home-intro__index::before {
+    display:
+      none;
+  }
+
+
+  /*
+   * On small screens the proof rows have their own separators,
+   * so color those hairlines instead of adding boxes.
+   */
+  .wf-home-intro__proof-item {
+    border-top-color:
+      color-mix(
+        in srgb,
+        var(--wf-brand-blue)
+        22%,
+        var(--wf-line)
+      );
+  }
+
+
+  .wf-home-intro__proof-item:last-child {
+    border-bottom-color:
+      color-mix(
+        in srgb,
+        var(--wf-brand-cobalt)
+        18%,
+        var(--wf-line)
+      );
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .wf-home-intro__headline-accent {
+    filter:
+      none !important;
+
+    background-position:
+      100% 50% !important;
+
+    transition:
+      none !important;
+  }
+}
+
+/* WF INTRO 02 BRAND COLOR FINAL END */

@@ -264,7 +264,15 @@ function ShortIntroduction() {
             createElement(
               'span',
               null,
-              '좋은 질문에서 시작됩니다.',
+              createElement(
+                'span',
+                {
+                  className:
+                    'wf-home-intro__headline-accent',
+                },
+                '좋은 질문',
+              ),
+              '에서 시작됩니다.',
             ),
           ),
         ),
