@@ -6,8 +6,7 @@ export default function PageTransition({
   routeEnter = 'run',
   snapCover = false,
   reducedMotion = false,
-  marker = { index: '--', label: 'PAGE' },
-  onCurtainTransitionEnd,
+  onWipeTransitionEnd,
   children,
 }) {
   return createElement(
@@ -21,36 +20,10 @@ export default function PageTransition({
       'data-reduced-motion': reducedMotion ? 'true' : 'false',
     },
     children,
-    createElement(
-      'div',
-      {
-        className: 'wf-page-transition__curtain',
-        'aria-hidden': 'true',
-        onTransitionEnd: onCurtainTransitionEnd,
-      },
-      createElement('div', {
-        className: 'wf-page-transition__slit',
-      }),
-      createElement(
-        'p',
-        {
-          className: 'wf-page-transition__marker',
-        },
-        createElement(
-          'span',
-          {
-            className: 'wf-page-transition__marker-index',
-          },
-          marker.index,
-        ),
-        createElement(
-          'span',
-          {
-            className: 'wf-page-transition__marker-label',
-          },
-          marker.label,
-        ),
-      ),
-    ),
+    createElement('div', {
+      className: 'wf-page-transition__wipe',
+      'aria-hidden': 'true',
+      onTransitionEnd: onWipeTransitionEnd,
+    }),
   )
 }
