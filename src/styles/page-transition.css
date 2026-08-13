@@ -30,7 +30,7 @@
   display: none;
 }
 
-@media (min-width: 48.01rem) {
+@media (min-width: 48.01rem) and (hover: hover) and (pointer: fine) {
   /* Avoid the expensive full-document bitmap. */
   :root {
     view-transition-name: none;
@@ -220,7 +220,7 @@
   display: none;
 }
 
-@media (max-width: 48rem) {
+@media (max-width: 48rem), (hover: none), (pointer: coarse) {
   .wf-mobile-route-curtain {
     position: fixed;
     z-index: 320;
