@@ -1,4 +1,25 @@
-﻿import { createElement } from 'react'
+import { createElement } from 'react'
+
+const routeRowStyle = {
+  minHeight: 0,
+  margin: 0,
+  padding: 0,
+  width: 'fit-content',
+  maxWidth: '100%',
+  gridTemplateColumns: 'minmax(0, 1fr)',
+  overflow: 'visible',
+  border: 0,
+}
+
+const routeSlotStyle = {
+  gridColumn: 1,
+  width: 'fit-content',
+  maxWidth: '100%',
+  minWidth: 0,
+  margin: 0,
+  padding: 0,
+  overflow: 'visible',
+}
 
 export function RouteHeroTitle({
   id,
@@ -27,21 +48,36 @@ export function RouteHeroTitle({
       createElement(
         'span',
         {
-          className: 'wf-route-hero-title__ghost',
-        },
-        title,
-      ),
-      createElement(
-        'span',
-        {
-          className: 'wf-route-hero-title__reveal',
+          className:
+            'wf-home-kinetic-row wf-home-kinetic-row--1',
+          style: routeRowStyle,
         },
         createElement(
           'span',
           {
-            className: 'wf-route-hero-title__word',
+            className: 'wf-home-kinetic-row__text-slot',
+            style: routeSlotStyle,
           },
-          title,
+          createElement(
+            'span',
+            {
+              className: 'wf-home-kinetic-row__ghost',
+            },
+            title,
+          ),
+          createElement(
+            'span',
+            {
+              className: 'wf-home-kinetic-row__reveal',
+            },
+            createElement(
+              'span',
+              {
+                className: 'wf-home-kinetic-row__reveal-word',
+              },
+              title,
+            ),
+          ),
         ),
       ),
     ),
