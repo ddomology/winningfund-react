@@ -1,8 +1,5 @@
 import { createElement } from 'react'
-import {
-  Outlet,
-  useLocation,
-} from 'react-router'
+import { Outlet } from 'react-router'
 import Header from '../components/Header.js'
 import Footer from '../components/Footer.js'
 import PageTransition from '../components/PageTransition.js'
@@ -25,32 +22,28 @@ const brand = Object.freeze({
 })
 
 export default function AppShell() {
-  const location = useLocation()
-
   return createElement(
-    'div',
-    { className: 'wf-app-shell' },
-    createElement(Header, {
-      brand,
-      navigationItems,
-    }),
+    PageTransition,
+    null,
     createElement(
-      'main',
-      {
-        id: 'main-content',
-        className: 'wf-route-viewport',
-      },
+      'div',
+      { className: 'wf-app-shell' },
+      createElement(Header, {
+        brand,
+        navigationItems,
+      }),
       createElement(
-        PageTransition,
+        'main',
         {
-          routeKey: `${location.pathname}${location.hash}`,
+          id: 'main-content',
+          className: 'wf-route-viewport',
         },
         createElement(Outlet),
       ),
+      createElement(Footer, {
+        siteName: siteConfig.siteName,
+        secondaryText: '투자·경제 학회',
+      }),
     ),
-    createElement(Footer, {
-      siteName: siteConfig.siteName,
-      secondaryText: '투자·경제 학회',
-    }),
   )
 }
