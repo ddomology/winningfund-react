@@ -13362,3 +13362,608 @@
 }
 
 /* WF DESKTOP 05 SEMESTER TIMELINE FINAL END */
+
+/* WF DESKTOP 05 REAL SCHEDULE FINAL START */
+
+/* =========================================================
+   05 / CONTENTS FOR 18-2
+   Source: user-provided semester calendar reference
+
+   Desktop only.
+   Mobile is intentionally left to the separate mobile project.
+
+   Visual rule:
+   - retain the light field after the dark-to-light wave
+   - use the reference's four-month information hierarchy
+   - avoid copying the reference's heavy dark cards verbatim
+   - use WinningFund blue, hairlines and generous whitespace
+   ========================================================= */
+
+@media (min-width: 64rem) {
+
+  .wf-home-semester {
+    position:
+      relative;
+
+    overflow:
+      clip;
+
+    background:
+      #f7faff
+      !important;
+  }
+
+
+  .wf-home-semester::before {
+    content:
+      "";
+
+    position:
+      absolute;
+
+    z-index:
+      0;
+
+    inset:
+      0;
+
+    pointer-events:
+      none;
+
+    background:
+      radial-gradient(
+        circle at 86% 8%,
+        rgba(
+          92,
+          200,
+          255,
+          0.13
+        )
+        0%,
+        transparent
+        27%
+      );
+  }
+
+
+  .wf-home-semester.wf-section--spacing-compact {
+    padding-block:
+      clamp(
+        88px,
+        7vw,
+        116px
+      )
+      clamp(
+        108px,
+        8.5vw,
+        144px
+      )
+      !important;
+  }
+
+
+  .wf-home-semester__editorial {
+    position:
+      relative;
+
+    z-index:
+      1;
+
+    width:
+      min(
+        calc(
+          100%
+          - 144px
+        ),
+        1180px
+      )
+      !important;
+
+    margin:
+      0
+      auto
+      !important;
+  }
+
+
+  .wf-home-semester__index {
+    margin:
+      0
+      0
+      34px
+      !important;
+
+    color:
+      var(--wf-brand-blue);
+
+    font-size:
+      0.64rem;
+
+    font-weight:
+      850;
+
+    letter-spacing:
+      0.12em;
+  }
+
+
+  /* =======================================================
+     SECTION HEADING
+     ======================================================= */
+
+  .wf-home-semester__heading-row {
+    display:
+      grid
+      !important;
+
+    grid-template-columns:
+      repeat(
+        12,
+        minmax(
+          0,
+          1fr
+        )
+      )
+      !important;
+
+    gap:
+      0
+      !important;
+
+    align-items:
+      end
+      !important;
+  }
+
+
+  .wf-home-semester__heading-copy {
+    grid-column:
+      1
+      /
+      span
+      7;
+
+    display:
+      grid;
+
+    gap:
+      17px;
+  }
+
+
+  .wf-home-semester__eyebrow {
+    margin:
+      0;
+
+    color:
+      var(--wf-brand-blue);
+
+    font-size:
+      0.74rem;
+
+    font-weight:
+      860;
+
+    line-height:
+      1;
+
+    letter-spacing:
+      0.17em;
+  }
+
+
+  .wf-home-semester__title {
+    margin:
+      0;
+
+    color:
+      #0a1730;
+
+    font-size:
+      clamp(
+        3.8rem,
+        5.4vw,
+        5.9rem
+      )
+      !important;
+
+    font-weight:
+      840;
+
+    line-height:
+      0.94;
+
+    letter-spacing:
+      -0.062em;
+  }
+
+
+  .wf-home-semester__term {
+    grid-column:
+      8
+      /
+      -1;
+
+    justify-self:
+      end;
+
+    margin:
+      0
+      -0.04em
+      -0.06em
+      0;
+
+    color:
+      var(--wf-brand-cobalt);
+
+    font-size:
+      clamp(
+        6.6rem,
+        10.4vw,
+        11.2rem
+      )
+      !important;
+
+    font-weight:
+      880;
+
+    line-height:
+      0.74;
+
+    letter-spacing:
+      -0.084em;
+  }
+
+
+  /* =======================================================
+     FOUR-MONTH CALENDAR
+     ======================================================= */
+
+  .wf-home-semester__months {
+    list-style:
+      none;
+
+    margin:
+      clamp(
+        64px,
+        5.8vw,
+        84px
+      )
+      0
+      0;
+
+    padding:
+      0;
+
+    display:
+      grid;
+
+    grid-template-columns:
+      repeat(
+        4,
+        minmax(
+          0,
+          1fr
+        )
+      );
+
+    gap:
+      clamp(
+        18px,
+        2vw,
+        28px
+      );
+  }
+
+
+  .wf-home-semester__month {
+    list-style:
+      none;
+
+    min-width:
+      0;
+
+    display:
+      grid;
+
+    grid-template-rows:
+      auto
+      1fr;
+
+    gap:
+      17px;
+  }
+
+
+  .wf-home-semester__month-heading {
+    min-height:
+      58px;
+
+    display:
+      grid;
+
+    align-content:
+      end;
+
+    gap:
+      5px;
+
+    padding:
+      0
+      2px
+      12px;
+
+    border-bottom:
+      1px
+      solid
+      rgba(
+        23,
+        51,
+        91,
+        0.16
+      );
+  }
+
+
+  .wf-home-semester__month-number {
+    color:
+      #0a1730;
+
+    font-size:
+      clamp(
+        2.2rem,
+        2.8vw,
+        3rem
+      );
+
+    font-weight:
+      830;
+
+    line-height:
+      0.82;
+
+    letter-spacing:
+      -0.055em;
+
+    font-variant-numeric:
+      tabular-nums;
+  }
+
+
+  .wf-home-semester__month-label {
+    color:
+      #28a9ef;
+
+    font-size:
+      0.62rem;
+
+    font-weight:
+      850;
+
+    line-height:
+      1;
+
+    letter-spacing:
+      0.17em;
+  }
+
+
+  /* =======================================================
+     MONTH EVENT FIELD
+     ======================================================= */
+
+  .wf-home-semester__events {
+    list-style:
+      none;
+
+    min-height:
+      328px;
+
+    margin:
+      0;
+
+    padding:
+      9px
+      clamp(
+        18px,
+        1.65vw,
+        24px
+      )
+      18px;
+
+    display:
+      grid;
+
+    align-content:
+      start;
+
+    border-top:
+      1px
+      solid
+      rgba(
+        255,
+        255,
+        255,
+        0.76
+      );
+
+    border-left:
+      2px
+      solid
+      #59c9f8;
+
+    border-right:
+      1px
+      solid
+      rgba(
+        28,
+        59,
+        104,
+        0.12
+      );
+
+    border-bottom:
+      1px
+      solid
+      rgba(
+        28,
+        59,
+        104,
+        0.12
+      );
+
+    border-radius:
+      0
+      10px
+      10px
+      0;
+
+    background:
+      rgba(
+        255,
+        255,
+        255,
+        0.48
+      );
+
+    box-shadow:
+      0
+      16px
+      42px
+      rgba(
+        43,
+        78,
+        129,
+        0.045
+      );
+  }
+
+
+  .wf-home-semester__event {
+    list-style:
+      none;
+
+    min-width:
+      0;
+
+    display:
+      grid;
+
+    gap:
+      6px;
+
+    padding:
+      16px
+      0
+      15px;
+
+    border-bottom:
+      1px
+      solid
+      rgba(
+        41,
+        70,
+        112,
+        0.11
+      );
+  }
+
+
+  .wf-home-semester__event:last-child {
+    border-bottom:
+      0;
+  }
+
+
+  .wf-home-semester__event-date {
+    color:
+      var(--wf-brand-blue);
+
+    font-size:
+      0.69rem;
+
+    font-weight:
+      830;
+
+    line-height:
+      1.2;
+
+    letter-spacing:
+      -0.015em;
+
+    font-variant-numeric:
+      tabular-nums;
+
+    white-space:
+      nowrap;
+  }
+
+
+  .wf-home-semester__event-title {
+    color:
+      #14233d;
+
+    font-size:
+      clamp(
+        0.88rem,
+        0.96vw,
+        1rem
+      );
+
+    font-weight:
+      680;
+
+    line-height:
+      1.42;
+
+    letter-spacing:
+      -0.025em;
+
+    word-break:
+      keep-all;
+  }
+
+
+  /* =======================================================
+     QUIET DESKTOP HOVER
+     ======================================================= */
+
+  .wf-home-semester__month,
+  .wf-home-semester__events,
+  .wf-home-semester__event-title {
+    transition:
+      border-color
+      180ms
+      var(--wf-ease-out),
+      background
+      180ms
+      var(--wf-ease-out),
+      color
+      180ms
+      var(--wf-ease-out);
+  }
+
+
+  .wf-home-semester__month:hover
+  .wf-home-semester__events {
+    border-left-color:
+      var(--wf-brand-blue);
+
+    background:
+      rgba(
+        255,
+        255,
+        255,
+        0.72
+      );
+  }
+
+
+  .wf-home-semester__month:hover
+  .wf-home-semester__event-title {
+    color:
+      #0b1650;
+  }
+}
+
+/* WF DESKTOP 05 REAL SCHEDULE FINAL END */

@@ -104,8 +104,137 @@ const source = {
     "semesterContents": {
       "semesterId": "18-2",
       "title": "18-2 활동",
-      "sourceStatus": "SOURCE_AVAILABLE_NOT_IMPORTED",
-      "scheduleItems": []
+      "sourceStatus": "AUTHORITATIVE",
+      "scheduleItems": [
+        {
+          "id": "18-2-september",
+          "monthNumber": "09",
+          "monthLabel": "SEP",
+          "sourceStatus": "AUTHORITATIVE",
+          "events": [
+            {
+              "id": "18-2-0904-ot",
+              "dateLabel": "09.04",
+              "title": "OT",
+              "sourceStatus": "AUTHORITATIVE"
+            },
+            {
+              "id": "18-2-0911-class-start",
+              "dateLabel": "09.11",
+              "title": "1주차 분반활동 시작",
+              "sourceStatus": "AUTHORITATIVE"
+            },
+            {
+              "id": "18-2-0918-class",
+              "dateLabel": "09.18",
+              "title": "2주차 분반활동",
+              "sourceStatus": "AUTHORITATIVE"
+            },
+            {
+              "id": "18-2-0923-all-lecture",
+              "dateLabel": "09.23",
+              "title": "3주차 전체강의",
+              "sourceStatus": "AUTHORITATIVE"
+            }
+          ]
+        },
+        {
+          "id": "18-2-october",
+          "monthNumber": "10",
+          "monthLabel": "OCT",
+          "sourceStatus": "AUTHORITATIVE",
+          "events": [
+            {
+              "id": "18-2-1002-class",
+              "dateLabel": "10.02",
+              "title": "4주차 분반활동",
+              "sourceStatus": "AUTHORITATIVE"
+            },
+            {
+              "id": "18-2-1003-1004-mt",
+              "dateLabel": "10.03~10.04",
+              "title": "MT",
+              "sourceStatus": "AUTHORITATIVE"
+            },
+            {
+              "id": "18-2-1009-class",
+              "dateLabel": "10.09",
+              "title": "5주차 분반활동",
+              "sourceStatus": "AUTHORITATIVE"
+            },
+            {
+              "id": "18-2-1010-1029-midterm-break",
+              "dateLabel": "10.10~10.29",
+              "title": "중간고사 휴식기간",
+              "sourceStatus": "AUTHORITATIVE"
+            },
+            {
+              "id": "18-2-1030-class",
+              "dateLabel": "10.30",
+              "title": "6주차 분반활동",
+              "sourceStatus": "AUTHORITATIVE"
+            }
+          ]
+        },
+        {
+          "id": "18-2-november",
+          "monthNumber": "11",
+          "monthLabel": "NOV",
+          "sourceStatus": "AUTHORITATIVE",
+          "events": [
+            {
+              "id": "18-2-1106-team-report",
+              "dateLabel": "11.06",
+              "title": "7주차 팀리포트 발표",
+              "sourceStatus": "AUTHORITATIVE"
+            },
+            {
+              "id": "18-2-1113-team-report",
+              "dateLabel": "11.13",
+              "title": "8주차 팀리포트 발표",
+              "sourceStatus": "AUTHORITATIVE"
+            },
+            {
+              "id": "18-2-1120-stock-game",
+              "dateLabel": "11.20",
+              "title": "9주차 주식게임",
+              "sourceStatus": "AUTHORITATIVE"
+            },
+            {
+              "id": "18-2-1127-all-lecture",
+              "dateLabel": "11.27",
+              "title": "10주차 전체강의",
+              "sourceStatus": "AUTHORITATIVE"
+            },
+            {
+              "id": "18-2-1128-1217-final-break",
+              "dateLabel": "11.28~12.17",
+              "title": "기말고사 휴식기간",
+              "sourceStatus": "AUTHORITATIVE"
+            }
+          ]
+        },
+        {
+          "id": "18-2-december",
+          "monthNumber": "12",
+          "monthLabel": "DEC",
+          "sourceStatus": "AUTHORITATIVE",
+          "events": [
+            {
+              "id": "18-2-1204-winning-night",
+              "dateLabel": "12.04",
+              "title": "위닝인의 밤",
+              "sourceStatus": "AUTHORITATIVE"
+            },
+            {
+              "id": "18-2-1218-closing",
+              "dateLabel": "12.18",
+              "title": "종강총회",
+              "sourceStatus": "AUTHORITATIVE"
+            }
+          ]
+        }
+      ]
     }
   },
   "aboutContent": {

@@ -939,10 +939,6 @@ function SemesterContents() {
       semanticLabel: '18-2 활동',
     },
 
-    /*
-     * Keep the shared primitive contract in the DOM.
-     * The visible HOME composition uses a dedicated editorial heading.
-     */
     createElement(
       'div',
       {
@@ -1013,44 +1009,80 @@ function SemesterContents() {
         ? createElement(
             'ol',
             {
-              className: 'wf-home-semester__timeline',
+              className: 'wf-home-semester__months',
+              'aria-label': '18-2 학기 월별 일정',
             },
 
-            ...semester.scheduleItems.map((item) =>
+            ...semester.scheduleItems.map((month) =>
               createElement(
                 'li',
                 {
-                  key: item.id,
-                  className: 'wf-home-semester__item',
+                  key: month.id,
+                  className: 'wf-home-semester__month',
                 },
 
                 createElement(
-                  'span',
+                  'header',
                   {
-                    className: 'wf-home-semester__date',
+                    className:
+                      'wf-home-semester__month-heading',
                   },
-                  item.period ?? item.dateLabel,
+
+                  createElement(
+                    'strong',
+                    {
+                      className:
+                        'wf-home-semester__month-number',
+                    },
+                    month.monthNumber,
+                  ),
+
+                  createElement(
+                    'span',
+                    {
+                      className:
+                        'wf-home-semester__month-label',
+                    },
+                    month.monthLabel,
+                  ),
                 ),
 
                 createElement(
-                  'strong',
+                  'ol',
                   {
                     className:
-                      'wf-home-semester__item-title',
+                      'wf-home-semester__events',
                   },
-                  item.title,
-                ),
 
-                item.description
-                  ? createElement(
-                      'span',
+                  ...(month.events ?? []).map((event) =>
+                    createElement(
+                      'li',
                       {
+                        key: event.id,
                         className:
-                          'wf-home-semester__description',
+                          'wf-home-semester__event',
                       },
-                      item.description,
-                    )
-                  : null,
+
+                      createElement(
+                        'time',
+                        {
+                          className:
+                            'wf-home-semester__event-date',
+                        },
+                        event.dateLabel,
+                      ),
+
+                      createElement(
+                        'strong',
+                        {
+                          className:
+                            'wf-home-semester__event-title',
+                        },
+                        event.title,
+                      ),
+                    ),
+                  ),
+                ),
               ),
             ),
           )
