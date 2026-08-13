@@ -2,10 +2,10 @@
    WINNINGFUND ROUTE TRANSITION
 
    Desktop:
-   - only the first hero participates in View Transition snapshots
+   - only the first hero and global wave participate in snapshots
    - forward/backward route order controls horizontal direction
    - compositor-friendly translate3d only; no animated clip-path
-   - one five-route global wave strip moves through the same route space
+   - one five-route global wave strip provides contiguous geometry
 
    Mobile:
    - branded cobalt curtain remains unchanged
@@ -16,11 +16,6 @@
   min-height: 100dvh;
 }
 
-/*
- * New routes are committed underneath an active transition.
- * Keep route entrance animations at frame zero until the transition ends.
- * The global desktop wave sits outside .wf-route-viewport, so it never pauses.
- */
 .wf-page-transition[data-route-enter='hold'] .wf-route-viewport *,
 .wf-page-transition[data-route-enter='hold'] .wf-route-viewport *::before,
 .wf-page-transition[data-route-enter='hold'] .wf-route-viewport *::after {
@@ -36,10 +31,7 @@
 }
 
 @media (min-width: 48.01rem) {
-  /*
-   * Disable the expensive full-root snapshot. Only the visible hero is captured.
-   * Header, global wave, and offscreen body content remain live DOM.
-   */
+  /* Avoid the expensive full-document bitmap. */
   :root {
     view-transition-name: none;
   }
@@ -53,7 +45,7 @@
     contain: paint;
   }
 
-  /* Route-local copies remain for mobile, but desktop uses one global strip. */
+  /* Route-local copies remain available for mobile only. */
   .wf-home-wave--hero-to-light,
   .wf-route-hero-wave {
     display: none !important;
@@ -76,21 +68,14 @@
     pointer-events: none;
     contain: paint;
     isolation: isolate;
+    view-transition-name: wf-global-wave;
   }
 
   .wf-desktop-continuous-wave__track {
     width: 500vw;
     height: 100%;
     transform: translate3d(var(--wf-desktop-wave-offset), 0, 0);
-    will-change: transform;
-    transition: none;
     backface-visibility: hidden;
-  }
-
-  .wf-page-transition[data-phase='swapping']
-  .wf-desktop-continuous-wave__track {
-    transition:
-      transform 820ms cubic-bezier(.65, 0, .35, 1);
   }
 
   .wf-desktop-continuous-wave__svg {
@@ -142,16 +127,29 @@
     }
   }
 
-  ::view-transition-group(wf-route-hero) {
+  /* Both named surfaces use frozen snapshots and compositor transforms only. */
+  ::view-transition-group(wf-route-hero),
+  ::view-transition-group(wf-global-wave) {
     animation: none;
   }
 
-  ::view-transition-image-pair(wf-route-hero) {
+  ::view-transition-group(wf-route-hero) {
+    z-index: 1;
+  }
+
+  ::view-transition-group(wf-global-wave) {
+    z-index: 3;
+  }
+
+  ::view-transition-image-pair(wf-route-hero),
+  ::view-transition-image-pair(wf-global-wave) {
     isolation: isolate;
   }
 
   ::view-transition-old(wf-route-hero),
-  ::view-transition-new(wf-route-hero) {
+  ::view-transition-new(wf-route-hero),
+  ::view-transition-old(wf-global-wave),
+  ::view-transition-new(wf-global-wave) {
     width: 100%;
     height: 100%;
     mix-blend-mode: normal;
@@ -163,72 +161,54 @@
     will-change: transform;
   }
 
-  ::view-transition-old(wf-route-hero) {
+  ::view-transition-old(wf-route-hero),
+  ::view-transition-old(wf-global-wave) {
     z-index: 1;
   }
 
-  ::view-transition-new(wf-route-hero) {
+  ::view-transition-new(wf-route-hero),
+  ::view-transition-new(wf-global-wave) {
     z-index: 2;
   }
 
-  :root[data-wf-route-direction='forward']
-  ::view-transition-old(wf-route-hero) {
+  :root[data-wf-route-direction='forward']::view-transition-old(wf-route-hero),
+  :root[data-wf-route-direction='forward']::view-transition-old(wf-global-wave) {
     animation-name: wf-route-screen-to-left;
   }
 
-  :root[data-wf-route-direction='forward']
-  ::view-transition-new(wf-route-hero) {
+  :root[data-wf-route-direction='forward']::view-transition-new(wf-route-hero),
+  :root[data-wf-route-direction='forward']::view-transition-new(wf-global-wave) {
     animation-name: wf-route-screen-from-right;
   }
 
-  :root[data-wf-route-direction='backward']
-  ::view-transition-old(wf-route-hero) {
+  :root[data-wf-route-direction='backward']::view-transition-old(wf-route-hero),
+  :root[data-wf-route-direction='backward']::view-transition-old(wf-global-wave) {
     animation-name: wf-route-screen-to-right;
   }
 
-  :root[data-wf-route-direction='backward']
-  ::view-transition-new(wf-route-hero) {
+  :root[data-wf-route-direction='backward']::view-transition-new(wf-route-hero),
+  :root[data-wf-route-direction='backward']::view-transition-new(wf-global-wave) {
     animation-name: wf-route-screen-from-left;
   }
 
   @keyframes wf-route-screen-to-left {
-    from {
-      transform: translate3d(0%, 0, 0);
-    }
-
-    to {
-      transform: translate3d(-100%, 0, 0);
-    }
+    from { transform: translate3d(0%, 0, 0); }
+    to { transform: translate3d(-100%, 0, 0); }
   }
 
   @keyframes wf-route-screen-from-right {
-    from {
-      transform: translate3d(100%, 0, 0);
-    }
-
-    to {
-      transform: translate3d(0%, 0, 0);
-    }
+    from { transform: translate3d(100%, 0, 0); }
+    to { transform: translate3d(0%, 0, 0); }
   }
 
   @keyframes wf-route-screen-to-right {
-    from {
-      transform: translate3d(0%, 0, 0);
-    }
-
-    to {
-      transform: translate3d(100%, 0, 0);
-    }
+    from { transform: translate3d(0%, 0, 0); }
+    to { transform: translate3d(100%, 0, 0); }
   }
 
   @keyframes wf-route-screen-from-left {
-    from {
-      transform: translate3d(-100%, 0, 0);
-    }
-
-    to {
-      transform: translate3d(0%, 0, 0);
-    }
+    from { transform: translate3d(-100%, 0, 0); }
+    to { transform: translate3d(0%, 0, 0); }
   }
 }
 
@@ -442,11 +422,12 @@
 
 @media (prefers-reduced-motion: reduce) {
   ::view-transition-old(wf-route-hero),
-  ::view-transition-new(wf-route-hero) {
+  ::view-transition-new(wf-route-hero),
+  ::view-transition-old(wf-global-wave),
+  ::view-transition-new(wf-global-wave) {
     animation: none !important;
   }
 
-  .wf-desktop-continuous-wave__track,
   .wf-desktop-continuous-wave__layer,
   .wf-mobile-route-curtain,
   .wf-mobile-route-curtain__brand-stage,
