@@ -1,13 +1,17 @@
-const HOME_WAVE_TIMINGS = Object.freeze([
+const WAVE_TIMINGS = Object.freeze([
   { duration: 7000, phase: 2000 },
   { duration: 10000, phase: 3000 },
   { duration: 13000, phase: 4000 },
   { duration: 20000, phase: 5000 },
 ])
 
-const START_X = -42
-const END_X = 133
-const WAVE_SELECTOR = '.wf-home-wave__parallax > use'
+const START_X = -90
+const END_X = 85
+const SELECTORS = Object.freeze([
+  '.wf-home-wave__parallax > use',
+  '.wf-desktop-continuous-wave__layer',
+])
+
 const activeLayers = new Map()
 
 let animationOrigin = 0
@@ -15,7 +19,11 @@ let frameRequest = 0
 
 function cubicBezierCoordinate(t, p1, p2) {
   const oneMinusT = 1 - t
-  return 3 * oneMinusT * oneMinusT * t * p1 + 3 * oneMinusT * t * t * p2 + t * t * t
+  return (
+    3 * oneMinusT * oneMinusT * t * p1 +
+    3 * oneMinusT * t * t * p2 +
+    t * t * t
+  )
 }
 
 function referenceEase(progress) {
@@ -33,45 +41,70 @@ function referenceEase(progress) {
   return cubicBezierCoordinate(t, 0.5, 0.5)
 }
 
-function syncHomeWaveLayers() {
-  const layers = document.querySelectorAll(WAVE_SELECTOR)
+function registerSelector(selector) {
+  const layers = document.querySelectorAll(selector)
 
-  layers.forEach((useElement, index) => {
-    if (activeLayers.has(useElement)) return
-    activeLayers.set(useElement, { ...HOME_WAVE_TIMINGS[index % 4] })
-    useElement.setAttribute('x', '48')
+  layers.forEach((element, index) => {
+    if (activeLayers.has(element)) return
+
+    activeLayers.set(element, {
+      ...WAVE_TIMINGS[index % WAVE_TIMINGS.length],
+    })
+
+    element.style.setProperty('animation', 'none', 'important')
+    element.style.setProperty('translate', 'none', 'important')
+    element.style.setProperty('will-change', 'transform')
   })
+}
 
-  for (const useElement of activeLayers.keys()) {
-    if (!useElement.isConnected) activeLayers.delete(useElement)
+function syncWaveLayers() {
+  SELECTORS.forEach(registerSelector)
+
+  for (const element of activeLayers.keys()) {
+    if (!element.isConnected) activeLayers.delete(element)
   }
 }
 
-function renderHomeWaveFrame(now) {
+function renderWaveFrame(now) {
   if (!animationOrigin) animationOrigin = now
   const elapsed = now - animationOrigin
 
-  for (const [useElement, timing] of activeLayers.entries()) {
-    const cycle = ((elapsed + timing.phase) % timing.duration) / timing.duration
+  for (const [element, timing] of activeLayers.entries()) {
+    const cycle =
+      ((elapsed + timing.phase) % timing.duration) /
+      timing.duration
+
     const eased = referenceEase(cycle)
-    const x = START_X + (END_X - START_X) * eased
-    useElement.setAttribute('x', x.toFixed(3))
+    const offset = START_X + (END_X - START_X) * eased
+
+    element.style.setProperty(
+      'transform',
+      `translate3d(${offset.toFixed(3)}px, 0, 0)`,
+      'important',
+    )
   }
 
-  frameRequest = requestAnimationFrame(renderHomeWaveFrame)
+  frameRequest = requestAnimationFrame(renderWaveFrame)
 }
 
-function startHomeWaveMotion() {
-  syncHomeWaveLayers()
+function startWaveMotion() {
+  syncWaveLayers()
 
-  const observer = new MutationObserver(syncHomeWaveLayers)
-  observer.observe(document.documentElement, { childList: true, subtree: true })
+  const observer = new MutationObserver(syncWaveLayers)
+  observer.observe(document.documentElement, {
+    childList: true,
+    subtree: true,
+  })
 
-  if (!frameRequest) frameRequest = requestAnimationFrame(renderHomeWaveFrame)
+  if (!frameRequest) {
+    frameRequest = requestAnimationFrame(renderWaveFrame)
+  }
 }
 
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', startHomeWaveMotion, { once: true })
+  document.addEventListener('DOMContentLoaded', startWaveMotion, {
+    once: true,
+  })
 } else {
-  startHomeWaveMotion()
+  startWaveMotion()
 }
