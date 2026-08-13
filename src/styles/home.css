@@ -13967,3 +13967,221 @@
 }
 
 /* WF DESKTOP 05 REAL SCHEDULE FINAL END */
+
+/* WF CLUB ACTIVITY COLLISION HOTFIX FINAL START */
+
+/* =========================================================
+   HERO / CLUB — GLYPH-SAFE RIGHT EDGE
+
+   The permanent reveal layer uses a clipped box.
+   The B glyph can visually overhang its measured advance width,
+   so the reveal box needs a small real reserve on the right.
+   ========================================================= */
+
+.wf-home-kinetic-row--3,
+.wf-home-kinetic-row--3
+.wf-home-kinetic-row__text-slot,
+.wf-home-kinetic-row--3
+.wf-home-kinetic-row__ghost,
+.wf-home-kinetic-row--3
+.wf-home-kinetic-row__reveal,
+.wf-home-kinetic-row--3
+.wf-home-kinetic-row__reveal-word {
+  overflow:
+    visible
+    !important;
+}
+
+
+.wf-home-kinetic-row--3
+.wf-home-kinetic-row__text-slot {
+  box-sizing:
+    content-box
+    !important;
+
+  width:
+    max-content
+    !important;
+
+  padding-right:
+    0.20em
+    !important;
+}
+
+
+/*
+ * Expand the actual clip/reveal box rather than only moving CLUB.
+ * This preserves the current alignment while giving B anti-alias
+ * and glyph overhang enough room.
+ */
+.wf-home-kinetic-row--3
+.wf-home-kinetic-row__reveal {
+  right:
+    -0.20em
+    !important;
+}
+
+
+/* Compact screens also keep a physical viewport reserve. */
+@media (max-width: 63.99rem) {
+
+  .wf-home-kinetic-row--3
+  .wf-home-kinetic-row__text-slot {
+    max-width:
+      calc(
+        100%
+        - 18px
+      )
+      !important;
+
+    margin-right:
+      18px
+      !important;
+
+    padding-right:
+      0.18em
+      !important;
+  }
+
+
+  .wf-home-kinetic-row--3
+  .wf-home-kinetic-row__reveal {
+    right:
+      -0.18em
+      !important;
+  }
+}
+
+
+/* =========================================================
+   03 / ACTIVITIES — ONE EFFECT OWNER
+
+   The section already owns a shared track.
+   Per-item node glow + arrow + icon translation created a second
+   effect layer and could visually cross the Korean copy.
+
+   Final interaction:
+   - no individual track node
+   - no floating arrow
+   - no translation / scale
+   - title + icon color only
+   ========================================================= */
+
+.wf-home-program__track-node,
+.wf-home-program__arrow {
+  display:
+    none
+    !important;
+}
+
+
+.wf-home-program,
+.wf-home-program__icon-shell,
+.wf-home-program__title {
+  will-change:
+    auto
+    !important;
+}
+
+
+@media (pointer: fine) and (hover: hover) {
+
+  .wf-home-program:hover,
+  .wf-home-program:focus-visible {
+    transform:
+      none
+      !important;
+  }
+
+
+  .wf-home-program:hover
+  .wf-home-program__icon-shell,
+  .wf-home-program:focus-visible
+  .wf-home-program__icon-shell {
+    color:
+      #72d4fb;
+
+    transform:
+      none
+      !important;
+  }
+
+
+  .wf-home-program:hover
+  .wf-home-program__title,
+  .wf-home-program:focus-visible
+  .wf-home-program__title {
+    color:
+      #72d4fb;
+
+    transform:
+      none
+      !important;
+  }
+}
+
+
+/* =========================================================
+   COMPACT FALLBACK — REMOVE THE VERTICAL TRACK ENTIRELY
+
+   Mobile is being separated into its own project.
+   Until then, the current responsive fallback should be visually
+   safe rather than forcing the desktop track into a narrow column.
+   ========================================================= */
+
+@media (max-width: 63.99rem) {
+
+  .wf-home-programs__list::before,
+  .wf-home-programs__list::after {
+    display:
+      none
+      !important;
+  }
+
+
+  .wf-home-programs__list {
+    padding-left:
+      0
+      !important;
+
+    padding-right:
+      0
+      !important;
+  }
+
+
+  .wf-home-program {
+    overflow:
+      visible
+      !important;
+  }
+}
+
+
+/* =========================================================
+   DESKTOP TRACK — KEEP ONLY THE SHARED HORIZONTAL LINE
+   ========================================================= */
+
+@media (min-width: 64rem) {
+
+  .wf-home-programs__list::before,
+  .wf-home-programs__list::after {
+    pointer-events:
+      none;
+
+    box-shadow:
+      none
+      !important;
+  }
+
+
+  .wf-home-program__body {
+    position:
+      relative;
+
+    z-index:
+      2;
+  }
+}
+
+/* WF CLUB ACTIVITY COLLISION HOTFIX FINAL END */
