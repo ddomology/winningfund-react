@@ -1,6 +1,6 @@
 /* ============================================================
    WINNINGFUND ROUTE TRANSITION
-   Fast top-pull + left-to-right cobalt wipe
+   The route screens themselves wipe into one another.
    ============================================================ */
 
 .wf-page-transition {
@@ -9,8 +9,8 @@
 }
 
 /*
- * Destination pages mount while the wipe is fully closed.
- * Keep all entrance animation timelines at frame zero until reveal ends.
+ * The new route is committed while the browser owns its transition snapshot.
+ * Keep route entrance animations parked at frame zero until the screen swap ends.
  */
 .wf-page-transition[data-route-enter='hold'] .wf-route-viewport *,
 .wf-page-transition[data-route-enter='hold'] .wf-route-viewport *::before,
@@ -18,108 +18,70 @@
   animation-play-state: paused !important;
 }
 
-.wf-page-transition__wipe {
-  position: fixed;
-  z-index: 220;
-  inset: 0;
-  visibility: hidden;
-  pointer-events: none;
-  transform: scaleX(0);
-  transform-origin: left center;
-  will-change: transform;
-  background:
-    linear-gradient(
-      100deg,
-      #69ccf5 0%,
-      #35aef5 24%,
-      #168cf4 48%,
-      #0868ee 72%,
-      #193fd7 100%
-    );
+/*
+ * Native View Transition snapshot choreography.
+ * There is no colored curtain: old(root) and new(root) are the actual before/after
+ * screen captures. Their clipping edges travel together from left to right,
+ * matching the supplied cover-slider reference while keeping layout continuity.
+ */
+::view-transition-group(root) {
+  animation: none;
 }
 
-/* A restrained leading edge keeps the wipe crisp without becoming a loader. */
-.wf-page-transition__wipe::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  width: clamp(2px, .28vw, 5px);
-  opacity: .55;
-  background:
-    linear-gradient(
-      180deg,
-      rgba(255,255,255,.2),
-      rgba(235,249,255,.88) 50%,
-      rgba(255,255,255,.2)
-    );
-  box-shadow: 0 0 18px rgba(190,238,255,.34);
+::view-transition-image-pair(root) {
+  isolation: auto;
 }
 
-.wf-page-transition[data-phase='idle'] .wf-page-transition__wipe {
-  visibility: hidden;
-  transform: scaleX(0);
-  transform-origin: left center;
-  transition: none;
+::view-transition-old(root),
+::view-transition-new(root) {
+  width: 100%;
+  height: 100%;
+  mix-blend-mode: normal;
+  animation-duration: 280ms;
+  animation-timing-function: cubic-bezier(.22,.8,.22,1);
+  animation-fill-mode: both;
 }
 
-.wf-page-transition[data-phase='covering'] .wf-page-transition__wipe,
-.wf-page-transition[data-phase='covered'] .wf-page-transition__wipe,
-.wf-page-transition[data-phase='revealing'] .wf-page-transition__wipe {
-  visibility: visible;
-  pointer-events: auto;
+::view-transition-old(root) {
+  z-index: 1;
+  animation-name: wf-route-screen-out;
 }
 
-/* Reference motion: grow from the left until the viewport is fully covered. */
-.wf-page-transition[data-phase='covering'] .wf-page-transition__wipe {
-  transform: scaleX(1);
-  transform-origin: left center;
-  transition:
-    transform 220ms cubic-bezier(.22,.8,.22,1);
+::view-transition-new(root) {
+  z-index: 2;
+  animation-name: wf-route-screen-in;
 }
 
-.wf-page-transition[data-phase='covered'] .wf-page-transition__wipe {
-  transform: scaleX(1);
-  transform-origin: right center;
-  transition: none;
+@keyframes wf-route-screen-out {
+  from {
+    clip-path: inset(0 0 0 0);
+  }
+
+  to {
+    clip-path: inset(0 0 0 100%);
+  }
 }
 
-/* Shrinking toward the right makes the reveal continue in the same direction. */
-.wf-page-transition[data-phase='revealing'] .wf-page-transition__wipe {
-  transform: scaleX(0);
-  transform-origin: right center;
-  transition:
-    transform 230ms cubic-bezier(.7,0,.25,1);
-}
+@keyframes wf-route-screen-in {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
 
-/* POP already committed the destination; cover it before the next paint. */
-.wf-page-transition[data-snap-cover='true'] .wf-page-transition__wipe {
-  visibility: visible !important;
-  pointer-events: auto;
-  transform: scaleX(1) !important;
-  transform-origin: right center !important;
-  transition: none !important;
+  to {
+    clip-path: inset(0 0 0 0);
+  }
 }
 
 @media (max-width: 48rem) {
-  .wf-page-transition[data-phase='covering'] .wf-page-transition__wipe {
-    transition-duration: 180ms;
-  }
-
-  .wf-page-transition[data-phase='revealing'] .wf-page-transition__wipe {
-    transition-duration: 200ms;
-  }
-
-  .wf-page-transition__wipe::after {
-    width: 2px;
-    opacity: .46;
-    box-shadow: 0 0 10px rgba(190,238,255,.28);
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 220ms;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .wf-page-transition__wipe {
-    transition: none !important;
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none !important;
   }
 }
