@@ -10,6 +10,7 @@ import {
 } from 'react-router'
 
 const MOBILE_QUERY = '(max-width: 48rem)'
+const MOBILE_WATCHDOG_MS = 1400
 const APP_BASE_PATH =
   import.meta.env.BASE_URL === '/'
     ? ''
@@ -88,6 +89,10 @@ function scrollToRouteTarget(target) {
   }
 }
 
+function isMobileViewport() {
+  return window.matchMedia(MOBILE_QUERY).matches
+}
+
 export default function useRouteTransition() {
   const location = useLocation()
   const navigate = useNavigate()
@@ -98,6 +103,8 @@ export default function useRouteTransition() {
   const phaseRef = useRef('idle')
   const scrollFrameRef = useRef(null)
   const transitionRef = useRef(null)
+  const pendingMobileRef = useRef(null)
+  const mobileWatchdogRef = useRef(null)
 
   const routeKey = `${location.pathname}${location.hash}`
 
@@ -123,14 +130,20 @@ export default function useRouteTransition() {
     }
   }
 
+  function clearMobileWatchdog() {
+    if (mobileWatchdogRef.current) {
+      window.clearTimeout(mobileWatchdogRef.current)
+      mobileWatchdogRef.current = null
+    }
+  }
+
   function pullCurrentScreenToTop() {
     cancelScrollMotion()
 
     const startY = window.scrollY
     if (startY <= 1) return Promise.resolve()
 
-    const mobile = window.matchMedia(MOBILE_QUERY).matches
-    const duration = mobile ? 110 : 160
+    const duration = isMobileViewport() ? 125 : 180
     const startedAt = performance.now()
 
     return new Promise((resolve) => {
@@ -156,6 +169,8 @@ export default function useRouteTransition() {
   }
 
   function finishTransition() {
+    clearMobileWatchdog()
+    pendingMobileRef.current = null
     transitionRef.current = null
     setRouteEnter('run')
     setTransitionPhase('idle')
@@ -172,7 +187,7 @@ export default function useRouteTransition() {
     scrollToRouteTarget(target)
   }
 
-  function swapScreens(to) {
+  function swapDesktopScreens(to) {
     setTransitionPhase('swapping')
 
     if (typeof document.startViewTransition !== 'function') {
@@ -198,10 +213,63 @@ export default function useRouteTransition() {
       })
   }
 
+  function beginMobileCurtain(to) {
+    pendingMobileRef.current = { to, committed: false }
+    setTransitionPhase('mobile-covering')
+
+    clearMobileWatchdog()
+    mobileWatchdogRef.current = window.setTimeout(() => {
+      const pending = pendingMobileRef.current
+
+      if (pending && !pending.committed) {
+        pending.committed = true
+        commitRoute(pending.to)
+      }
+
+      finishTransition()
+    }, MOBILE_WATCHDOG_MS)
+  }
+
+  function onMobileCurtainTransitionEnd(event) {
+    if (
+      event.target !== event.currentTarget ||
+      event.propertyName !== 'transform'
+    ) {
+      return
+    }
+
+    if (phaseRef.current === 'mobile-covering') {
+      const pending = pendingMobileRef.current
+      if (!pending) {
+        finishTransition()
+        return
+      }
+
+      pending.committed = true
+      commitRoute(pending.to)
+      setTransitionPhase('mobile-covered')
+
+      window.requestAnimationFrame(() => {
+        window.requestAnimationFrame(() => {
+          if (phaseRef.current === 'mobile-covered') {
+            setTransitionPhase('mobile-revealing')
+          }
+        })
+      })
+      return
+    }
+
+    if (phaseRef.current === 'mobile-revealing') {
+      finishTransition()
+    }
+  }
+
   useEffect(
     () => () => {
       cancelScrollMotion()
+      clearMobileWatchdog()
       transitionRef.current = null
+      pendingMobileRef.current = null
     },
     [],
   )
@@ -248,7 +316,12 @@ export default function useRouteTransition() {
       pullCurrentScreenToTop()
         .then(() => {
           if (phaseRef.current !== 'pulling') return
-          swapScreens(to)
+
+          if (isMobileViewport()) {
+            beginMobileCurtain(to)
+          } else {
+            swapDesktopScreens(to)
+          }
         })
         .catch(() => {
           commitRoute(to)
@@ -268,5 +341,6 @@ export default function useRouteTransition() {
     phase,
     routeEnter,
     reducedMotion,
+    onMobileCurtainTransitionEnd,
   }
 }
