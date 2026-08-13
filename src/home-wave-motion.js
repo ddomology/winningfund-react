@@ -1,70 +1,77 @@
-const SVG_NS = 'http://www.w3.org/2000/svg'
-
 const HOME_WAVE_TIMINGS = Object.freeze([
-  { duration: '7s', begin: '-2s' },
-  { duration: '10s', begin: '-3s' },
-  { duration: '13s', begin: '-4s' },
-  { duration: '20s', begin: '-5s' },
+  { duration: 7000, phase: 2000 },
+  { duration: 10000, phase: 3000 },
+  { duration: 13000, phase: 4000 },
+  { duration: 20000, phase: 5000 },
 ])
 
-function hasNativeWaveAnimation(useElement) {
-  return Array.from(useElement.children).some(
-    (child) =>
-      child.localName === 'animate' &&
-      child.getAttribute('data-wf-home-wave-native') === 'true',
-  )
+const START_X = -42
+const END_X = 133
+const WAVE_SELECTOR = '.wf-home-wave__parallax > use'
+const activeLayers = new Map()
+
+let animationOrigin = 0
+let frameRequest = 0
+
+function cubicBezierCoordinate(t, p1, p2) {
+  const oneMinusT = 1 - t
+  return 3 * oneMinusT * oneMinusT * t * p1 + 3 * oneMinusT * t * t * p2 + t * t * t
 }
 
-function attachNativeWaveAnimation(useElement, index) {
-  if (hasNativeWaveAnimation(useElement)) return
+function referenceEase(progress) {
+  let low = 0
+  let high = 1
+  let t = progress
 
-  const timing = HOME_WAVE_TIMINGS[index % HOME_WAVE_TIMINGS.length]
+  for (let index = 0; index < 12; index += 1) {
+    const x = cubicBezierCoordinate(t, 0.55, 0.45)
+    if (x < progress) low = t
+    else high = t
+    t = (low + high) / 2
+  }
 
-  // Goodkatz reference geometry: x=48 with transform -90 -> 85.
-  // Moving SVG x from -42 -> 133 is exactly the same horizontal travel,
-  // but it cannot be cancelled by a CSS transform override.
-  useElement.setAttribute('x', '48')
-
-  const animation = document.createElementNS(SVG_NS, 'animate')
-  animation.setAttribute('data-wf-home-wave-native', 'true')
-  animation.setAttribute('attributeName', 'x')
-  animation.setAttribute('values', '-42;133')
-  animation.setAttribute('dur', timing.duration)
-  animation.setAttribute('begin', timing.begin)
-  animation.setAttribute('repeatCount', 'indefinite')
-  animation.setAttribute('calcMode', 'spline')
-  animation.setAttribute('keyTimes', '0;1')
-  animation.setAttribute('keySplines', '.55 .5 .45 .5')
-
-  useElement.appendChild(animation)
+  return cubicBezierCoordinate(t, 0.5, 0.5)
 }
 
-function hydrateHomeWaves(root = document) {
-  const layers = root.querySelectorAll?.('.wf-home-wave__parallax > use')
-  if (!layers?.length) return
+function syncHomeWaveLayers() {
+  const layers = document.querySelectorAll(WAVE_SELECTOR)
 
   layers.forEach((useElement, index) => {
-    attachNativeWaveAnimation(useElement, index % 4)
+    if (activeLayers.has(useElement)) return
+    activeLayers.set(useElement, { ...HOME_WAVE_TIMINGS[index % 4] })
+    useElement.setAttribute('x', '48')
   })
+
+  for (const useElement of activeLayers.keys()) {
+    if (!useElement.isConnected) activeLayers.delete(useElement)
+  }
+}
+
+function renderHomeWaveFrame(now) {
+  if (!animationOrigin) animationOrigin = now
+  const elapsed = now - animationOrigin
+
+  for (const [useElement, timing] of activeLayers.entries()) {
+    const cycle = ((elapsed + timing.phase) % timing.duration) / timing.duration
+    const eased = referenceEase(cycle)
+    const x = START_X + (END_X - START_X) * eased
+    useElement.setAttribute('x', x.toFixed(3))
+  }
+
+  frameRequest = requestAnimationFrame(renderHomeWaveFrame)
 }
 
 function startHomeWaveMotion() {
-  hydrateHomeWaves()
+  syncHomeWaveLayers()
 
-  const observer = new MutationObserver(() => {
-    hydrateHomeWaves()
-  })
+  const observer = new MutationObserver(syncHomeWaveLayers)
+  observer.observe(document.documentElement, { childList: true, subtree: true })
 
-  observer.observe(document.documentElement, {
-    childList: true,
-    subtree: true,
-  })
+  if (!frameRequest) frameRequest = requestAnimationFrame(renderHomeWaveFrame)
 }
 
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', startHomeWaveMotion, {
-    once: true,
-  })
+  document.addEventListener('DOMContentLoaded', startHomeWaveMotion, { once: true })
 } else {
   startHomeWaveMotion()
 }
