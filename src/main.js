@@ -14,6 +14,7 @@ import './styles/members.css'
 import './styles/activities.css'
 import './styles/recruitment.css'
 import './styles/route-hero-effects.css'
+import './styles/kinetic-title-safety.css'
 import './styles/placeholders.css'
 
 const rootElement = document.getElementById('root')
@@ -35,4 +36,3 @@ createRoot(rootElement).render(
     ),
   ),
 )
-
