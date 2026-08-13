@@ -1,8 +1,9 @@
-import { createElement } from 'react'
+﻿import { createElement } from 'react'
 import { Link } from 'react-router'
 import Section from '../components/Section.js'
 import SectionHeader from '../components/SectionHeader.js'
 import HomeSectionRail from '../components/HomeSectionRail.js'
+import HomeMagneticScroll from '../components/HomeMagneticScroll.js'
 import WinningFundBrushSignature from '../components/WinningFundBrushSignature.js'
 import {
   siteContentBundle,
@@ -405,6 +406,7 @@ export default function HomePage() {
   return createElement(
     'div',
     { className: 'wf-home' },
+    createElement(HomeMagneticScroll),
     createElement(HomeSectionRail),
     createElement(HomeHero),
     createElement(ShortIntroduction),
