@@ -1,4 +1,4 @@
-﻿import { createElement } from 'react'
+﻿import { createElement, useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router'
 import Section from '../components/Section.js'
 import SectionHeader from '../components/SectionHeader.js'
@@ -168,7 +168,50 @@ function HomeHero() {
 }
 
 function ShortIntroduction() {
-  const introduction = homeData.shortIntroduction
+  const [revealed, setRevealed] = useState(false)
+  const revealRef = useRef(null)
+
+  useEffect(() => {
+    const target = revealRef.current
+    if (!target) return undefined
+
+    const reducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)',
+    )
+
+    if (
+      reducedMotion.matches ||
+      !('IntersectionObserver' in window)
+    ) {
+      setRevealed(true)
+      return undefined
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0]
+
+        if (!entry?.isIntersecting) return
+
+        setRevealed(true)
+        observer.disconnect()
+      },
+      {
+        threshold: 0.22,
+        rootMargin: '0px 0px -8% 0px',
+      },
+    )
+
+    observer.observe(target)
+
+    return () => {
+      observer.disconnect()
+    }
+  }, [])
+
+  const revealClass = revealed
+    ? 'wf-home-intro__editorial is-revealed'
+    : 'wf-home-intro__editorial'
 
   return createElement(
     Section,
@@ -176,35 +219,139 @@ function ShortIntroduction() {
       sectionId: 'short-introduction',
       spacingVariant: 'compact',
       className: 'wf-home-intro',
+      semanticLabel: '위닝펀드 소개',
     },
     createElement(
       'div',
-      { className: 'wf-home-intro__grid' },
+      {
+        ref: revealRef,
+        className: revealClass,
+      },
       createElement(
         'div',
-        { className: 'wf-home-section-index' },
+        {
+          className:
+            'wf-home-section-index wf-home-intro__index',
+        },
         '02 / 소개',
       ),
       createElement(
         'div',
-        { className: 'wf-home-intro__statement' },
+        { className: 'wf-home-intro__content' },
         createElement(
-          'p',
-          { className: 'wf-home-intro__name' },
-          introduction?.heading ?? '위닝펀드',
+          'h2',
+          {
+            className: 'wf-home-intro__headline',
+          },
+          createElement(
+            'span',
+            {
+              className:
+                'wf-home-intro__headline-line wf-home-intro__headline-line--1',
+            },
+            createElement(
+              'span',
+              null,
+              '좋은 투자는',
+            ),
+          ),
+          createElement(
+            'span',
+            {
+              className:
+                'wf-home-intro__headline-line wf-home-intro__headline-line--2',
+            },
+            createElement(
+              'span',
+              null,
+              '좋은 질문에서 시작됩니다.',
+            ),
+          ),
         ),
         createElement(
           'p',
-          { className: 'wf-home-intro__identity' },
-          introduction?.supportingIdentity ?? '투자·경제 학회',
+          {
+            className:
+              'wf-home-intro__editorial-copy',
+          },
+          '위닝펀드는 시장을 함께 공부하고, 각자의 관점을 검증하며, 근거 있는 투자 판단을 만들어가는 대학 연합투자경제동아리입니다.',
         ),
-        introduction?.bodyCopy
-          ? createElement(
-              'p',
-              { className: 'wf-home-intro__copy' },
-              introduction.bodyCopy,
-            )
-          : null,
+        createElement(
+          'div',
+          {
+            className: 'wf-home-intro__proof',
+            'aria-label': '위닝펀드 주요 정보',
+          },
+          createElement(
+            'div',
+            {
+              className:
+                'wf-home-intro__proof-item wf-home-intro__proof-item--1',
+            },
+            createElement(
+              'strong',
+              {
+                className:
+                  'wf-home-intro__proof-value',
+              },
+              '2009',
+            ),
+            createElement(
+              'span',
+              {
+                className:
+                  'wf-home-intro__proof-label',
+              },
+              '출범',
+            ),
+          ),
+          createElement(
+            'div',
+            {
+              className:
+                'wf-home-intro__proof-item wf-home-intro__proof-item--2',
+            },
+            createElement(
+              'strong',
+              {
+                className:
+                  'wf-home-intro__proof-value',
+              },
+              '1,800명',
+            ),
+            createElement(
+              'span',
+              {
+                className:
+                  'wf-home-intro__proof-label',
+              },
+              '누적 회원',
+            ),
+          ),
+          createElement(
+            'div',
+            {
+              className:
+                'wf-home-intro__proof-item wf-home-intro__proof-item--3',
+            },
+            createElement(
+              'strong',
+              {
+                className:
+                  'wf-home-intro__proof-value wf-home-intro__proof-value--word',
+              },
+              '연합',
+            ),
+            createElement(
+              'span',
+              {
+                className:
+                  'wf-home-intro__proof-label',
+              },
+              '국내 최대 연합투자경제동아리',
+            ),
+          ),
+        ),
       ),
     ),
   )
