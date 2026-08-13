@@ -14,14 +14,33 @@ import {
 import { ROUTE_META } from '../app/routeMeta.js'
 
 const WATCHDOG_MS = 1400
+const APP_BASE_PATH =
+  import.meta.env.BASE_URL === '/'
+    ? ''
+    : import.meta.env.BASE_URL.replace(/\/+$/, '')
 
 function normalizePathname(pathname) {
   if (!pathname) return '/'
   return pathname === '/' ? '/' : pathname.replace(/\/+$/, '')
 }
 
-function resolveRouteMeta(pathname) {
+function toRouterPathname(pathname) {
   const normalized = normalizePathname(pathname)
+
+  if (!APP_BASE_PATH) return normalized
+  if (normalized === APP_BASE_PATH) return '/'
+
+  if (normalized.startsWith(`${APP_BASE_PATH}/`)) {
+    return normalized.slice(APP_BASE_PATH.length) || '/'
+  }
+
+  return normalized
+}
+
+function resolveRouteMeta(pathname) {
+  const normalized = normalizePathname(
+    toRouterPathname(pathname),
+  )
   const index = ROUTE_META.findIndex(
     (entry) => normalizePathname(entry.path) === normalized,
   )
@@ -54,12 +73,14 @@ function isInternalAnchor(anchor) {
   if (anchor.target && anchor.target !== '_self') return false
   if (anchor.hasAttribute('download')) return false
 
-  const url = new URL(anchor.href, window.location.href)
+  const url = new URL(anchor.href, document.URL)
   return url.origin === window.location.origin
 }
 
 function routeIdentity(url) {
-  return normalizePathname(url.pathname)
+  return normalizePathname(
+    toRouterPathname(url.pathname),
+  )
 }
 
 export default function PageTransition({ children }) {
@@ -181,8 +202,8 @@ export default function PageTransition({ children }) {
       const anchor = event.target.closest?.('a[href]')
       if (!anchor || !isInternalAnchor(anchor)) return
 
-      const target = new URL(anchor.href, window.location.href)
-      const current = new URL(window.location.href)
+      const target = new URL(anchor.href, document.URL)
+      const current = new URL(document.URL)
 
       const samePath =
         routeIdentity(target) === routeIdentity(current)
@@ -210,9 +231,10 @@ export default function PageTransition({ children }) {
 
       event.preventDefault()
 
-      const to = `${target.pathname}${target.search}${target.hash}`
+      const pathname = toRouterPathname(target.pathname)
+      const to = `${pathname}${target.search}${target.hash}`
       pendingRef.current = { to }
-      setMarker(resolveRouteMeta(target.pathname))
+      setMarker(resolveRouteMeta(pathname))
       setPhase('covering')
       beginWatchdog()
     }
