@@ -3504,3 +3504,1182 @@
 }
 
 /* WF SHARED IDENTITY GRADIENT END */
+
+/* WF HERO FRAME RING RAIL FINAL START */
+
+/* =========================================================
+   FINAL RESPONSIVE OWNERSHIP
+
+   1. The white side panel owns the section rail.
+   2. The blue hero owns the typography frame.
+   3. Ultra-wide screens must not recenter the typography farther right.
+   4. The rail is visualized only as line + rings.
+   5. Mobile gets a dedicated horizontal ring capsule.
+   6. ECONOMICS gets glyph-safe ink space for its terminal S.
+   ========================================================= */
+
+
+/* =========================================================
+   SHARED SIDE-PANEL GEOMETRY
+   ========================================================= */
+
+.wf-home {
+  --wf-home-side-panel:
+    clamp(
+      292px,
+      20vw,
+      380px
+    );
+}
+
+@media (max-width: 86rem) and (min-width: 64rem) {
+  .wf-home {
+    --wf-home-side-panel:
+      clamp(
+        236px,
+        18vw,
+        280px
+      );
+  }
+}
+
+
+/* =========================================================
+   DESKTOP HERO FRAME
+
+   The background remains full-bleed.
+   The actual content frame is left-anchored inside the blue field,
+   so increasing viewport width does not push the composition right.
+   ========================================================= */
+
+@media (min-width: 64rem) {
+
+  .wf-home-hero--kinetic-entrance {
+    --wf-kinetic-side:
+      var(--wf-home-side-panel);
+  }
+
+  .wf-home-hero__inner--kinetic-entrance {
+    grid-template-columns:
+      var(--wf-home-side-panel)
+      minmax(0, 1fr);
+  }
+
+  .wf-home-hero__kinetic-main {
+    padding-left:
+      clamp(
+        54px,
+        4.2vw,
+        82px
+      );
+
+    padding-right:
+      clamp(
+        48px,
+        3.8vw,
+        76px
+      );
+  }
+
+  /*
+   * The old 1180px auto-centered frame drifted right on ultra-wide
+   * displays. Keep one stable editorial frame anchored to hero left.
+   */
+  .wf-home-kinetic-list,
+  .wf-home-kinetic-footer {
+    width:
+      min(
+        100%,
+        1120px
+      );
+
+    margin-left:
+      0;
+
+    margin-right:
+      auto;
+  }
+}
+
+
+/* Large desktop: stop horizontal drift completely. */
+@media (min-width: 100rem) {
+
+  .wf-home-hero__kinetic-main {
+    padding-left: 78px;
+    padding-right: 72px;
+  }
+
+  .wf-home-kinetic-list,
+  .wf-home-kinetic-footer {
+    width: 1120px;
+    max-width: 100%;
+  }
+}
+
+
+/* =========================================================
+   ECONOMICS TERMINAL-S GLYPH SAFETY
+
+   Negative tracking can make the painted curve of the terminal S
+   extend beyond its advance box.
+
+   The old fix only enlarged the parent text-slot. That does not
+   guarantee enough ink space for background-clip:text itself.
+
+   The actual text layers now own the safety reserve.
+   ========================================================= */
+
+.wf-home-kinetic-row--2
+.wf-home-kinetic-row__ghost,
+
+.wf-home-kinetic-row--2
+.wf-home-kinetic-row__reveal-word {
+  box-sizing:
+    content-box;
+
+  padding-right:
+    0.15em;
+}
+
+
+/*
+ * Remove the previous duplicated parent reserve.
+ * The real glyph layers now provide the required width themselves.
+ */
+@media (min-width: 64rem) {
+
+  .wf-home-kinetic-row--2
+  .wf-home-kinetic-row__text-slot {
+    padding-right:
+      var(--wf-card-trail) !important;
+  }
+}
+
+@media (max-width: 63.99rem) {
+
+  .wf-home-kinetic-row--2
+  .wf-home-kinetic-row__text-slot {
+    padding-right:
+      0 !important;
+  }
+}
+
+
+/* =========================================================
+   DESKTOP RING RAIL
+
+   The number/label nodes remain in the DOM for accessibility and
+   historical verification, but have no visual presence.
+
+   The white side panel now clearly owns a compact independent rail.
+   ========================================================= */
+
+@media (min-width: 64rem) {
+
+  .wf-home-rail {
+    --wf-home-rail-ring:
+      12px;
+
+    --wf-home-rail-ring-current:
+      18px;
+
+    top:
+      50%;
+
+    left:
+      calc(
+        (
+          var(--wf-home-side-panel)
+          - 48px
+        )
+        / 2
+      );
+
+    right:
+      auto;
+
+    bottom:
+      auto;
+
+    width:
+      48px;
+
+    height:
+      min(
+        44vh,
+        360px
+      );
+
+    min-height:
+      300px;
+
+    padding:
+      14px
+      0;
+
+    transform:
+      translateY(-50%);
+
+    pointer-events:
+      none;
+
+    background:
+      rgba(
+        255,
+        255,
+        255,
+        0.88
+      );
+
+    border:
+      1px
+      solid
+      rgba(
+        25,
+        63,
+        215,
+        0.11
+      );
+
+    border-radius:
+      999px;
+
+    box-shadow:
+      0
+      14px
+      40px
+      rgba(
+        22,
+        49,
+        94,
+        0.08
+      );
+
+    backdrop-filter:
+      blur(12px);
+  }
+
+  .wf-home-rail::before {
+    content:
+      none !important;
+
+    display:
+      none !important;
+  }
+
+
+  /* -------------------------
+     shared vertical line
+     ------------------------- */
+
+  .wf-home-rail__track {
+    top:
+      30px;
+
+    right:
+      auto;
+
+    bottom:
+      30px;
+
+    left:
+      50%;
+
+    width:
+      1px;
+
+    height:
+      auto;
+
+    transform:
+      translateX(-50%);
+
+    overflow:
+      visible;
+
+    background:
+      rgba(
+        139,
+        155,
+        179,
+        0.28
+      );
+  }
+
+  .wf-home-rail__progress {
+    top:
+      0;
+
+    right:
+      auto;
+
+    bottom:
+      auto;
+
+    left:
+      0;
+
+    width:
+      1px;
+
+    height:
+      calc(
+        var(--wf-home-rail-progress)
+        * 100%
+      );
+
+    min-width:
+      0;
+
+    min-height:
+      0;
+
+    background:
+      linear-gradient(
+        180deg,
+        #69ccf5 0%,
+        #168cf4 54%,
+        #193fd7 100%
+      );
+  }
+
+
+  /* -------------------------
+     five clickable nodes
+     ------------------------- */
+
+  .wf-home-rail__list {
+    z-index:
+      2;
+
+    height:
+      100%;
+
+    grid-template-columns:
+      1fr;
+
+    grid-template-rows:
+      repeat(
+        5,
+        minmax(
+          0,
+          1fr
+        )
+      );
+  }
+
+  .wf-home-rail__item {
+    min-width:
+      0;
+
+    justify-content:
+      center;
+
+    align-items:
+      center;
+  }
+
+  .wf-home-rail__link {
+    position:
+      relative;
+
+    width:
+      48px;
+
+    height:
+      100%;
+
+    min-height:
+      0;
+
+    padding:
+      0;
+
+    display:
+      grid;
+
+    place-items:
+      center;
+
+    grid-template-columns:
+      none;
+
+    grid-template-areas:
+      none;
+
+    background:
+      transparent !important;
+
+    color:
+      transparent !important;
+
+    opacity:
+      1 !important;
+
+    transform:
+      none !important;
+
+    pointer-events:
+      auto;
+  }
+
+
+  /* visual text removal; anchor aria-label remains */
+  .wf-home-rail__number,
+  .wf-home-rail__label,
+  .wf-home-rail__tick {
+    position:
+      absolute !important;
+
+    width:
+      1px !important;
+
+    height:
+      1px !important;
+
+    min-width:
+      0 !important;
+
+    margin:
+      -1px !important;
+
+    padding:
+      0 !important;
+
+    overflow:
+      hidden !important;
+
+    clip:
+      rect(
+        0,
+        0,
+        0,
+        0
+      ) !important;
+
+    white-space:
+      nowrap !important;
+
+    border:
+      0 !important;
+
+    opacity:
+      0 !important;
+
+    pointer-events:
+      none !important;
+  }
+
+
+  /* -------------------------
+     ring node
+     ------------------------- */
+
+  .wf-home-rail__link::before {
+    content:
+      "";
+
+    position:
+      absolute;
+
+    left:
+      50%;
+
+    top:
+      50%;
+
+    width:
+      var(--wf-home-rail-ring);
+
+    height:
+      var(--wf-home-rail-ring);
+
+    box-sizing:
+      border-box;
+
+    transform:
+      translate(
+        -50%,
+        -50%
+      );
+
+    border:
+      1.5px
+      solid
+      rgba(
+        133,
+        149,
+        173,
+        0.62
+      );
+
+    border-radius:
+      50%;
+
+    background:
+      #ffffff;
+
+    box-shadow:
+      0
+      0
+      0
+      3px
+      rgba(
+        255,
+        255,
+        255,
+        0.92
+      );
+
+    transition:
+      width
+      220ms
+      var(--wf-ease-out),
+      height
+      220ms
+      var(--wf-ease-out),
+      border-color
+      180ms
+      var(--wf-ease-out),
+      box-shadow
+      220ms
+      var(--wf-ease-out);
+  }
+
+
+  /* visited = quiet blue ring */
+  .wf-home-rail__link[data-state='visited']::before {
+    border-color:
+      rgba(
+        22,
+        140,
+        244,
+        0.68
+      );
+  }
+
+
+  /* current = larger brand ring */
+  .wf-home-rail__link[data-state='current']::before {
+    width:
+      var(--wf-home-rail-ring-current);
+
+    height:
+      var(--wf-home-rail-ring-current);
+
+    border:
+      2px
+      solid
+      transparent;
+
+    background:
+      linear-gradient(
+        #ffffff,
+        #ffffff
+      )
+      padding-box,
+
+      linear-gradient(
+        135deg,
+        #69ccf5 0%,
+        #168cf4 48%,
+        #193fd7 100%
+      )
+      border-box;
+
+    box-shadow:
+      0
+      0
+      0
+      4px
+      rgba(
+        22,
+        140,
+        244,
+        0.09
+      );
+  }
+
+
+  /* current center dot */
+  .wf-home-rail__link::after {
+    content:
+      "";
+
+    position:
+      absolute;
+
+    left:
+      50%;
+
+    top:
+      50%;
+
+    width:
+      4px;
+
+    height:
+      4px;
+
+    transform:
+      translate(
+        -50%,
+        -50%
+      )
+      scale(0);
+
+    border-radius:
+      50%;
+
+    background:
+      var(--wf-brand-blue);
+
+    opacity:
+      0;
+
+    transition:
+      transform
+      220ms
+      var(--wf-ease-out),
+      opacity
+      180ms
+      var(--wf-ease-out);
+  }
+
+  .wf-home-rail__link[data-state='current']::after {
+    transform:
+      translate(
+        -50%,
+        -50%
+      )
+      scale(1);
+
+    opacity:
+      1;
+  }
+
+
+  /* keyboard / mouse feedback stays ring-only */
+  .wf-home-rail__link:hover::before,
+  .wf-home-rail__link:focus-visible::before {
+    border-color:
+      var(--wf-brand-blue);
+
+    box-shadow:
+      0
+      0
+      0
+      4px
+      rgba(
+        22,
+        140,
+        244,
+        0.11
+      );
+  }
+
+  .wf-home-rail__link:focus-visible {
+    outline:
+      none;
+  }
+}
+
+
+/* =========================================================
+   MOBILE / TABLET HORIZONTAL RING CAPSULE
+
+   Do not simply rotate the desktop rail.
+   This is a dedicated horizontal composition.
+   ========================================================= */
+
+@media (max-width: 63.99rem) {
+
+  .wf-home-rail {
+    --wf-home-rail-ring:
+      11px;
+
+    --wf-home-rail-ring-current:
+      17px;
+
+    top:
+      auto;
+
+    right:
+      auto;
+
+    bottom:
+      max(
+        14px,
+        env(
+          safe-area-inset-bottom
+        )
+      );
+
+    left:
+      50%;
+
+    width:
+      min(
+        calc(
+          100vw
+          - 32px
+        ),
+        340px
+      );
+
+    height:
+      54px;
+
+    min-height:
+      0;
+
+    padding:
+      0
+      20px;
+
+    transform:
+      translateX(-50%);
+
+    pointer-events:
+      none;
+
+    background:
+      rgba(
+        255,
+        255,
+        255,
+        0.92
+      );
+
+    border:
+      1px
+      solid
+      rgba(
+        25,
+        63,
+        215,
+        0.12
+      );
+
+    border-radius:
+      999px;
+
+    box-shadow:
+      0
+      12px
+      34px
+      rgba(
+        18,
+        43,
+        86,
+        0.13
+      );
+
+    backdrop-filter:
+      blur(14px);
+  }
+
+  .wf-home-rail::before {
+    content:
+      none !important;
+
+    display:
+      none !important;
+  }
+
+
+  /* horizontal line */
+  .wf-home-rail__track {
+    top:
+      50%;
+
+    right:
+      30px;
+
+    bottom:
+      auto;
+
+    left:
+      30px;
+
+    width:
+      auto;
+
+    height:
+      1px;
+
+    transform:
+      translateY(-50%);
+
+    overflow:
+      visible;
+
+    background:
+      rgba(
+        139,
+        155,
+        179,
+        0.30
+      );
+  }
+
+  .wf-home-rail__progress {
+    top:
+      0;
+
+    right:
+      auto;
+
+    bottom:
+      auto;
+
+    left:
+      0;
+
+    width:
+      calc(
+        var(--wf-home-rail-progress)
+        * 100%
+      );
+
+    height:
+      1px;
+
+    min-width:
+      0;
+
+    min-height:
+      0;
+
+    background:
+      linear-gradient(
+        90deg,
+        #69ccf5 0%,
+        #168cf4 54%,
+        #193fd7 100%
+      );
+  }
+
+
+  .wf-home-rail__list {
+    z-index:
+      2;
+
+    height:
+      100%;
+
+    grid-template-rows:
+      1fr;
+
+    grid-template-columns:
+      repeat(
+        5,
+        minmax(
+          0,
+          1fr
+        )
+      );
+  }
+
+  .wf-home-rail__item {
+    justify-content:
+      center;
+
+    align-items:
+      center;
+  }
+
+  .wf-home-rail__link {
+    position:
+      relative;
+
+    width:
+      100%;
+
+    height:
+      54px;
+
+    min-height:
+      0;
+
+    padding:
+      0;
+
+    display:
+      grid;
+
+    place-items:
+      center;
+
+    gap:
+      0;
+
+    background:
+      transparent !important;
+
+    color:
+      transparent !important;
+
+    opacity:
+      1 !important;
+
+    transform:
+      none !important;
+
+    pointer-events:
+      auto;
+  }
+
+
+  .wf-home-rail__number,
+  .wf-home-rail__label,
+  .wf-home-rail__tick {
+    position:
+      absolute !important;
+
+    width:
+      1px !important;
+
+    height:
+      1px !important;
+
+    min-width:
+      0 !important;
+
+    margin:
+      -1px !important;
+
+    padding:
+      0 !important;
+
+    overflow:
+      hidden !important;
+
+    clip:
+      rect(
+        0,
+        0,
+        0,
+        0
+      ) !important;
+
+    white-space:
+      nowrap !important;
+
+    border:
+      0 !important;
+
+    opacity:
+      0 !important;
+
+    pointer-events:
+      none !important;
+  }
+
+
+  .wf-home-rail__link::before {
+    content:
+      "";
+
+    position:
+      absolute;
+
+    left:
+      50%;
+
+    top:
+      50%;
+
+    width:
+      var(--wf-home-rail-ring);
+
+    height:
+      var(--wf-home-rail-ring);
+
+    box-sizing:
+      border-box;
+
+    transform:
+      translate(
+        -50%,
+        -50%
+      );
+
+    border:
+      1.5px
+      solid
+      rgba(
+        133,
+        149,
+        173,
+        0.68
+      );
+
+    border-radius:
+      50%;
+
+    background:
+      #ffffff;
+
+    box-shadow:
+      0
+      0
+      0
+      3px
+      rgba(
+        255,
+        255,
+        255,
+        0.96
+      );
+
+    transition:
+      width
+      220ms
+      var(--wf-ease-out),
+      height
+      220ms
+      var(--wf-ease-out),
+      border-color
+      180ms
+      var(--wf-ease-out);
+  }
+
+  .wf-home-rail__link[data-state='visited']::before {
+    border-color:
+      rgba(
+        22,
+        140,
+        244,
+        0.68
+      );
+  }
+
+  .wf-home-rail__link[data-state='current']::before {
+    width:
+      var(--wf-home-rail-ring-current);
+
+    height:
+      var(--wf-home-rail-ring-current);
+
+    border:
+      2px
+      solid
+      transparent;
+
+    background:
+      linear-gradient(
+        #ffffff,
+        #ffffff
+      )
+      padding-box,
+
+      linear-gradient(
+        135deg,
+        #69ccf5 0%,
+        #168cf4 48%,
+        #193fd7 100%
+      )
+      border-box;
+  }
+
+  .wf-home-rail__link::after {
+    content:
+      "";
+
+    position:
+      absolute;
+
+    left:
+      50%;
+
+    top:
+      50%;
+
+    width:
+      4px;
+
+    height:
+      4px;
+
+    transform:
+      translate(
+        -50%,
+        -50%
+      )
+      scale(0);
+
+    border-radius:
+      50%;
+
+    background:
+      var(--wf-brand-blue);
+
+    opacity:
+      0;
+
+    transition:
+      transform
+      220ms
+      var(--wf-ease-out),
+      opacity
+      180ms
+      var(--wf-ease-out);
+  }
+
+  .wf-home-rail__link[data-state='current']::after {
+    transform:
+      translate(
+        -50%,
+        -50%
+      )
+      scale(1);
+
+    opacity:
+      1;
+  }
+
+  .wf-home-rail__link:focus-visible {
+    outline:
+      none;
+  }
+}
+
+
+/* =========================================================
+   VERY SMALL PHONE
+   ========================================================= */
+
+@media (max-width: 30rem) {
+
+  .wf-home-rail {
+    width:
+      calc(
+        100vw
+        - 24px
+      );
+
+    height:
+      50px;
+
+    padding:
+      0
+      14px;
+  }
+
+  .wf-home-rail__link {
+    height:
+      50px;
+  }
+
+  .wf-home-rail__track {
+    left:
+      24px;
+
+    right:
+      24px;
+  }
+}
+
+/* WF HERO FRAME RING RAIL FINAL END */
