@@ -19,22 +19,17 @@
 }
 
 /* ============================================================
-   HOME WAVE MOTION — KEEP THE REFERENCE WAVE INTACT
+   HOME WAVES — ORIGINAL GOODKATZ REFERENCE MOTION
 
-   HomePage.js already uses the original gentle-wave path and the original
-   four-layer reference composition. Do not reshape, scale, or replace it.
-
-   The previous compatibility patch translated each SVG <use> by percentage,
-   which could move the long reference path outside the visible viewBox.
-   Instead, animate the SVG geometry x-position itself. The travel range is
-   exactly the reference motion: x=48 plus -90 -> +85 = -42 -> 133.
+   Keep HomePage.js gentle-wave geometry exactly as the uploaded reference.
+   The wave is intentionally a long repeating SVG path; motion is created by
+   translating that same path from -90px to 85px. Do not replace the path,
+   reshape it, or animate the SVG x property.
    ============================================================ */
 
 .wf-home-wave__parallax > use {
-  transform: none !important;
-  will-change: auto;
   animation:
-    wf-home-wave-reference-x
+    wf-home-wave-reference-move
     25s
     cubic-bezier(.55, .5, .45, .5)
     infinite
@@ -61,13 +56,13 @@
   animation-duration: 20s !important;
 }
 
-@keyframes wf-home-wave-reference-x {
+@keyframes wf-home-wave-reference-move {
   0% {
-    x: -42px;
+    transform: translate3d(-90px, 0, 0);
   }
 
   100% {
-    x: 133px;
+    transform: translate3d(85px, 0, 0);
   }
 }
 
@@ -75,6 +70,5 @@
   .wf-home-wave__parallax > use {
     animation: none !important;
     transform: none !important;
-    x: 48px;
   }
 }
