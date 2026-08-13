@@ -981,3 +981,62 @@
     transition: none !important;
   }
 }
+
+
+/* WF ACTIVITIES SOURCE MEDIA FINAL START */
+.wf-activities-media { min-width: 0; }
+.wf-activities-media .wf-responsive-media__frame { background: #eaf0f8; }
+.wf-activities-media .wf-responsive-media__image { transition: transform 360ms var(--wf-ease-out); }
+.wf-activities-media[data-crop-mode='contain'] .wf-responsive-media__image { object-fit: contain; background: #fff; }
+.wf-activities-media .wf-responsive-media__caption { margin-top:10px; color:#78869a; font-size:.58rem; font-weight:800; letter-spacing:.12em; }
+
+.wf-activities-sector { display:grid; grid-template-columns:minmax(300px,.82fr) minmax(0,1.18fr); gap:clamp(44px,6vw,86px); align-items:start; }
+.wf-activities-sector__media .wf-responsive-media__frame { aspect-ratio:1.12 !important; }
+.wf-activities-sector__media .wf-responsive-media__image { object-position:50% 48% !important; }
+.wf-activities-sector .wf-activities-detail-grid { grid-template-columns:minmax(0,1fr); }
+.wf-activities-sector .wf-activities-detail-grid li,
+.wf-activities-sector .wf-activities-detail-grid li:first-child { padding:24px 0; border-right:0; border-bottom:1px solid rgba(29,64,115,.13); }
+.wf-activities-sector .wf-activities-detail-grid li:last-child { border-bottom:0; }
+.wf-activities-sector .wf-activities-detail-grid__index { margin-bottom:14px; }
+
+@media (min-width:64rem) {
+  .wf-activities-fm { grid-template-columns:minmax(190px,.55fr) minmax(180px,.42fr) minmax(0,1.03fr); column-gap:clamp(32px,4vw,60px); }
+  .wf-activities-fm__media { align-self:start; max-width:220px; }
+  .wf-activities-fm__media .wf-responsive-media__frame { max-height:342px; border:1px solid rgba(255,255,255,.16); background:#fff; }
+  .wf-activities-fm__media .wf-responsive-media__caption { color:rgba(211,224,243,.56); }
+  .wf-activities-fm__operations { grid-column:1 / -1; }
+}
+
+.wf-activities-reports__team-media { margin:24px 0 26px; }
+.wf-activities-reports__team-media .wf-responsive-media__frame { aspect-ratio:1.18 !important; }
+.wf-activities-reports__personal-item { grid-template-columns:38px minmax(0,.8fr) minmax(220px,1.2fr) !important; gap:clamp(20px,2.6vw,36px) !important; align-items:center !important; }
+.wf-activities-reports__personal-copy { min-width:0; }
+.wf-activities-reports__personal-copy p { margin-top:12px; }
+.wf-activities-reports__personal-media .wf-responsive-media__frame { aspect-ratio:1.18 !important; }
+
+.wf-activities-academic-list article { grid-template-columns:42px minmax(210px,.72fr) minmax(300px,1.28fr) !important; gap:clamp(24px,3.4vw,52px) !important; padding:30px 0; }
+.wf-activities-academic-list__copy { min-width:0; }
+.wf-activities-academic-list__copy p { margin-top:14px; }
+.wf-activities-academic-list__media .wf-responsive-media__frame { aspect-ratio:1.52 !important; }
+.wf-activities-academic-list__media .wf-responsive-media__caption { color:rgba(211,224,243,.52); }
+
+@media (pointer:fine) and (hover:hover) {
+  .wf-activities-sector__media:hover .wf-responsive-media__image,
+  .wf-activities-reports__team-media:hover .wf-responsive-media__image,
+  .wf-activities-reports__personal-media:hover .wf-responsive-media__image,
+  .wf-activities-academic-list__media:hover .wf-responsive-media__image { transform:scale(1.018); }
+}
+
+@media (max-width:63.99rem) {
+  .wf-activities-sector { grid-template-columns:minmax(0,1fr); }
+  .wf-activities-fm__media { width:min(220px,72vw); }
+  .wf-activities-reports__personal-item,
+  .wf-activities-academic-list article { grid-template-columns:32px minmax(0,1fr) !important; }
+  .wf-activities-reports__personal-media,
+  .wf-activities-academic-list__media { grid-column:2; width:min(100%,520px); }
+}
+
+@media (prefers-reduced-motion:reduce) {
+  .wf-activities-media .wf-responsive-media__image { transition:none !important; }
+}
+/* WF ACTIVITIES SOURCE MEDIA FINAL END */

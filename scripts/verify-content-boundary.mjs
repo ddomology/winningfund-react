@@ -1,4 +1,4 @@
-import fs from 'node:fs'
+﻿import fs from 'node:fs'
 import path from 'node:path'
 import process from 'node:process'
 import {
@@ -98,9 +98,41 @@ fm?.semanticFacts?.unresolvedKey==='U-006'
   ? pass('U-006 FM journal explicitly unresolved')
   : fail('U-006 FM journal silently filled')
 
-siteContentBundle.assets.length===10 &&
-siteContentBundle.assets.every((x)=>x.assetId && x.sourcePath && !String(x.sourcePath).startsWith('data:'))
-  ? pass('10 managed asset refs, no embedded base64')
+const requiredAssetIds = [
+  'brand-logo',
+  'member-18-2-01-photo',
+  'member-18-2-02-photo',
+  'member-18-2-03-photo',
+  'member-18-2-04-photo',
+  'member-18-2-05-photo',
+  'member-18-2-06-photo',
+  'member-18-2-07-photo',
+  'member-18-2-08-photo',
+  'member-18-2-09-photo',
+  'activity-sector-followup-photo',
+  'activity-fm-monthly-report-photo',
+  'activity-team-report-presentation-photo',
+  'activity-individual-strategy-report-photo',
+  'activity-individual-company-report-photo',
+  'activity-stock-game-photo',
+  'activity-stock-mentoring-photo',
+]
+
+const assetIds = new Set(
+  siteContentBundle.assets.map((asset) => asset.assetId),
+)
+
+siteContentBundle.assets.length===requiredAssetIds.length &&
+requiredAssetIds.every((assetId)=>assetIds.has(assetId)) &&
+siteContentBundle.assets.every((asset)=>
+  asset.assetId &&
+  asset.sourcePath &&
+  asset.src &&
+  !String(asset.sourcePath).startsWith('data:') &&
+  !String(asset.src).startsWith('data:') &&
+  fs.existsSync(path.join(root,asset.sourcePath))
+)
+  ? pass('17 managed asset refs: 1 brand + 9 members + 7 activities')
   : fail('asset registry invalid')
 
 const pageDir=path.join(root,'src','pages')
