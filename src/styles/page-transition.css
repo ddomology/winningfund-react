@@ -1,6 +1,9 @@
 /* ============================================================
    WINNINGFUND ROUTE TRANSITION
-   The route screens themselves wipe into one another.
+
+   Desktop: the route screens themselves wipe into one another.
+   Mobile: a branded cobalt curtain travels bottom -> top, swaps the
+   route while fully covered, then continues out above the viewport.
    ============================================================ */
 
 .wf-page-transition {
@@ -9,8 +12,8 @@
 }
 
 /*
- * The new route is committed while the browser owns its transition snapshot.
- * Keep route entrance animations parked at frame zero until the screen swap ends.
+ * New routes are committed underneath an active transition.
+ * Keep route entrance animations at frame zero until the transition ends.
  */
 .wf-page-transition[data-route-enter='hold'] .wf-route-viewport *,
 .wf-page-transition[data-route-enter='hold'] .wf-route-viewport *::before,
@@ -18,12 +21,10 @@
   animation-play-state: paused !important;
 }
 
-/*
- * Native View Transition snapshot choreography.
- * There is no colored curtain: old(root) and new(root) are the actual before/after
- * screen captures. Their clipping edges travel together from left to right,
- * matching the supplied cover-slider reference while keeping layout continuity.
- */
+/* ============================================================
+   DESKTOP — PRESENTATION-LIKE SCREEN WIPE
+   ============================================================ */
+
 ::view-transition-group(root) {
   animation: none;
 }
@@ -37,8 +38,8 @@
   width: 100%;
   height: 100%;
   mix-blend-mode: normal;
-  animation-duration: 280ms;
-  animation-timing-function: cubic-bezier(.22,.8,.22,1);
+  animation-duration: 520ms;
+  animation-timing-function: cubic-bezier(.65, 0, .35, 1);
   animation-fill-mode: both;
 }
 
@@ -72,10 +73,211 @@
   }
 }
 
+/* ============================================================
+   MOBILE — BRANDED CURTAIN
+   ============================================================ */
+
+.wf-mobile-route-curtain {
+  display: none;
+}
+
 @media (max-width: 48rem) {
-  ::view-transition-old(root),
-  ::view-transition-new(root) {
-    animation-duration: 220ms;
+  .wf-mobile-route-curtain {
+    position: fixed;
+    z-index: 320;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translate3d(0, 100%, 0);
+    will-change: transform;
+    background:
+      radial-gradient(
+        circle at 22% 16%,
+        rgba(183, 235, 255, .34),
+        transparent 34%
+      ),
+      radial-gradient(
+        circle at 78% 84%,
+        rgba(21, 38, 160, .22),
+        transparent 38%
+      ),
+      linear-gradient(
+        155deg,
+        #55bff6 0%,
+        #2098f4 30%,
+        #0875ef 61%,
+        #174bdc 100%
+      );
+  }
+
+  .wf-mobile-route-curtain::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: .22;
+    background:
+      linear-gradient(
+        180deg,
+        rgba(255,255,255,.08),
+        transparent 28%,
+        transparent 70%,
+        rgba(2,35,130,.1)
+      );
+  }
+
+  .wf-page-transition[data-phase='mobile-covering']
+  .wf-mobile-route-curtain,
+  .wf-page-transition[data-phase='mobile-covered']
+  .wf-mobile-route-curtain,
+  .wf-page-transition[data-phase='mobile-revealing']
+  .wf-mobile-route-curtain {
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .wf-page-transition[data-phase='mobile-covering']
+  .wf-mobile-route-curtain {
+    transform: translate3d(0, 0, 0);
+    transition:
+      transform 310ms cubic-bezier(.22,.78,.2,1);
+  }
+
+  .wf-page-transition[data-phase='mobile-covered']
+  .wf-mobile-route-curtain {
+    transform: translate3d(0, 0, 0);
+    transition: none;
+  }
+
+  .wf-page-transition[data-phase='mobile-revealing']
+  .wf-mobile-route-curtain {
+    transform: translate3d(0, -100%, 0);
+    transition:
+      transform 330ms cubic-bezier(.65,0,.28,1);
+  }
+
+  .wf-mobile-route-curtain__brand-stage {
+    position: relative;
+    z-index: 2;
+    width: min(54vw, 208px);
+    aspect-ratio: 1;
+    display: grid;
+    place-items: center;
+    opacity: 0;
+    transform: scale(.94);
+  }
+
+  .wf-page-transition[data-phase='mobile-covering']
+  .wf-mobile-route-curtain__brand-stage {
+    opacity: 1;
+    transform: scale(1);
+    transition:
+      opacity 170ms ease-out 90ms,
+      transform 260ms cubic-bezier(.16,1,.3,1) 70ms;
+  }
+
+  .wf-page-transition[data-phase='mobile-covered']
+  .wf-mobile-route-curtain__brand-stage {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .wf-page-transition[data-phase='mobile-revealing']
+  .wf-mobile-route-curtain__brand-stage {
+    opacity: 0;
+    transform: scale(1.035);
+    transition:
+      opacity 140ms linear,
+      transform 220ms cubic-bezier(.4,0,1,1);
+  }
+
+  .wf-mobile-route-curtain__halo {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .wf-mobile-route-curtain__dot {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 4px;
+    height: 4px;
+    border-radius: 999px;
+    opacity: 0;
+    background: rgba(255,255,255,.9);
+    box-shadow: 0 0 9px rgba(226,247,255,.22);
+    transform:
+      translate(-50%, -50%)
+      rotate(var(--wf-mobile-dot-angle))
+      translateY(calc(-1 * min(25vw, 94px)));
+    transition: opacity 150ms ease-out;
+  }
+
+  .wf-mobile-route-curtain__dot:nth-child(2n) {
+    width: 3px;
+    height: 3px;
+    background: rgba(255,255,255,.7);
+  }
+
+  .wf-mobile-route-curtain__dot:nth-child(3n) {
+    width: 5px;
+    height: 5px;
+    background: rgba(255,255,255,.82);
+  }
+
+  .wf-mobile-route-curtain__dot:nth-child(1) { transition-delay: 70ms; }
+  .wf-mobile-route-curtain__dot:nth-child(2) { transition-delay: 84ms; }
+  .wf-mobile-route-curtain__dot:nth-child(3) { transition-delay: 98ms; }
+  .wf-mobile-route-curtain__dot:nth-child(4) { transition-delay: 112ms; }
+  .wf-mobile-route-curtain__dot:nth-child(5) { transition-delay: 126ms; }
+  .wf-mobile-route-curtain__dot:nth-child(6) { transition-delay: 140ms; }
+  .wf-mobile-route-curtain__dot:nth-child(7) { transition-delay: 154ms; }
+  .wf-mobile-route-curtain__dot:nth-child(8) { transition-delay: 168ms; }
+  .wf-mobile-route-curtain__dot:nth-child(9) { transition-delay: 182ms; }
+  .wf-mobile-route-curtain__dot:nth-child(10) { transition-delay: 196ms; }
+  .wf-mobile-route-curtain__dot:nth-child(11) { transition-delay: 210ms; }
+  .wf-mobile-route-curtain__dot:nth-child(12) { transition-delay: 224ms; }
+
+  .wf-page-transition[data-phase='mobile-covering']
+  .wf-mobile-route-curtain__dot,
+  .wf-page-transition[data-phase='mobile-covered']
+  .wf-mobile-route-curtain__dot {
+    opacity: 1;
+  }
+
+  .wf-page-transition[data-phase='mobile-revealing']
+  .wf-mobile-route-curtain__dot {
+    opacity: 0;
+    transition-delay: 0ms;
+    transition-duration: 110ms;
+  }
+
+  .wf-mobile-route-curtain__logo {
+    position: relative;
+    z-index: 3;
+    display: block;
+    width: min(35vw, 138px);
+    height: auto;
+    user-select: none;
+    pointer-events: none;
+    filter:
+      brightness(0)
+      invert(1)
+      drop-shadow(0 5px 18px rgba(3,48,145,.13));
+  }
+
+  .wf-mobile-route-curtain__wordmark {
+    position: relative;
+    z-index: 3;
+    color: #ffffff;
+    font-size: clamp(.95rem, 4vw, 1.15rem);
+    font-weight: 900;
+    letter-spacing: .13em;
+    white-space: nowrap;
   }
 }
 
@@ -83,5 +285,11 @@
   ::view-transition-old(root),
   ::view-transition-new(root) {
     animation: none !important;
+  }
+
+  .wf-mobile-route-curtain,
+  .wf-mobile-route-curtain__brand-stage,
+  .wf-mobile-route-curtain__dot {
+    transition: none !important;
   }
 }
