@@ -2,7 +2,6 @@
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router'
 import App from './app/App.js'
-import './home-wave-motion.js'
 import './styles/reset.css'
 import './styles/brand-foundation.css'
 import './styles/app-shell.css'
