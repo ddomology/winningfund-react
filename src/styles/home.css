@@ -11946,3 +11946,689 @@
 }
 
 /* WF WAVES REFERENCE REBUILD FINAL END */
+
+/* WF WAVES OVERLAP COMPACT03 POLISH FINAL START */
+
+/* =========================================================
+   01 / HERO — MOBILE COLLISION FIXES
+   ========================================================= */
+
+/*
+ * AND used to be absolutely positioned over the ECONOMICS row.
+ * On compact screens it now owns a real layout row.
+ */
+@media (max-width: 63.99rem) {
+
+  .wf-home-kinetic-row--2 {
+    display:
+      grid
+      !important;
+
+    grid-template-columns:
+      minmax(
+        0,
+        1fr
+      )
+      !important;
+
+    grid-template-rows:
+      auto
+      auto
+      !important;
+
+    gap:
+      8px
+      !important;
+
+    padding-top:
+      0
+      !important;
+  }
+
+
+  .wf-home-kinetic-row--2
+  .wf-home-kinetic-row__meta {
+    position:
+      static
+      !important;
+
+    inset:
+      auto
+      !important;
+
+    width:
+      fit-content;
+
+    min-width:
+      0;
+
+    margin:
+      0
+      0
+      0
+      4%
+      !important;
+
+    transform:
+      none
+      !important;
+  }
+
+
+  .wf-home-kinetic-row--2
+  .wf-home-kinetic-row__annotation {
+    line-height:
+      1.1;
+
+    white-space:
+      nowrap;
+  }
+
+
+  .wf-home-kinetic-row--2
+  .wf-home-kinetic-row__text-slot {
+    margin:
+      0
+      0
+      0
+      4%
+      !important;
+  }
+
+
+  /*
+   * CLUB had no right-side glyph reserve.
+   * Pull it slightly inward and reserve room for B overhang.
+   */
+  .wf-home-kinetic-row--3
+  .wf-home-kinetic-row__text-slot {
+    box-sizing:
+      content-box;
+
+    margin-left:
+      20%
+      !important;
+
+    margin-right:
+      4%
+      !important;
+
+    padding-right:
+      0.12em
+      !important;
+  }
+
+
+  .wf-home-kinetic-row--3
+  .wf-home-kinetic-row__ghost,
+
+  .wf-home-kinetic-row--3
+  .wf-home-kinetic-row__reveal-word {
+    padding-right:
+      0.10em
+      !important;
+  }
+}
+
+
+/* =========================================================
+   03 / ACTIVITIES — QUIET HOVER + REMOVE STRAY BLUE NODE
+   ========================================================= */
+
+/*
+ * The shared track is enough.
+ * Individual circular nodes and the floating arrow were adding a
+ * second effect layer and colliding with copy on hover.
+ */
+.wf-home-program__track-node {
+  display:
+    none
+    !important;
+}
+
+
+.wf-home-program__arrow {
+  display:
+    none
+    !important;
+}
+
+
+@media (pointer: fine) and (hover: hover) {
+
+  .wf-home-program:hover,
+  .wf-home-program:focus-visible {
+    transform:
+      none
+      !important;
+  }
+
+
+  .wf-home-program:hover
+  .wf-home-program__icon-shell,
+
+  .wf-home-program:focus-visible
+  .wf-home-program__icon-shell {
+    transform:
+      none
+      !important;
+
+    color:
+      #72d4fb;
+  }
+
+
+  .wf-home-program:hover
+  .wf-home-program__title,
+
+  .wf-home-program:focus-visible
+  .wf-home-program__title {
+    color:
+      #72d4fb;
+  }
+}
+
+
+/* =========================================================
+   03 / MOBILE — DENSITY PASS
+
+   Four activities should read as one compact chapter, not four tall cards.
+   - smaller headline
+   - shorter list lead-in
+   - no decorative icons
+   - tighter rows and copy
+   - thinner vertical track
+   ========================================================= */
+
+@media (max-width: 48rem) {
+
+  .wf-home-programs.wf-section--spacing-compact {
+    padding-block:
+      48px
+      58px
+      !important;
+  }
+
+
+  .wf-home-programs__index {
+    margin-bottom:
+      22px
+      !important;
+  }
+
+
+  .wf-home-programs__header {
+    margin-top:
+      0
+      !important;
+
+    gap:
+      14px
+      !important;
+  }
+
+
+  .wf-home-programs__headline {
+    max-width:
+      11ch;
+
+    font-size:
+      clamp(
+        2.05rem,
+        9.2vw,
+        2.9rem
+      )
+      !important;
+
+    line-height:
+      1
+      !important;
+  }
+
+
+  .wf-home-programs__kicker {
+    max-width:
+      none;
+
+    font-size:
+      0.56rem
+      !important;
+
+    line-height:
+      1.4;
+  }
+
+
+  .wf-home-programs__list {
+    margin-top:
+      34px
+      !important;
+
+    padding-left:
+      48px
+      !important;
+
+    padding-right:
+      0
+      !important;
+  }
+
+
+  .wf-home-programs__list::before,
+  .wf-home-programs__list::after {
+    top:
+      2px
+      !important;
+
+    bottom:
+      2px
+      !important;
+
+    left:
+      14px
+      !important;
+
+    width:
+      2px
+      !important;
+  }
+
+
+  .wf-home-program {
+    min-height:
+      0
+      !important;
+
+    display:
+      block
+      !important;
+
+    padding:
+      0
+      0
+      27px
+      !important;
+  }
+
+
+  .wf-home-program:last-child {
+    padding-bottom:
+      0
+      !important;
+  }
+
+
+  /*
+   * Decorative icons were forcing extra row height and competing
+   * with the compact timeline on phones.
+   */
+  .wf-home-program__icon-shell {
+    display:
+      none
+      !important;
+  }
+
+
+  .wf-home-program__number {
+    position:
+      static
+      !important;
+
+    display:
+      block;
+
+    margin:
+      0
+      0
+      5px
+      !important;
+
+    color:
+      rgba(
+        111,
+        210,
+        250,
+        0.82
+      );
+
+    font-size:
+      0.58rem
+      !important;
+
+    line-height:
+      1.2;
+  }
+
+
+  .wf-home-program__body {
+    display:
+      grid
+      !important;
+
+    width:
+      100%
+      !important;
+
+    margin:
+      0
+      !important;
+
+    padding:
+      0
+      !important;
+
+    gap:
+      5px
+      !important;
+  }
+
+
+  .wf-home-program__title {
+    max-width:
+      none
+      !important;
+
+    font-size:
+      1rem
+      !important;
+
+    line-height:
+      1.28
+      !important;
+  }
+
+
+  .wf-home-program__summary {
+    max-width:
+      none
+      !important;
+
+    font-size:
+      0.79rem
+      !important;
+
+    line-height:
+      1.48
+      !important;
+
+    color:
+      rgba(
+        205,
+        218,
+        239,
+        0.70
+      );
+  }
+}
+
+
+/* =========================================================
+   04 / OUR MISSION — FULL EDITORIAL WIDTH
+
+   The old two-column wrapper put the entire list in the right column.
+   Mission now reads top-to-bottom, then uses the full width for rows.
+   ========================================================= */
+
+.wf-home-mission__index {
+  box-sizing:
+    border-box;
+
+  width:
+    min(
+      calc(
+        100%
+        - 144px
+      ),
+      1180px
+    )
+    !important;
+
+  margin-left:
+    auto
+    !important;
+
+  margin-right:
+    auto
+    !important;
+}
+
+
+.wf-home-mission__editorial {
+  display:
+    grid
+    !important;
+
+  grid-template-columns:
+    minmax(
+      0,
+      1fr
+    )
+    !important;
+
+  gap:
+    clamp(
+      34px,
+      4.5vw,
+      54px
+    )
+    !important;
+
+  align-items:
+    start;
+}
+
+
+.wf-home-mission__header {
+  position:
+    static
+    !important;
+
+  width:
+    100%;
+
+  max-width:
+    620px;
+}
+
+
+.wf-home-mission__title {
+  max-width:
+    24ch
+    !important;
+}
+
+
+.wf-home-mission__list {
+  width:
+    100%;
+
+  min-width:
+    0;
+}
+
+
+.wf-home-mission__item {
+  width:
+    100%;
+
+  min-width:
+    0;
+
+  grid-template-columns:
+    44px
+    minmax(
+      0,
+      1fr
+    )
+    !important;
+
+  gap:
+    clamp(
+      20px,
+      2.4vw,
+      32px
+    )
+    !important;
+
+  padding:
+    clamp(
+      27px,
+      2.6vw,
+      36px
+    )
+    0
+    !important;
+}
+
+
+.wf-home-mission__body {
+  min-width:
+    0;
+
+  display:
+    grid
+    !important;
+
+  grid-template-columns:
+    minmax(
+      190px,
+      0.58fr
+    )
+    minmax(
+      0,
+      1.42fr
+    )
+    !important;
+
+  gap:
+    clamp(
+      32px,
+      5vw,
+      80px
+    )
+    !important;
+
+  align-items:
+    start;
+}
+
+
+.wf-home-mission__heading {
+  max-width:
+    15ch;
+}
+
+
+.wf-home-mission__copy {
+  width:
+    100%;
+
+  max-width:
+    54ch
+    !important;
+}
+
+
+@media (pointer: fine) and (hover: hover) {
+
+  .wf-home-mission__item:hover
+  .wf-home-mission__heading {
+    transform:
+      none
+      !important;
+  }
+}
+
+
+/* compact Mission returns to one readable column */
+@media (max-width: 63.99rem) {
+
+  .wf-home-mission__index {
+    width:
+      calc(
+        100%
+        - var(--wf-gutter)
+        * 2
+      )
+      !important;
+  }
+}
+
+
+@media (max-width: 48rem) {
+
+  .wf-home-mission__editorial {
+    gap:
+      28px
+      !important;
+  }
+
+
+  .wf-home-mission__item {
+    grid-template-columns:
+      28px
+      minmax(
+        0,
+        1fr
+      )
+      !important;
+
+    gap:
+      14px
+      !important;
+
+    padding:
+      20px
+      0
+      !important;
+  }
+
+
+  .wf-home-mission__body {
+    grid-template-columns:
+      minmax(
+        0,
+        1fr
+      )
+      !important;
+
+    gap:
+      8px
+      !important;
+  }
+
+
+  .wf-home-mission__heading {
+    max-width:
+      none;
+  }
+
+
+  .wf-home-mission__copy {
+    max-width:
+      34ch
+      !important;
+  }
+}
+
+
+/* =========================================================
+   ACCESSIBLE FOCUS
+   ========================================================= */
+
+.wf-home-program:focus-visible {
+  outline:
+    1px
+    solid
+    rgba(
+      114,
+      212,
+      251,
+      0.72
+    );
+
+  outline-offset:
+    7px;
+}
+
+/* WF WAVES OVERLAP COMPACT03 POLISH FINAL END */
