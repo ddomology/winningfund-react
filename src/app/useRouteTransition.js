@@ -10,7 +10,8 @@ import {
 } from 'react-router'
 
 const MOBILE_QUERY = '(max-width: 48rem)'
-const MOBILE_WATCHDOG_MS = 1400
+const MOBILE_WATCHDOG_MS = 2400
+const MOBILE_BRAND_HOLD_MS = 140
 const APP_BASE_PATH =
   import.meta.env.BASE_URL === '/'
     ? ''
@@ -105,6 +106,7 @@ export default function useRouteTransition() {
   const transitionRef = useRef(null)
   const pendingMobileRef = useRef(null)
   const mobileWatchdogRef = useRef(null)
+  const mobileHoldRef = useRef(null)
 
   const routeKey = `${location.pathname}${location.hash}`
 
@@ -137,13 +139,20 @@ export default function useRouteTransition() {
     }
   }
 
+  function clearMobileHold() {
+    if (mobileHoldRef.current) {
+      window.clearTimeout(mobileHoldRef.current)
+      mobileHoldRef.current = null
+    }
+  }
+
   function pullCurrentScreenToTop() {
     cancelScrollMotion()
 
     const startY = window.scrollY
     if (startY <= 1) return Promise.resolve()
 
-    const duration = isMobileViewport() ? 125 : 180
+    const duration = isMobileViewport() ? 170 : 220
     const startedAt = performance.now()
 
     return new Promise((resolve) => {
@@ -170,6 +179,7 @@ export default function useRouteTransition() {
 
   function finishTransition() {
     clearMobileWatchdog()
+    clearMobileHold()
     pendingMobileRef.current = null
     transitionRef.current = null
     setRouteEnter('run')
@@ -249,13 +259,14 @@ export default function useRouteTransition() {
       commitRoute(pending.to)
       setTransitionPhase('mobile-covered')
 
-      window.requestAnimationFrame(() => {
-        window.requestAnimationFrame(() => {
-          if (phaseRef.current === 'mobile-covered') {
-            setTransitionPhase('mobile-revealing')
-          }
-        })
-      })
+      clearMobileHold()
+      mobileHoldRef.current = window.setTimeout(() => {
+        mobileHoldRef.current = null
+
+        if (phaseRef.current === 'mobile-covered') {
+          setTransitionPhase('mobile-revealing')
+        }
+      }, MOBILE_BRAND_HOLD_MS)
       return
     }
 
@@ -268,6 +279,7 @@ export default function useRouteTransition() {
     () => () => {
       cancelScrollMotion()
       clearMobileWatchdog()
+      clearMobileHold()
       transitionRef.current = null
       pendingMobileRef.current = null
     },
