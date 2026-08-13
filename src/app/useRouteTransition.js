@@ -9,9 +9,10 @@ import {
   useNavigate,
   useNavigationType,
 } from 'react-router'
-import { ROUTE_META } from './routeMeta.js'
 
-const WATCHDOG_MS = 1400
+const WATCHDOG_MS = 1000
+const MOBILE_QUERY = '(max-width: 48rem)'
+const MOBILE_LONG_SCROLL_PX = 600
 const APP_BASE_PATH =
   import.meta.env.BASE_URL === '/'
     ? ''
@@ -35,24 +36,6 @@ function toRouterPathname(pathname) {
   return normalized
 }
 
-function resolveRouteMeta(pathname) {
-  const normalized = normalizePathname(
-    toRouterPathname(pathname),
-  )
-  const index = ROUTE_META.findIndex(
-    (entry) => normalizePathname(entry.path) === normalized,
-  )
-
-  if (index === -1) {
-    return { index: '--', label: 'PAGE' }
-  }
-
-  return {
-    index: String(index + 1).padStart(2, '0'),
-    label: ROUTE_META[index].label,
-  }
-}
-
 function isModifiedClick(event) {
   return (
     event.button !== 0 ||
@@ -69,13 +52,29 @@ function isInternalAnchor(anchor) {
   if (anchor.hasAttribute('download')) return false
 
   const url = new URL(anchor.href, document.URL)
-  return url.origin === window.location.origin
+  if (url.origin !== window.location.origin) return false
+
+  if (APP_BASE_PATH) {
+    const pathname = normalizePathname(url.pathname)
+    if (
+      pathname !== APP_BASE_PATH &&
+      !pathname.startsWith(`${APP_BASE_PATH}/`)
+    ) {
+      return false
+    }
+  }
+
+  return true
 }
 
 function routeIdentity(url) {
   return normalizePathname(
     toRouterPathname(url.pathname),
   )
+}
+
+function easeOutCubic(progress) {
+  return 1 - ((1 - progress) ** 3)
 }
 
 export default function useRouteTransition() {
@@ -85,9 +84,6 @@ export default function useRouteTransition() {
   const [phase, setPhase] = useState('idle')
   const [routeEnter, setRouteEnter] = useState('run')
   const [snapCover, setSnapCover] = useState(false)
-  const [marker, setMarker] = useState(() =>
-    resolveRouteMeta(location.pathname),
-  )
   const [reducedMotion, setReducedMotion] = useState(false)
 
   const pendingRef = useRef(null)
@@ -95,6 +91,7 @@ export default function useRouteTransition() {
   const previousLocationRef = useRef(location)
   const firstLocationEffectRef = useRef(true)
   const watchdogRef = useRef(null)
+  const scrollFrameRef = useRef(null)
   const phaseRef = useRef(phase)
 
   phaseRef.current = phase
@@ -118,8 +115,63 @@ export default function useRouteTransition() {
     }
   }
 
+  function cancelScrollMotion() {
+    if (scrollFrameRef.current) {
+      window.cancelAnimationFrame(scrollFrameRef.current)
+      scrollFrameRef.current = null
+    }
+  }
+
+  function animateCurrentPageTowardTop() {
+    cancelScrollMotion()
+
+    const startY = window.scrollY
+    if (startY <= 1) return
+
+    const mobile = window.matchMedia(MOBILE_QUERY).matches
+    const longMobile =
+      mobile && startY > MOBILE_LONG_SCROLL_PX
+
+    const duration = longMobile
+      ? 110
+      : mobile
+        ? 145
+        : 210
+
+    /*
+     * On a long mobile page, only show a short upward pull. The fully opaque
+     * wipe hides the final snap to zero so the browser chrome does not spend
+     * hundreds of milliseconds chasing a huge smooth-scroll distance.
+     */
+    const endY = longMobile
+      ? Math.max(
+          0,
+          startY - Math.min(520, Math.max(180, startY * 0.22)),
+        )
+      : 0
+
+    const startedAt = performance.now()
+
+    function frame(now) {
+      const progress = Math.min(1, (now - startedAt) / duration)
+      const eased = easeOutCubic(progress)
+      const nextY = startY + ((endY - startY) * eased)
+
+      window.scrollTo(0, nextY)
+
+      if (progress < 1) {
+        scrollFrameRef.current = window.requestAnimationFrame(frame)
+      } else {
+        scrollFrameRef.current = null
+      }
+    }
+
+    scrollFrameRef.current = window.requestAnimationFrame(frame)
+  }
+
   function finishTransition() {
     clearWatchdog()
+    cancelScrollMotion()
     pendingRef.current = null
     transitionOwnedNavigationRef.current = false
     setSnapCover(false)
@@ -133,8 +185,16 @@ export default function useRouteTransition() {
     watchdogRef.current = window.setTimeout(() => {
       const pending = pendingRef.current
 
+      cancelScrollMotion()
+
       if (pending && !transitionOwnedNavigationRef.current) {
         transitionOwnedNavigationRef.current = true
+
+        const target = new URL(pending.to, window.location.origin)
+        if (!target.hash) {
+          window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
+        }
+
         navigate(pending.to)
       }
 
@@ -142,7 +202,13 @@ export default function useRouteTransition() {
     }, WATCHDOG_MS)
   }
 
-  useEffect(() => clearWatchdog, [])
+  useEffect(
+    () => () => {
+      clearWatchdog()
+      cancelScrollMotion()
+    },
+    [],
+  )
 
   useLayoutEffect(() => {
     if (firstLocationEffectRef.current) {
@@ -175,7 +241,6 @@ export default function useRouteTransition() {
         return
       }
 
-      setMarker(resolveRouteMeta(location.pathname))
       setRouteEnter('hold')
       setSnapCover(true)
       setPhase('covered')
@@ -216,15 +281,24 @@ export default function useRouteTransition() {
         return
       }
 
-      if (reducedMotion) return
-
-      event.preventDefault()
-
       const pathname = toRouterPathname(target.pathname)
       const to = `${pathname}${target.search}${target.hash}`
 
+      if (reducedMotion) {
+        event.preventDefault()
+
+        if (!target.hash) {
+          window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
+        }
+
+        navigate(to)
+        return
+      }
+
+      event.preventDefault()
+
       pendingRef.current = { to }
-      setMarker(resolveRouteMeta(pathname))
+      animateCurrentPageTowardTop()
       setPhase('covering')
       beginWatchdog()
     }
@@ -240,6 +314,7 @@ export default function useRouteTransition() {
     const pending = pendingRef.current
     if (!pending) return
 
+    cancelScrollMotion()
     transitionOwnedNavigationRef.current = true
     setRouteEnter('hold')
     setPhase('covered')
@@ -252,7 +327,7 @@ export default function useRouteTransition() {
     navigate(pending.to)
   }
 
-  function onCurtainTransitionEnd(event) {
+  function onWipeTransitionEnd(event) {
     if (
       event.target !== event.currentTarget ||
       event.propertyName !== 'transform'
@@ -276,7 +351,6 @@ export default function useRouteTransition() {
     routeEnter,
     snapCover,
     reducedMotion,
-    marker,
-    onCurtainTransitionEnd,
+    onWipeTransitionEnd,
   }
 }
