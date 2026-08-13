@@ -1,9 +1,14 @@
 /* ============================================================
    WINNINGFUND ROUTE TRANSITION
 
-   Desktop: the route screens themselves wipe into one another.
-   Mobile: a branded cobalt curtain travels bottom -> top, swaps the
-   route while fully covered, then continues out above the viewport.
+   Desktop:
+   - only the first hero participates in View Transition snapshots
+   - forward/backward route order controls horizontal direction
+   - compositor-friendly translate3d only; no animated clip-path
+   - one five-route global wave strip moves through the same route space
+
+   Mobile:
+   - branded cobalt curtain remains unchanged
    ============================================================ */
 
 .wf-page-transition {
@@ -14,6 +19,7 @@
 /*
  * New routes are committed underneath an active transition.
  * Keep route entrance animations at frame zero until the transition ends.
+ * The global desktop wave sits outside .wf-route-viewport, so it never pauses.
  */
 .wf-page-transition[data-route-enter='hold'] .wf-route-viewport *,
 .wf-page-transition[data-route-enter='hold'] .wf-route-viewport *::before,
@@ -22,54 +28,207 @@
 }
 
 /* ============================================================
-   DESKTOP — PRESENTATION-LIKE SCREEN WIPE
+   DESKTOP — DIRECTIONAL HERO SLIDE + GLOBAL WAVE SPACE
    ============================================================ */
 
-::view-transition-group(root) {
-  animation: none;
+.wf-desktop-continuous-wave {
+  display: none;
 }
 
-::view-transition-image-pair(root) {
-  isolation: auto;
-}
-
-::view-transition-old(root),
-::view-transition-new(root) {
-  width: 100%;
-  height: 100%;
-  mix-blend-mode: normal;
-  animation-duration: 820ms;
-  animation-timing-function: cubic-bezier(.65, 0, .35, 1);
-  animation-fill-mode: both;
-}
-
-::view-transition-old(root) {
-  z-index: 1;
-  animation-name: wf-route-screen-out;
-}
-
-::view-transition-new(root) {
-  z-index: 2;
-  animation-name: wf-route-screen-in;
-}
-
-@keyframes wf-route-screen-out {
-  from {
-    clip-path: inset(0 0 0 0);
+@media (min-width: 48.01rem) {
+  /*
+   * Disable the expensive full-root snapshot. Only the visible hero is captured.
+   * Header, global wave, and offscreen body content remain live DOM.
+   */
+  :root {
+    view-transition-name: none;
   }
 
-  to {
-    clip-path: inset(0 0 0 100%);
+  .wf-home-hero,
+  .wf-about-hero,
+  .wf-members-hero,
+  .wf-activities-hero,
+  .wf-recruitment-hero {
+    view-transition-name: wf-route-hero;
+    contain: paint;
   }
-}
 
-@keyframes wf-route-screen-in {
-  from {
-    clip-path: inset(0 100% 0 0);
+  /* Route-local copies remain for mobile, but desktop uses one global strip. */
+  .wf-home-wave--hero-to-light,
+  .wf-route-hero-wave {
+    display: none !important;
   }
 
-  to {
-    clip-path: inset(0 0 0 0);
+  .wf-desktop-continuous-wave {
+    --wf-desktop-wave-layer-1: rgba(247,250,255,.70);
+    --wf-desktop-wave-layer-2: rgba(247,250,255,.54);
+    --wf-desktop-wave-layer-3: rgba(247,250,255,.38);
+    --wf-desktop-wave-layer-4: #f7faff;
+
+    position: absolute;
+    z-index: 40;
+    top: calc(100svh - clamp(92px, 11vw, 150px));
+    left: 0;
+    display: block;
+    width: 100%;
+    height: clamp(92px, 11vw, 150px);
+    overflow: hidden;
+    pointer-events: none;
+    contain: paint;
+    isolation: isolate;
+  }
+
+  .wf-desktop-continuous-wave__track {
+    width: 500vw;
+    height: 100%;
+    transform: translate3d(var(--wf-desktop-wave-offset), 0, 0);
+    will-change: transform;
+    transition: none;
+    backface-visibility: hidden;
+  }
+
+  .wf-page-transition[data-phase='swapping']
+  .wf-desktop-continuous-wave__track {
+    transition:
+      transform 820ms cubic-bezier(.65, 0, .35, 1);
+  }
+
+  .wf-desktop-continuous-wave__svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+
+  .wf-desktop-continuous-wave__layer {
+    transform-box: fill-box;
+    transform-origin: center;
+    will-change: transform;
+    animation:
+      wf-desktop-global-wave-drift
+      18s
+      cubic-bezier(.45,.05,.55,.95)
+      infinite
+      alternate;
+  }
+
+  .wf-desktop-continuous-wave__layer--1 {
+    animation-duration: 24s;
+    animation-delay: -7s;
+  }
+
+  .wf-desktop-continuous-wave__layer--2 {
+    animation-duration: 19s;
+    animation-delay: -11s;
+  }
+
+  .wf-desktop-continuous-wave__layer--3 {
+    animation-duration: 15s;
+    animation-delay: -4s;
+  }
+
+  .wf-desktop-continuous-wave__layer--4 {
+    animation-duration: 12s;
+    animation-delay: -9s;
+  }
+
+  @keyframes wf-desktop-global-wave-drift {
+    from {
+      transform: translate3d(-10px, 0, 0);
+    }
+
+    to {
+      transform: translate3d(10px, 0, 0);
+    }
+  }
+
+  ::view-transition-group(wf-route-hero) {
+    animation: none;
+  }
+
+  ::view-transition-image-pair(wf-route-hero) {
+    isolation: isolate;
+  }
+
+  ::view-transition-old(wf-route-hero),
+  ::view-transition-new(wf-route-hero) {
+    width: 100%;
+    height: 100%;
+    mix-blend-mode: normal;
+    opacity: 1;
+    animation-duration: 820ms;
+    animation-timing-function: cubic-bezier(.65, 0, .35, 1);
+    animation-fill-mode: both;
+    backface-visibility: hidden;
+    will-change: transform;
+  }
+
+  ::view-transition-old(wf-route-hero) {
+    z-index: 1;
+  }
+
+  ::view-transition-new(wf-route-hero) {
+    z-index: 2;
+  }
+
+  :root[data-wf-route-direction='forward']
+  ::view-transition-old(wf-route-hero) {
+    animation-name: wf-route-screen-to-left;
+  }
+
+  :root[data-wf-route-direction='forward']
+  ::view-transition-new(wf-route-hero) {
+    animation-name: wf-route-screen-from-right;
+  }
+
+  :root[data-wf-route-direction='backward']
+  ::view-transition-old(wf-route-hero) {
+    animation-name: wf-route-screen-to-right;
+  }
+
+  :root[data-wf-route-direction='backward']
+  ::view-transition-new(wf-route-hero) {
+    animation-name: wf-route-screen-from-left;
+  }
+
+  @keyframes wf-route-screen-to-left {
+    from {
+      transform: translate3d(0%, 0, 0);
+    }
+
+    to {
+      transform: translate3d(-100%, 0, 0);
+    }
+  }
+
+  @keyframes wf-route-screen-from-right {
+    from {
+      transform: translate3d(100%, 0, 0);
+    }
+
+    to {
+      transform: translate3d(0%, 0, 0);
+    }
+  }
+
+  @keyframes wf-route-screen-to-right {
+    from {
+      transform: translate3d(0%, 0, 0);
+    }
+
+    to {
+      transform: translate3d(100%, 0, 0);
+    }
+  }
+
+  @keyframes wf-route-screen-from-left {
+    from {
+      transform: translate3d(-100%, 0, 0);
+    }
+
+    to {
+      transform: translate3d(0%, 0, 0);
+    }
   }
 }
 
@@ -282,14 +441,17 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  ::view-transition-old(root),
-  ::view-transition-new(root) {
+  ::view-transition-old(wf-route-hero),
+  ::view-transition-new(wf-route-hero) {
     animation: none !important;
   }
 
+  .wf-desktop-continuous-wave__track,
+  .wf-desktop-continuous-wave__layer,
   .wf-mobile-route-curtain,
   .wf-mobile-route-curtain__brand-stage,
   .wf-mobile-route-curtain__dot {
     transition: none !important;
+    animation: none !important;
   }
 }
